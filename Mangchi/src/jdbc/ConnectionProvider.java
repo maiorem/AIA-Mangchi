@@ -13,11 +13,5 @@ public class ConnectionProvider {
 		String jdbcUrl="jdbc:apache:commons:dbcp:pool";
 		return DriverManager.getConnection(jdbcUrl);
 				
-		// DB Connection 정보
-		//String dburl="jdbc:oracle:thin:@localhost:1521:orcl";
-		//String user="scott";
-		//String pw="tiger";
-		
-		//return DriverManager.getConnection(dburl, user, pw);
 	}
 }
