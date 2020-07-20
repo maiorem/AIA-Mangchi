@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="#"><img src="<c:url value="/img/logo.png"/> class="logo_img" style="width: 50px; height: 50px;" ></a>
@@ -13,7 +13,10 @@
           <a class="nav-link" href="#">로그인</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">대여요청</a>
+          <a class="nav-link" href="#">대여게시판</a>
+        </li>
+                <li class="nav-item">
+          <a class="nav-link" href="<c:url value="/board/posting.do"/>">글쓰기</a>
         </li>
       </ul>
       <form class="form-inline mt-2 mt-md-0">
