@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="kr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Carousel Template · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+
+    <!-- Bootstrap core CSS -->
+<link href="../assets/dist/css/bootstrap.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="carousel.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+    
+    
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#" style="padding-left: 20px;"><img src="../img/logo.png" class="logo_img" style="width: 50px; height: 50px;" ></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active" style="padding-left: 30px;">
+          <a class="nav-link" href="#">요청 게시판 <!-- <span class="sr-only">(current)</span> --></a>
+        </li>
+       
+        
+          <li class="nav-item">
+          <a class="nav-link" href="#">글쓰기</a>
+        </li>
+        
+          <li class="nav-item">
+          <a class="nav-link" href="#" style="margin-right: 250px;">대여물품 등록</a>
+        </li>
+       
+
+   <li style="padding-left: 60px;"></li>   
+         
+        <form class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" style="width: 400px; ">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+      </form>
+      
+      
+   <li style="padding-left: 600px;"></li>
+   
+   
+    <li class="nav-item">
+      <a class="nav-link" href="#" style="position: relative; ">로그인</a>
+        </li>
+   
+   
+        </ul>
+   
+   
+     
+     
+   
+  </div>
+</nav>
+
+<main role="main" class="container">
+
+
+
+
+
+
+	<div class="write_div_wr" style="margin-top: 100px;">
+              
+        
+        
+        
+        
+        
+
+        
+        <div class="bo_w_tit write_div">
+            <label for="wr_subject" class="sound_only">상품명<strong>필수</strong></label>
+            <input type="text" name="wr_subject" value="" id="wr_subject" required class="frm_input full_input required" placeholder="상품명">
+        </div>
+		<div class="write_div">
+            <label for="wr_email" class="sound_only">이메일</label>
+            <input type="email" name="wr_email" value="maiorem00@naver.com" id="wr_email" class="frm_input full_input  email" maxlength="100" placeholder="이메일 (계약서발송용)">
+        </div>
+		<div class="write_div" style="display:none">
+            <label for="wr_express" class="sound_only">배송방법</label>
+            <input type="text" name="wr_express" value="" id="wr_express" class="frm_input full_input" maxlength="100" placeholder="택배 또는 직거래">
+        </div>
+		<div class="bo_w_tit write_div">
+            <label for="wr_price" class="sound_only">금액<strong>필수</strong></label>
+            <input type="text" name="wr_price" value="" id="wr_price" required class="frm_input required" placeholder="금액" onkeyup="inputNumberFormat(this)">
+
+			<p class="price_option" style="display:block">
+				<label class="wr_price_op"> ( 1일 기준 )</label>
+			</p>
+			
+        </div>
+		
+		<div class="bo_w_tit share_imgup" style="height:100%; text-align:right; border:1px solid #ccc; border-radius:5px; margin:12px 20px;">
+		
+			<!-- 이미지 업로드 -->
+			<span id="img_txt" style="float:left; color:#777; padding-left:5px">이미지 업로드</span>
+			
+			<div style="display:block; margin-left:5px; height:100%;">
+				<span class="file_add">
+										<input type="file" name="bf_file[]" id="bf_file_1" onchange="readURL(this,'0')" class="frm_file" style="display:none">
+					
+					<label for="bf_file_1" id="bf_file_label_1" style=" 
+					background-image:url('https://shareforyou.co.kr/theme/basic/img/camera.png'); background-size:100% 100%; padding:6px 6px; line-height:25px;">&nbsp&nbsp&nbsp&nbsp
+					</label>
+					
+				</span>
+				
+
+								<div style="position:relative">
+					<a onclick="resetInputFile(0)" id="blah_del_0" 
+					style="display:none; position:absolute; top:5px; right:5px; padding:5px; border:1px solid #c13d2f; color:#c13d2f; text-align:center; border-radius:5px; font-weight:bold;">
+						삭제 <span style="color:#c13d2f;">X</span>
+					</a>
+					<img id="blah0" style="width:100%; display:none; padding:5px"><!--이미지-->
+				</div>
+
+
+				
+				
+									<input type="file" name="bf_file[]" id="bf_file_2" onchange="readURL(this,'1')" class="frm_file" style="display:none">
+					
+					<label for="bf_file_2" id="bf_file_label_2" style=" display:none;  
+					background-image:url('https://shareforyou.co.kr/theme/basic/img/camera.png'); background-size:100% 100%; padding:6px 6px; line-height:25px;">&nbsp&nbsp&nbsp&nbsp
+					</label>
+					
+				</span>
+				
+
+								<div style="position:relative">
+					<a onclick="resetInputFile(1)" id="blah_del_1" 
+					style="display:none; position:absolute; top:5px; right:5px; padding:5px; border:1px solid #c13d2f; color:#c13d2f; text-align:center; border-radius:5px; font-weight:bold;">
+						삭제 <span style="color:#c13d2f;">X</span>
+					</a>
+					<img id="blah1" style="width:100%; display:none; padding:5px"><!--이미지-->
+				</div>
+
+
+				
+				
+									<input type="file" name="bf_file[]" id="bf_file_3" onchange="readURL(this,'2')" class="frm_file" style="display:none">
+					
+					<label for="bf_file_3" id="bf_file_label_3" style=" display:none;  
+					background-image:url('https://shareforyou.co.kr/theme/basic/img/camera.png'); background-size:100% 100%; padding:6px 6px; line-height:25px;">&nbsp&nbsp&nbsp&nbsp
+					</label>
+					
+				</span>
+				
+
+								<div style="position:relative">
+					<a onclick="resetInputFile(2)" id="blah_del_2" 
+					style="display:none; position:absolute; top:5px; right:5px; padding:5px; border:1px solid #c13d2f; color:#c13d2f; text-align:center; border-radius:5px; font-weight:bold;">
+						삭제 <span style="color:#c13d2f;">X</span>
+					</a>
+					<img id="blah2" style="width:100%; display:none; padding:5px"><!--이미지-->
+				</div>
+
+
+				
+				
+									<input type="file" name="bf_file[]" id="bf_file_4" onchange="readURL(this,'3')" class="frm_file" style="display:none">
+					
+					<label for="bf_file_4" id="bf_file_label_4" style=" display:none;  
+					background-image:url('https://shareforyou.co.kr/theme/basic/img/camera.png'); background-size:100% 100%; padding:6px 6px; line-height:25px;">&nbsp&nbsp&nbsp&nbsp
+					</label>
+					
+				</span>
+				
+
+								<div style="position:relative">
+					<a onclick="resetInputFile(3)" id="blah_del_3" 
+					style="display:none; position:absolute; top:5px; right:5px; padding:5px; border:1px solid #c13d2f; color:#c13d2f; text-align:center; border-radius:5px; font-weight:bold;">
+						삭제 <span style="color:#c13d2f;">X</span>
+					</a>
+					<img id="blah3" style="width:100%; display:none; padding:5px"><!--이미지-->
+				</div>
+
+
+				
+				
+									<input type="file" name="bf_file[]" id="bf_file_5" onchange="readURL(this,'4')" class="frm_file" style="display:none">
+					
+					<label for="bf_file_5" id="bf_file_label_5" style=" display:none;  
+					background-image:url('https://shareforyou.co.kr/theme/basic/img/camera.png'); background-size:100% 100%; padding:6px 6px; line-height:25px;">&nbsp&nbsp&nbsp&nbsp
+					</label>
+					
+				</span>
+				
+
+								<div style="position:relative">
+					<a onclick="resetInputFile(4)" id="blah_del_4" 
+					style="display:none; position:absolute; top:5px; right:5px; padding:5px; border:1px solid #c13d2f; color:#c13d2f; text-align:center; border-radius:5px; font-weight:bold;">
+						삭제 <span style="color:#c13d2f;">X</span>
+					</a>
+					<img id="blah4" style="width:100%; display:none; padding:5px"><!--이미지-->
+				</div>
+
+
+				
+				
+									<input type="file" name="bf_file[]" id="bf_file_6" onchange="readURL(this,'5')" class="frm_file" style="display:none">
+					
+					<label for="bf_file_6" id="bf_file_label_6" style=" display:none;  
+					background-image:url('https://shareforyou.co.kr/theme/basic/img/camera.png'); background-size:100% 100%; padding:6px 6px; line-height:25px;">&nbsp&nbsp&nbsp&nbsp
+					</label>
+					
+				</span>
+				
+
+								<div style="position:relative">
+					<a onclick="resetInputFile(5)" id="blah_del_5" 
+					style="display:none; position:absolute; top:5px; right:5px; padding:5px; border:1px solid #c13d2f; color:#c13d2f; text-align:center; border-radius:5px; font-weight:bold;">
+						삭제 <span style="color:#c13d2f;">X</span>
+					</a>
+					<img id="blah5" style="width:100%; display:none; padding:5px"><!--이미지-->
+				</div>
+
+
+				
+				
+									<input type="file" name="bf_file[]" id="bf_file_7" onchange="readURL(this,'6')" class="frm_file" style="display:none">
+					
+					<label for="bf_file_7" id="bf_file_label_7" style=" display:none;  
+					background-image:url('https://shareforyou.co.kr/theme/basic/img/camera.png'); background-size:100% 100%; padding:6px 6px; line-height:25px;">&nbsp&nbsp&nbsp&nbsp
+					</label>
+					
+				</span>
+				
+
+								<div style="position:relative">
+					<a onclick="resetInputFile(6)" id="blah_del_6" 
+					style="display:none; position:absolute; top:5px; right:5px; padding:5px; border:1px solid #c13d2f; color:#c13d2f; text-align:center; border-radius:5px; font-weight:bold;">
+						삭제 <span style="color:#c13d2f;">X</span>
+					</a>
+					<img id="blah6" style="width:100%; display:none; padding:5px"><!--이미지-->
+				</div>
+
+
+				
+				
+									<input type="file" name="bf_file[]" id="bf_file_8" onchange="readURL(this,'7')" class="frm_file" style="display:none">
+					
+					<label for="bf_file_8" id="bf_file_label_8" style=" display:none;  
+					background-image:url('https://shareforyou.co.kr/theme/basic/img/camera.png'); background-size:100% 100%; padding:6px 6px; line-height:25px;">&nbsp&nbsp&nbsp&nbsp
+					</label>
+					
+				</span>
+				
+
+								<div style="position:relative">
+					<a onclick="resetInputFile(7)" id="blah_del_7" 
+					style="display:none; position:absolute; top:5px; right:5px; padding:5px; border:1px solid #c13d2f; color:#c13d2f; text-align:center; border-radius:5px; font-weight:bold;">
+						삭제 <span style="color:#c13d2f;">X</span>
+					</a>
+					<img id="blah7" style="width:100%; display:none; padding:5px"><!--이미지-->
+				</div>
+
+
+				
+				
+									<input type="file" name="bf_file[]" id="bf_file_9" onchange="readURL(this,'8')" class="frm_file" style="display:none">
+					
+					<label for="bf_file_9" id="bf_file_label_9" style=" display:none;  
+					background-image:url('https://shareforyou.co.kr/theme/basic/img/camera.png'); background-size:100% 100%; padding:6px 6px; line-height:25px;">&nbsp&nbsp&nbsp&nbsp
+					</label>
+					
+				</span>
+				
+
+								<div style="position:relative">
+					<a onclick="resetInputFile(8)" id="blah_del_8" 
+					style="display:none; position:absolute; top:5px; right:5px; padding:5px; border:1px solid #c13d2f; color:#c13d2f; text-align:center; border-radius:5px; font-weight:bold;">
+						삭제 <span style="color:#c13d2f;">X</span>
+					</a>
+					<img id="blah8" style="width:100%; display:none; padding:5px"><!--이미지-->
+				</div>
+
+
+				
+				
+									<input type="file" name="bf_file[]" id="bf_file_10" onchange="readURL(this,'9')" class="frm_file" style="display:none">
+					
+					<label for="bf_file_10" id="bf_file_label_10" style=" display:none;  
+					background-image:url('https://shareforyou.co.kr/theme/basic/img/camera.png'); background-size:100% 100%; padding:6px 6px; line-height:25px;">&nbsp&nbsp&nbsp&nbsp
+					</label>
+					
+				</span>
+				
+
+								<div style="position:relative">
+					<a onclick="resetInputFile(9)" id="blah_del_9" 
+					style="display:none; position:absolute; top:5px; right:5px; padding:5px; border:1px solid #c13d2f; color:#c13d2f; text-align:center; border-radius:5px; font-weight:bold;">
+						삭제 <span style="color:#c13d2f;">X</span>
+					</a>
+					<img id="blah9" style="width:100%; display:none; padding:5px"><!--이미지-->
+				</div>
+
+
+				
+				
+							</div>
+			<!-- 이미지 업로드 끝 -->
+
+			</div>
+			<div class="write_div write_div2" style="padding:20px 0 20px 0; border-top:1px solid #ddd;">
+            <label for="wr_content" class="sound_only">상세내용<strong>필수</strong></label>
+                        <span class="sound_only">웹에디터 시작</span>
+<textarea id="wr_content" name="wr_content" class="" maxlength="65536" style="width:100%;height:300px" placeholder="상세 내용"></textarea>
+<span class="sound_only">웹 에디터 끝</span>                    
+        <!-- 비밀글 -->
+		<input type="hidden" id="addr_input_type" value="">
+		<span class="wrtie_secret" style="display:none">
+			<input type="checkbox" id="secret" name="secret" value="secret"><label for="secret">비밀글로 등록하기</label>
+		</span>
+		<!--
+			<span style="margin-left:5px; float:right">
+			<input type="checkbox" id="secret" name="secret" value="secret" onclick="chk('https://shareforyou.co.kr/theme/basic/img')" style="display:none;">
+			<label for="secret" id="secret_img" style="background-image:url('https://shareforyou.co.kr/theme/basic/img/un-lock.svg'); background-size:100% 100%; padding:10px 7px; line-height:40px;">&nbsp&nbsp&nbsp&nbsp</label>
+		</span>
+		<!-- 비밀글끝 -->
+        </div>
+		
+        		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.js"></script></body>
+</html>
