@@ -3,10 +3,56 @@
   <display-name>Mangchi</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+    <!-- DBCP 등록 : 초기화 -->
+  <servlet>
+  	<servlet-name>DBCPInit</servlet-name>
+	<servlet-class>jdbc.DBCPInit</servlet-class>
+	<load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <!-- FrontController 등록 -->
+  <servlet>
+  	<servlet-name>FrontController</servlet-name>
+  	<servlet-class>controller.FrontController</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>FrontController</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  
+   
+  <!-- 로그인 필터 등록 -->
+  <filter>
+  	<filter-name>loginCheckFilter</filter-name>
+  	<filter-class>filter.LoginFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>loginCheckFilter</filter-name>
+  	<url-pattern>/WEB-INF/views/member/mypage/*</url-pattern>
+  </filter-mapping>
+  
+   <filter-mapping>
+  	<filter-name>loginCheckFilter</filter-name>
+  	<url-pattern>/WEB-INF/views/board/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- 인코딩 필터 등록 -->
+  <filter>
+  	<filter-name>encodingFilter</filter-name>
+	<filter-class>filter.CharacterEncodingFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  
+  
 </web-app>
