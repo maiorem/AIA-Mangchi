@@ -15,7 +15,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 
     <!-- Bootstrap core CSS -->
-<link href="../assets/dist/css/bootstrap.css" rel="stylesheet">
+	<link rel='stylesheet' href='<c:url value="/assets/dist/css/bootstrap.css"/>'>
 
     <style>
       .bd-placeholder-img {
@@ -34,7 +34,7 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="carousel.css" rel="stylesheet">
+    <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
   </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -169,4 +169,4 @@
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.js"></script></body>
+<script>window.jQuery || document.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')</script><script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script></body>
