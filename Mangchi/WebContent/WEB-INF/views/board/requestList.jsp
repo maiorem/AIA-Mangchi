@@ -23,7 +23,9 @@
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<div>
-
+		<br>
+		<br>
+		<br>
 		<h1>게시판 들어갈 자리</h1>
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
