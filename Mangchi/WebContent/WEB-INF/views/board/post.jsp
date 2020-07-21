@@ -34,7 +34,7 @@
 			<div class="write_div_wr" style="margin-top: 100px;">
 
 				<div class="bo_w_tit write_div">
-					<label for="wr_subject" class="sound_only">상품명<strong>필수</strong></label>
+					<label for="wr_subject" class="sound_only">상품명</label>
 					<input type="text" name="wr_subject" value="" id="wr_subject"
 						required class="frm_input full_input required" placeholder="상품명">
 				</div>
@@ -51,7 +51,7 @@
 						placeholder="택배 또는 직거래">
 				</div>
 				<div class="bo_w_tit write_div">
-					<label for="wr_price" class="sound_only">금액<strong>필수</strong></label>
+					<label for="wr_price" class="sound_only">금액</label>
 					<input type="text" name="wr_price" value="" id="wr_price" required
 						class="frm_input required" placeholder="금액"
 						onkeyup="inputNumberFormat(this)">
@@ -268,12 +268,12 @@
 				</div>
 				<div class="write_div write_div2"
 					style="padding: 20px 0 20px 0; border-top: 1px solid #ddd;">
-					<label for="wr_content" class="sound_only">상세내용<strong>필수</strong></label>
-					<span class="sound_only">웹에디터 시작</span>
+					<label for="wr_content" class="sound_only">상세내용</label>
+					<!-- <span class="sound_only">웹에디터 시작</span> -->
 					<textarea id="wr_content" name="wr_content" class=""
 						maxlength="65536" style="width: 100%; height: 300px"
 						placeholder="상세 내용"></textarea>
-					<span class="sound_only">웹 에디터 끝</span>
+					<!-- <span class="sound_only">웹 에디터 끝</span> -->
 					<!-- 비밀글 -->
 					<input type="hidden" id="addr_input_type" value=""> <span
 						class="wrtie_secret" style="display: none"> <input
