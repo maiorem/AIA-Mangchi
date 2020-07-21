@@ -19,7 +19,7 @@
 	<link rel='stylesheet' href='<c:url value="/css/default.css"/>'> 
     <!-- Custom styles for this template -->
     <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
-    <link href='<c:url value="/css/Regform.css"/>' rel="stylesheet">
+    <link href='<c:url value="/css/RegForm.css"/>' rel="stylesheet">
   </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -29,6 +29,9 @@
 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
  
+	<a href="https://front.codes/" class="logo" target="_blank">
+		<img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+	</a>
 
 	<div class="section">
 		<div class="container">
@@ -52,8 +55,8 @@
 												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<a class="reg" href="#" class="btn_reg mt-4">submit</a>
-                            				<p class="reg" class="mb-0 mt-4 text-center"><a class="reg" href="#0" class="link">Forgot your password?</a></p>
+											<a href="#" class="btn mt-4">submit</a>
+                            				<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
 				      					</div>
 			      					</div>
 			      				</div>
@@ -73,7 +76,7 @@
 												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<a class="reg" href="#" class="btn_reg mt-4">submit</a>
+											<a href="#" class="btn mt-4">submit</a>
 				      					</div>
 			      					</div>
 			      				</div>
@@ -84,7 +87,6 @@
 	      	</div>
 	    </div>
 	</div>
-  
   </div>
   
  

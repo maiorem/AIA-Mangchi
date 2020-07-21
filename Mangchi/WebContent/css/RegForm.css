@@ -1,10 +1,8 @@
-
-
 /* Please ❤ this if you like it! */
 
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
-/* 
+
 body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;
@@ -13,12 +11,12 @@ body{
 	color: #c4c3ca;
 	background-color: #1f2029;
 	overflow-x: hidden;
-} */
-a.reg {
+}
+a {
 	cursor: pointer;
   transition: all 200ms linear;
 }
-a.reg:hover {
+a:hover {
 	text-decoration: none;
 }
 .link {
@@ -27,7 +25,7 @@ a.reg:hover {
 .link:hover {
   color: #ffeba7;
 }
-p.reg {
+p {
   font-weight: 500;
   font-size: 14px;
   line-height: 1.7;
@@ -40,7 +38,7 @@ h6 span{
   text-transform: uppercase;
   font-weight: 700;
 }
-.section_reg{
+.section{
   position: relative;
   width: 100%;
   display: block;
@@ -235,7 +233,7 @@ h6 span{
     transition: all 200ms linear;
 }
 
-.btn_reg{  
+.btn{  
   border-radius: 4px;
   height: 44px;
   font-size: 13px;
