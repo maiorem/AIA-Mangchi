@@ -12,7 +12,7 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Jekyll v4.0.1">
-<title>Carousel Template · Bootstrap</title>
+<title>대여 요청 글쓰기</title>
 
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.5/examples/carousel/">

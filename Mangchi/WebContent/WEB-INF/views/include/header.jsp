@@ -13,7 +13,7 @@
           <a class="nav-link" href="<c:url value='/member/login.do'/>">로그인</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">대여게시판</a>
+          <a class="nav-link" href="<c:url value='/board/boarding.do'/>">대여게시판</a>
         </li>
                 <li class="nav-item">
           <a class="nav-link" href="<c:url value="/board/posting.do"/>">글쓰기</a>
