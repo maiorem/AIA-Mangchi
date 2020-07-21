@@ -28,10 +28,6 @@
 <main role="main">
 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
- 
-	<a href="https://front.codes/" class="logo" target="_blank">
-		<img src="https://assets.codepen.io/1462889/fcy.png" alt="">
-	</a>
 
 	<div class="section">
 		<div class="container">
