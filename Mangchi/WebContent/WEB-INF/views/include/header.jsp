@@ -19,9 +19,6 @@
           <a class="nav-link" href="<c:url value="/board/posting.do"/>">글쓰기</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<c:url value="/note/writeMessage.do"/>">쪽지 보내기</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="<c:url value="/note/messageBox.do"/>">쪽지함</a>
         </li>
       </ul>
