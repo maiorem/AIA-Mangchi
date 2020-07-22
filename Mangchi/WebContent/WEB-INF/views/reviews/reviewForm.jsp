@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
  
 <!DOCTYPE html>
 <html>
@@ -21,17 +20,13 @@
 
 <table>
 	
-	<!-- 게시글 파라미터값 히든으로숨김 -->
-	<tr style="display: none;">
-	<td class="req_idx" id="req_idx">
-	<%String req_idx = request.getParameter("req_idx"); %></td>
-	</tr>
 	
+
 	
 
 	<tr>
 	<td class="req_writer" id="req_writer">
-	 <% String req_writer = (String)session.getAttribute("req_writer"); %>
+	 <% int req_writer = (int)session.getAttribute("req_writer"); %>
  			 글쓴이세션값 : <%=req_writer%></td>
 	</tr>
 				

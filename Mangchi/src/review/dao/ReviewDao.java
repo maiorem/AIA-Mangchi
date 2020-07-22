@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import jdbc.ConnectionProvider;
 import review.model.Review;
 
 
@@ -56,6 +57,41 @@ public class ReviewDao {
 		
 		
 		return resultCnt;
+	}
+
+	public int selectReview(Connection conn, Review review2) throws SQLException {
+		
+		
+		
+		Connection conn1=null;
+		Statement stmt=null;
+		ResultSet rs = null;
+		
+		
+		String sql = "SELECT LAST_INSERT_ID()";
+		
+		
+		try {
+			
+			conn1=ConnectionProvider.getConnection();
+			stmt=conn1.createStatement();
+			rs=stmt.executeQuery(sql);
+			
+			
+			while(rs.next()) {
+				int review_idx = rs.getInt("review_idx");
+				
+				
+				
+			}
+			
+			
+		}finally {
+			
+		}
+		
+		
+		return 0;
 	}
 
 	

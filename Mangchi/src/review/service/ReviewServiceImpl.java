@@ -27,6 +27,8 @@ public class ReviewServiceImpl implements Service {
 
 		Connection conn = null;
 		
+		int review_idx =0;
+		
 		// 아래3개필수
 		int req_idx =7; //test용
 		//int review_receiver=7; // test용
@@ -55,10 +57,14 @@ public class ReviewServiceImpl implements Service {
 			
 			
 			
+			Review review2 = new Review();
+			
+			review2.setReview_idx(review_idx);
+			
 			dao = ReviewDao.getInstance();
 			
 			resultCnt=dao.insertReview(conn,review);
-			
+			resultCnt=dao.selectReview(conn,review2);
 			
 			
 		} catch (SQLException e) {
