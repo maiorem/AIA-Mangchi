@@ -26,6 +26,9 @@
 .suround_only{
 	width: 100px;
 }
+form{
+	margin-top: 100px;
+}
 .upload-hidden{
 	width: 1px; 
 	height: 1px; 
@@ -54,7 +57,7 @@
 					</div>
 					<div class="write_reqinfo req_writer">
 						<label class="suround_only">요청자</label>
-						<p>${loginInfo.member_id}</p>
+						${loginInfo.member_id}
 					</div>
 					<div class="write_reqinfo req_price">
 						<label class="suround_only">금액</label>
@@ -79,7 +82,6 @@
 
 					<hr>
 					<label class="suround_only">상세 내용</label>
-					<label for="wr_content" class="sound_only">상세내용</label>
 					<textarea name="req_text" maxlength="2000" style="width: 100%; height: 300px;"
 						placeholder="상세 내용"></textarea>
 					<input type="submit" value="글쓰기 완료">
