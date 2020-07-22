@@ -20,23 +20,10 @@
 <!-- Bootstrap core CSS -->
 <link rel='stylesheet'
 	href='<c:url value="/assets/dist/css/bootstrap.css"/>'>
+<link rel='stylesheet' href='<c:url value="/css/default.css"/>'>
 <!-- Custom styles for this template -->
+<link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
 <link href='<c:url value="/css/kwonjaejun.css"/>' rel="stylesheet">
-<style>
-.suround_only{
-	width: 100px;
-}
-.upload-hidden{
-	width: 1px; 
-	height: 1px; 
-	padding: 0; 
-	margin: -1px; 
-	overflow: hidden; 
-	clip:rect(0,0,0,0); 
-	border: 0;
-
-}
-</style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 <body>
@@ -44,90 +31,20 @@
 	<div>
 
 		<main role="main" class="container">
-			<form action="insertpost.do" method="post">
-				<input type="hidden" name="member_idx" value="${loginInfo.member_idx}">
-				
-				<div class="write_form">
-					<div class="write_reqinfo req_title">
-						<label class="suround_only">제목</label>
-						<input type="text" name="req_title" placeholder="제목입력해주세요">
-					</div>
-					<div class="write_reqinfo req_writer">
-						<label class="suround_only">요청자</label>
-						<p>${loginInfo.member_id}</p>
-					</div>
-					<div class="write_reqinfo req_price">
-						<label class="suround_only">금액</label>
-						<input type="text" name="req_price"/>
-					</div>
-					<div class="write_reqinfo req_loc">
-						<label class="suround_only">주소</label>
-						<br>
-						API들어가야함<br>
-						
-						<input type="text" name="req_loc"/>
-					</div>
-					<div class="write_reqinfo req_img">
-						<label class="suround_only">참고 이미지</label>
-						<input type="file" name="req_img"/>
-					</div>
-					<!-- <div class="write_reqinfo req_img"> 
-						<input class="upload-name" value="파일선택" disabled="disabled"> 
-						<label for="ex_filename">업로드</label> 
-						<input type="file" id="ex_filename" class="upload-hidden">
-					</div> -->
 
-					<hr>
-					<label class="suround_only">상세 내용</label>
-					<label for="wr_content" class="sound_only">상세내용</label>
-					<textarea name="req_text" maxlength="2000" style="width: 100%; height: 300px;"
-						placeholder="상세 내용"></textarea>
-					<input type="submit" value="글쓰기 완료">
-				</div>
-				
-			</form>
-		</main>
-	</div>
+			<form action="">
+				<div class="write_div_wr" style="margin-top: 100px;">
 
-	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
-<script>
-	window.jQuery
-			|| document
-					.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')
-					
-	$(document).ready(function(){ 
-		var fileTarget = $('.filebox .upload-hidden'); 
-		fileTarget.on('change', function(){ // 값이 변경되면 
-			if(window.FileReader){ // modern browser 
-				var filename = $(this)[0].files[0].name; 
-			} else { // old IE 
-				var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
-			} 
-			console.log(filename);
-		// 추출한 파일명 삽입 
-			$(this).siblings('.upload-name').val(filename); 
-		}); 
-	});
-
-</script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
-<script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script>
-</body>
-</html>
-
-				<%-- <div class="write_div_wr" style="margin-top: 100px;">
 					<div class="bo_w_tit write_div">
 						<label for="wr_subject" class="sound_only">제목</label> 
 						<input
-							type="text" name="req_title" value="" id="wr_subject" required
+							type="text" name="wr_subject" value="" id="wr_subject" required
 							class="frm_input full_input required" placeholder="제목입력해주세요">
 					</div>
 					<div class="write_div">
 						<label for="wr_email" class="sound_only">요청자</label>
 						<input
-							type="email" name="req_" value="${loginInfo.uid}"
+							type="email" name="wr_email" value="${loginInfo.uid}"
 							id="wr_email" class="frm_input full_input email" maxlength="100"
 							readonly>
 					</div>
@@ -384,4 +301,20 @@
 							for="secret">비밀글로 등록하기</label>
 						</span>
 					</div>
-				</div> --%>
+				</div>
+			</form>
+		</main>
+	</div>
+
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<script>
+	window.jQuery
+			|| document
+					.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script>
+</body>
+</html>
