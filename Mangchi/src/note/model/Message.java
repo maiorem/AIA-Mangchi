@@ -1,12 +1,12 @@
 package note.model;
-
+// 보낸 사람, 받는 사람 타입 수정해야함
 import java.sql.Date;
 
 public class Message {
 	
 	private int msg_idx;
 	private int req_idx;
-	private int msg_receiver;
+	private String msg_receiver;
 	private int msg_writer;
 	private String msg_text;
 	private String msg_img;
@@ -17,7 +17,7 @@ public class Message {
 	public Message() {
 	}
 
-	public Message(int msg_idx, int req_idx, int msg_receiver, int msg_writer, String msg_text, String msg_img,
+	public Message(int msg_idx, int req_idx, String msg_receiver, int msg_writer, String msg_text, String msg_img,
 			Date msg_date, int readcheck) {
 		this.msg_idx = msg_idx;
 		this.req_idx = req_idx;
@@ -29,15 +29,6 @@ public class Message {
 		this.readcheck = readcheck;
 	}
 	
-
-	public Message(int req_idx, int msg_receiver, int msg_writer, String msg_text, String msg_img, int readcheck) {
-		this.req_idx = req_idx;
-		this.msg_receiver = msg_receiver;
-		this.msg_writer = msg_writer;
-		this.msg_text = msg_text;
-		this.msg_img = msg_img;
-		this.readcheck = readcheck;
-	}
 
 	public int getMsg_idx() {
 		return msg_idx;
@@ -55,11 +46,11 @@ public class Message {
 		this.req_idx = req_idx;
 	}
 
-	public int getMsg_receiver() {
+	public String getMsg_receiver() {
 		return msg_receiver;
 	}
 
-	public void setMsg_receiver(int msg_receiver) {
+	public void setMsg_receiver(String msg_receiver) {
 		this.msg_receiver = msg_receiver;
 	}
 
@@ -102,6 +93,9 @@ public class Message {
 	public void setReadcheck(int readcheck) {
 		this.readcheck = readcheck;
 	}
+	
+	
+	
 
 	@Override
 	public String toString() {

@@ -42,11 +42,12 @@
 	<br>	
 
 	<div id="note">
-		<form action="<c:url value='/message/sendMessage.do'/>" method="get">
+		<form action="<c:url value='/note/sendMessage.do'/>" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="senderIdx" value="${loginInfo.idx }">
 			<table>
 				<tr>
 					<td>보내는 사람</td>
-					<td>${loginInfo.uid}</td>
+					<td><input type="email" name="sernder" id="sender" value="${loginInfo.uid}" readonly></td>
 				</tr>
 				<tr>
 					<td>받는 사람</td>
@@ -55,6 +56,10 @@
 				<tr>
 					<td>내용</td>
 					<td><input type="text" name="noteText" id="noteText" required></td>
+				</tr>
+				<tr>
+					<td>이미지</td>
+					<td><input type="file" name="noteImage"></td>
 				</tr>
 				<tr>
 					<td></td>
