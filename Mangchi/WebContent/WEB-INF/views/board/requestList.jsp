@@ -27,6 +27,10 @@
 		<br>
 		<br>
 		<h1>게시판 들어갈 자리</h1>
+		
+		<%-- <%@ include file="map.jsp" %> --%>
+		<%@ include file="requestMap.jsp" %>
+		
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
