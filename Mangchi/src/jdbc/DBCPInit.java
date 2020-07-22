@@ -35,9 +35,9 @@ public class DBCPInit extends HttpServlet {
 		
 		try {
 			
-			String jdbcDriver = "jdbc:mysql://(host name):3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-			String username = "(id)";
-			String pw = "(pw)";
+			String jdbcDriver = "jdbc:mysql://localhost:8080:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
+			String username = "maiorem";
+			String pw = "runake0510";
 			
 			ConnectionFactory connFactory = new DriverManagerConnectionFactory(jdbcDriver, username, pw);
 			
