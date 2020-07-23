@@ -1,16 +1,16 @@
-package note.dao;
+package message.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import note.model.Message;
+import message.model.Message;
 
-public class NoteDao {
+public class MessageDao {
 	
-	private NoteDao() {}
-	private static NoteDao dao=new NoteDao();
-	public static NoteDao getInstance() {
+	private MessageDao() {}
+	private static MessageDao dao=new MessageDao();
+	public static MessageDao getInstance() {
 		return dao;
 	}
 	
@@ -28,7 +28,7 @@ public class NoteDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, msg.getMsg_writer());
-			pstmt.setString(2, msg.getMsg_receiver());
+			pstmt.setInt(2, msg.getMsg_receiver());
 			pstmt.setString(3, msg.getMsg_text());
 			pstmt.setString(4, msg.getMsg_img());
 			pstmt.setInt(5, msg.getReadcheck());

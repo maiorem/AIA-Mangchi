@@ -1,4 +1,4 @@
-package note.service;
+package message.service;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -17,13 +17,13 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import jdbc.ConnectionProvider;
 import member.dao.MemberMessageDao;
-import note.dao.NoteDao;
-import note.model.Message;
+import message.dao.MessageDao;
+import message.model.Message;
 import service.Service;
 
 public class SendingMessageServiceImpl implements Service {
 	
-	NoteDao dao;
+	MessageDao dao;
 	MemberMessageDao mmdao;
 
 	@Override
@@ -33,7 +33,7 @@ public class SendingMessageServiceImpl implements Service {
 		int resultCnt=0;
 		
 		int senderIdx=-1;
-		String receiverId=null;
+		int receiverIdx=-1;
 		String text=null;
 		String img=null;
 		int check=0; //안읽은 상태
@@ -69,9 +69,7 @@ public class SendingMessageServiceImpl implements Service {
 							
 						} else if(paramName.equals("noteId")) {
 							if(mmdao.existId(conn, paramValue)) {
-								receiverId=paramValue;
-								System.out.println(paramName+ " : " +paramValue);
-								System.out.println("아이디 존재 확인");
+								receiverIdx=mmdao.idToIdx(conn, paramValue);
 								
 							} else {
 								throw new Exception("쪽지를 보낼 상대가 존재하지 않습니다.");
@@ -98,12 +96,12 @@ public class SendingMessageServiceImpl implements Service {
 				}
 				Message msg=new Message();
 				msg.setMsg_writer(senderIdx);
-				msg.setMsg_receiver(receiverId);
+				msg.setMsg_receiver(receiverIdx);
 				msg.setMsg_text(text);
 				msg.setMsg_img(img);
 				msg.setReadcheck(check);
 				
-				dao=NoteDao.getInstance();
+				dao=MessageDao.getInstance();
 				resultCnt=dao.sendMessage(conn, msg);
 				req.setAttribute("note", msg);
 				req.setAttribute("resultNote", resultCnt);

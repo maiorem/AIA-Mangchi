@@ -42,12 +42,12 @@
 	<br>	
 
 	<div id="note">
-		<form action="<c:url value='/note/sendMessage.do'/>" method="post" enctype="multipart/form-data">
+		<form action="<c:url value='/message/sendMessage.do'/>" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="senderIdx" value="${loginInfo.idx }">
 			<table>
 				<tr>
 					<td>보내는 사람</td>
-					<td><input type="email" name="sernder" id="sender" value="${loginInfo.uid}" readonly></td>
+					<td><input type="email" name="sender" id="sender" value="${loginInfo.uid}" readonly></td>
 				</tr>
 				<tr>
 					<td>받는 사람</td>

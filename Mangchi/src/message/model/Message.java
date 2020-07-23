@@ -1,4 +1,4 @@
-package note.model;
+package message.model;
 // 보낸 사람, 받는 사람 타입 수정해야함
 import java.sql.Date;
 
@@ -6,18 +6,21 @@ public class Message {
 	
 	private int msg_idx;
 	private int req_idx;
-	private String msg_receiver;
+	private int msg_receiver;
 	private int msg_writer;
 	private String msg_text;
 	private String msg_img;
 	private Date msg_date;
 	private int readcheck;
 	
+	String msg_receiverId;
+	String msg_writerId;
+	
 		
 	public Message() {
 	}
 
-	public Message(int msg_idx, int req_idx, String msg_receiver, int msg_writer, String msg_text, String msg_img,
+	public Message(int msg_idx, int req_idx, int msg_receiver, int msg_writer, String msg_text, String msg_img,
 			Date msg_date, int readcheck) {
 		this.msg_idx = msg_idx;
 		this.req_idx = req_idx;
@@ -29,6 +32,19 @@ public class Message {
 		this.readcheck = readcheck;
 	}
 	
+	
+
+	public Message(int msg_idx, int req_idx, String msg_text, String msg_img, Date msg_date, int readcheck,
+			String msg_receiverId, String msg_writerId) {
+		this.msg_idx = msg_idx;
+		this.req_idx = req_idx;
+		this.msg_text = msg_text;
+		this.msg_img = msg_img;
+		this.msg_date = msg_date;
+		this.readcheck = readcheck;
+		this.msg_receiverId = msg_receiverId;
+		this.msg_writerId = msg_writerId;
+	}
 
 	public int getMsg_idx() {
 		return msg_idx;
@@ -46,11 +62,11 @@ public class Message {
 		this.req_idx = req_idx;
 	}
 
-	public String getMsg_receiver() {
+	public int getMsg_receiver() {
 		return msg_receiver;
 	}
 
-	public void setMsg_receiver(String msg_receiver) {
+	public void setMsg_receiver(int msg_receiver) {
 		this.msg_receiver = msg_receiver;
 	}
 
@@ -96,6 +112,22 @@ public class Message {
 	
 	
 	
+
+	public String getMsg_receiverId() {
+		return msg_receiverId;
+	}
+
+	public void setMsg_receiverId(String msg_receiverId) {
+		this.msg_receiverId = msg_receiverId;
+	}
+
+	public String getMsg_writerId() {
+		return msg_writerId;
+	}
+
+	public void setMsg_writerId(String msg_writerId) {
+		this.msg_writerId = msg_writerId;
+	}
 
 	@Override
 	public String toString() {
