@@ -26,7 +26,7 @@ public class MyRequestListServiceImpl implements Service {
 //		HttpSession session = req.getSession();
 //		Member member = (Member)session.getAttribute("loginInfo");
 //		int member_idx = member.getMember_idx();
-		int member_idx = 2;
+		int member_idx = 4;
 		int pageNum =1;
 		if(request.getParameter("page")!=null) {
 			pageNum = Integer.parseInt(request.getParameter("page"));
