@@ -25,6 +25,7 @@
 
 <table >
 	<tr>
+	<%-- <td>${reviewList }</td> --%>
 		<td>${review.review_idx}</td>
 		<td>${review.req_idx}</td>
 		<td>${review.review_writer}</td>
