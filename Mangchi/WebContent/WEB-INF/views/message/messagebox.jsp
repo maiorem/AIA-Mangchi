@@ -25,13 +25,20 @@
 <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
 <style>
 div.wrap {
-	margin: 50px;
+	margin: 100px;
 	height: 500px;
 }
 
 div.noteBox {
 	height: 100px;
 	display:none;
+}
+
+table.box {
+	
+	width: 800px;
+	color: #AAAAAA;
+
 }
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -68,22 +75,30 @@ div.noteBox {
 		<div class="contentsArea">
 			<div class="noteBox ReNoteArea">
 				<c:if test="${noteList.messageList != null}">
-					<table border="1">
+					<table class="table table-hover">
 						<tr>
-							<th>보낸이</th>
-							<th>제목</th>
-							<th>날짜</th>
-							<th>답장하기</th>
-							<th>삭제</th>
+							<th scope="col">#</th>
+							<th scope="col">보낸이</th>
+							<th scope="col">제목</th>
+							<th scope="col">날짜</th>
+							<th scope="col">답장하기</th>
+							<th scope="col">삭제</th>
 						</tr>
 						<c:forEach items="${noteList.messageList}" var="notes">
 							<c:if test="${loginInfo.member_id eq notes.msg_receiver}">
 								<tr>
+									<th scope="row">-</th>
 									<td>${notes.msg_writerId}</td>
-									<td><a href="/message/noteview.do?idx=${notes.msg_idx}?req=${notes.req_idx}?sender=${notes.msg_writerId}?date=${notes.msg_date}?title=${notes.msg_title}?text=${notes.msg_text}?img=${notes.msg_img}">${notes.msg_title}</a></td>
+									<td><a href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a>
+									</td>
 									<td>${notes.msg_date}</td>
 									<td><a href="repMessage.do?toPerson=${notes.msg_writerId}?req=${notes.req_idx}">답장</a></td>
-									<td><a href="">삭제</a></td>
+									<td><a href="">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+</svg>
+									</a></td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -105,22 +120,27 @@ div.noteBox {
 			</div>
 			<div class="noteBox SendNoteArea">
 				<c:if test="${noteList.messageList != null}">
-					<table border="1">
+					<table class="table table-hover">
 						<tr>
-							<th>받는이</th>
-							<th>제목</th>
-							<th>날짜</th>
-							<th>읽음여부</th>
-							<th>삭제</th>
+							<th scope="col">#</th>
+							<th scope="col">받는이</th>
+							<th scope="col">제목</th>
+							<th scope="col">날짜</th>
+							<th scope="col">읽음여부</th>
+							<th scope="col">삭제</th>
 						</tr>
 						<c:forEach items="${noteList.messageList}" var="notes">
 							<c:if test="${loginInfo.member_idx eq notes.msg_writer}">
 								<tr>
+									<th scope="row">-</th>
 									<td>${notes.msg_receiverId}</td>
-									<td><a href="/message/noteview.do?idx=${notes.msg_idx}?req=${notes.req_idx}?sender=${notes.msg_writerId}?date=${notes.msg_date}?title=${notes.msg_title}?text=${notes.msg_text}?img=${notes.msg_img}">${notes.msg_title}</a></td>
+									<td><a href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a></td>
 									<td>${notes.msg_date}</td>
 									<td>${notes.readcheck}</td>
-									<td><a href="">삭제</a></td>
+									<td><a href=""><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+</svg></a></td>
 								</tr>
 							</c:if>
 						</c:forEach>

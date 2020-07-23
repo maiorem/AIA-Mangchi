@@ -23,14 +23,14 @@
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	
 	<div class="card noteview">
-	게시판 번호  : ${param.req} <br>
-	보낸 사람 : ${param.sender}  작성날짜 : ${param.date} <br>
-	<strong>${param.title}</strong>			
+	게시판 번호  : ${viewNote.req_idx} <br>
+	보낸 사람 : ${viewNote.msg_writerId}  작성날짜 : ${viewNote.msg_date} <br>
+	<strong>${viewNote.msg_title}</strong>			
 	<hr>
 	<p>
-	${param.text}
+	${viewNote.msg_text}
 	</p>
-	<img src='<c:url value="${param.img}"/>'>
+	<img src='<c:url value="${viewNote.msg_img}"/>' style="width: 100px;">
 		
 	</div>
 
