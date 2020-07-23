@@ -125,6 +125,45 @@ public class MessageDao {
 		
 		return list;
 	}
+
+	public Message selectMessageFromIdx(Connection conn, int idx) throws SQLException {
+		
+		Message msg=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			String sql="select msg.msg_idx, msg.req_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_idx=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				msg=new Message(
+						rs.getInt("msg.msg_idx"),
+						rs.getInt("msg.req_idx"),
+						rs.getString("mem.member_id"),
+						rs.getString("msg.msg_receiver"),
+						rs.getString("msg.msg_title"),
+						rs.getString("msg.msg_text"),
+						rs.getString("msg.msg_img"),
+						rs.getDate("msg.msg_date"),
+						rs.getInt("msg.msg_readcheck")
+						);
+			}
+			
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		
+		return msg;
+	}
 	
 
 	

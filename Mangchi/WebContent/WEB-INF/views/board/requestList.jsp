@@ -39,7 +39,7 @@
 		<button onclick="">약도보기</button>
 		
 		
-			<%@ include file="map.jsp" %>
+			<%-- <%@ include file="map.jsp" %> --%>
 		
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>

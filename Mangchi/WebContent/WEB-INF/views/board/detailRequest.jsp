@@ -33,8 +33,11 @@
 			</tr>
 			<tr>
 				<td>수행자</td>
-			<c:if test="${choiceRequest.req_helper==0}">
+			<c:if test="${choiceRequest.req_status==0}">
 				<td>(대기중)</td>
+			</c:if>
+			<c:if test="${choiceRequest.req_status>0}">
+				<td>${choiceRequest.req_helper}</td>
 			</c:if>
 			</tr>
 			<tr>
@@ -63,7 +66,13 @@
 			</tr>
 			<tr>
 				<td>상태</td>
-				<td>${choiceRequest.req_status}</td>
+				<td>
+				<select name="status_req">
+					<option value="0" id="zero">0</option>
+					<option value="1" id="one">1</option>
+					<option value="2" id="two" selected="selected">2</option>
+				</select>
+				</td>
 			</tr>
 			<tr>
 				<td>참고이미지</td>
@@ -73,6 +82,27 @@
 		</div>
 	</main>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
-
+<script>
+	$(document).ready(function(){
+		var status=${choiceRequest.req_status};
+		
+		if(status==0){
+			$('select #zero').attr('selected','selected');
+			$('select #one').removeAttr('selected');
+			$('select #two').removeAttr('selected');
+		}
+		if(status==1){
+			$('select #zero').removeAttr('selected');
+			$('select #one').attr('selected','selected');
+			$('select #two').removeAttr('selected');
+		}
+		if(status==2){
+			$('select #zero').removeAttr('selected');
+			$('select #one').removeAttr('selected');
+			$('select #two').attr('selected','selected');
+		}
+		
+	})
+</script>
 </body>
 </html>
