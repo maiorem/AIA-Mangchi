@@ -9,11 +9,8 @@ public class NullServiceImpl implements Service {
 
 	@Override
 	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
-		
-		//view page
-		String viewPage="/WEB-INF/views/null.jsp";
 
-		return viewPage;
+		return "/WEB-INF/views/null.jsp";
 	}
 
 }
