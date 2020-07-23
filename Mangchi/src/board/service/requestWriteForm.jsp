@@ -47,36 +47,39 @@ form{
 	<div>
 
 		<main role="main" class="container">
-			<form action="insertpost.do" method="post" id="form_write" enctype="multipart/form-data">
+			<form action="insertpost.do" method="post" id="form_write">
+				<input type="hidden" name="member_idx" value="${loginInfo.member_idx}">
+				
 				<div class="write_form">
 					<div class="write_reqinfo req_title">
-						<label for="req_titleid" class="suround_only">제목</label>
-						<input type="text" name="req_title" id="req_titleid" placeholder="(제목입력해주세요)">
+						<label class="suround_only">제목</label>
+						<input type="text" name="req_title" placeholder="제목입력해주세요">
 					</div>
 					<div class="write_reqinfo req_writer">
 						<label class="suround_only">요청자</label>
 						<c:if test="${loginInfo!=null}">
-							<input type="text" value="${loginInfo.member_nick}" name="nickName" readonly/>
-							<input type="hidden" value="${loginInfo.member_idx}" name="req_writer"/>
+							<input type="text" value="${loginInfo.member_nick}" readonly/>
+							<input type="hidden" value="${loginInfo.member_idx}" name="req_idx"/>
 						</c:if>
 						<c:if test="${loginInfo==null}">
-							<input type="text" value="짠가" name="nickName" readonly/>
-							<input type="hidden" value="2" name="req_writer"/>
+							<input type="text" value="짠가"/>
+							<input type="hidden" value="8" name="req_idx"/>
 						</c:if>
 					</div>
 					<div class="write_reqinfo req_price">
-						<label for="req_priceid" class="suround_only">금액</label>
-						<input type="text" name="req_price" id="req_priceid" placeholder="(금액)" required/>
+						<label class="suround_only">금액</label>
+						<input type="text" name="req_price"/>
 					</div>
-					<div class="write_reqinfo req_term">
-						<label for="req_termid" class="suround_only">반납날짜</label>
-						<input type="datetime-local" id="req_termid" value="xxx" min="yyy" max="zzz" name="req_term" required/>
+					<div class="write_reqinfo req_price">
+						<label class="suround_only">반납날짜</label>
+						<input type="datetime-local" value="xxx" min="yyy" max="zzz" name="req_term"/>
 					</div>
 					<div class="write_reqinfo req_loc">
-						<label class="suround_only">받을주소</label>
-						<input type="text" id="sample5_address" name="req_loc" readonly placeholder="(주소검색으로 입력)">
-						<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" ><br>
-						<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+						<label class="suround_only">주소</label>
+						<br>
+						API들어가야함<br>
+						
+						<input type="text" name="req_loc"/>
 					</div>
 					<div class="write_reqinfo req_img">
 						<label class="suround_only">참고 이미지</label>
@@ -90,10 +93,11 @@ form{
 
 					<hr>
 					<label class="suround_only">상세 내용</label>
-					<textarea form="form_write" name="req_text" maxlength="2000" style="width: 100%; height: 300px;"
+					<textarea name="req_text" maxlength="2000" style="width: 100%; height: 300px;"
 						placeholder="상세 내용"></textarea>
 					<input type="button" id="button1" onclick="button1_click();" value="버튼1" />
 					<input type="submit" value="글쓰기 완료">
+					<input type="hidden" value="c" name="curr">
 				</div>
 				
 			</form>
@@ -101,59 +105,7 @@ form{
 	</div>
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b991b264fa5727cb3e70e18b0cfb366&libraries=services"></script>
 <script>
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-        mapOption = {
-            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-            level: 5 // 지도의 확대 레벨
-        };
-
-    //지도를 미리 생성
-    var map = new daum.maps.Map(mapContainer, mapOption);
-    //주소-좌표 변환 객체를 생성
-    var geocoder = new daum.maps.services.Geocoder();
-    //마커를 미리 생성
-    var marker = new daum.maps.Marker({
-        position: new daum.maps.LatLng(37.537187, 127.005476),
-        map: map
-    });
-
-
-    function sample5_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                var addr = data.address; // 최종 주소 변수
-
-                // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("sample5_address").value = addr;
-                // 주소로 상세 정보를 검색
-                geocoder.addressSearch(data.address, function(results, status) {
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === daum.maps.services.Status.OK) {
-
-                        var result = results[0]; //첫번째 결과의 값을 활용
-
-                        // 해당 주소에 대한 좌표를 받아서
-                        var coords = new daum.maps.LatLng(result.y, result.x);
-                        // 지도를 보여준다.
-                        mapContainer.style.display = "block";
-                        map.relayout();
-                        // 지도 중심을 변경한다.
-                        map.setCenter(coords);
-                        // 마커를 결과값으로 받은 위치로 옮긴다.
-                        marker.setPosition(coords)
-                    }
-                });
-            }
-        }).open();
-    }
-</script>
-<script>
-    
-    
 	window.jQuery
 			|| document
 					.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')
@@ -180,9 +132,6 @@ form{
 		}); 
 	});
 
-	
-	//지도
-	
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
