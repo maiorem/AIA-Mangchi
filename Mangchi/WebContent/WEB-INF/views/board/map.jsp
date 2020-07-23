@@ -82,14 +82,14 @@
     <p><em>지도를 움직여 주세요!</em></p>
     <p id="result"></p>
 
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69c40691beee2a7bf82c96e2f85f0da8&libraries=services"></script> 
-    
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69c40691beee2a7bf82c96e2f85f0da8&libraries=services"></script>
+
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69c40691beee2a7bf82c96e2f85f0da8"></script>
-    
-    
-    
-    
-    
+
+
+
+
+
     <script>
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
             mapOption = {
@@ -102,6 +102,65 @@
 
 
 
+
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
+
+
+
+        //요청하는 사람의 위치를 담을 객체 
+        var requestLoc = {}; //또는 var person = new Object();
+
+
+
+        //요청하는 사람의 위도 경도 값 
+        function request(coords) {
+
+            requestLoc.latitude = coords.Ga;
+
+            requestLoc.longitude = coords.Ha;
+
+        }
+
+
+
+
+
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch('서울 종로구 종로 94', function(result, status) {
+
+            // 정상적으로 검색이 완료됐으면 
+            if (status === kakao.maps.services.Status.OK) {
+
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+
+                var marker1 = new daum.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                var requestMessage = '<div style="padding:5px; background-color:white; border: 1px solid #DDD;">요청자 위치</div>';
+
+                var overlay1 = new daum.maps.CustomOverlay({
+                    content: requestMessage,
+                    map: map,
+                    position: marker1.getPosition()
+                });
+
+
+                request(coords);
+
+
+
+            }
+        });
+
+
+
+
+        //나의 현재 위치 값을 담을 객체 
+
         //<<도와주는 사람 의 현재 위치 >>///
 
         // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
@@ -113,57 +172,72 @@
                 var lat = position.coords.latitude, // 위도
                     lon = position.coords.longitude; // 경도
 
-                var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-                    message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+                var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 
+                
 
                 // 마커와 인포윈도우를 표시합니다
-                displayMarker(locPosition, message);
+                displayMarker(locPosition);
+
 
             });
 
         } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
-            var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
-                message = 'geolocation을 사용할수 없어요..'
+            var locPosition = new kakao.maps.LatLng(33.450701, 126.570667)
+            
+                alert('잘못된 경로입니다. 다시 접근해주세요');
 
-            displayMarker(locPosition, message);
+                displayMarker(locPosition);
         }
+
+
+
+
+
 
         // 지도에 마커와 인포윈도우를 표시하는 함수입니다
         function displayMarker(locPosition, message) {
 
             // 마커를 생성합니다
-            var marker = new kakao.maps.Marker({
+            var marker2 = new daum.maps.Marker({
                 map: map,
                 position: locPosition
             });
+            
+            
+//            var iwContent = message; // 인포윈도우에 표시할 내용
+//
+//
+//            // 인포윈도우를 생성합니다
+//            var infowindow = new kakao.maps.InfoWindow({
+//                content: iwContent
+//            });
+//
+//            
+//            // 인포윈도우를 마커위에 표시합니다 
+//            infowindow.open(map, marker2);
+            
+            
+            var requestMessage = '<div style="padding:5px; background-color:white; border: 1px solid #DDD;">내위치</div>';
 
-            var iwContent = message, // 인포윈도우에 표시할 내용
-                iwRemoveable = true;
-
-            // 인포윈도우를 생성합니다
-            var infowindow = new kakao.maps.InfoWindow({
-                content: iwContent,
-                removable: iwRemoveable
-            });
-
-            // 인포윈도우를 마커위에 표시합니다 
-            infowindow.open(map, marker);
+                var overlay1 = new daum.maps.CustomOverlay({
+                    content: requestMessage,
+                    map: map,
+                    position: marker2.getPosition()
+                });
+            
+            
+            
 
             // 지도 중심좌표를 접속위치로 변경합니다
             map.setCenter(locPosition);
 
-            console.log(locPosition);
 
             return locPosition;
 
         }
-        
 
-        
-        
-        
-      
+
 
 
 
@@ -185,15 +259,17 @@
 
 
             // 마우스로 클릭한 위치입니다 
-            // 요청자 위치 절대 경로를 설정해야함 ★★★★ 위도, 경도
-            var clickPosition = new kakao.maps.LatLng(37.570221706456074, 126.98330929257511);
-            
 
-            
+            //요청하는 사람 위도 , 경도 값 
+            var longitude = requestLoc.longitude;
+            var latitude = requestLoc.latitude;
 
-            //내 현재 위치 
+
+            var clickPosition = new kakao.maps.LatLng(longitude, latitude);
+
+
+            //내위치 (수행자의 현재 위치 값 )
             var myPosition = map.getCenter();
-
 
 
 
@@ -217,9 +293,8 @@
                     map: map, // 선을 표시할 지도입니다 
 
 
+                    //path: [clickPosition, myPosition], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
                     path: [clickPosition, myPosition], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
-
-
 
                     strokeWeight: 3, // 선의 두께입니다 
                     strokeColor: '#db4040', // 선의 색깔입니다
@@ -239,9 +314,7 @@
                 displayCircleDot(clickPosition, 0);
 
 
-            } 
-            
-            else { // 선이 그려지고 있는 상태이면
+            } else { // 선이 그려지고 있는 상태이면
 
                 // 그려지고 있는 선의 좌표 배열을 얻어옵니다
                 var path = clickLine.getPath();
@@ -253,14 +326,14 @@
                 clickLine.setPath(path);
 
                 var distance = Math.round(clickLine.getLength());
-                
+
                 displayCircleDot(clickPosition, distance);
             }
 
 
-            
-            
-            
+
+
+
             //<<<<<지도 그려지고 난후 값 //
 
             // 지도 오른쪽 클릭 이벤트가 발생했는데 선을 그리고있는 상태이면
@@ -287,17 +360,17 @@
                     var distance = Math.round(clickLine.getLength()), // 선의 총 거리를 계산합니다
                         content = getTimeHTML(distance); // 커스텀오버레이에 추가될 내용입니다
 
-                
-                    
+
+
                     //<<<<<<★★★★★★★★거리 출력 
-                    
-                    var html ='';
-                    html +='<div>요청자와 나와의 거리 : '+distance+'m</div>';
-                    document.getElementById('distance').innerHTML=html;
-                    
-                    
-                    
-                    
+
+                    var html = '';
+                    html += '<div>요청자와 나와의 거리 : ' + distance + 'm</div>';
+                    document.getElementById('distance').innerHTML = html;
+
+
+
+
                     // 그려진 선의 거리정보를 지도에 표시합니다
                     showDistance(content, path[path.length - 1]);
                     getTimeHTML(distance);
@@ -405,16 +478,15 @@
                 circle: circleOverlay,
                 distance: distanceOverlay
             });
-            
+
         }
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
 
 
         // 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 지도에서 모두 제거하는 함수입니다

@@ -28,8 +28,18 @@
 		<br>
 		<h1>게시판 들어갈 자리</h1>
 		
-		<%-- <%@ include file="map.jsp" %> --%>
-		<%@ include file="requestMap.jsp" %>
+		<select>
+			<option></option>
+		</select>
+		
+		
+		<div> 제목 </div>
+		<p>
+		
+		<button onclick="">약도보기</button>
+		
+		
+			<%@ include file="map.jsp" %>
 		
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
