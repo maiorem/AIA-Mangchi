@@ -56,35 +56,7 @@ public class MemberMessageDao {
 		}
 		return result;
 	}
-	public int idToIdx(Connection conn, String id) throws SQLException {
-		
-		int receiverIdx=-1;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		String sql="select member_idx from project.member where member_id=?";
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			
-			rs=pstmt.executeQuery();
-			
-			while(rs.next()) {
-				receiverIdx=rs.getInt(1);
-			}
-			
-		}finally {
-			if(rs!=null) {
-				rs.close();
-			}
-			if(pstmt!=null) {
-				pstmt.close();
-			}
-		}
-		
-		
-		return receiverIdx;
-	}
+
 
 	
 	

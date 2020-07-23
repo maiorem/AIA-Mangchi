@@ -10,7 +10,7 @@ public class MessageBoxServiceImpl implements Service {
 	@Override
 	public String getViewPage(HttpServletRequest req, HttpServletResponse resp) {
 		
-		return "/WEB-INF/views/note/messagebox.jsp";
+		return "/WEB-INF/views/message/messagebox.jsp";
 	}
 
 }
