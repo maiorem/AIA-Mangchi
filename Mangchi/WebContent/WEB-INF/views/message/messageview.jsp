@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!doctype html>
 <html lang="ko">
   <head>
@@ -23,11 +22,16 @@
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	
-	<div class="noteview">
-	게시판 번호 ${ }			
-	
-	
-	
+	<div class="card noteview">
+	게시판 번호  : ${param.req} <br>
+	보낸 사람 : ${param.sender}  작성날짜 : ${param.date} <br>
+	<strong>${param.title}</strong>			
+	<hr>
+	<p>
+	${param.text}
+	</p>
+	<img src='<c:url value="${param.img}"/>'>
+		
 	</div>
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>

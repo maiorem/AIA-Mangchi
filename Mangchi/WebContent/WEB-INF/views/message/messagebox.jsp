@@ -71,7 +71,7 @@ div.noteBox {
 					<table border="1">
 						<tr>
 							<th>보낸이</th>
-							<th>메시지</th>
+							<th>제목</th>
 							<th>날짜</th>
 							<th>답장하기</th>
 							<th>삭제</th>
@@ -80,7 +80,7 @@ div.noteBox {
 							<c:if test="${loginInfo.member_id eq notes.msg_receiver}">
 								<tr>
 									<td>${notes.msg_writerId}</td>
-									<td><a href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a></td>
+									<td><a href="/message/noteview.do?idx=${notes.msg_idx}?req=${notes.req_idx}?sender=${notes.msg_writerId}?date=${notes.msg_date}?title=${notes.msg_title}?text=${notes.msg_text}?img=${notes.msg_img}">${notes.msg_title}</a></td>
 									<td>${notes.msg_date}</td>
 									<td><a href="repMessage.do?toPerson=${notes.msg_writerId}?req=${notes.req_idx}">답장</a></td>
 									<td><a href="">삭제</a></td>
@@ -108,7 +108,7 @@ div.noteBox {
 					<table border="1">
 						<tr>
 							<th>받는이</th>
-							<th>메시지</th>
+							<th>제목</th>
 							<th>날짜</th>
 							<th>읽음여부</th>
 							<th>삭제</th>
@@ -117,7 +117,7 @@ div.noteBox {
 							<c:if test="${loginInfo.member_idx eq notes.msg_writer}">
 								<tr>
 									<td>${notes.msg_receiverId}</td>
-									<td><a href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a></td>
+									<td><a href="/message/noteview.do?idx=${notes.msg_idx}?req=${notes.req_idx}?sender=${notes.msg_writerId}?date=${notes.msg_date}?title=${notes.msg_title}?text=${notes.msg_text}?img=${notes.msg_img}">${notes.msg_title}</a></td>
 									<td>${notes.msg_date}</td>
 									<td>${notes.readcheck}</td>
 									<td><a href="">삭제</a></td>
