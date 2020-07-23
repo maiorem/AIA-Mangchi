@@ -164,8 +164,18 @@ public class MessageDao {
 		
 		return msg;
 	}
-	
 
+	public int changeReadCheckFromIdx(Connection conn, int idx) {
+		int readCheck=0;
+		PreparedStatement pstmt=null;
+		
+		String sql="update ";
+		pstmt=conn.prepareStatement(sql);
+		pstmt.setInt(1, idx);
+		
+		
+		
+		return readCheck;
 	
 	
 }
