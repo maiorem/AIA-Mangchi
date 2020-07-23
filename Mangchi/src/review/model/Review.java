@@ -9,7 +9,7 @@ public class Review {
 	private int req_idx;
 	private int review_receiver;
 	private int review_writer;
-	private int review_score;
+	private float review_score;
 	private String review_text;
 	private Date review_regdate;
 	
@@ -19,7 +19,7 @@ public class Review {
 	}
 	
 	
-	public Review(int review_idx, int req_idx, int review_receiver, int review_writer, int review_score,
+	public Review(int review_idx, int req_idx, int review_receiver, int review_writer, float review_score,
 			String review_text, Date review_regdate) {
 		this.review_idx = review_idx;
 		this.req_idx = req_idx;
@@ -89,14 +89,14 @@ public class Review {
 
 
 
-	public int getReview_score() {
+	public float getReview_score() {
 		return review_score;
 	}
 
 
 
 
-	public void setReview_score(int review_score) {
+	public void setReview_score(float review_score) {
 		this.review_score = review_score;
 	}
 

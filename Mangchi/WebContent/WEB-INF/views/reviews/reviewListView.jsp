@@ -24,16 +24,34 @@
 <body>
 
 <table >
+
+<c:forEach items="${reviewList}" var="review">
+
 	<tr>
-		<td>${review.review_idx}</td>
-		<td>${review.req_idx}</td>
-		<td>${review.review_writer}</td>
+		<td>${review}</td>
 		
-	</tr>
+		</tr>
+		
+		
+</c:forEach>
 
-
+ 
 </table>
 
+평점
+<c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>
+
+
+
+<br><br>
+내가쓴리뷰들
+<br>
+
+<c:forEach items="${writerList}" var="wr">
+	
+		 <span class="star-prototype">${wr}</span>
+	
+</c:forEach>
 
 
 
