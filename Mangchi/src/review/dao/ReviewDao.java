@@ -90,7 +90,7 @@ public class ReviewDao {
 			while(rs.next()) {
 				
 				reviewList.add(new Review(rs.getInt("review_idx"),rs.getInt("req_idx"),rs.getInt("review_receiver"),
-						rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getDate("review_regdate")));
+						rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getString("review_regdate")));
 			}
 			
 			
@@ -132,7 +132,7 @@ public class ReviewDao {
 				while(rs.next()) {
 					
 					reviewList.add(new Review(rs.getInt("review_idx"),rs.getInt("req_idx"),rs.getInt("review_receiver"),
-							rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getDate("review_regdate")));
+							rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getString("review_regdate")));
 				}
 				
 				
