@@ -15,8 +15,11 @@
         <li class="nav-item">
           <a class="nav-link" href="<c:url value='/board/boarding.do'/>">대여게시판</a>
         </li>
-                <li class="nav-item">
+          <li class="nav-item">
           <a class="nav-link" href="<c:url value="/board/posting.do"/>">글쓰기</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<c:url value="/message/messageBox.do"/>">쪽지함</a>
         </li>
       </ul>
       <form class="form-inline mt-2 mt-md-0">
