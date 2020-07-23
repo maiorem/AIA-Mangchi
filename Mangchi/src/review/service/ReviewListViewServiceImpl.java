@@ -40,6 +40,9 @@ public class ReviewListViewServiceImpl implements Service {
 			float score =0;
 			List<Review> writeList =null;
 			
+			
+			
+			
 			reviewList = dao.getlist(conn,member_idx);
 			score = dao.scoreAvg(conn, member_idx);
 			writeList = dao.setlist(conn, a);

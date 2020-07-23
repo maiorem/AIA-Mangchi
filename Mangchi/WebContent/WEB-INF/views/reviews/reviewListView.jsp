@@ -4,10 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-   
     <%@ page import="review.model.*" %>
-    
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,15 +12,9 @@
 <title>Insert title here</title>
 </head>
 
-
-
-
-
-
-
 <body>
 
-<table >
+<table border="3">
 
 <c:forEach items="${reviewList}" var="review">
 
@@ -42,17 +33,29 @@
 <c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>
 
 
+<table >
+	<tr>
+	<%-- <td>${reviewList }</td> --%>
+		<td>${review.review_idx}</td>
+		<td>${review.req_idx}</td>
+		<td>${review.review_writer}</td>
+		
+	</tr>
 
 <br><br>
 내가쓴리뷰들
 <br>
 
+<table border="3">
 <c:forEach items="${writerList}" var="wr">
 	
-		 <span class="star-prototype">${wr}</span>
+		<tr>
+	<td>${wr}</td>
+		</tr>
+		
 	
 </c:forEach>
-
+</table>
 
 
 </body>

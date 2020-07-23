@@ -19,11 +19,8 @@
 
 <body>
 
-DB에 올라갔습니다.
+${result }
 
-<
-
-
-
+DB가입완료
 </body>
 </html>
