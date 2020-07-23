@@ -82,7 +82,7 @@ div.noteBox {
 									<td>${notes.msg_writerId}</td>
 									<td><a href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a></td>
 									<td>${notes.msg_date}</td>
-									<td><a href="repMessage.do?toPerson=${notes.msg_writerId}">답장</a></td>
+									<td><a href="repMessage.do?toPerson=${notes.msg_writerId}?req=${notes.req_idx}">답장</a></td>
 									<td><a href="">삭제</a></td>
 								</tr>
 							</c:if>
