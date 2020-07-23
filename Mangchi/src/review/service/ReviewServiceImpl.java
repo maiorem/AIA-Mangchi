@@ -2,7 +2,9 @@ package review.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,12 +29,11 @@ public class ReviewServiceImpl implements Service {
 
 		Connection conn = null;
 		
-		int review_idx =0;
 		
-		// 아래3개필수
-		int req_idx =7; //test용
-		//int review_receiver=7; // test용
-		int review_writer =2; // test용
+		
+		int req_idx =8; //test용
+		int review_receiver=99; // test용
+		int review_writer =6; // test용
 		
 		//int req_idx =Integer.parseInt(req.getParameter("req_idx")); // 게시글 idx
 		//int review_receiver = Integer.parseInt(req.getParameter("review_receiver")); // 리뷰당하는사람
@@ -49,6 +50,8 @@ public class ReviewServiceImpl implements Service {
 			
 			Review review = new Review();
 			
+			
+			//review.setReview_idx(review_idx);
 			review.setReq_idx(req_idx); // 게시글번호 
 			//review.setReview_receiver(review_receiver);
 			review.setReview_writer(review_writer);
@@ -56,16 +59,12 @@ public class ReviewServiceImpl implements Service {
 			review.setReview_text(review_text);
 			
 			
-			
-			Review review2 = new Review();
-			
-			review2.setReview_idx(review_idx);
-			
 			dao = ReviewDao.getInstance();
 			
+
 			resultCnt=dao.insertReview(conn,review);
-			resultCnt=dao.selectReview(conn,review2);
 			
+			req.setAttribute("result", resultCnt);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -25,15 +25,19 @@
 	
 
 	<tr>
-	<td class="req_writer" id="req_writer">
-	 <% int req_writer = (int)session.getAttribute("req_writer"); %>
- 			 글쓴이세션값 : <%=req_writer%></td>
+	<td>
+	<%--  <% int req_writer = (int)session.getAttribute("req_writer"); %> --%>
+ 			 글쓴이세션값 : <%-- <%=req_writer%> --%></td>
+ 	<input type="hidden" class="req_writer" id="req_writer" value="<%-- <%=req_writer%> --%>">
+ 	
 	</tr>
 				
-	<tr >
-	<td class="review_receiver" id="review_receiver">
+	<tr>
+	<td>
 	<%String review_receiver = request.getParameter("review_receiver"); %>
-		받는이 : <%=review_receiver %></td>
+		받는이 : <%=review_receiver %>
+	<input type="hidden" name="review_receiver" id="review_receiver" value="<%=review_receiver %>">
+		</td>
 	</tr>
 			
 				
@@ -52,11 +56,21 @@
 						<option value="5">5</option>
 					</select></td>
 				</tr>
+		
+			<tr>
+			<td>리뷰idx</td>
+				<td><input type="hidden" name="review_idx"></td>
 				
+			<td>가입일</td>
+				<td><input type="hidden" name="review_regdate" value=""></td>
+			</tr>
+		
+					
 				<tr>
 					<td> <input type="submit" name="등록">	</td>
 				</tr>
 
+	
 
 
 </table>
