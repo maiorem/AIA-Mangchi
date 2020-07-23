@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title> M A N G C H | 쪽지 보내기 </title>
+    <title> M A N G C H | 쪽지보기 </title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 
@@ -23,9 +23,12 @@
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	
+	<div class="noteview">
+	게시판 번호 ${ }			
 	
 	
 	
+	</div>
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
