@@ -148,7 +148,7 @@
     <!-- /END THE FEATURETTES -->
 
   </div><!-- /.container -->
-
+</main>
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>

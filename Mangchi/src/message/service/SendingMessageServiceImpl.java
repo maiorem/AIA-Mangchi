@@ -1,4 +1,4 @@
-package note.service;
+package message.service;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -17,13 +17,13 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import jdbc.ConnectionProvider;
 import member.dao.MemberMessageDao;
-import note.dao.NoteDao;
-import note.model.Message;
+import message.dao.MessageDao;
+import message.model.Message;
 import service.Service;
 
 public class SendingMessageServiceImpl implements Service {
 	
-	NoteDao dao;
+	MessageDao dao;
 	MemberMessageDao mmdao;
 
 	@Override
@@ -32,11 +32,12 @@ public class SendingMessageServiceImpl implements Service {
 		
 		int resultCnt=0;
 		
+		int reqlistIdx=-1;
 		int senderIdx=-1;
 		String receiverId=null;
+		String title=null;
 		String text=null;
 		String img=null;
-		int check=0; //안읽은 상태
 		
 		Connection conn=null;
 		
@@ -63,21 +64,22 @@ public class SendingMessageServiceImpl implements Service {
 						conn=ConnectionProvider.getConnection();
 						mmdao=MemberMessageDao.getInstance();
 
-						if(paramName.equals("senderIdx")) {
+						if(paramName.equals("reqListIdx")) {
+							reqlistIdx=Integer.parseInt(paramValue);
+							
+						} else if(paramName.equals("sender")){
 							senderIdx=Integer.parseInt(paramValue);
-							System.out.println(paramName+ " : " +paramValue);
 							
 						} else if(paramName.equals("noteId")) {
 							if(mmdao.existId(conn, paramValue)) {
 								receiverId=paramValue;
-								System.out.println(paramName+ " : " +paramValue);
-								System.out.println("아이디 존재 확인");
 								
 							} else {
 								throw new Exception("쪽지를 보낼 상대가 존재하지 않습니다.");
 							}
-						} else if(paramName.equals("noteText")) {
-							System.out.println(paramName+ " : " +paramValue);
+						} else if(paramName.equals("noteTitle")){
+							title=paramValue;
+						}else if(paramName.equals("noteText")) {
 							text=paramValue;
 						} 
 						
@@ -101,9 +103,8 @@ public class SendingMessageServiceImpl implements Service {
 				msg.setMsg_receiver(receiverId);
 				msg.setMsg_text(text);
 				msg.setMsg_img(img);
-				msg.setReadcheck(check);
 				
-				dao=NoteDao.getInstance();
+				dao=MessageDao.getInstance();
 				resultCnt=dao.sendMessage(conn, msg);
 				req.setAttribute("note", msg);
 				req.setAttribute("resultNote", resultCnt);
@@ -140,7 +141,7 @@ public class SendingMessageServiceImpl implements Service {
 		}
 		
 		
-		return "/WEB-INF/views/note/sendingmessage.jsp";
+		return "/WEB-INF/views/message/sendingmessage.jsp";
 	}
 
 }

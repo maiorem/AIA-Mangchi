@@ -1,4 +1,4 @@
-package note.service;
+package message.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
