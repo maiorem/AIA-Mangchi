@@ -56,6 +56,14 @@ table.box {
 			$('div.SendNoteArea').css('display', 'block');
 		});
 		
+		$('a.view').click(function(){
+			
+			$.ajax({
+				url:''
+			});
+		});
+		
+		
 	});
 
 </script>
@@ -89,7 +97,7 @@ table.box {
 								<tr>
 									<th scope="row">-</th>
 									<td>${notes.msg_writerId}</td>
-									<td><a href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a>
+									<td><a class="view" href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a>
 									</td>
 									<td>${notes.msg_date}</td>
 									<td><a href="repMessage.do?toPerson=${notes.msg_writerId}?req=${notes.req_idx}">답장</a></td>
@@ -134,7 +142,7 @@ table.box {
 								<tr>
 									<th scope="row">-</th>
 									<td>${notes.msg_receiverId}</td>
-									<td><a href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a></td>
+									<td><a class="view" href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a></td>
 									<td>${notes.msg_date}</td>
 									<td><span id="checkmsg">${notes.readcheck}</span></td>
 									<td><a href=""><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
