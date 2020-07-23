@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import board.dao.BoardDao;
 import board.model.RequestWriting;
 import jdbc.ConnectionProvider;
+import member.model.Member;
 import service.Service;
 
 public class WriteRequestResultServiceImpl implements Service {
@@ -18,9 +19,9 @@ public class WriteRequestResultServiceImpl implements Service {
 	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
 		Connection conn = null;
 		RequestWriting rw = null;
-//		HttpSession session = request.getSession();
-//		Member member = (Member)session.getAttribute("loginInfo");
-		int member_idx=2;
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginInfo");
+		int member_idx=member.getIdx();
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao = BoardDao.getInstance();

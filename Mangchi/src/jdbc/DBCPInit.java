@@ -34,35 +34,11 @@ public class DBCPInit extends HttpServlet {
 	private void initConnectionPool() {
 		
 		try {
-<<<<<<< HEAD
-<<<<<<< HEAD
-			
 
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> PARKSEONGMIN
-=======
->>>>>>> PARKSEONGMIN
->>>>>>> master
-			String jdbcDriver = "jdbc:mysql://mangchi1.cynhwcnt3hk0.ap-northeast-2.rds.amazonaws.com:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-=======
-			
-=======
-
->>>>>>> KJJ
-			String jdbcDriver = "jdbc:mysql://localhost:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
 //			String jdbcDriver = "jdbc:mysql://mangchi1.cynhwcnt3hk0.ap-northeast-2.rds.amazonaws.com:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
+			String jdbcDriver = "jdbc:mysql://localhost:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
 			String username = "bit";
 			String pw = "bit";
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 			
 			ConnectionFactory connFactory = new DriverManagerConnectionFactory(jdbcDriver, username, pw);
 			

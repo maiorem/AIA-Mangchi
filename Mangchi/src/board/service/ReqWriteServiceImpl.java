@@ -17,6 +17,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import jdbc.ConnectionProvider;
+import member.model.Member;
 import board.dao.BoardDao;
 import board.model.RequestWriting;
 import service.Service;
@@ -56,8 +57,8 @@ public class ReqWriteServiceImpl implements Service {
 		double req_latitude;// 위도
 		double req_longitude;// 경도
 		String req_img=null; // 참고이미지
-//		String nick=(Member)request.getSession().getAttribute("loginInfo").getMember_nick;
-		String nick = "말리";
+		Member mb=(Member)request.getSession().getAttribute("loginInfo");
+		String nick = mb.getNick();
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 		try {
