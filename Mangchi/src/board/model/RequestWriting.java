@@ -1,15 +1,18 @@
 package board.model;
 
+//import java.sql.Date;
+
 import java.util.Date;
 
 public class RequestWriting {
 	private int req_idx;
-	private String req_writer;
+	private int req_writer;
+	private String writer_nick;
 	private String req_title;
 	private int req_helper;
 	private int req_price;
-	private Date req_regdate;
-	private Date req_term;
+	private String req_regdate;
+	private String req_term;
 	private String req_loc;
 	private String req_text;
 	private double req_latitude;
@@ -20,12 +23,13 @@ public class RequestWriting {
 	
 	public RequestWriting(
 						int req_idx, 
-						String req_writer, 
+						int req_writer,
+						String writer_nick,
 						String req_title, 
 						int req_helper, 
 						int req_price,
-						Date req_regdate, 
-						Date req_term, 
+						String req_regdate, 
+						String req_term, 
 						String req_loc, 
 						String req_text, 
 						double req_latitude, 
@@ -34,6 +38,7 @@ public class RequestWriting {
 						int req_status, String req_img) {
 		this.req_idx = req_idx;
 		this.req_writer = req_writer;
+		this.writer_nick = writer_nick;
 		this.req_title = req_title;
 		this.req_helper = req_helper;
 		this.req_price = req_price;
@@ -50,6 +55,16 @@ public class RequestWriting {
 
 	public RequestWriting() {}
 
+	
+	
+	public String getWriter_nick() {
+		return writer_nick;
+	}
+
+	public void setWriter_nick(String writer_nick) {
+		this.writer_nick = writer_nick;
+	}
+
 	public int getReq_idx() {
 		return req_idx;
 	}
@@ -58,11 +73,11 @@ public class RequestWriting {
 		this.req_idx = req_idx;
 	}
 
-	public String getReq_writer() {
+	public int getReq_writer() {
 		return req_writer;
 	}
 
-	public void setReq_writer(String req_writer) {
+	public void setReq_writer(int req_writer) {
 		this.req_writer = req_writer;
 	}
 
@@ -90,19 +105,19 @@ public class RequestWriting {
 		this.req_price = req_price;
 	}
 
-	public Date getReq_regdate() {
+	public String getReq_regdate() {
 		return req_regdate;
 	}
 
-	public void setReq_regdate(Date req_regdate) {
+	public void setReq_regdate(String req_regdate) {
 		this.req_regdate = req_regdate;
 	}
 
-	public Date getReq_term() {
+	public String getReq_term() {
 		return req_term;
 	}
 
-	public void setReq_term(Date req_term) {
+	public void setReq_term(String req_term) {
 		this.req_term = req_term;
 	}
 
@@ -164,10 +179,15 @@ public class RequestWriting {
 
 	@Override
 	public String toString() {
-		return "RequestWriting [req_idx=" + req_idx + ", req_writer=" + req_writer + ", req_title=" + req_title
-				+ ", req_helper=" + req_helper + ", req_price=" + req_price + ", req_regdate=" + req_regdate
-				+ ", req_term=" + req_term + ", req_loc=" + req_loc + ", req_text=" + req_text + ", req_latitude="
-				+ req_latitude + ", req_longitude=" + req_longitude + ", req_readcnt=" + req_readcnt + ", req_status="
-				+ req_status + ", req_img=" + req_img + "]";
+		return "RequestWriting [req_idx=" + req_idx + ", req_writer=" + req_writer + ", writer_nick=" + writer_nick
+				+ ", req_title=" + req_title + ", req_helper=" + req_helper + ", req_price=" + req_price
+				+ ", req_regdate=" + req_regdate + ", req_term=" + req_term + ", req_loc=" + req_loc + ", req_text="
+				+ req_text + ", req_latitude=" + req_latitude + ", req_longitude=" + req_longitude + ", req_readcnt="
+				+ req_readcnt + ", req_status=" + req_status + ", req_img=" + req_img + "]";
 	}
+
+	
+//	public java.util.Date toDate(){
+//		return new java.util.Date(this.req_term.getTime());
+//	}
 }

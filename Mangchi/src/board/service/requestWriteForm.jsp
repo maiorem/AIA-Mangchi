@@ -97,6 +97,7 @@ form{
 						placeholder="상세 내용"></textarea>
 					<input type="button" id="button1" onclick="button1_click();" value="버튼1" />
 					<input type="submit" value="글쓰기 완료">
+					<input type="hidden" value="c" name="curr">
 				</div>
 				
 			</form>
