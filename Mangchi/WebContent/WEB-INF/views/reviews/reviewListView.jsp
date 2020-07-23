@@ -33,7 +33,6 @@
 <c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>
 
 
-<<<<<<< HEAD
 <table >
 	<tr>
 	<%-- <td>${reviewList }</td> --%>
@@ -42,8 +41,6 @@
 		<td>${review.review_writer}</td>
 		
 	</tr>
-=======
->>>>>>> 3ef81ace8fc6825ad71f1a324972e151b01ed899
 
 <br><br>
 내가쓴리뷰들
