@@ -3,20 +3,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title> M A N G C H | 우리 동네 대여 서비스</title>
+    <title>Carousel Template · Bootstrap</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 
     <!-- Bootstrap core CSS -->
 	<link rel='stylesheet' href='<c:url value="/assets/dist/css/bootstrap.css"/>'>
-	<link rel='stylesheet' href='<c:url value="/css/default.css"/>'> 
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
     <!-- Custom styles for this template -->
     <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
   </head>

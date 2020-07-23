@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>대여 요청 게시판</title>
+    <title> M A N G C H | 쪽지보기 </title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 
@@ -22,26 +22,14 @@
   </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
-	<div>
-		<br>
-		<br>
-		<br>
-		<h1>게시판 들어갈 자리</h1>
-		
-		<select>
-			<option></option>
-		</select>
-		
-		
-		<div> 제목 </div>
-		<p>
-		
-		<button onclick="">약도보기</button>
-		
-		
-			<%@ include file="map.jsp" %>
-		
+	
+	<div class="noteview">
+	게시판 번호 ${ }			
+	
+	
+	
 	</div>
+
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

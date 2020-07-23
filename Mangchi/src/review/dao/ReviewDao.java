@@ -42,7 +42,7 @@ public class ReviewDao {
 			pstmt.setInt(1, review.getReq_idx());
 			pstmt.setInt(2, review.getReview_receiver());
 			pstmt.setInt(3, review.getReview_writer());
-			pstmt.setInt(4, review.getReview_score());
+			pstmt.setFloat(4, review.getReview_score());
 			pstmt.setString(5, review.getReview_text());
 			
 			
@@ -65,8 +65,8 @@ public class ReviewDao {
 
 	
 	
-	//public List<Review> getlist(Connection conn, Member member) throws SQLException {
-		public List<Review> getlist(Connection conn, int a) throws SQLException {
+	
+		public List<Review> getlist(Connection conn, int member_idx) throws SQLException {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -82,7 +82,7 @@ public class ReviewDao {
 			
 			pstmt =conn.prepareStatement(sql);
 			//pstmt.setInt(1, member.getmember_idx());
-			pstmt.setInt(1, a);
+			pstmt.setInt(1, member_idx);
 			
 			rs=pstmt.executeQuery();
 			
@@ -90,7 +90,7 @@ public class ReviewDao {
 			while(rs.next()) {
 				
 				reviewList.add(new Review(rs.getInt("review_idx"),rs.getInt("req_idx"),rs.getInt("review_receiver"),
-						rs.getInt("review_writer"),rs.getInt("review_score"),rs.getString("review_text"),rs.getDate("review_regdate")));
+						rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getString("review_regdate")));
 			}
 			
 			
@@ -108,41 +108,81 @@ public class ReviewDao {
 	
 	
 	
+		public List<Review> setlist(Connection conn, int a) throws SQLException {
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			List<Review> reviewList = new ArrayList<>();
+			
+			
+			
+			try {
+				
+				
+				String sql = "select * from project.review_list where review_writer=?";
+				
+				pstmt =conn.prepareStatement(sql);
+				//pstmt.setInt(1, member.getmember_idx());
+				pstmt.setInt(1, a);
+				
+				rs=pstmt.executeQuery();
+				
+			
+				while(rs.next()) {
+					
+					reviewList.add(new Review(rs.getInt("review_idx"),rs.getInt("req_idx"),rs.getInt("review_receiver"),
+							rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getString("review_regdate")));
+				}
+				
+				
+			} finally {
+				if(rs != null) {
+					rs.close();
+				}
+				if(pstmt !=null) {
+					pstmt.close();
+				}
+			}
+			
+			return reviewList;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	
 	
 	
-	public List<Review> listReview(Connection conn, int req_idx) throws SQLException{
+	public float scoreAvg (Connection conn, int member_idx) throws SQLException{
 		
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		List<Review> reviewList = new ArrayList<>();
+		float ResultCnt = 0;
 		
 		
-		String sql = "select *, avg(review_score) from project.review_list group by req_idx having req_idx=?";
+		String sql = "select avg(review_score) from project.review_list group by review_receiver having review_receiver=?";
 		
 		
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, req_idx);
-			
+			pstmt.setInt(1, member_idx);
 			
 			rs=pstmt.executeQuery();
 			
 		while(rs.next()) {
-			Review review = new Review();
-			review.setReview_idx(rs.getInt("review_idx"));
-			review.setReq_idx(rs.getInt("req_idx"));
-			review.setReview_receiver(rs.getInt("review_receiver"));
-			review.setReview_writer(rs.getInt("review_writer"));
-			review.setReview_score(rs.getInt("review_score"));
-			review.setReview_text(rs.getString("review_text"));
-			review.setReview_regdate(rs.getDate("review_regdate"));
+			ResultCnt = rs.getFloat(1);
 			
-			reviewList.add(review);
+			
 		}
 		
 		}finally {
@@ -151,9 +191,9 @@ public class ReviewDao {
 			}
 			
 		}
+		return ResultCnt;
 		
 		
-		return reviewList;
 		
 		
 		

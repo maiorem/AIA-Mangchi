@@ -26,8 +26,9 @@ public class ReviewListViewServiceImpl implements Service {
 		Connection conn=null;
 		HttpSession session=req.getSession();
 //		Member rv = (Member)session.getAttribute("loginInfo");
-//		int a=rv.getMember_idx;
-		int a = 1111;
+//		int member_idx=rv.getMember_idx;
+		int member_idx = 1111;
+		int a=15;
 		try {
 			
 			conn=ConnectionProvider.getConnection();
@@ -36,17 +37,40 @@ public class ReviewListViewServiceImpl implements Service {
 			
 			
 			List<Review> reviewList = null;
+			float score =0;
+			List<Review> writeList =null;
 			
-			reviewList = dao.getlist(conn,a);
+			
+			
+			
+			reviewList = dao.getlist(conn,member_idx);
+			score = dao.scoreAvg(conn, member_idx);
+			writeList = dao.setlist(conn, a);
+			
 			
 			System.out.println(reviewList);
+			System.out.println(score);
+			System.out.println(writeList);
 			
 			req.setAttribute("reviewList", reviewList);
+			req.setAttribute("score", score);
 			
+			req.setAttribute("writerList", writeList);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 		}
 		
 		
