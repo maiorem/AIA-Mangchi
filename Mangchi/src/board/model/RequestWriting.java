@@ -27,7 +27,7 @@ public class RequestWriting {
 						int req_writer,
 						String writer_nick,
 						String req_title, 
-						int req_helper, 
+						int req_helper,
 						int req_price,
 						String req_regdate, 
 						String req_term, 

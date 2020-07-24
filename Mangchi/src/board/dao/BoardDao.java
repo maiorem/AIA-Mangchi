@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -222,7 +223,7 @@ public class BoardDao {
 						rs.getString("member_nick"), 
 						rs.getString("req_title"),
 						rs.getInt("req_helper"),
-						rs.getInt("req_price"), 
+						rs.getInt("req_price"),
 						sdf.format(regdate),
 						rs.getString("req_term"),
 						rs.getString("req_loc"), 
@@ -264,7 +265,7 @@ public class BoardDao {
 			while(rs.next()) {
 				Member member = new Member();
 				
-				member.setIdx(rs.getInt("msg_writer"));
+				member.setIdx(rs.getInt("member_idx"));
 				member.setNick(rs.getString("member_nick"));
 				
 				list.add(member);
@@ -278,6 +279,36 @@ public class BoardDao {
 			}
 		}
 		return list;
+	}
+	public int chooseHelperStatus(Connection conn, int req_idx, int helper) throws SQLException {
+		
+		int num = 1;
+		PreparedStatement pstmt = null;
+		if(helper==-1) {
+			num=0;
+		}
+		String sql = "UPDATE `project`.`request_list` " + 
+					 "SET " + 
+					 "`req_helper` = ?, " + 
+					 "`req_status` = "+num+" " + 
+					 "WHERE `req_idx` = ?;";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if(helper==-1) {
+				pstmt.setNull(1, java.sql.Types.NULL);
+				pstmt.setInt(2, req_idx);
+			}else {
+				pstmt.setInt(1, helper);
+				pstmt.setInt(2, req_idx);				
+			}
+			pstmt.executeUpdate();
+			
+		} finally {
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		return num;
 	}
 	
 	
