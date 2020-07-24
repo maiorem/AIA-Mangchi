@@ -35,6 +35,39 @@ button.buy {
 button.sell{
 	
 }
+
+ 
+
+table.type09 {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+
+}
+table.type09 thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #369;
+    border-bottom: 3px solid #036;
+}
+table.type09 tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
+}
+table.type09 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+
+
 </style>
 
 <meta charset="UTF-8">
@@ -73,29 +106,35 @@ button.sell{
 
 
 <div class="center" id="center" style="margin-top: 30px;">
-<table border="3">
+
+
+
+<table class="type09">
+<thead>
+
 
 <tr>
-<th>리뷰idx</th>
-<th>게시글번호</th>
-<th>나</th>
-<th>상대방</th>
-<th>점수</th>
-<th style="width:50%;">내용</th>
-<th>리뷰쓴날자</th>
+<th scope="cols">리뷰idx</th>
+<th scope="cols">게시글번호</th>
+<th scope="cols">나</th>
+<th scope="cols">상대방</th>
+<th scope="cols">점수</th>
+<th scope="cols"">내용</th>
+<th scope="cols">리뷰쓴날자</th>
 </tr>
 
+</thead>
 
 <c:forEach items="${reviewList}" var="x">
 
 	<tr>
-		<td>${x.review_idx}</td>
-		<td>${x.req_idx}</td>
-		<td>${x.review_receiver}</td>
-		<td>${x.review_writer}</td>
-		<td>${x.review_score}</td>
-		<td>${x.review_text}</td>
-		<td>${x.review_regdate}</td>
+		<td scope="row">${x.review_idx}</td>
+		<td scope="row">${x.req_idx}</td>
+		<td scope="row">${x.review_receiver}</td>
+		<td scope="row">${x.review_writer}</td>
+		<td scope="row">${x.review_score}</td>
+		<td scope="row">${x.review_text}</td>
+		<td scope="row">${x.review_regdate}</td>
 		
 		</tr>
 		
@@ -116,29 +155,32 @@ button.sell{
 
 
 <div class="center2" id="center2" style="margin-top: 30px; display: none;">
-<table border="3">
+<table class="type09">
+
+<thead>
 
 <tr>
-<th>리뷰idx</th>
-<th>게시글번호</th>
-<th>상대방</th>
-<th>나</th>
-<th>점수</th>
-<th style="width:60%;">내용</th>
-<th>리뷰쓴날자</th>
+<th scope="cols">리뷰idx</th>
+<th scope="cols">게시글번호</th>
+<th scope="cols">상대방</th>
+<th scope="cols">나</th>
+<th scope="cols">점수</th>
+<th scope="cols" style="width: 40%;">내용</th>
+<th scope="cols">리뷰쓴날자22</th>
 </tr>
 
+</thead>
 
 <c:forEach items="${writerList}" var="y">
 
 	<tr>
-		<td>${y.review_idx}</td>
-		<td>${y.req_idx}</td>
-		<td>${y.review_receiver}</td>
-		<td>${y.review_writer}</td>
-		<td>${y.review_score}</td>
-		<td>${y.review_text}</td>
-		<td>${y.review_regdate}</td>
+		<td  >${y.review_idx}</td>
+		<td  >${y.req_idx}</td>
+		<td  >${y.review_receiver}</td>
+		<td  scope="row">${y.review_writer}</td>
+		<td  scope="row">${y.review_score}</td>
+		<td  scope="row" style="width: 40%;">${y.review_text}</td>
+		<td  scope="row">${y.review_regdate}</td>
 		
 		</tr>
 		

@@ -19,93 +19,172 @@
 	<link rel='stylesheet' href='<c:url value="/css/default.css"/>'> 
     <!-- Custom styles for this template -->
     <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
-    
+    <link href='<c:url value="/css/star.css"/>' rel="stylesheet">
     <style type="text/css">
     
     body {
 	padding-top:7em !important;
 	
 }
+
+.bold{
+	font-weight: bold;
+}
+
+
+
+
+
+
     </style>
     
   </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
-	
-전체값 : <c:out value="${loginInfo }"/>
-	
-	<form id="reviewForm" action="review.do"  method="post">
+		<article>
 
+		<div class="container" role="main">
 
-<table>
+			<h2 class="bold">거래 후기 남기기</h2>
 
-	<tr>
-	<td> 작성자 : ${loginInfo.nick }  </td>
-	<td> 인풋값 : ${loginInfo.idx }  </td>
- 	<input type="hidden" class="req_writer" id="req_writer" value="${loginInfo.idx }">
-	</tr>
-				
-	<tr>
-	<td>
+			<br>
 
-		받는이 : 게시글에서받아오는파라미터
-	<input type="hidden" name="review_receiver" id="review_receiver" value="">
-		</td>
-	</tr>
+			<form id="reviewForm"  method="post" action="review.do">
+
+			<!-- review_writer 작성자 필수 -->
+			<input type="hidden" id="review_writer" value="${loginInfo.idx }"> 
 			
-				
-	<tr>
-		<td>후기</td>
-		<td> <input type="text" name="review_text" id="review_text"></td>
-	</tr>
-				
-				<tr>
-					<td>평점</td>
-					<td><select name="review_score">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-					</select></td>
-				</tr>
-		
-			<tr>
-			<td>리뷰idx</td>
-				<td><input type="hidden" name="review_idx"></td>
-				
-			<td>가입일</td>
-				<td><input type="hidden" name="review_regdate" value=""></td>
-			</tr>
-		
+			<!--  review_receiver 받는이는 게시글에서 가져오기 -->
+			<input type="hidden" id="review_receiver" value="">
+			
+			<!-- review_regdate 게시글작성일은 null로두기[자동으로 서밋할시 now()] -->
+			<td><input type="hidden" name="review_regdate" value=""></td>
+			
+			<!-- req_idx 게시글번호 게시글에서 가져오기 -->
+			<td><input type="hidden" name="review_regdate" value=""></td>
+			
+			
+				<div class="mb-3">
+
+					<label for="title" class="bold" style="color: gray;">거래한 상품</label><br>
+					<h4>망치 빌려요 [ 게시글 이름 파라미터가져오기 ]</h4>
 					
-				<tr>
-					<td> <input type="submit" name="submit" value="글쓰기완료">	</td>
-				</tr>
+				
 
-	
-</table>
-</form>
+				</div>
 
+				
+
+
+				
+
+				<div class="mb-3">
+
+					<label for="content">내용</label>
+
+					<textarea class="form-control" rows="5" name="review_text" id="review_text" placeholder="후기 내용을 입력해 주세요" ></textarea>
+
+				</div>
+
+				
+
+				<div class="mb-3">
+
+					<label for="tag">거래 평점</label>
+
+
+<span class="star-input">
+	<span class="input">
 	
-	
-	
+    	<input type="radio" name="review_score" value="1" id="p1">
+    	<label for="p1">1</label>
+    	<input type="radio" name="review_score" value="2" id="p2">
+    	<label for="p2">2</label>
+    	<input type="radio" name="review_score" value="3" id="p3">
+    	<label for="p3">3</label>
+    	<input type="radio" name="review_score" value="4" id="p4">
+    	<label for="p4">4</label>
+    	<input type="radio" name="review_score" value="5" id="p5">
+    	<label for="p5">5</label>
+    	</select>
+  	</span>
+  	<output for="star-input"><b>0</b>점</output>						
+</span>
+
+
+
+
+
+				
+
+				</div>
+				
+			
+
+		<div style="float: right;">
+			<input type="submit" class="btn btn-sm btn-primary" name="submit" value="완료">
+			<input type="reset" class="btn btn-sm btn-primary" name="submit" value="취소">
+			</div>
+			</form>
+
+
+		</div>
+
+	</article>
+
+<br><br><br>
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')</script><script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script></body>
+<!-- <script src="js/star.js"></script> -->
+
 <script>
 
-$( document ).ready( function () {
+
 	
-	${'#submit'}.click(function () {
-		var jb = $('#req_writer').val();
-		alert(jb);
-		
-	});
 	
-};
+	var starRating = function(){
+		var $star = $(".star-input"),
+		    $result = $star.find("output>b");
+			
+		  	$(document)
+			.on("focusin", ".star-input>.input", 
+				function(){
+		   		 $(this).addClass("focus");
+		 	})
+				 
+		   	.on("focusout", ".star-input>.input", function(){
+		    	var $this = $(this);
+		    	setTimeout(function(){
+		      		if($this.find(":focus").length === 0){
+		       			$this.removeClass("focus");
+		     	 	}
+		   		}, 100);
+		 	 })
+		  
+		    .on("change", ".star-input :radio", function(){
+		    	$result.text($(this).next().text());
+		  	})
+		    .on("mouseover", ".star-input label", function(){
+		    	$result.text($(this).text());
+		    })
+		    .on("mouseleave", ".star-input>.input", function(){
+		    	var $checked = $star.find(":checked");
+		    		if($checked.length === 0){
+		     	 		$result.text("0");
+		   		 	} else {
+		     	 		$result.text($checked.next().text());
+		    		}
+		  	});
+		};
+
+		starRating();
+	
+	
+	
+	
 
 </script>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import board.model.RequestWriting;
 import jdbc.ConnectionProvider;
 import member.model.Member;
 import review.dao.ReviewDao;
@@ -33,24 +34,23 @@ public class ReviewServiceImpl implements Service {
 		
 		HttpSession session=req.getSession();
 		Member rv = (Member)session.getAttribute("loginInfo");
-		int review_writer=rv.getIdx();
+		RequestWriting br = (RequestWriting)session.getAttribute("");
+
+		
+		//int req_idx=br.getReq_idx();
+		//int review_receiver=br.getReq_helper();
+		
+		
 		
 		int req_idx =8; //test용
 		int review_receiver=3; // test용
-		//int review_writer =6; // test용
+		int review_writer=rv.getIdx();
 		
-		//int req_idx =Integer.parseInt(req.getParameter("req_idx")); // 게시글 idx
-		//int review_receiver = Integer.parseInt(req.getParameter("review_receiver")); // 리뷰당하는사람
 		
-		String a = req.getParameter("review_writer");
-		//int review_writer = Integer.parseInt(a); // 리뷰쓰는사람[게시글올린사람]
-		
-		//int review_writer = (int)req.getSession().getAttribute("review_writer");
 				
 		
 		int review_score = Integer.parseInt(req.getParameter("review_score"));
 		String review_text = req.getParameter("review_text");
-		//int review_score =3;
 		
 		
 		
@@ -61,9 +61,8 @@ public class ReviewServiceImpl implements Service {
 			Review review = new Review();
 			
 			
-			//review.setReview_idx(review_idx);
 			review.setReq_idx(req_idx); // 게시글번호 
-			//review.setReview_receiver(review_receiver);
+			review.setReview_receiver(review_receiver);
 			review.setReview_writer(review_writer);
 			review.setReview_score(review_score);
 			review.setReview_text(review_text);
