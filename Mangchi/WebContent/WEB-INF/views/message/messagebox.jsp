@@ -40,6 +40,15 @@ table.box {
 	color: #AAAAAA;
 
 }
+
+.check_ok {
+	color: green;
+}
+
+.check_not {
+	color: red;
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
@@ -64,8 +73,12 @@ table.box {
 				success: function(data){
 					if(data='Y') {
 						$('#checkmsg').text("읽음");
+						$('#checkmsg').addClass('check_ok');
+					} else {
+						$('#checkmsg').text("읽지않음");
+						$('#checkmsg').addClass('check_not');
 					}
-				};
+				}
 			});
 		});
 		

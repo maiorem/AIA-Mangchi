@@ -23,11 +23,12 @@ public class CheckReadingNoteServiceImpl implements Service {
 		
 		try {
 			conn=ConnectionProvider.getConnection();
-			int readCheck=dao.changeReadCheckFromIdx(conn, idx);
+			int resultCnt=dao.changeReadCheckFromIdx(conn, idx); //readcheck 값을 1로 수정
+			int readCheck=dao.selectReadCheckByIdx(conn, idx);	//readcheck 값을 읽어 옴
 			
 			if(readCheck==1) {
 				check="Y";
-			}
+			} 
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

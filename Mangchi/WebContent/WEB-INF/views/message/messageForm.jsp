@@ -48,7 +48,7 @@
 			<table>
 				<tr>
 					<td>보내는 사람</td>
-					<td><input type="email" name="sender" id="sender" value="${loginInfo.uid}" readonly></td>
+					<td><input type="email" name="sender" id="sender" value="${loginInfo.id}" readonly></td>
 				</tr>
 				<tr>
 					<td>받는 사람</td>

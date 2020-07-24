@@ -165,18 +165,57 @@ public class MessageDao {
 		return msg;
 	}
 
-	public int changeReadCheckFromIdx(Connection conn, int idx) {
-		int readCheck=0;
+	public int changeReadCheckFromIdx(Connection conn, int idx) throws SQLException {
+		
+		int resultCnt=0;
+		
 		PreparedStatement pstmt=null;
 
-		String sql="update ";
+		try {
+			String sql="update project.message set msg_readcheck=? where msg_idx=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, idx);
+			
+			resultCnt=pstmt.executeUpdate();
+		} finally {
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+
+
+		return resultCnt;
+
+
+	}
+
+	public int selectReadCheckByIdx(Connection conn, int idx) throws SQLException {
+		
+		int readCheck=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+		String sql="select msg_readcheck from project.message where msg_idx=?";
 		pstmt=conn.prepareStatement(sql);
 		pstmt.setInt(1, idx);
-
-
-
+		rs=pstmt.executeQuery();
+		
+		while(rs.next()) {
+			readCheck=rs.getInt(1);
+		}
+		
+		
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+			
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
 		return readCheck;
-
-
 	}
 }
