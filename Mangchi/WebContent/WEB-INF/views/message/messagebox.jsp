@@ -88,6 +88,12 @@ table.box {
 </script>
 </head>
 <body>
+	<c:if test="${loginInfo==null}">
+	<script>
+		alert('쪽지는 로그인을 해야 이용이 가능합니다.');
+		location.href='<c:url value="/member/loginForm.do"/>';
+	</script>
+	</c:if>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div class="wrap">
 
