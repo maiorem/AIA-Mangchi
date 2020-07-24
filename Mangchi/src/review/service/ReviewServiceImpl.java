@@ -8,8 +8,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jdbc.ConnectionProvider;
+import member.model.Member;
 import review.dao.ReviewDao;
 import review.model.Review;
 import service.Service;
@@ -29,7 +31,9 @@ public class ReviewServiceImpl implements Service {
 
 		Connection conn = null;
 		
-		
+		HttpSession session=req.getSession();
+		Member rv = (Member)session.getAttribute("loginInfo");
+		int review_writer=rv.getIdx();
 		
 		int req_idx =8; //test용
 		int review_receiver=3; // test용
@@ -37,8 +41,12 @@ public class ReviewServiceImpl implements Service {
 		
 		//int req_idx =Integer.parseInt(req.getParameter("req_idx")); // 게시글 idx
 		//int review_receiver = Integer.parseInt(req.getParameter("review_receiver")); // 리뷰당하는사람
+		
 		String a = req.getParameter("review_writer");
-		int review_writer = Integer.parseInt(a); // 리뷰쓰는사람[게시글올린사람]
+		//int review_writer = Integer.parseInt(a); // 리뷰쓰는사람[게시글올린사람]
+		
+		//int review_writer = (int)req.getSession().getAttribute("review_writer");
+				
 		
 		int review_score = Integer.parseInt(req.getParameter("review_score"));
 		String review_text = req.getParameter("review_text");

@@ -41,6 +41,7 @@
 
 	<tr>
 	<td> 작성자 : ${loginInfo.nick }  </td>
+	<td> 인풋값 : ${loginInfo.idx }  </td>
  	<input type="hidden" class="req_writer" id="req_writer" value="${loginInfo.idx }">
 	</tr>
 				
