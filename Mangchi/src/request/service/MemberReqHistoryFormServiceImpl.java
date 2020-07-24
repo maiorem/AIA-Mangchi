@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jdbc.ConnectionProvider;
-
+import member.model.Member;
 import request.dao.RequestDao;
 import request.model.Request;
 import request.model.RequestListView;
@@ -35,7 +35,12 @@ public class MemberReqHistoryFormServiceImpl implements Service {
 
 			dao = RequestDao.getInstance();	
 			
-			int requestTotalCount = dao.selectReqCount(conn, 2);
+			Member loginInfo = (Member)req.getSession().getAttribute("loginInfo");	
+			System.out.println(loginInfo);
+			int idx = loginInfo.getIdx();
+			System.out.println("로그인한 사람 : "+idx);
+			
+			int requestTotalCount = dao.selectReqCount(conn, idx);
 			
 			int pageNumber = 1;
 			String page = req.getParameter("page");
@@ -56,7 +61,7 @@ public class MemberReqHistoryFormServiceImpl implements Service {
 				startRow = (pageNumber - 1) * COUNT_PER_PAGE ;
 				
 
-				requestList = dao.selectReqHistory(conn, 2, startRow, COUNT_PER_PAGE);
+				requestList = dao.selectReqHistory(conn, idx, startRow, COUNT_PER_PAGE);
 				System.out.println("requestList: "+requestList);
 
 			} else {
