@@ -11,7 +11,7 @@ public class Review {
 	private int review_writer;
 	private float review_score;
 	private String review_text;
-	private Date review_regdate;
+	private String review_regdate;
 	
 	
 	public Review() {
@@ -20,7 +20,7 @@ public class Review {
 	
 	
 	public Review(int review_idx, int req_idx, int review_receiver, int review_writer, float review_score,
-			String review_text, Date review_regdate) {
+			String review_text, String review_regdate) {
 		this.review_idx = review_idx;
 		this.req_idx = req_idx;
 		this.review_receiver = review_receiver;
@@ -117,14 +117,14 @@ public class Review {
 
 
 
-	public Date getReview_regdate() {
+	public String getReview_regdate() {
 		return review_regdate;
 	}
 
 
 
 
-	public void setReview_regdate(Date review_regdate) {
+	public void setReview_regdate(String review_regdate) {
 		this.review_regdate = review_regdate;
 	}
 

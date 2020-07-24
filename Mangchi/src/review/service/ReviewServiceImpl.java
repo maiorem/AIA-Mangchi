@@ -32,7 +32,7 @@ public class ReviewServiceImpl implements Service {
 		
 		
 		int req_idx =8; //test용
-		int review_receiver=99; // test용
+		int review_receiver=3; // test용
 		int review_writer =6; // test용
 		
 		//int req_idx =Integer.parseInt(req.getParameter("req_idx")); // 게시글 idx
@@ -41,6 +41,7 @@ public class ReviewServiceImpl implements Service {
 		
 		int review_score = Integer.parseInt(req.getParameter("review_score"));
 		String review_text = req.getParameter("review_text");
+		//int review_score =3;
 		
 		
 		

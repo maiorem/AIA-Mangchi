@@ -68,7 +68,11 @@
 			</tr>
 			<tr>
 				<td>상태</td>
-				<td>${currentWriting.req_status}</td>
+				<td>
+				<select>
+				
+				</select>
+				</td>
 			</tr>
 			<tr>
 				<td>참고이미지</td>

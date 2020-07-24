@@ -56,8 +56,8 @@ form{
 					<div class="write_reqinfo req_writer">
 						<label class="suround_only">요청자</label>
 						<c:if test="${loginInfo!=null}">
-							<input type="text" value="${loginInfo.member_nick}" name="nickName" readonly/>
-							<input type="hidden" value="${loginInfo.member_idx}" name="req_writer"/>
+							<input type="text" value="${loginInfo.nick}" name="nickName" readonly/>
+							<input type="hidden" value="${loginInfo.idx}" name="req_writer"/>
 						</c:if>
 						<c:if test="${loginInfo==null}">
 							<input type="text" value="짠가" name="nickName" readonly/>
