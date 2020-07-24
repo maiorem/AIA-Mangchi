@@ -19,6 +19,15 @@
 	<link rel='stylesheet' href='<c:url value="/css/default.css"/>'> 
     <!-- Custom styles for this template -->
     <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
+    
+    <style type="text/css">
+    
+    body {
+	padding-top:7em !important;
+	
+}
+    </style>
+    
   </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -31,9 +40,11 @@
 
 	<tr>
 	<td>
-	<%--  <% int req_writer = (int)session.getAttribute("req_writer"); %> --%>
- 			 글쓴이세션값 : <%-- <%=req_writer%> --%></td>
- 	<input type="hidden" class="req_writer" id="req_writer" value="<%-- <%=req_writer%> --%>">
+	
+	<%-- int req_writer = (int)session.getAttribute("loginInfo"); --%> 
+	${loginInfo.nick}
+ 			 글쓴이세션값 :  <%--req_writer--%> </td>
+ 	<input type="hidden" class="req_writer" id="req_writer" <%-- value=" <%=req_writer%>  --%>">
  	
 	</tr>
 				

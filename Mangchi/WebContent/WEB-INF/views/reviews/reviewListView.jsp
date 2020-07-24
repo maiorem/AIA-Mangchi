@@ -106,14 +106,16 @@ button.sell{
 </table>
 </div>
 
+
+<%-- 
 <div>
 평점
 <c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>
-</div>
+</div> --%>
 
 
 
-<div class="center2" id="center2" style="margin-top: 30px;">
+<div class="center2" id="center2" style="margin-top: 30px; display: none;">
 <table border="3">
 
 <tr>
