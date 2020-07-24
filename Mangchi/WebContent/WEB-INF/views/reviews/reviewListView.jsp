@@ -101,7 +101,7 @@ table.type09 td {
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 <div class="center">
-<button id="buy">나의 후기</button><button id="sell">내가 쓴후기</button>
+<button id="buy" class="btn btn-outline-success my-2 my-sm-0">나의 후기</button><button id="sell" class="btn btn-outline-success my-2 my-sm-0">내가 쓴후기</button>
 </div>
 
 
@@ -119,7 +119,7 @@ table.type09 td {
 <th scope="cols">나</th>
 <th scope="cols">상대방</th>
 <th scope="cols">점수</th>
-<th scope="cols"">내용</th>
+<th scope="cols" style="width: 40%;">내용</th>
 <th scope="cols">리뷰쓴날자</th>
 </tr>
 
@@ -146,11 +146,6 @@ table.type09 td {
 </div>
 
 
-<%-- 
-<div>
-평점
-<c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>
-</div> --%>
 
 
 
@@ -223,16 +218,4 @@ $('#buy').click(function () {
 		$('#center2').css('display','inline'); */
 	});
 	
-	
-	$('#buy').hover(function() {
-		  $(this).css("color", "red");
-		}, function(){
-		  $(this).css("color", "black");
-		});
-	
-	$('#sell').hover(function() {
-		  $(this).css("color", "red");
-		}, function(){
-		  $(this).css("color", "black");
-		});
 </script>

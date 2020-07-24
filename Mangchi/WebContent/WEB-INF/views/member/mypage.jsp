@@ -23,8 +23,33 @@
 <link rel='stylesheet' href='<c:url value="/css/default.css"/>'>
 <!-- Custom styles for this template -->
 <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
+
+<style type="text/css">
+
+span.star-prototype, span.star-prototype > * {
+    height: 16px; 
+    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+    width:80px;
+    display: inline-block;
+}
+ 
+span.star-prototype > * {
+    background-position: 0 0;
+    max-width:80px; 
+}
+
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 <body>
+<c:if test="${loginInfo==null}">
+	<script>
+		alert('글을 쓰려면 로그인 해주세요');
+		
+		location.href='<c:url value="/member/loginForm.do"/>';
+	</script>
+</c:if>
+
 
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<br>
@@ -103,13 +128,13 @@
 					<div class="col-auto d-none d-lg-block"></div>
 				</div>
 			</div>
-		</div>
-		
-		<div class="col-md-6">
+			
+			
+				<div class="col-md-6">
 				<div
 					class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 					<div class="col p-4 d-flex flex-column position-static">
-						<strong class="d-inline-block mb-2 text-success">거래 내역</strong>
+						<strong class="d-inline-block mb-2 text-success">리뷰 내역</strong>
 
 						<div class="row mb-2">
 							<div class="col-lg-6">
@@ -120,25 +145,33 @@
 									<title>Placeholder</title><rect width="100%" height="100%"
 										fill="#777" />
 									<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-									<a href="${pageContext.request.contextPath}/member/reqhistory.do">요청 내역</a>
+									<a href="${pageContext.request.contextPath}/reviews/reviewList.do">내가쓴 리뷰</a>
 							</div>
 							<div class="col-lg-6">
-								<svg class="bd-placeholder-img rounded-circle" width="100"
-									height="100" xmlns="http://www.w3.org/2000/svg"
-									preserveAspectRatio="xMidYMid slice" focusable="false"
-									role="img" aria-label="Placeholder: 100x100">
-									<title>Placeholder</title><rect width="100%" height="100%"
-										fill="#777" />
-									<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-									<a href="${pageContext.request.contextPath}/member/rnthistory.do">대여 내역</a>
+							
+							<br>
+							
+						<div>
+						현재 나의 평점 :
+						<span class="star-prototype">
+						<c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>
+						</span>(<c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>)
+						</div>
+							
+							
 							</div>
 						</div>
-						<a href="#">Continue reading</a>
+						
+					
+						
 					</div>
-					<div class="col-auto d-none d-lg-block"></div>
+				
 				</div>
 			</div>
-		
+			
+			
+			
+		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
@@ -147,9 +180,24 @@
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
 <script>
+$('documnet').ready(function name() {
+	
+	$.fn.generateStars = function() {
+	    return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
+	};
+
+	// 숫자 평점을 별로 변환하도록 호출하는 함수
+	$('.star-prototype').generateStars();
+
+	
+});
+
+
+
 	window.jQuery
 			|| document
 					.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')
 </script>
 <script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script>
 </body>
+
