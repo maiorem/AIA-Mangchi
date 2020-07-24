@@ -10,6 +10,7 @@ public class RequestWriting {
 	private String writer_nick;
 	private String req_title;
 	private int req_helper;
+	private String helper_nick;
 	private int req_price;
 	private String req_regdate;
 	private String req_term;
@@ -57,6 +58,14 @@ public class RequestWriting {
 
 	
 	
+	public String getHelper_nick() {
+		return helper_nick;
+	}
+
+	public void setHelper_nick(String helper_nick) {
+		this.helper_nick = helper_nick;
+	}
+
 	public String getWriter_nick() {
 		return writer_nick;
 	}
