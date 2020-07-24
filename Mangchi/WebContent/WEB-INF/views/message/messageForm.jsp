@@ -81,4 +81,4 @@
 	crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')</script>
 <script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script>
-</body>
+
