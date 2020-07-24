@@ -34,13 +34,20 @@
   
   <filter-mapping>
   	<filter-name>loginCheckFilter</filter-name>
-  	<url-pattern>/WEB-INF/views/member/mypage/*</url-pattern>
+  	<url-pattern>/WEB-INF/views/member/mypage.jsp</url-pattern>
   </filter-mapping>
   
    <filter-mapping>
   	<filter-name>loginCheckFilter</filter-name>
-  	<url-pattern>/WEB-INF/views/board/*</url-pattern>
+  	<url-pattern>/WEB-INF/views/board/requestWriteFrom.jsp</url-pattern>
   </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>loginCheckFilter</filter-name>
+  	<url-pattern>/WEB-INF/views/message/*</url-pattern>
+  </filter-mapping>
+
+  
   
   <!-- 인코딩 필터 등록 -->
   <filter>
