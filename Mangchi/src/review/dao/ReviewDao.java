@@ -152,7 +152,43 @@ public class ReviewDao {
 		
 		
 		
-		
+		public int searchnick(Connection conn, int helper_idx) throws SQLException {
+			
+			int resultCnt =0;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			
+			try {
+				
+				String sql = "SELECT member_nick FROM project.member where member_idx=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, helper_idx);
+				
+				resultCnt=pstmt.executeUpdate();
+				
+				
+				while(rs.next()) {
+					
+					resultCnt=rs.getInt(1);
+					
+				}
+				
+				
+				
+			} finally {
+				if(pstmt!=null) {
+					pstmt.close();
+				}
+			}
+			
+			
+			
+			return resultCnt;
+			
+		}
 		
 		
 		

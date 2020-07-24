@@ -29,22 +29,22 @@ public class ReviewServiceImpl implements Service {
 		
 		
 		int resultCnt =0;
-
+		
+		
+		
+		
+		
 		Connection conn = null;
 		
 		HttpSession session=req.getSession();
 		Member rv = (Member)session.getAttribute("loginInfo");
-		RequestWriting br = (RequestWriting)session.getAttribute("");
+		int review_writer=rv.getIdx();
 
 		
-		//int req_idx=br.getReq_idx();
-		//int review_receiver=br.getReq_helper();
+		int req_idx=Integer.parseInt(req.getParameter("req_idx")); // 게시글에서쏴줌
+		int review_receiver=Integer.parseInt(req.getParameter("req_helper")); //게시글에서쏴줌
+		//int review_receiver=3; // test용
 		
-		
-		
-		int req_idx =8; //test용
-		int review_receiver=3; // test용
-		int review_writer=rv.getIdx();
 		
 		
 				
@@ -53,28 +53,35 @@ public class ReviewServiceImpl implements Service {
 		String review_text = req.getParameter("review_text");
 		
 		
-		
+		int nick= Integer.parseInt(req.getParameter("req_helper"));
 		
 		try {
 			conn = ConnectionProvider.getConnection();
 			
+			
+			
+			
 			Review review = new Review();
 			
 			
-			review.setReq_idx(req_idx); // 게시글번호 
-			review.setReview_receiver(review_receiver);
-			review.setReview_writer(review_writer);
-			review.setReview_score(review_score);
-			review.setReview_text(review_text);
+			review.setReq_idx(req_idx); // 게시글에서 가져옴 
+			review.setReview_receiver(review_receiver); // 게시글에서 가져옴
+			review.setReview_writer(review_writer); // 글쓴이 로그인세션idx 
+			review.setReview_score(review_score); // 폼에서 직접
+			review.setReview_text(review_text); // 폼에서 직접 
 			
 			
 			dao = ReviewDao.getInstance();
 			
 
 			resultCnt=dao.insertReview(conn,review);
+			nick=dao.searchnick(conn, nick);
+			
+			System.out.println(nick);
+			System.out.println(resultCnt);
 			
 			req.setAttribute("result", resultCnt);
-			
+			req.setAttribute("nick", nick);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
