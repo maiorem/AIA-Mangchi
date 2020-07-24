@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jdbc.ConnectionProvider;
+import member.model.Member;
 import review.dao.ReviewDao;
 import review.model.Review;
 import service.Service;
@@ -25,10 +26,10 @@ public class ReviewListViewServiceImpl implements Service {
 		
 		Connection conn=null;
 		HttpSession session=req.getSession();
-//		Member rv = (Member)session.getAttribute("loginInfo");
-//		int member_idx=rv.getMember_idx;
-		int member_idx = 1111;
-		int a=15;
+		Member rv = (Member)session.getAttribute("loginInfo");
+		int member_idx=rv.getIdx();
+		
+		
 		try {
 			
 			conn=ConnectionProvider.getConnection();
@@ -45,7 +46,7 @@ public class ReviewListViewServiceImpl implements Service {
 			
 			reviewList = dao.getlist(conn,member_idx);
 			score = dao.scoreAvg(conn, member_idx);
-			writeList = dao.setlist(conn, a);
+			writeList = dao.setlist(conn, member_idx);
 			
 			
 			System.out.println(reviewList);
