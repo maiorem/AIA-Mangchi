@@ -120,7 +120,7 @@
 			hiddenField.setAttribute("name", "uid");
 			hiddenField.setAttribute("value", req_writer);
 			form.appendChild(hiddenField);
-			window.open(action,"selecthelper",'width=400, height=600, menubar=no, status=no, toolbar=no');
+			window.open(action,"selecthelper",'width=770, height=950, menubar=no, status=no, toolbar=no');
 			form.target="selecthelper";
 			document.body.appendChild(form);
 			form.submit();
