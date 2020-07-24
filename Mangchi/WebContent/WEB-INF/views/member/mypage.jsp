@@ -65,7 +65,7 @@
 									<title>Placeholder</title><rect width="100%" height="100%"
 										fill="#777" />
 									<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-									<a href="${pageContext.request.contextPath}/member/reqhistory.do">요청 내역</a>
+									<a href="${pageContext.request.contextPath}/request/reqhistory.do">요청 내역</a>
 							</div>
 							<div class="col-lg-6">
 								<svg class="bd-placeholder-img rounded-circle" width="100"
@@ -75,7 +75,7 @@
 									<title>Placeholder</title><rect width="100%" height="100%"
 										fill="#777" />
 									<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-									<a href="${pageContext.request.contextPath}/member/rnthistory.do">대여 내역</a>
+									<a href="${pageContext.request.contextPath}/request/rnthistory.do">대여 내역</a>
 							</div>
 						</div>
 						<a href="#">Continue reading</a>

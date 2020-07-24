@@ -60,41 +60,109 @@ public class RequestDao {
 		return list;
 	}
 	
-	// 나의 대여 게시물
-	public List<Request> selectRntHistory(Connection conn, int idx) throws SQLException {
+	// 요청 카운트
+	public int selectReqCount(Connection conn, int idx) throws SQLException {
+
+		int resultCnt = 0;
 
 		PreparedStatement pstmt = null;
-		ResultSet rs;
+
+		ResultSet rs = null;
 		
-		List<Request> list = new ArrayList();
-
-
+		//System.out.println(">>>>>>> "+idx);
+		
 		try {
-			String sql = "select * from project.request_list where req_helper=?";
+			String sql = "select count(*) from project.request_list where req_writer="+idx;// where req_writer=? " ;
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, idx);
-
-			rs = pstmt.executeQuery();
-
+			//pstmt.setNString(1, idx+"");
+			rs = pstmt.executeQuery(sql);
+			
 			while (rs.next()) {
-				Request req = new Request();
-				req.setReq_idx(rs.getInt("req_idx"));
-				req.setReq_title(rs.getString("req_title"));
-				req.setReq_loc(rs.getString("req_loc"));
-				req.setReq_price(rs.getInt("req_price"));
-				req.setReq_status(rs.getInt("req_status"));
-				req.setReq_regdate(rs.getDate("req_regdate"));
-				list.add(req);
+				resultCnt = rs.getInt(1);
 			}
 
 		} finally {
+			if (rs != null) {
+				rs.close();
+			}
 			if (pstmt != null) {
 				pstmt.close();
 			}
 		}
-
-		return list;
+		System.out.println(resultCnt);
+		return resultCnt;
 	}
+	
+	// 나의 대여 게시물
+		public List<Request> selectRntHistory(Connection conn, int idx, int startRow, int endRow ) throws SQLException {
+
+			PreparedStatement pstmt = null;
+			ResultSet rs;
+			
+			List<Request> list = new ArrayList();
+
+
+			try {
+				String sql = "select * from project.request_list where req_helper=? limit ?,?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, idx);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					Request req = new Request();
+					req.setReq_idx(rs.getInt("req_idx"));
+					req.setReq_title(rs.getString("req_title"));
+					req.setReq_loc(rs.getString("req_loc"));
+					req.setReq_price(rs.getInt("req_price"));
+					req.setReq_status(rs.getInt("req_status"));
+					req.setReq_regdate(rs.getDate("req_regdate"));
+					list.add(req);
+				}
+
+			} finally {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			}
+
+			return list;
+		}
+	
+	// 대여 카운트
+		public int selectRntCount(Connection conn, int idx) throws SQLException {
+
+
+			int resultCnt = 0;
+
+			PreparedStatement pstmt = null;
+
+			ResultSet rs = null;
+
+			try {
+				String sql = "select count(*) from project.request_list where req_helper="+idx;
+				pstmt = conn.prepareStatement(sql);
+				
+				//pstmt.setInt(1, idx);
+				
+				rs = pstmt.executeQuery(sql);
+				if (rs.next()) {
+					resultCnt = rs.getInt(1);
+				}
+
+			} finally {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			}
+			System.out.println(resultCnt);
+			return resultCnt;
+		}
 	
 	// 모든 게시물
 	public List<Request> selectAllrequest(Connection conn, int startRow, int endRow) throws SQLException {

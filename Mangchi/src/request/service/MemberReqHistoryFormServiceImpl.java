@@ -35,7 +35,7 @@ public class MemberReqHistoryFormServiceImpl implements Service {
 
 			dao = RequestDao.getInstance();	
 			
-			int requestTotalCount = dao.selectTotalCount(conn);
+			int requestTotalCount = dao.selectReqCount(conn, 2);
 			
 			int pageNumber = 1;
 			String page = req.getParameter("page");
