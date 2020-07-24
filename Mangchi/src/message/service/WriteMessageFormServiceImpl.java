@@ -12,7 +12,7 @@ public class WriteMessageFormServiceImpl implements Service {
 		
 		
 		
-		return "/WEB-INF/views/note/messageForm.jsp";
+		return "/WEB-INF/views/message/messageForm.jsp";
 				
 	}
 

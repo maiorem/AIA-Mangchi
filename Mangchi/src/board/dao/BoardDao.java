@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 import board.model.RequestWriting;
+import member.model.Member;
 
 public class BoardDao {
 	private BoardDao() {}
@@ -242,6 +243,41 @@ public class BoardDao {
 		}
 		
 		return rw;
+	}
+	public List<Member> getRequestHelpers(Connection conn, int loginIdx, int req_idx) throws SQLException {
+		List<Member>list = new ArrayList<Member>();
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		
+		String sql ="SELECT * FROM project.message ms join project.member mb " + 
+					"where ms.msg_writer=mb.member_idx " + 
+					"	and req_idx=? " + 
+					"   and msg_writer != ? " + 
+					"group by msg_writer";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, req_idx);
+			pstmt.setInt(2, loginIdx);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Member member = new Member();
+				
+				member.setIdx(rs.getInt("msg_writer"));
+				member.setNick(rs.getString("member_nick"));
+				
+				list.add(member);
+			}
+		} finally {
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+			if(rs!=null) {
+				rs.close();
+			}
+		}
+		return list;
 	}
 	
 	
