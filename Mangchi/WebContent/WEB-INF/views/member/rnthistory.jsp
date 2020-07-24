@@ -28,8 +28,8 @@
 	<div class="container">
 		<div class="nav-scroller bg-white shadow-sm">
 			<nav class="nav nav-underline">
-				<a class="nav-link" href="${pageContext.request.contextPath}/member/reqhistory.do">요청 내역</a> 
-				<a class="nav-link" href="${pageContext.request.contextPath}/member/rnthistory.do">대여 내역</a>
+				<a class="nav-link" href="${pageContext.request.contextPath}/request/reqhistory.do">요청 내역</a> 
+				<a class="nav-link" href="${pageContext.request.contextPath}/request/rnthistory.do">대여 내역</a>
 			</nav>
 		</div>
 		<h1>대여 내역</h1>
