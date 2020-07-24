@@ -153,7 +153,7 @@ public class ReviewDao {
 		
 	
 	
-		public Member selecthlperMember(Connection conn, String id) throws SQLException {
+		public Member selecthlperMember(Connection conn, int id) throws SQLException {
 
 			Member member = null;
 
@@ -165,7 +165,7 @@ public class ReviewDao {
 				String sql = "select * from project.member where member_idx=?";
 
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, id);
+				pstmt.setInt(1, id);
 
 				rs = pstmt.executeQuery();
 

@@ -23,10 +23,10 @@ public class ReviewFormServiceImpl implements Service {
 		
 		Connection conn=null;
 		
-		//int a = Integer.parseInt(req.getParameter("req_helper"));
-		String a = "11";
-		//int b = Integer.parseInt(req.getParameter("req_idx"));
-		int b = 9;
+		int a = Integer.parseInt(req.getParameter("req_helper"));
+//		String a = "11";
+		int b = Integer.parseInt(req.getParameter("req_idx"));
+//		int b = 9;
 		
 		
 	try {
