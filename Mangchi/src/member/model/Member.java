@@ -15,6 +15,15 @@ public class Member {
 	
 	public Member() {}
 	
+	public Member(int idx, String id, String pw, String nick, String photo, Date regDate) {
+		this.idx = idx;
+		this.id = id;
+		this.pw = pw;
+		this.nick = nick;
+		this.regDate = regDate;
+		this.photo = photo;
+	};
+	
 	public Member(int idx, String id, String pw, String nick, Double score, Date regDate, String addr,
 			String photo) {
 		this.idx = idx;

@@ -20,6 +20,8 @@
     <!-- Custom styles for this template -->
     <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
     <link href='<c:url value="/css/RegForm.css"/>' rel="stylesheet">
+    
+  
   </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -55,6 +57,9 @@
 											<input type="submit" class="btn mt-4">
 											</form>
                             				<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+                            				<br>
+                            				<!-- 카카오 로그인 api -->
+                            				<a id="custom-login-btn" href="#"><img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222"/></a>
 				      					</div>
 			      					</div>
 			      				</div>
@@ -90,10 +95,162 @@
  
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>window.jQuery || document.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')</script><script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script></body>
+	
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript">
+	Kakao.init('5a8a5ce6115cd1642bcb72f180541d7b');
+	
+	$(function(){
+		
+		
+		var idCheck = function(res){
+			alert(res.id);
+			alert(res.properties.nickname);
+            alert(res.properties.profile_image);
+            var id = res.id;
+            var nick = res.properties.nickname;
+            var photo = res.properties.profile_image;
+            $.ajax({
+            	url:"/Mangchi/member/kakaoCheck.do",
+            	type:"post",
+            	data:{id:id, nick:nick, photo:photo},
+            	success:function(data){
+            		alert("완료!" + data);
+            	},
+            	error:function(request,status,error){
+            		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+            });
+		};
+		
+		
+		var kakaoLogin = function(){
+			Kakao.Auth.login({
+	               success: function(authObj) {
+						
+	            	   Kakao.API.request({
+	                       url: '/v2/user/me',
+	                       success: function(res) {
+
+	                           //alert(JSON.stringify(authObj));
+	                           alert('로그인 되었습니다.');
+								
+	                           
+		                        //$('#login').css('display', 'none');
+		                        //$('#uinfo').css('display', 'inline');
+		                        //$('#status').css('display', 'inline');
+		                        //$('#logout').css('display', 'inline');
+								
+	                           console.log(res);
+
+	                           // -> 요기에다가 회원가입이나 로그인하는 서버 로직 호출
+	                           idCheck(res);
+	                          /*  var id = res.id;
+	                           $.ajax({
+	                           	url:"kakaoCheck.do",
+	                           	type:"post",
+	                           	data:{id:id},
+	                           	success:function(data){
+	                           		alert("완료!" + id);
+	                           		//window.opener.location.reload();
+	                           		//self.close();
+	                           	}
+	                           }); */
+
+	                       },
+	                       fail: function(error) {
+	                           alert(JSON.stringify(error));
+	                       }
+	                   });
+
+	               },
+	               fail: function(error) {
+	                   alert(JSON.stringify(error))
+	               }
+	           });
+		}
+		
+		var kakaoLoninBtnOnClickEvent = function(){
+			$("#custom-login-btn").on("click", function(){
+				kakaoLogin();
+			})
+		}
+		
+		
+		var init = function(){
+			kakaoLoninBtnOnClickEvent();
+		}
+		
+		init();
+	})
+	
+	
+	
+	
+	
+	/*
+	$(function(){
+		
+		$.kakaoLogin = function(){
+			Kakao.Auth.login({
+	               success: function(authObj) {
+						
+	            	   Kakao.API.request({
+	                       url: '/v2/user/me',
+	                       success: function(res) {
+
+	                           //alert(JSON.stringify(authObj));
+	                           alert('로그인 되었습니다.');
+								
+	                           
+		                        //$('#login').css('display', 'none');
+		                        //$('#uinfo').css('display', 'inline');
+		                        //$('#status').css('display', 'inline');
+		                        //$('#logout').css('display', 'inline');
+								
+	                           console.log(res);
+
+	                           // -> 요기에다가 회원가입이나 로그인하는 서버 로직 호출해주면되 엌.. 감사합니다...(__)
+
+	                       },
+	                       fail: function(error) {
+	                           alert(JSON.stringify(error));
+	                       }
+	                   });
+
+	               },
+	               fail: function(error) {
+	                   alert(JSON.stringify(error))
+	               }
+	           });
+		}
+		
+		$.fn.kakaoLoninBtnOnClickEvent = function(){
+			var $this = $(this);
+			$this.on("click", function(){
+				$.kakaoLogin();
+			})
+		}
+		
+		
+		$($.initView = function(){
+			$("#custom-login-btn").kakaoLoninBtnOnClickEvent();
+		})
+		
+		
+		$.initView();
+		이게다임 아..하..		
+		
+	})
+	*/
+	</script>
+	
+
 </body>
 </html>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')</script><script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script></body>
 
   
   
