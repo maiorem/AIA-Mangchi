@@ -18,29 +18,30 @@ public class ChooseHelperServiceImpl implements Service {
 	public String getViewPage(HttpServletRequest req, HttpServletResponse resp) {
 		int req_idx = Integer.parseInt(req.getParameter("req_idx"));
 		int helper = Integer.parseInt(req.getParameter("req_helper"));
-		System.out.println(req_idx);
-		System.out.println(helper);
 		Connection conn = null;
-		
+		int result =0;
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao=BoardDao.getInstance();
 			
-			if(helper>-1) {
-				//대기중을 눌럿을때 상태를 대기로
-			}else {
-				//유저를 눌럿을때 상태를 렌탈중으로
-			}
+			result = dao.chooseHelperStatus(conn,req_idx,helper);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 			
-		
-		
-//		req.setAttribute("choiceRequest", rw);
+		req.setAttribute("updateResult", result);
 //		req.setAttribute("requestHelpers", list);
-		return "/WEB-INF/views/board/detailRequest.jsp";
+		return "/WEB-INF/views/board/updateStatusResult.jsp";
 	}
 
 }
