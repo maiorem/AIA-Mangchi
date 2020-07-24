@@ -161,7 +161,7 @@ table.type09 td {
 <th scope="cols">나</th>
 <th scope="cols">점수</th>
 <th scope="cols" style="width: 40%;">내용</th>
-<th scope="cols">리뷰쓴날자22</th>
+<th scope="cols">리뷰쓴날자</th>
 </tr>
 
 </thead>
