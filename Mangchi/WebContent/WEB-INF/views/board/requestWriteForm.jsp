@@ -43,6 +43,13 @@ form{
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 <body>
+	<c:if test="${loginInfo==null}">
+	<script>
+		alert('글을 쓰려면 로그인 해주세요');
+		
+		location.href='<c:url value="/member/loginForm.do"/>';
+	</script>
+	</c:if>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div>
 
@@ -55,14 +62,12 @@ form{
 					</div>
 					<div class="write_reqinfo req_writer">
 						<label class="suround_only">요청자</label>
-						<c:if test="${loginInfo!=null}">
-							<input type="text" value="${loginInfo.nick}" name="nickName" readonly/>
-							<input type="hidden" value="${loginInfo.idx}" name="req_writer"/>
-						</c:if>
-						<c:if test="${loginInfo==null}">
+						<input type="text" value="${loginInfo.nick}" name="nickName" readonly/>
+						<input type="hidden" value="${loginInfo.idx}" name="req_writer"/>
+						<%-- <c:if test="${loginInfo==null}">
 							<input type="text" value="짠가" name="nickName" readonly/>
 							<input type="hidden" value="2" name="req_writer"/>
-						</c:if>
+						</c:if> --%>
 					</div>
 					<div class="write_reqinfo req_price">
 						<label for="req_priceid" class="suround_only">금액</label>
@@ -74,8 +79,8 @@ form{
 					</div>
 					<div class="write_reqinfo req_loc">
 						<label class="suround_only">받을주소</label>
-						<input type="text" id="sample5_address" name="req_loc" readonly placeholder="(주소검색으로 입력)">
-						<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" ><br>
+						<input type="text" id="sample5_address" name="req_loc" value="${loginInfo.addr}" readonly placeholder="(주소검색으로 입력)">
+						<input type="button" onclick="sample5_execDaumPostcode()" value="다른주소로 변경" ><br>
 						<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 					</div>
 					<div class="write_reqinfo req_img">
