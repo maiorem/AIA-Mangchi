@@ -10,8 +10,9 @@ import java.util.List;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
+import board.model.RequestWriting;
 import jdbc.ConnectionProvider;
-
+import member.model.Member;
 import review.model.Review;
 
 
@@ -150,45 +151,39 @@ public class ReviewDao {
 		
 		
 		
-		
-		
-		public int searchnick(Connection conn, int helper_idx) throws SQLException {
-			
-			int resultCnt =0;
-			
+	
+	
+		public Member selecthlperMember(Connection conn, String id) throws SQLException {
+
+			Member member = null;
+
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			
-			
+
 			try {
-				
-				String sql = "SELECT member_nick FROM project.member where member_idx=?";
-				
+
+				String sql = "select * from project.member where member_idx=?";
+
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, helper_idx);
-				
-				resultCnt=pstmt.executeUpdate();
-				
-				
-				while(rs.next()) {
-					
-					resultCnt=rs.getInt(1);
-					
+				pstmt.setString(1, id);
+
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					member = new Member(rs.getInt("member_idx"), rs.getString("member_id"), rs.getString("member_pw"), rs.getString("member_nick"),
+							rs.getDouble("member_score"), rs.getDate("member_regdate"), rs.getString("member_addr"), rs.getString("member_img"));
 				}
-				
-				
-				
+
 			} finally {
-				if(pstmt!=null) {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
 					pstmt.close();
-				}
 			}
-			
-			
-			
-			return resultCnt;
-			
+			return member;
 		}
+		
+		
 		
 		
 		
@@ -234,7 +229,47 @@ public class ReviewDao {
 		
 		
 	}
-	
+
+		public RequestWriting selectRequest(Connection conn, int req_idx) throws SQLException {
+
+			
+			RequestWriting rw = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+
+				String sql = "SELECT * FROM project.request_list where req_idx=?";
+
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, req_idx);
+				
+
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					rw = new RequestWriting(rs.getInt("req_idx"),rs.getInt("req_writer"), 
+							"", rs.getString("req_title"), 
+							rs.getInt("req_helper"), rs.getInt("req_price"),
+							rs.getString("req_regdate"), rs.getString("req_term"), 
+							rs.getString("req_loc"), rs.getString("req_text"),
+							rs.getDouble("req_latitude"), rs.getDouble("req_longitude"),
+							rs.getInt("req_readcnt"), rs.getInt("req_status"),
+							rs.getString("req_img"));
+				}
+
+			} finally {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			}
+			return rw;
+		}
+			
+			
+		
 	
 	
 	

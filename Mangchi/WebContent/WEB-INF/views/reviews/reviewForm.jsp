@@ -52,22 +52,23 @@
 			<form id="reviewForm"  method="post" action="review.do">
 
 			<!-- review_writer 작성자 필수 -->
-			<input type="hidden" id="review_writer" value="${loginInfo.idx }"> 
+			<input type="hidden" name="review_writer" value="${loginInfo.idx }"> 
 			
 			<!--  review_receiver 받는이는 게시글에서 가져오기 -->
-			<input type="hidden" id="review_receiver" value="${param.req_helper }">
+			<input type="hidden" name="review_receiver" value="${nick.idx }">
+			
 			
 			<!-- review_regdate 게시글작성일은 null로두기[자동으로 서밋할시 now()] -->
 			<td><input type="hidden" name="review_regdate" value=""></td>
 			
 			<!-- req_idx 게시글번호 게시글에서 가져오기 -->
-			<td><input type="hidden" name="req_idx" value="${param.req_idx}"></td>
+			<td><input type="hidden" name="req_idx" value="${req.req_idx }"></td>
 			
 			
 				<div class="mb-3">
 
 					<label for="title" class="bold" style="color: gray;">거래한 상품</label><br>
-					<h4 style="margin-right: 20%;">${param.req_title }</h4> <c:out value="${nick }"/>
+					<h4 style="margin-right: 20%;"> ${req.req_title } </h4> <c:out value="${nick.nick }"/>
 					
 				
 

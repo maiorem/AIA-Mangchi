@@ -42,7 +42,7 @@ public class ReviewServiceImpl implements Service {
 
 		
 		int req_idx=Integer.parseInt(req.getParameter("req_idx")); // 게시글에서쏴줌
-		int review_receiver=Integer.parseInt(req.getParameter("req_helper")); //게시글에서쏴줌
+		int review_receiver=Integer.parseInt(req.getParameter("review_receiver")); 
 		//int review_receiver=3; // test용
 		
 		
@@ -53,7 +53,6 @@ public class ReviewServiceImpl implements Service {
 		String review_text = req.getParameter("review_text");
 		
 		
-		int nick= Integer.parseInt(req.getParameter("req_helper"));
 		
 		try {
 			conn = ConnectionProvider.getConnection();
@@ -75,13 +74,11 @@ public class ReviewServiceImpl implements Service {
 			
 
 			resultCnt=dao.insertReview(conn,review);
-			nick=dao.searchnick(conn, nick);
 			
-			System.out.println(nick);
+			
 			System.out.println(resultCnt);
 			
 			req.setAttribute("result", resultCnt);
-			req.setAttribute("nick", nick);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
