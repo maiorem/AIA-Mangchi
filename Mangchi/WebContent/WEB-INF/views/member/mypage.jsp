@@ -104,6 +104,41 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="col-md-6">
+				<div
+					class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+					<div class="col p-4 d-flex flex-column position-static">
+						<strong class="d-inline-block mb-2 text-success">거래 내역</strong>
+
+						<div class="row mb-2">
+							<div class="col-lg-6">
+								<svg class="bd-placeholder-img rounded-circle" width="100"
+									height="100" xmlns="http://www.w3.org/2000/svg"
+									preserveAspectRatio="xMidYMid slice" focusable="false"
+									role="img" aria-label="Placeholder: 100x100">
+									<title>Placeholder</title><rect width="100%" height="100%"
+										fill="#777" />
+									<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+									<a href="${pageContext.request.contextPath}/member/reqhistory.do">요청 내역</a>
+							</div>
+							<div class="col-lg-6">
+								<svg class="bd-placeholder-img rounded-circle" width="100"
+									height="100" xmlns="http://www.w3.org/2000/svg"
+									preserveAspectRatio="xMidYMid slice" focusable="false"
+									role="img" aria-label="Placeholder: 100x100">
+									<title>Placeholder</title><rect width="100%" height="100%"
+										fill="#777" />
+									<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+									<a href="${pageContext.request.contextPath}/member/rnthistory.do">대여 내역</a>
+							</div>
+						</div>
+						<a href="#">Continue reading</a>
+					</div>
+					<div class="col-auto d-none d-lg-block"></div>
+				</div>
+			</div>
+		
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
