@@ -113,7 +113,8 @@ public class ReqWriteServiceImpl implements Service {
 												 .getRealPath(uri);
 						
 //						System.out.println(realPath);
-						if(file.getSize()==0) {
+//						System.out.println("file사이즈 : "+file.getSize());
+						if(file.getSize()!=0) {
 							// 파일 덮어쓰면 안되니까 앞에 나노초 붙여줌
 							String newFileName = System.nanoTime() + "_" + file.getName();
 							File saveFile = new File(realPath, newFileName);
@@ -126,7 +127,7 @@ public class ReqWriteServiceImpl implements Service {
 						}
 					}
 				}
-
+				
 
 //				System.out.println("img : "+req_img);
 				RequestWriting rw = new RequestWriting();

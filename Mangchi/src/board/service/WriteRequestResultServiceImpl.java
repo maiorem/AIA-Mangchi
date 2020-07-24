@@ -19,13 +19,15 @@ public class WriteRequestResultServiceImpl implements Service {
 	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
 		Connection conn = null;
 		RequestWriting rw = null;
+		
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("loginInfo");
 		int member_idx=member.getIdx();
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao = BoardDao.getInstance();
-			rw = dao.getCurrentRequest(conn,member_idx);
+			int req_idx = dao.getCurrentRequest(conn,member_idx);
+			rw= dao.getDetailRequestInfo(conn, req_idx);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -38,9 +40,9 @@ public class WriteRequestResultServiceImpl implements Service {
 			}
 		}
 		if(rw!=null) {
-			request.setAttribute("currentWriting", rw);
+			request.setAttribute("choiceRequest", rw);
 		}
-		return "/WEB-INF/views/board/currentMyRequest.jsp";
+		return "/WEB-INF/views/board/detailRequest.jsp";
 	}
 
 }

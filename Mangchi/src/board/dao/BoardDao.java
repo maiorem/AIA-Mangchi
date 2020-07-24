@@ -81,11 +81,10 @@ public class BoardDao {
 		
 		return result;
 	}
-	public RequestWriting getCurrentRequest(Connection conn, int member_idx) throws SQLException {
-		RequestWriting rw = new RequestWriting();
+	public int getCurrentRequest(Connection conn, int member_idx) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+		int req_idx=-1;
 		String sql= "select * "
 				  + "from project.request_list rl join project.member m " + 
 					"where rl.req_writer=m.member_idx and rl.req_regdate=(select max(req_regdate) from project.request_list where req_writer=?)";
@@ -95,8 +94,8 @@ public class BoardDao {
 			
 			rs= pstmt.executeQuery();
 			while(rs.next()) {
-				Timestamp regdate = rs.getTimestamp("req_regdate");
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//				Timestamp regdate = rs.getTimestamp("req_regdate");
+//				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				
 //				String req_regdate = sdf.format(date);
 //				System.out.println(req_regdate);
@@ -105,19 +104,20 @@ public class BoardDao {
 //				String req_regdate = dateTime.format(formatter);
 //				System.out.println("req_regdate: "+req_regdate);
 				
-				rw.setReq_idx(rs.getInt("req_idx"));
-				rw.setReq_writer(rs.getInt("req_writer"));
-				rw.setWriter_nick(rs.getString("member_nick"));
-				rw.setReq_title(rs.getString("req_title"));
-				rw.setReq_helper(rs.getInt("req_helper"));
-				rw.setReq_price(rs.getInt("req_price"));
-				rw.setReq_regdate(sdf.format(regdate));
-				rw.setReq_term(rs.getString("req_term"));
-				rw.setReq_loc(rs.getString("req_loc"));
-				rw.setReq_text(rs.getString("req_text"));
-				rw.setReq_readcnt(rs.getInt("req_readcnt"));
-				rw.setReq_status(rs.getInt("req_status"));
-				rw.setReq_img(rs.getString("req_img"));
+//				rw.setReq_idx(rs.getInt("req_idx"));
+//				rw.setReq_writer(rs.getInt("req_writer"));
+//				rw.setWriter_nick(rs.getString("member_nick"));
+//				rw.setReq_title(rs.getString("req_title"));
+//				rw.setReq_helper(rs.getInt("req_helper"));
+//				rw.setReq_price(rs.getInt("req_price"));
+//				rw.setReq_regdate(sdf.format(regdate));
+//				rw.setReq_term(rs.getString("req_term"));
+//				rw.setReq_loc(rs.getString("req_loc"));
+//				rw.setReq_text(rs.getString("req_text"));
+//				rw.setReq_readcnt(rs.getInt("req_readcnt"));
+//				rw.setReq_status(rs.getInt("req_status"));
+//				rw.setReq_img(rs.getString("req_img"));
+				req_idx= rs.getInt("req_idx");
 			}
 		} finally{
 			if(pstmt!=null) {
@@ -127,7 +127,7 @@ public class BoardDao {
 				rs.close();
 			}
 		};
-		return rw;
+		return req_idx;
 	}
 	public int selectTotalMyReqCnt(Connection conn, int member_idx) throws SQLException {
 		int resultCnt = 0;

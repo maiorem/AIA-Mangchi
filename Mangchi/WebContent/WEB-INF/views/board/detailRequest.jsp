@@ -19,17 +19,14 @@
 	<main>
 		<div class="write_result">
 		<table border="1">
+			
 			<tr>
-				<td>idx</td>
-				<td>${choiceRequest.req_idx}</td>
+				<td>제목</td>
+				<td>${choiceRequest.req_title}</td>
 			</tr>
 			<tr>
 				<td>요청자</td>
 				<td>${choiceRequest.writer_nick}</td>
-			</tr>
-			<tr>
-				<td>제목</td>
-				<td>${choiceRequest.req_title}</td>
 			</tr>
 			<tr>
 				<td>수행자</td>
@@ -69,10 +66,15 @@
 			</tr>
 			<tr>
 				<td>참고이미지</td>
+				<c:if test="${not empty choiceRequest.req_img}">
 				<td><img class="req_img_view" src="<c:url value="${choiceRequest.req_img}"/>"/></td>
+				</c:if>
+				<c:if test="${empty choiceRequest.req_img}">
+				<td>(사진없음)</td>
+				</c:if>
 			</tr>
 		</table>
-		<a href="/message/sendNote.do?id=" id="sendNoteLink">쪽지보내기</a>
+		<input type="button" value="쪽지 보내기" id="send_Note">
 		</div>
 	</main>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
@@ -94,8 +96,10 @@
 		}
 		if(loginUser!=writerUser){
 			$('#helper_selector').css('display','none');
+			$('#send_Note').css('display','block');
 		}else{
 			$('#helper_selector').css('display','block');
+			$('#send_Note').css('display','none');
 		}
 		const action='<c:url value="/message/sendNote.do"/>';
 		const req_idx = ${choiceRequest.req_idx};
@@ -104,7 +108,7 @@
 		console.log('req_idx : '+req_idx);
 		console.log('req_writer: '+req_writer);
 		
-		$('#helper_selector').on('click',function(){
+		$('#send_Note').on('click',function(){
 			const form = document.createElement("form");
 			form.setAttribute("charset", "UTF-8");
 			form.setAttribute("method", "Post");
@@ -120,8 +124,8 @@
 			hiddenField.setAttribute("name", "uid");
 			hiddenField.setAttribute("value", req_writer);
 			form.appendChild(hiddenField);
-			window.open(action,"selecthelper",'width=770, height=950, menubar=no, status=no, toolbar=no');
-			form.target="selecthelper";
+			window.open(action,"sendNote",'width=800, height=950, menubar=no, status=no, toolbar=no');
+			form.target="sendNote";
 			document.body.appendChild(form);
 			form.submit();
 		});
