@@ -18,7 +18,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br>
 	<main>
 		<div class="write_result">
 		<table border="1">
