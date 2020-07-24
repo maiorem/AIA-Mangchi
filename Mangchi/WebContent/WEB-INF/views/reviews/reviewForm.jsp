@@ -32,6 +32,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	
+전체값 : <c:out value="${loginInfo }"/>
 	
 	<form id="reviewForm" action="review.do"  method="post">
 
@@ -39,20 +40,15 @@
 <table>
 
 	<tr>
-	<td>
-	
-	<%-- int req_writer = (int)session.getAttribute("loginInfo"); --%> 
-	${loginInfo.nick}
- 			 글쓴이세션값 :  <%--req_writer--%> </td>
- 	<input type="hidden" class="req_writer" id="req_writer" <%-- value=" <%=req_writer%>  --%>">
- 	
+	<td> 작성자 : ${loginInfo.nick }  </td>
+ 	<input type="hidden" class="req_writer" id="req_writer" value="${loginInfo.idx }">
 	</tr>
 				
 	<tr>
 	<td>
-	<%String review_receiver = request.getParameter("review_receiver"); %>
-		받는이 : <%=review_receiver %>
-	<input type="hidden" name="review_receiver" id="review_receiver" value="<%=review_receiver %>">
+
+		받는이 : 게시글에서받아오는파라미터
+	<input type="hidden" name="review_receiver" id="review_receiver" value="">
 		</td>
 	</tr>
 			
@@ -83,7 +79,7 @@
 		
 					
 				<tr>
-					<td> <input type="submit" name="등록">	</td>
+					<td> <input type="submit" name="submit" value="글쓰기완료">	</td>
 				</tr>
 
 	
@@ -99,3 +95,16 @@
 </html>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')</script><script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script></body>
+<script>
+
+$( document ).ready( function () {
+	
+	${'#submit'}.click(function () {
+		var jb = $('#req_writer').val();
+		alert(jb);
+		
+	});
+	
+};
+
+</script>
