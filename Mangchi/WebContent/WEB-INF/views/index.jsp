@@ -124,12 +124,12 @@
         <p class="nanum"><strong>★☆팀장☆★</strong><br>사용자 리뷰</p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+        <img class="rounded-circle" src="<c:url value="/img/team/고은아.png"/>" style="width:140px; height:140px; "><!-- <rect width="100%" height="100%" fill="#777"/> -->
         <h2>고은아</h2>
         <p class="nanum">팀원<br>마이 거래리스트, 검색</p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+        <img class="rounded-circle" src="<c:url value="/img/team/박성민.jpg"/>" style="width:140px; height:140px">
         <h2>박성민</h2>
         <p class="nanum">팀원<br>회원가입, 로그인</p>
       </div><!-- /.col-lg-4 -->
@@ -139,7 +139,7 @@
         <p class="nanum">팀원<br>지도 API</p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+        <img class="rounded-circle" src="<c:url value="/img/team/홍세영.png"/>" style="width:140px; height:140px">
         <h2>홍세영</h2>
         <p class="nanum">팀원<br>쪽지보내기</p>
       </div><!-- /.col-lg-4 -->
