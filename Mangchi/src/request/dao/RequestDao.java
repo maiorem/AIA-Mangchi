@@ -32,7 +32,12 @@ public class RequestDao {
 
 
 		try {
-			String sql = "select * from project.request_list where req_writer=? limit ?,?";
+			// String sql = "select * from project.request_list where req_writer=? limit ?,?";
+			
+			String sql = " select req_idx, member_nick, req_title, req_loc, req_price, req_status, req_regdate, req_term "+ 
+					" from project.member, project.request_list" + 
+					" where member_idx=req_writer and req_writer=? limit ?,? ";
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			pstmt.setInt(2, startRow);
@@ -43,11 +48,13 @@ public class RequestDao {
 			while (rs.next()) {
 				Request req = new Request();
 				req.setReq_idx(rs.getInt("req_idx"));
+				req.setMember_nick(rs.getString("member_nick"));
 				req.setReq_title(rs.getString("req_title"));
 				req.setReq_loc(rs.getString("req_loc"));
 				req.setReq_price(rs.getInt("req_price"));
 				req.setReq_status(rs.getInt("req_status"));
 				req.setReq_regdate(rs.getDate("req_regdate"));
+				req.setReq_term(rs.getString("req_term"));
 				list.add(req);
 			}
 
@@ -103,7 +110,12 @@ public class RequestDao {
 
 
 			try {
-				String sql = "select * from project.request_list where req_helper=? limit ?,?";
+				// String sql = "select * from project.request_list where req_helper=? limit ?,?";
+				
+				String sql = " select req_idx, member_nick, req_title, req_loc, req_price, req_status, req_regdate, req_term "+ 
+						" from project.member, project.request_list" + 
+						" where member_idx=req_writer and req_helper=? limit ?,? ";
+				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, idx);
 				pstmt.setInt(2, startRow);
@@ -114,11 +126,13 @@ public class RequestDao {
 				while (rs.next()) {
 					Request req = new Request();
 					req.setReq_idx(rs.getInt("req_idx"));
+					req.setMember_nick(rs.getString("member_nick"));
 					req.setReq_title(rs.getString("req_title"));
 					req.setReq_loc(rs.getString("req_loc"));
 					req.setReq_price(rs.getInt("req_price"));
 					req.setReq_status(rs.getInt("req_status"));
 					req.setReq_regdate(rs.getDate("req_regdate"));
+					req.setReq_term(rs.getString("req_term"));
 					list.add(req);
 				}
 
@@ -184,12 +198,14 @@ public class RequestDao {
 			while (rs.next()) {
 				Request req = new Request();
 				req.setReq_idx(rs.getInt("req_idx"));
+				req.setMember_nick(rs.getString("member_nick"));
 				req.setReq_writer(rs.getInt("req_writer"));
 				req.setReq_title(rs.getString("req_title"));
 				req.setReq_loc(rs.getString("req_loc"));
 				req.setReq_price(rs.getInt("req_price"));
 				req.setReq_status(rs.getInt("req_status"));
 				req.setReq_regdate(rs.getDate("req_regdate"));
+				req.setReq_term(rs.getString("req_term"));
 				list.add(req);
 			}
 
@@ -212,7 +228,12 @@ public class RequestDao {
 
 		try {
 
-			String sql = "select * from project.request_list where req_title like '%"+sch+"%' limit ?,?";
+			//String sql = "select * from project.request_list where req_title like '%"+sch+"%' limit ?,?";
+			
+			String sql = " select req_idx, member_nick, req_title, req_price, req_status, req_regdate, req_term, req_loc " + 
+					" from project.member, project.request_list " + 
+					" where member_idx=req_writer and req_title like '%"+sch+"%'limit ?,?";
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
@@ -221,12 +242,13 @@ public class RequestDao {
 			while (rs.next()) {
 				Request req = new Request();
 				req.setReq_idx(rs.getInt("req_idx"));
-				req.setReq_writer(rs.getInt("req_writer"));
+				req.setMember_nick(rs.getString("member_nick"));
 				req.setReq_title(rs.getString("req_title"));
 				req.setReq_loc(rs.getString("req_loc"));
 				req.setReq_price(rs.getInt("req_price"));
 				req.setReq_status(rs.getInt("req_status"));
 				req.setReq_regdate(rs.getDate("req_regdate"));
+				req.setReq_term(rs.getString("req_term"));
 				list.add(req);
 			}
 
