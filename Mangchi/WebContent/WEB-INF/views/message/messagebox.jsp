@@ -59,7 +59,13 @@ table.box {
 		$('a.view').click(function(){
 			
 			$.ajax({
-				url:''
+				url:'readCheck.do',
+				data: { idx : $(this).param() },
+				success: function(data){
+					if(data='Y') {
+						$('#checkmsg').text("읽음");
+					}
+				};
 			});
 		});
 		

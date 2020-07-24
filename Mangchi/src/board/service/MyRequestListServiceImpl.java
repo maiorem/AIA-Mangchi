@@ -14,6 +14,7 @@ import board.dao.BoardDao;
 import board.model.RequestList;
 import board.model.RequestWriting;
 import jdbc.ConnectionProvider;
+import member.model.Member;
 import service.Service;
 
 public class MyRequestListServiceImpl implements Service {
@@ -23,10 +24,9 @@ public class MyRequestListServiceImpl implements Service {
 	public String getViewPage(HttpServletRequest request, HttpServletResponse resp) {
 		Connection conn = null;
 		RequestList view = null;
-//		HttpSession session = req.getSession();
-//		Member member = (Member)session.getAttribute("loginInfo");
-//		int member_idx = member.getMember_idx();
-		int member_idx = 4;
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginInfo");
+		int member_idx = member.getIdx();
 		int pageNum =1;
 		if(request.getParameter("page")!=null) {
 			pageNum = Integer.parseInt(request.getParameter("page"));

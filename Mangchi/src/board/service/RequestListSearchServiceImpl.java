@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jdbc.ConnectionProvider;
 import request.dao.RequestDao;
@@ -14,16 +16,17 @@ import request.model.Request;
 import request.model.RequestListView;
 import service.Service;
 
-public class RequestListBoardServiceImpl implements Service {
+public class RequestListSearchServiceImpl implements Service {
 
 	RequestDao dao;
-	
+
 	
 	@Override
 	public String getViewPage(HttpServletRequest req, HttpServletResponse resp) {
 		
 			Connection conn = null;
-			RequestListView listview = null;
+			RequestListView searchview = null;
+			List<Request> requestList = null;
 			
 			final int COUNT_PER_PAGE = 3;
 		
@@ -32,10 +35,19 @@ public class RequestListBoardServiceImpl implements Service {
 				conn = ConnectionProvider.getConnection();
 
 				dao = RequestDao.getInstance();	
-				List<Request> requestList = null;
 				
-				int requestTotalCount = dao.selectTotalCount(conn);
+				String sch = req.getParameter("Search");
 				
+				if(sch=="") {
+					sch="아잉";
+				}
+				
+				req.setAttribute("sch", sch);
+				
+				int requestTotalCount = dao.selectTotalschCount(conn, sch);
+
+				System.out.println(sch);
+
 				int pageNumber = 1;
 				String page = req.getParameter("page");
 				
@@ -54,7 +66,7 @@ public class RequestListBoardServiceImpl implements Service {
 					// ���� ��, ������ ��
 					startRow = (pageNumber - 1) * COUNT_PER_PAGE ;
 					
-					requestList = dao.selectAllrequest(conn,startRow, COUNT_PER_PAGE);
+					requestList = dao.searchRequest(conn, sch, startRow, COUNT_PER_PAGE);
 					// System.out.println("requestList: "+requestList);
 
 				} else {
@@ -62,10 +74,8 @@ public class RequestListBoardServiceImpl implements Service {
 					requestList = Collections.emptyList();
 				}
 
-				listview = new RequestListView(requestTotalCount, pageNumber, requestList, COUNT_PER_PAGE, startRow); 
-				
-		
-				System.out.println("requestList: "+requestList);
+				searchview = new RequestListView(requestTotalCount, pageNumber, requestList, COUNT_PER_PAGE, startRow); 
+			
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -85,10 +95,10 @@ public class RequestListBoardServiceImpl implements Service {
 
 			}
 
-			req.setAttribute("listView", listview);
+			req.setAttribute("searchView", searchview);
 			
 		
-		return "/WEB-INF/views/board/requestList.jsp";
+		return "/WEB-INF/views/board/searchList.jsp";
 	}
 
 }
