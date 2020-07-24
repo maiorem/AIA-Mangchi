@@ -9,9 +9,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
+      <c:if test="${empty loginInfo}">
         <li class="nav-item active">
           <a class="nav-link" href="<c:url value='/member/loginForm.do'/>">로그인</a>
         </li>
+       </c:if>
+       <c:if test="${not empty loginInfo}">
+        <li class="nav-item active">
+          <a class="nav-link" href="<c:url value='/member/logout.do'/>">로그아웃</a>
+        </li>
+       </c:if>
         <li class="nav-item">
           <a class="nav-link" href="<c:url value='/board/boarding.do'/>">대여게시판</a>
         </li>
