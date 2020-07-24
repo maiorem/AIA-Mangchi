@@ -3,13 +3,11 @@ package request.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javafx.application.Application;
 import jdbc.ConnectionProvider;
 import member.model.Member;
 import request.dao.RequestDao;
@@ -21,7 +19,7 @@ public class MemberRntHistoryFormServiceImpl implements Service {
 	
 	RequestDao dao;
 	RequestListView listview = null;
-	List<Request> rentalList = null;
+	List<Request> requestList = null;
 	final int COUNT_PER_PAGE = 3;
 
 
@@ -64,17 +62,16 @@ public class MemberRntHistoryFormServiceImpl implements Service {
 				startRow = (pageNumber - 1) * COUNT_PER_PAGE ;
 				
 
-				rentalList = dao.selectRntHistory(conn, idx, startRow, COUNT_PER_PAGE);
-				System.out.println("requestList: "+rentalList);
+				requestList = dao.selectRntHistory(conn, idx, startRow, COUNT_PER_PAGE);
+				System.out.println("requestList: "+requestList);
 
 			} else {
 				pageNumber = 0;
-				rentalList = Collections.emptyList();
+				requestList = Collections.emptyList();
 			}
-			listview = new RequestListView(requestTotalCount, pageNumber, rentalList, COUNT_PER_PAGE, startRow); 
+			
+			listview = new RequestListView(requestTotalCount, pageNumber, requestList, COUNT_PER_PAGE, startRow); 
 
-			
-			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -94,7 +91,7 @@ public class MemberRntHistoryFormServiceImpl implements Service {
 
 		}
 
-		req.setAttribute("rentalhistory", rentalList);
+		req.setAttribute("listView", listview);
 		
 		return "/WEB-INF/views/member/rnthistory.jsp";
 	}
