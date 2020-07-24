@@ -35,7 +35,7 @@
 				<td>수행자</td>
 				<td id="selectHelper">
 				</td>
-			</tr>
+			</tr> 
 			<tr>
 				<td>가격</td>
 				<td>${choiceRequest.req_price}</td>
@@ -106,6 +106,8 @@
 		</c:forEach>
 		$('#selectHelper').append('<input type="button" value="선택완료" id="helper_selector_btn">');
 		
+		//로그인한 사용자
+		const loginIdx= ${loginInfo.idx};
 		//게시글 제목(리뷰)
 		const title='${choiceRequest.req_title}';
 		//게시글 인덱스
@@ -116,7 +118,7 @@
 		const helper = ${choiceRequest.req_helper};
 		//상태표시하는 td				
 		const status_td = $('#status_req');
-		//헬퍼표시하는 select
+		//헬퍼표시하는 select value
 		const helperVal=$('#helpers').val();
 		//헬퍼 선택 완료 버튼
 		const helperSelectBtn=$('#helper_selector_btn');
@@ -138,7 +140,7 @@
 			//렌탈 완료이면 셀렉트 태그 비활성화
 			selectTag.attr('disabled','disabled');
 		}
-		
+				
 		//select태그 선택시켜놓기
 		if(helperStatus!=0){
 			for(var i=0;i<arr.length;i++){
@@ -147,6 +149,30 @@
 				}
 			}
 		}
+		
+		//로그인사용자와 해당 글의 글쓴이가 같은경우 다른경우 분기처리 
+		if(loginIdx==writer){
+			console.log('같은');	
+			$('#sendNote').hide();
+		}else{			
+			console.log('다른');	
+			$('#helpEnd').hide();
+			selectTag.attr('disabled','disabled');
+		}
+		 
+		//헬퍼가 바뀌면 선택완료버튼 보이기
+		//헬퍼가 바뀌면 선택이 완료되기 전에는 렌탈완료버튼 숨기기
+		var val = $('#helpers').val();
+		helperSelectBtn.hide(); //버튼은 기본 hide
+		$('#helpers').on('change',function(){
+			
+			$('#helpEnd').hide();
+			if(val == $(this).val() ){	
+				helperSelectBtn.hide();
+			}else{
+				helperSelectBtn.show();				
+			}
+		});
 		
 		//헬퍼 선택버튼 클릭 이벤트
 		helperSelectBtn.on('click',function(){
@@ -170,47 +196,8 @@
 				}
 			});
 		});
-		 
-		//헬퍼가 바뀌면 선택완료버튼 보이기
-		//헬퍼가 바뀌면 선택이 완료되기 전에는 렌탈완료버튼 숨기기
-		var val = $('#helpers').val();
-		helperSelectBtn.hide(); //버튼은 기본 hide
-		$('#helpers').on('change',function(){
-			
-			$('#helpEnd').hide();
-			if(val == $(this).val() ){	
-				helperSelectBtn.hide();
-			}else{
-				helperSelectBtn.show();				
-			}
-		});
-		
-		//쪽지 보내기
-		//족지 보내기 버튼 클릭 이벤트
-		//form태그 만들어서 보냄
-		$('#sendNote').on('click',function(){
-			var action='<c:url value="/message/sendNote.do"/>';
-			
-			var form = document.createElement("form");
-			form.setAttribute("charset", "UTF-8");
-			form.setAttribute("method", "Post");
-			form.setAttribute("action", action);
-			var hiddenField = document.createElement("input");
-			hiddenField.setAttribute("type", "hidden");
-			hiddenField.setAttribute("name", "req_idx");
-			hiddenField.setAttribute("value", req_idx);
-			form.appendChild(hiddenField);
-			
-			hiddenField = document.createElement("input");
-			hiddenField.setAttribute("type", "hidden");
-			hiddenField.setAttribute("name", "uid");
-			hiddenField.setAttribute("value", req_writer);
-			form.appendChild(hiddenField);
-			document.body.appendChild(form);
-			form.submit();
-		});
-		
-		//렌탈 완료버튼
+				
+		//렌탈 완료버튼클릭 이벤트
 		//보낼 파라미터값 req_idx / req_title / req_helper
 		$('#helpEnd').on('click',function(){
 			console.log(helper);
@@ -235,6 +222,35 @@
 			var inputTitle =$('<input type="hidden" value="'+title+'" name="req_title">');
 			var inputNick =$('<input type="hidden" value="'+nick+'" name="helper_nick">');
 			form.append(inputIdx).append(inputHelper).append(inputTitle).append(inputNick);
+			form.submit();
+		});
+		
+		//내가 쓴글, 남이 쓴 글 구분
+		//로그인한 사용자와 글쓴이가 같을 때
+		
+		
+		//쪽지 보내기
+		//족지 보내기 버튼 클릭 이벤트
+		//form태그 만들어서 보냄
+		$('#sendNote').on('click',function(){
+			var action='<c:url value="/message/sendNote.do"/>';
+			
+			var form = document.createElement("form");
+			form.setAttribute("charset", "UTF-8");
+			form.setAttribute("method", "Post");
+			form.setAttribute("action", action);
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "req_idx");
+			hiddenField.setAttribute("value", req_idx);
+			form.appendChild(hiddenField);
+			
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "uid");
+			hiddenField.setAttribute("value", req_writer);
+			form.appendChild(hiddenField);
+			document.body.appendChild(form);
 			form.submit();
 		});
 	});
