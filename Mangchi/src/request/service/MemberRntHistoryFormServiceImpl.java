@@ -3,12 +3,15 @@ package request.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javafx.application.Application;
 import jdbc.ConnectionProvider;
+import member.model.Member;
 import request.dao.RequestDao;
 import request.model.Request;
 import request.model.RequestListView;
@@ -28,12 +31,19 @@ public class MemberRntHistoryFormServiceImpl implements Service {
 		Connection conn = null;
 		
 		try {
-
+			
 			conn = ConnectionProvider.getConnection();
 
 			dao = RequestDao.getInstance();	
 			
-			int requestTotalCount = dao.selectRntCount(conn, 2);
+			// session 값가져오기
+			// 나중에 logininfo model 사용해서 바꿔주기!!!!!!!!!!!!!!!!
+			Member loginInfo = (Member)req.getSession().getAttribute("loginInfo");	
+			System.out.println(loginInfo);
+			int idx = loginInfo.getIdx();
+			System.out.println("로그인한 사람 : "+idx);
+			
+			int requestTotalCount = dao.selectRntCount(conn, idx);
 			
 			int pageNumber = 1;
 			String page = req.getParameter("page");
@@ -54,7 +64,7 @@ public class MemberRntHistoryFormServiceImpl implements Service {
 				startRow = (pageNumber - 1) * COUNT_PER_PAGE ;
 				
 
-				rentalList = dao.selectRntHistory(conn, 2, startRow, COUNT_PER_PAGE);
+				rentalList = dao.selectRntHistory(conn, idx, startRow, COUNT_PER_PAGE);
 				System.out.println("requestList: "+rentalList);
 
 			} else {

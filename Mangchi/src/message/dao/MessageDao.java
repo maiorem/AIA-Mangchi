@@ -218,4 +218,23 @@ public class MessageDao {
 		}
 		return readCheck;
 	}
+
+	public int deleteMessage(Connection conn, int idx) throws SQLException {
+		int resultCnt=0;
+		PreparedStatement pstmt=null;
+		
+		try {
+		String sql="delete from project.message where msg_idx=?";
+		pstmt=conn.prepareStatement(sql);
+		pstmt.setInt(1, idx);
+		
+		resultCnt=pstmt.executeUpdate();
+		} finally {
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+			
+		}
+		return resultCnt;
+	}
 }
