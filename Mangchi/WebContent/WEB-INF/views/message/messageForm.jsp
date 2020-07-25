@@ -56,7 +56,7 @@
 				</tr>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="noteTitle" id="notetitle" placehoder="제목을 입력해주세요"></td>
+					<td><input type="text" name="noteTitle" id="notetitle" placeholder="제목을 입력해주세요"></td>
 				</tr>
 				<tr>
 					<td>내용</td>
