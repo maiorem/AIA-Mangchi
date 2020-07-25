@@ -86,18 +86,6 @@ table.box {
 			$('div.SendNoteArea').css('display', 'block');
 		});
 
-		
-/* 		var readCheck=$('#chk').val();
-		console.log(readCheck);'
-		if (readCheck==0) {
-			$('.readcheck').text('읽지않음');
-			$('.readcheck').addClass('check_not')
-		} else {
-			$('.readcheck').text('읽음');
-			$('.readcheck').removeClass('check_not');
-			$('.readcheck').addClass('check_ok');
-		} 
- */
 	});
 </script>
 </head>
@@ -190,8 +178,12 @@ table.box {
 										<td><a class="view"
 											href='<c:url value="/message/noteview.do?idx=${SenderNotes.msg_idx}"/>'>${SenderNotes.msg_title}</a></td>
 										<td>${SenderNotes.msg_date}</td>
-										<td><span class="readCheck"><p>${SenderNotes.readcheck}</p></span></td>
-										<%-- <input type="hidden" id="chk" value="${SenderNotes.readcheck}"> --%>
+										<c:if test="${SenderNotes.readcheck==0}">
+										<td><span class="readCheck"><p style="color: red;">읽지 않음</p></span></td>
+										</c:if>
+										<c:if test="${SenderNotes.readcheck==1}">
+										<td><span class="readCheck"><p style="color: green;">읽음</p></span></td>
+										</c:if>
 										<td><a
 											href="javascript:messageListDel(${SenderNotes.msg_idx})">
 												<svg width="1em" height="1em" viewBox="0 0 16 16"
