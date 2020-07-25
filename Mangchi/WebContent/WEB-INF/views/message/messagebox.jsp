@@ -191,7 +191,7 @@ table.box {
 								<th scope="col">삭제</th>
 							</tr>
 							<c:forEach items="${noteList.messageList}" var="SenderNotes">
-								<c:if test="${loginInfo.idx eq notes.msg_writer}">
+								<c:if test="${loginInfo.idx eq SenderNotes.msg_writer}">
 									<tr>
 										<th scope="row">-</th>
 										<td>${SenderNotes.msg_receiver}</td>
