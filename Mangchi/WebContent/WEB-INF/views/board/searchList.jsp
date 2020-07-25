@@ -13,7 +13,7 @@
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Jekyll v4.0.1">
 <title>서치 게시판</title>
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 
@@ -93,7 +93,7 @@
 						</div>
 						<div class="card__tags">
 
-							<a href="#" class="stretched-link"></a>
+							<a href="#" class="stretched-link"><input type="hidden" class="${request.req_idx}" value="${request.req_idx}"></a>
 						</div>
 					</div>
 				</article>
@@ -115,7 +115,24 @@
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>
+<script>
+$('a').click(function(e) {
 
+	var req_idx = $(this).children('input').val();
+
+	var action = '${pageContext.request.contextPath}/board/detailRequestInfo.do';
+
+	var form = $('<form></form>');
+	form.attr('charset', 'utf-8');
+	form.attr('method', 'post');
+	form.attr('action', action);
+	form.appendTo('body');
+
+	var inputIdx = $('<input type="hidden" value="'+req_idx+'" name="req_idx">');
+	form.append(inputIdx);
+	form.submit();
+		});   
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
