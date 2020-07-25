@@ -71,7 +71,7 @@ function messageDel(idx) {
 			</div>
 			<hr>
 			<form method="post">
-			<button><a href="repMessage.do?toPerson=${viewNote.msg_writerId }?req=${viewNote.req_idx}">답장하기</a></button> <button><a href="javascript:messageDel(${viewNote.msg_idx})">삭제하기</a></button>
+			<button><a href="repMessage.do?idx=${viewNote.msg_idx}">답장하기</a></button> <button><a href="javascript:messageDel(${viewNote.msg_idx})">삭제하기</a></button>
 			</form>
 		</div>
 	</div>
