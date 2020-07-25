@@ -20,8 +20,11 @@ public class DetailRequestInfoImpl implements Service {
 		Connection conn = null;
 		RequestWriting rw = null;
 		List<Member> list=null;
-		Member loginMember = (Member)req.getSession().getAttribute("loginInfo");
-		int loginIdx=loginMember.getIdx();
+		int loginIdx = 0;
+		if((Member)req.getSession().getAttribute("loginInfo")!=null) {
+			Member loginMember = (Member)req.getSession().getAttribute("loginInfo");
+			loginIdx=loginMember.getIdx();
+		}
 		System.out.println(req.getParameter("req_idx"));
 		// int req_idx = Integer.parseInt(req.getParameter("req_idx"));
 
