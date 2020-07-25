@@ -68,11 +68,12 @@
 	</c:if> --%>
 		<c:if test="${not empty listView.requestList}">
 			<c:forEach items="${listView.requestList}" var="request">
-				<article class="horizontal card">
+				<article class="horizontal card" >
 					<div class="card__content">
 						<div class="card__title">
-							<p id="p1">게시물 번호 : ${request.req_idx} 요청자 :
+							<p id="p1" >게시물 번호 : ${request.req_idx} 요청자 :
 								${request.member_nick} 게시물 제목 : ${request.req_title}</p>
+								
 						</div>
 						<div class="card__date">${request.req_regdate}&middot;
 							<span class="card__time-to-read">${request.req_price}</span>
@@ -83,7 +84,7 @@
 						</div>
 						<div class="card__tags">
 
-							<a href="#" class="stretched-link" id="move"></a>
+							<a href="#" class="stretched-link" ><input type="hidden" class="${request.req_idx}" value="${request.req_idx}"></a>
 						</div>
 					</div>
 				</article>
@@ -107,18 +108,20 @@
 </body>
 </html>
 <script>
-/*  	$('#move').click(function(){
-	 var test = '${listView.requestList}';
-	 var testval = test.substr(18,2);
+/*  	$('a').click(function(e){
+  	
+	 var test = $(this).children('input').val();
+	 
 	 console.log(test);
-	 console.log(testval); //req_idx=xx
+	 //console.log(testval); //req_idx=xx
 	
-	 location.href='${pageContext.request.contextPath}/board/detailRequestInfo.do?'+testval;
-	 });   */
+	 //location.href='${pageContext.request.contextPath}/board/detailRequestInfo.do?'+testval;
+	 });  
+	 */
 
- 	 $('#move').click(function() {
-		var test = '${listView.requestList}';
-		var req_idx = test.substr(18,2);
+ 	  $('a').click(function(e) {
+
+		var req_idx = $(this).children('input').val();
 
 		var action = '${pageContext.request.contextPath}/board/detailRequestInfo.do';
 
@@ -131,7 +134,7 @@
 		var inputIdx = $('<input type="hidden" value="'+req_idx+'" name="req_idx">');
 		form.append(inputIdx);
 		form.submit();
-			});  
+			});   
 </script>
 
 

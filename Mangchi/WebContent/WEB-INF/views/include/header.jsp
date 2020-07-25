@@ -16,8 +16,8 @@
        </c:if>
        <c:if test="${not empty loginInfo}">
         <li class="nav-item active">
-          <a class="nav-link" id="logout" href="javascript:logoutWithKakao();">로그아웃</a>
-          <!-- <c:url value='/member/logout.do'/> -->
+          <a class="nav-link" id="logout" href="<c:url value='/member/logout.do'/>">로그아웃</a>
+          
         </li>
        </c:if>
         <li class="nav-item">
@@ -29,8 +29,10 @@
         <li class="nav-item">
           <a class="nav-link" href="<c:url value="/message/messageBox.do"/>">쪽지함</a>
         </li>
+        <c:if test="${not empty loginInfo}">
         <li class="nav-item"><a class="nav-link"
 					href="<c:url value='/member/mypage.do'/>">마이페이지</a></li>
+		</c:if>
       </ul>
       <form class="form-inline mt-2 mt-md-0"
 				action="${pageContext.request.contextPath}/board/searchrequest.do"
