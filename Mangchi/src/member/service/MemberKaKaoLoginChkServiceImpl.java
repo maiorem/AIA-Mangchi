@@ -39,18 +39,20 @@ public class MemberKaKaoLoginChkServiceImpl implements Service {
 				System.out.println("아이디가없을시 회원가입값: " + resultCnt);
 				req.setAttribute("resultCnt", resultCnt);
 				// 아이디가 존재 할시 addr 체크
-			} else if (resultCnt == 1) {
-				int addrCnt = dao.addrCheck(conn, kid);
-				
-				System.out.println("회원일시 주소유무값: " + addrCnt);
-				// 주소 유무에 따른 결과값
-				if (resultCnt == 1 && addrCnt == 0) {
-					req.setAttribute("resultCnt", resultCnt);
-				} else if (resultCnt == 1 && addrCnt == 1){
-					resultCnt = 2;
-					req.setAttribute("resultCnt", resultCnt);
+				if (resultCnt == 1) {
+					int addrCnt = dao.addrCheck(conn, kid);
+					
+					System.out.println("회원일시 주소유무값: " + addrCnt);
+					// 주소 유무에 따른 결과값
+					if (resultCnt == 1 && addrCnt == 0) {
+						req.setAttribute("resultCnt", resultCnt);
+					} else if (resultCnt == 1 && addrCnt == 1){
+						resultCnt = 2;
+						req.setAttribute("resultCnt", resultCnt);
+					}
 				}
 			}
+			
 
 			conn.commit();
 		} catch (SQLException e) {
