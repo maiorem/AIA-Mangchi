@@ -12,6 +12,7 @@ import jdbc.ConnectionProvider;
 import member.model.Member;
 import review.dao.ReviewDao;
 import review.model.Review;
+import review.model.Reviewjoin;
 import service.Service;
 
 public class ReviewListViewServiceImpl implements Service {
@@ -30,6 +31,8 @@ public class ReviewListViewServiceImpl implements Service {
 		int member_idx=rv.getIdx();
 		
 		
+		
+		
 		try {
 			
 			conn=ConnectionProvider.getConnection();
@@ -37,9 +40,9 @@ public class ReviewListViewServiceImpl implements Service {
 			
 			
 			
-			List<Review> reviewList = null;
+			List<Reviewjoin> reviewList = null;
 			float score =0;
-			List<Review> writeList =null;
+			List<Reviewjoin> writeList =null;
 			
 			
 			
@@ -49,9 +52,6 @@ public class ReviewListViewServiceImpl implements Service {
 			writeList = dao.setlist(conn, member_idx);
 			
 			
-			System.out.println(reviewList);
-			System.out.println(score);
-			System.out.println(writeList);
 			
 			req.setAttribute("reviewList", reviewList);
 			req.setAttribute("score", score);
