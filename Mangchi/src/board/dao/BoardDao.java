@@ -310,6 +310,30 @@ public class BoardDao {
 		}
 		return num;
 	}
+	public int completeHelpStatus(Connection conn, int req_idx, int helper) throws SQLException {
+		int result =0;
+		int num=-1;
+		PreparedStatement pstmt=null;
+		String sql = "UPDATE `project`.`request_list` " + 
+				 	 "SET " + 
+				 	 "`req_helper` = ?, " + 
+				 	 "`req_status` = 2 " + 
+				 	 "WHERE `req_idx` = ?;";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, helper);;
+			pstmt.setInt(2, req_idx);
+			result=pstmt.executeUpdate();
+		} finally {
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		if(result ==1) {
+			num=2;
+		}
+		return num;
+	}
 	
 	
 }
