@@ -79,7 +79,7 @@
 	<c:if test="${not empty listView.requestList}">
 			<c:forEach items="${listView.requestList}" var="request">
 				<article class="horizontal card">
-					<div class="card__content">
+					<div class="card__content" >
 						<div class="card__title">
 							<p id="p1">게시물 번호 : ${request.req_idx} 요청자 :
 								${request.member_nick} 게시물 제목 : ${request.req_title}</p>
@@ -93,7 +93,7 @@
 						</div>
 						<div class="card__tags">
 
-							<a href="#" class="stretched-link"></a>
+							<a href="#" class="stretched-link" id="test"></a>
 						</div>
 					</div>
 				</article>
@@ -125,3 +125,19 @@
 </script>
 <script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script>
 </body>
+
+<script>
+
+
+const test = ${listView.requestList};
+
+$("#test").click({ msg : test }, function(event) {
+    var msg = event.data.msg;
+    alert(msg);
+    console.log(msg);
+});
+ 
+	
+
+
+</script>
