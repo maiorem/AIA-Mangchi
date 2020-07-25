@@ -16,8 +16,8 @@
        </c:if>
        <c:if test="${not empty loginInfo}">
         <li class="nav-item active">
-          <a class="nav-link" id="logout" href="javascript:logoutWithKakao();">로그아웃</a>
-          <!-- <c:url value='/member/logout.do'/> -->
+          <a class="nav-link" id="logout" href="<c:url value='/member/logout.do'/>">로그아웃</a>
+          
         </li>
        </c:if>
         <li class="nav-item">

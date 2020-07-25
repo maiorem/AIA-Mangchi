@@ -113,9 +113,6 @@
             var id = res.id;
             var nick = res.properties.nickname;
             var photo = res.properties.profile_image;
-            /* goAjaxPost("/Mangchi/member/kakaoCheck.do", 'post', param , function(data){
-            	
-            }); */
             $.ajax({
             	url:"/Mangchi/member/kakaoCheck.do",
             	type:"post",
@@ -149,32 +146,10 @@
 	            	   Kakao.API.request({
 	                       url: '/v2/user/me',
 	                       success: function(res) {
-
-	                           //alert(JSON.stringify(authObj));
 	                           alert('로그인 되었습니다.');
-								
-	                           
-		                        //$('#login').css('display', 'none');
-		                        //$('#uinfo').css('display', 'inline');
-		                        //$('#status').css('display', 'inline');
-		                        //$('#logout').css('display', 'inline');
-								
+	                           //####
 	                           console.log(res);
-
-	                           // -> 요기에다가 회원가입이나 로그인하는 서버 로직 호출
 	                           idCheck(res);
-	                          /*  var id = res.id;
-	                           $.ajax({
-	                           	url:"kakaoCheck.do",
-	                           	type:"post",
-	                           	data:{id:id},
-	                           	success:function(data){
-	                           		alert("완료!" + id);
-	                           		//window.opener.location.reload();
-	                           		//self.close();
-	                           	}
-	                           }); */
-
 	                       },
 	                       fail: function(error) {
 	                           alert(JSON.stringify(error));
@@ -230,7 +205,7 @@
 								
 	                           console.log(res);
 
-	                           // -> 요기에다가 회원가입이나 로그인하는 서버 로직 호출해주면되 엌.. 감사합니다...(__)
+	                           // -> 요기에다가 회원가입이나 로그인하는 서버 로직 호출
 
 	                       },
 	                       fail: function(error) {
@@ -259,7 +234,6 @@
 		
 		
 		$.initView();
-		이게다임 아..하..		
 		
 	})
 	*/
