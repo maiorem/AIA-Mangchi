@@ -194,7 +194,7 @@ table.box {
 								<c:if test="${loginInfo.idx eq notes.msg_writer}">
 									<tr>
 										<th scope="row">-</th>
-										<td>${SenderNotes.msg_receiverId}</td>
+										<td>${SenderNotes.msg_receiver}</td>
 										<td><a class="view"
 											href='<c:url value="/message/noteview.do?idx=${SenderNotes.msg_idx}"/>'>${SenderNotes.msg_title}</a></td>
 										<td>${SenderNotes.msg_date}</td>
