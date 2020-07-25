@@ -12,7 +12,7 @@ public class Reviewjoin {
 	private float review_score;
 	private String review_text;
 	private String review_regdate;
-	ss
+	
 	private String req_title;
 	private String member_nick;
 	
