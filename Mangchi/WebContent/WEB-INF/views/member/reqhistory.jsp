@@ -94,7 +94,7 @@
 						<div class="card__tags">
 						</div>
 					</div>
-					<a href="#" class="stretched-link" id="move"></a>
+					<a href="#" class="stretched-link"><input type="hidden" class="${request.req_idx}" value="${request.req_idx}"></a>
 				</article>
 				<br>
 			</c:forEach>

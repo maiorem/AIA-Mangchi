@@ -84,7 +84,7 @@
 						</div>
 						<div class="card__tags">
 
-							<a href="#" class="stretched-link" id="move" ><input type="hidden" class="${request.req_idx}" value="${request.req_idx}"></a>
+							<a href="#" class="stretched-link" ><input type="hidden" class="${request.req_idx}" value="${request.req_idx}"></a>
 						</div>
 					</div>
 				</article>
