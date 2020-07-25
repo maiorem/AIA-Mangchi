@@ -100,8 +100,10 @@ public class SendingMessageServiceImpl implements Service {
 					
 				}
 				Message msg=new Message();
+				msg.setReq_idx(reqlistIdx);
 				msg.setMsg_writer(senderIdx);
 				msg.setMsg_receiver(receiverId);
+				msg.setMsg_title(title);
 				msg.setMsg_text(text);
 				msg.setMsg_img(img);
 				
