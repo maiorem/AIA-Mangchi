@@ -22,10 +22,13 @@ public class DetailRequestInfoImpl implements Service {
 		List<Member> list=null;
 		Member loginMember = (Member)req.getSession().getAttribute("loginInfo");
 		int loginIdx=loginMember.getIdx();
-		
+		System.out.println(req.getParameter("req_idx"));
+		// int req_idx = Integer.parseInt(req.getParameter("req_idx"));
+
 		int req_idx = Integer.parseInt(req.getParameter("req_idx"));
 		
 //		int req_idx=77; 
+
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao=BoardDao.getInstance();

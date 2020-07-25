@@ -12,7 +12,7 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Jekyll v4.0.1">
-<title>M A N G C H | 우리 동네 대여 서비스</title>
+<title>게시글화면</title>
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 <!-- Bootstrap core CSS -->
