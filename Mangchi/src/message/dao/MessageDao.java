@@ -515,4 +515,65 @@ public class MessageDao {
 
 		return list;
 	}
+
+	public int selectReqIdxByMsgIdx(Connection conn, int idx) throws SQLException {
+		int reqIdx=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			String sql="select req_idx from project.message where msg_idx=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				reqIdx=rs.getInt(1);
+			}
+			
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+			
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		
+		
+		return reqIdx;
+	}
+
+	public String selectWriterIdByIdx(Connection conn, int idx) throws SQLException {
+		
+		String writerId=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			String sql="select mem.member_id from project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx where msg.msg_idx=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				writerId=rs.getString(1);
+			}
+			
+		}finally {
+			if(rs!=null) {
+				rs.close();
+			}
+			
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		
+		
+		return writerId;
+	}
 }
