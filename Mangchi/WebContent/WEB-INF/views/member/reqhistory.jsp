@@ -93,7 +93,7 @@
 						</div>
 						<div class="card__tags">
 
-							<a href="#" class="stretched-link"></a>
+							<a href="#" class="stretched-link" id="move"></a>
 						</div>
 					</div>
 				</article>
@@ -115,13 +115,23 @@
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
 <script>
-	window.jQuery
-			|| document
-					.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')
+$('#move').click(function() {
+	var test = '${listView.requestList}';
+	var req_idx = test.substr(18,2);
+
+	var action = '${pageContext.request.contextPath}/board/detailRequestInfo.do';
+
+	var form = $('<form></form>');
+	form.attr('charset', 'utf-8');
+	form.attr('method', 'post');
+	form.attr('action', action);
+	form.appendTo('body');
+
+	var inputIdx = $('<input type="hidden" value="'+req_idx+'" name="req_idx">');
+	form.append(inputIdx);
+	form.submit();
+		});  
 </script>
 <script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script>
 </body>
