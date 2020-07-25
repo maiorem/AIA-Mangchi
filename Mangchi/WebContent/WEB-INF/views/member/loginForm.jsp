@@ -191,8 +191,10 @@
 		var kakaoLoninBtnOnClickEvent = function(){
 			$("#custom-login-btn").on("click", function(){
 				kakaoLogin();
-			})
+			});
 		}
+		
+		
 		
 		
 		var init = function(){

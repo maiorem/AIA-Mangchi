@@ -44,9 +44,9 @@ public class MemberKaKaoLoginChkServiceImpl implements Service {
 				
 				System.out.println("회원일시 주소유무값: " + addrCnt);
 				// 주소 유무에 따른 결과값
-				if (resultCnt == 1 && addrCnt == 1) {
+				if (resultCnt == 1 && addrCnt == 0) {
 					req.setAttribute("resultCnt", resultCnt);
-				} else if (resultCnt == 1 && addrCnt == 0){
+				} else if (resultCnt == 1 && addrCnt == 1){
 					resultCnt = 2;
 					req.setAttribute("resultCnt", resultCnt);
 				}
