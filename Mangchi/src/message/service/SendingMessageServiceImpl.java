@@ -67,8 +67,9 @@ public class SendingMessageServiceImpl implements Service {
 						if(paramName.equals("reqListIdx")) {
 							reqlistIdx=Integer.parseInt(paramValue);
 							
-						} else if(paramName.equals("sender")){
+						} else if(paramName.equals("idx")){
 							senderIdx=Integer.parseInt(paramValue);
+							
 							
 						} else if(paramName.equals("noteId")) {
 							if(mmdao.existId(conn, paramValue)) {
