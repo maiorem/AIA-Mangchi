@@ -98,7 +98,7 @@
 
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script>window.jQuery || document.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')</script><script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script></body>
+<script>window.jQuery || document.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')</script><script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script>
 	
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
@@ -107,19 +107,34 @@
 	$(function(){
 		
 		
+		
+		
 		var idCheck = function(res){
-			alert(res.id);
-			alert(res.properties.nickname);
-            alert(res.properties.profile_image);
             var id = res.id;
             var nick = res.properties.nickname;
             var photo = res.properties.profile_image;
+            /* goAjaxPost("/Mangchi/member/kakaoCheck.do", 'post', param , function(data){
+            	
+            }); */
             $.ajax({
             	url:"/Mangchi/member/kakaoCheck.do",
             	type:"post",
             	data:{id:id, nick:nick, photo:photo},
             	success:function(data){
-            		alert("완료!" + data);
+            		if(data==0){
+            			alert("사이트가 처음이시군요?" +
+            						"\n 추가 회원 가입이 필요합니다." +
+            						"\n 회원가입 페이지로 이동합니다.");
+            			location.replace("kakaoRegForm.do?kid="+id);
+            		}else if(data==1){
+            			alert("추가 회원가입을 안하셨군요?" +
+            					"\n 추가 회원 가입이 필요합니다." +
+								"\n 회원가입 페이지로 이동합니다.");
+            			location.replace("kakaoRegForm.do?kid="+id);
+            		}else if(data=2){
+            			alert("로그인 되었습니다.");
+            			location.replace("kakaoLogin.do?kid="+id);
+            		};
             	},
             	error:function(request,status,error){
             		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}

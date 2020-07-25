@@ -3,13 +3,11 @@ package request.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javafx.application.Application;
 import jdbc.ConnectionProvider;
 import member.model.Member;
 import request.dao.RequestDao;
