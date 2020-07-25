@@ -73,6 +73,8 @@ table.box {
 			location.href = 'messageDelete.do?idx=' + idx;
 		}
 	}
+	
+
 
 	$(document).ready(function() {
 
@@ -87,20 +89,28 @@ table.box {
 			$('div.SendNoteArea').css('display', 'block');
 		});
 
+		var titleClick=function() {
+			if($('#checkmsg').val()==0) {
+				$('#checkmsg').text('읽지않음');
+				$('#checkmsg').addClass('check_not')
+			} else if($('#checkmsg').val()==1) {
+				$('#checkmsg').text("읽음");
+				$('#checkmsg').removeClass('check_not');
+				$('#checkmsg').addClass('check_ok');
+			}
+		}
+		
 		$('a.view').click(function() {
-
+			alert($(this).param());
+			
 			$.ajax({
 				url : 'readCheck.do',
 				data : {
 					idx : $(this).param()
 				},
 				success : function(data) {
-					if (data = 'Y') {
-						$('#checkmsg').text("읽음");
-						$('#checkmsg').addClass('check_ok');
-					} else {
-						$('#checkmsg').text("읽지않음");
-						$('#checkmsg').addClass('check_not');
+					if (data=='Y') {
+						titleClick();
 					}
 				}
 			});
