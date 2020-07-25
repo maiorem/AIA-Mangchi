@@ -8,12 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import board.model.RequestWriting;
 import jdbc.ConnectionProvider;
 import member.model.Member;
 import review.dao.ReviewDao;
 import review.model.Review;
-import review.model.Reviewjoin;
 import service.Service;
 
 public class ReviewListViewServiceImpl implements Service {
@@ -30,8 +28,6 @@ public class ReviewListViewServiceImpl implements Service {
 		HttpSession session=req.getSession();
 		Member rv = (Member)session.getAttribute("loginInfo");
 		int member_idx=rv.getIdx();
-		//int b = Integer.parseInt(req.getParameter("req_idx"));
-		int b = 9;
 		
 		
 		try {
@@ -41,9 +37,9 @@ public class ReviewListViewServiceImpl implements Service {
 			
 			
 			
-			List<Reviewjoin> reviewList = null;
+			List<Review> reviewList = null;
 			float score =0;
-			List<Reviewjoin> writeList =null;
+			List<Review> writeList =null;
 			
 			
 			
@@ -52,15 +48,15 @@ public class ReviewListViewServiceImpl implements Service {
 			score = dao.scoreAvg(conn, member_idx);
 			writeList = dao.setlist(conn, member_idx);
 			
-			System.out.println("나한테쓴것들 : " +reviewList);
-			System.out.println(" 평균 : " + score);
-			System.out.println("내가쓴것들 : " +writeList);
+			
+			System.out.println(reviewList);
+			System.out.println(score);
+			System.out.println(writeList);
 			
 			req.setAttribute("reviewList", reviewList);
 			req.setAttribute("score", score);
 			
 			req.setAttribute("writerList", writeList);
-			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
