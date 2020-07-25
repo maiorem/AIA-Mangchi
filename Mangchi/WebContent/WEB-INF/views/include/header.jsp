@@ -16,7 +16,8 @@
        </c:if>
        <c:if test="${not empty loginInfo}">
         <li class="nav-item active">
-          <a class="nav-link" href="<c:url value='/member/logout.do'/>">로그아웃</a>
+          <a class="nav-link" id="logout" href="javascript:logoutWithKakao();">로그아웃</a>
+          <!-- <c:url value='/member/logout.do'/> -->
         </li>
        </c:if>
         <li class="nav-item">
@@ -41,3 +42,11 @@
     </div>
   </nav>
 </header>
+  <script>
+  function logoutWithKakao() {
+      Kakao.Auth.logout(function() {
+          alert('로그아웃되었습니다.');
+      });
+          sessionStorage.removeItem('loginInfo');
+  }
+</script>
