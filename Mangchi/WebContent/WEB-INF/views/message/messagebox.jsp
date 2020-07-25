@@ -261,7 +261,7 @@ table.box {
 
 
 
-
+<!-- 1 -->
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
