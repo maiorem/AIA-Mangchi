@@ -55,10 +55,8 @@ function messageDel(idx) {
 	<div class="wrap">
 
 		<div class="boxarea" id="noteBoxArea">
-			<button class="btn btn-outline-success my-2 my-sm-0" id="reBox"
-				type="button">받은 쪽지함</button>
-			<button class="btn btn-outline-success my-2 my-sm-0" id="seBox"
-				type="button">보낸 쪽지함</button>
+			<button class="btn btn-outline-success my-2 my-sm-0"
+				type="button"><a href='<c:url value="/message/messageBox.do"/>'>쪽지함으로 돌아가기</a></button>
 
 		</div>
 		<hr>
