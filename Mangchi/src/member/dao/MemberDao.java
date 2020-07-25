@@ -121,7 +121,7 @@ public class MemberDao {
 
 		try {
 
-			String sql = "SELECT count(*) FROM project.member WHERE kakao_id = ? AND member_addr IS NULL";
+			String sql = "SELECT count(*) FROM project.member WHERE kakao_id = ? AND member_addr IS NOT NULL";
 
 			pstmt = conn.prepareStatement(sql);
 
