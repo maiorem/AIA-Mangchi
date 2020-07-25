@@ -131,6 +131,8 @@
             		}else if(data=2){
             			alert("로그인 되었습니다.");
             			location.replace("kakaoLogin.do?kid="+id);
+            			 Kakao.Auth.logout(function() {
+                         });
             		};
             	},
             	error:function(request,status,error){
@@ -149,7 +151,9 @@
 	                           alert('로그인 되었습니다.');
 	                           //####
 	                           console.log(res);
+	                           
 	                           idCheck(res);
+	                              
 	                       },
 	                       fail: function(error) {
 	                           alert(JSON.stringify(error));
