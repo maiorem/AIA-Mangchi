@@ -23,9 +23,9 @@ public class DetailRequestInfoImpl implements Service {
 		Member loginMember = (Member)req.getSession().getAttribute("loginInfo");
 		int loginIdx=loginMember.getIdx();
 		
-//		int req_idx = Integer.parseInt(req.getParameter("req_idx"));
+		int req_idx = Integer.parseInt(req.getParameter("req_idx"));
 		
-		int req_idx=77; 
+//		int req_idx=77; 
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao=BoardDao.getInstance();
