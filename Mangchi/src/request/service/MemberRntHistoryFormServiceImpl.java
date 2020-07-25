@@ -50,7 +50,6 @@ public class MemberRntHistoryFormServiceImpl implements Service {
 				try {
 					pageNumber = Integer.parseInt(page);
 				} catch (NumberFormatException e) {
-					System.out.println("���� Ÿ���� ���ڿ��� ���޵��� �ʾ� ���� �߻�");
 				}
 			}
 
@@ -64,6 +63,8 @@ public class MemberRntHistoryFormServiceImpl implements Service {
 
 				requestList = dao.selectRntHistory(conn, idx, startRow, COUNT_PER_PAGE);
 				System.out.println("requestList: "+requestList);
+				req.setAttribute("requestList", requestList);
+
 
 			} else {
 				pageNumber = 0;
