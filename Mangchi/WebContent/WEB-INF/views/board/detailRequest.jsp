@@ -25,14 +25,15 @@
 	width: 200px;
 }
 .title{
+	text-align:center;
 	line-height:50px;
 	height: 50px;
 	color: white;
 	font-weight: bold;
 	background-color: #455A64;
-	padding-left:20%;
 	margin: 2%;
 	border-radius: 10px;
+	width: 200px;
 }
 .contents{
 	line-height:50px;
@@ -174,8 +175,8 @@
 		</c:forEach>
 		$('#selectHelper').append('<button type="button" id="helper_selector_btn" class="btn btn-info btn-sm selecComp">선택완료</button>');
 		
-		//로그인한 사용자
-		const loginIdx= ${loginInfo.idx};
+		//현재 사용자의 idx (비로그인일시 -1)
+		const currUserIdx=${currUserIdx};
 		//게시글 제목(리뷰)
 		const title='${choiceRequest.req_title}';
 		//게시글 인덱스
@@ -190,12 +191,12 @@
 		const helperVal=$('#helpers').val();
 		//헬퍼 선택 완료 버튼
 		const helperSelectBtn=$('#helper_selector_btn');
-		
+		//게시글의 상태		
+		const helperStatus=${choiceRequest.req_status};
 		//상세내용 "호출"시 
 		//헬퍼상태에 따라 렌탈대기 렌탈중 렌탈완료
 		//호출된 글의 status 입력
 		//status에 따라 렌탈완료버튼 보이기
-		const helperStatus=${choiceRequest.req_status};
 		if(helperStatus==0){
 			status_td.text('렌탈대기');
 			$('#helpEnd').hide();
@@ -227,31 +228,48 @@
 			}
 		}
 		
-		//로그인사용자와 해당 글의 글쓴이가 같은경우 다른경우 분기처리 
-		if(loginIdx==writer){
-			console.log('같은');	
-			$('#sendNote').hide();
-		}else{			
-			console.log('다른');	
+		//로그인사용자와 해당 글의 글쓴이가 같은경우 다른경우 분기처리
+		if(currUserIdx!=-1){
+			if(currUserIdx==writer){
+				console.log('같은');	
+				$('#sendNote').hide();
+			}else{
+				console.log('다른');	
+				$('#helpEnd').hide();
+				for(var i=0;i<arr.length;i++){
+					if(helper==arr[i].idx){
+						$('#selectHelper').html(arr[i].nick);
+					}
+				}
+			}
+		}else{
 			$('#helpEnd').hide();
-			selectTag.attr('disabled','disabled');
+			for(var i=0;i<arr.length;i++){
+				if(helper==arr[i].idx){
+					$('#selectHelper').html(arr[i].nick);
+				}
+			}
 		}
-		 
+		
 		//헬퍼가 바뀌면 선택완료버튼 보이기
 		//헬퍼가 바뀌면 선택이 완료되기 전에는 렌탈완료버튼 숨기기
+		var changeHelper=0;
+		console.log('헬퍼바뀜? :'+changeHelper);
 		var val = $('#helpers').val();
 		helperSelectBtn.hide(); //버튼은 기본 hide
 		$('#helpers').on('change',function(){
-			
 			$('#helpEnd').hide();
 			if(val == $(this).val() ){	
 				helperSelectBtn.hide();
 				$('#helpEnd').show();
+				console.log('헬퍼'+changeHelper);
 			}else{
 				helperSelectBtn.show();				
+				changeHelper=1;
+				console.log('헬퍼'+changeHelper);
 			}
 		});
-		
+		 
 		//헬퍼 선택버튼 클릭 이벤트
 		helperSelectBtn.on('click',function(){
 			$.ajax({
@@ -264,9 +282,15 @@
 					},
 				success : function(data){
 					if(data==1){
-						alert('렌탈을 시작합니다');
-						status_td.text('렌탈중');
-						location.reload();
+						if(helperStatus==1&&changeHelper==1){
+							alert('헬퍼를 변경합니다');
+							status_td.text('렌탈중');
+							location.reload();
+						}else{
+							alert('렌탈을 시작합니다');
+							status_td.text('렌탈중');
+							location.reload();
+						}
 					}else if(data==0){
 						alert('대기중으로 전환합니다');
 						status_td.text('렌탈대기');
@@ -327,25 +351,30 @@
 		//족지 보내기 버튼 클릭 이벤트
 		//form태그 만들어서 보냄
 		$('#sendNote').on('click',function(){
-			var action='<c:url value="/message/sendNote.do"/>';
-			
-			var form = document.createElement("form");
-			form.setAttribute("charset", "UTF-8");
-			form.setAttribute("method", "Post");
-			form.setAttribute("action", action);
-			var hiddenField = document.createElement("input");
-			hiddenField.setAttribute("type", "hidden");
-			hiddenField.setAttribute("name", "req_idx");
-			hiddenField.setAttribute("value", idx);
-			form.appendChild(hiddenField);
-			
-			hiddenField = document.createElement("input");
-			hiddenField.setAttribute("type", "hidden");
-			hiddenField.setAttribute("name", "uid");
-			hiddenField.setAttribute("value", writer);
-			form.appendChild(hiddenField);
-			document.body.appendChild(form);
-			form.submit();
+			if(currUserIdx==-1){
+				alert('쪽지보내기는 로그인 이후에 가능합니다');
+				location.href='<c:url value="/member/loginForm.do"/>';
+			}else{
+				var action='<c:url value="/message/sendNote.do"/>';
+				
+				var form = document.createElement("form");
+				form.setAttribute("charset", "UTF-8");
+				form.setAttribute("method", "Post");
+				form.setAttribute("action", action);
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", "req_idx");
+				hiddenField.setAttribute("value", idx);
+				form.appendChild(hiddenField);
+				
+				hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", "uid");
+				hiddenField.setAttribute("value", writer);
+				form.appendChild(hiddenField);
+				document.body.appendChild(form);
+				form.submit();
+			}
 		});
 	});		
 </script>
