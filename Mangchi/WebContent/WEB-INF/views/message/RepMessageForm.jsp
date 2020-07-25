@@ -25,13 +25,13 @@
 
 	<div id="note">
 		<form action="<c:url value='/message/sendMessage.do'/>" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="idx" value="${loginMember.idx}">
+			<input type="hidden" name="idx" value="${loginInfo.idx}">
 			<input type="hidden" name="reqListIdx" value="${param.req}">
 
 			<table>
 				<tr>
 					<td>보내는 사람</td>
-					<td><input type="email" name="senderId" id="noteId" value="${loginMember.uid}" readonly></td>
+					<td><input type="email" name="senderId" id="noteId" value="${loginInfo.id}" readonly></td>
 				</tr>
 				<tr>
 					<td>받는 사람</td>
@@ -39,11 +39,11 @@
 				</tr>
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="noteTitle" id="notetitle"></td>
+					<td><input type="text" name="noteTitle" id="notetitle" placehoder="제목을 입력해주세요"></td>
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td><input type="text" name="noteText" required></td>
+					<td><input type="text" name="noteText" placehoder="쪽지 내용을 입력해주세요" required></td>
 				</tr>
 				<tr>
 					<td>이미지</td>
