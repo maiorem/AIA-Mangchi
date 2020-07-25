@@ -114,12 +114,6 @@ table.box {
 </script>
 </head>
 <body>
-	<c:if test="${loginInfo==null}">
-		<script>
-			alert('쪽지는 로그인을 해야 이용이 가능합니다.');
-			location.href = '<c:url value="/member/loginForm.do"/>';
-		</script>
-	</c:if>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div class="wrap">
 
@@ -143,7 +137,7 @@ table.box {
 							<th scope="col">삭제</th>
 						</tr>
 						<c:forEach items="${searchNoteList.messageList}" var="notes">
-							<c:if test="${loginInfo.member_id eq notes.msg_receiver}">
+							<c:if test="${loginInfo.id eq notes.msg_receiver}">
 								<tr>
 									<th scope="row"><input type="checkbox" name="msgCheck"
 										class="msgcheck onlycheck" id="msg${notes.msg_idx}Check"></th>
