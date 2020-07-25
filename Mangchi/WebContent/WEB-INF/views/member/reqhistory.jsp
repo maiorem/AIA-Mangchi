@@ -92,10 +92,9 @@
 								${request.req_loc}</p>
 						</div>
 						<div class="card__tags">
-
-							<a href="#" class="stretched-link" id="move"></a>
 						</div>
 					</div>
+					<a href="#" class="stretched-link" id="move"></a>
 				</article>
 				<br>
 			</c:forEach>
@@ -116,22 +115,30 @@
 </body>
 </html>
 <script>
-$('#move').click(function() {
-	var test = '${listView.requestList}';
-	var req_idx = test.substr(18,2);
+/*  	$('#move').click(function(){
+var test = '${listView.requestList}';
+var testval = test.substr(18,2);
+console.log(test);
+console.log(testval); //req_idx=xx
 
-	var action = '${pageContext.request.contextPath}/board/detailRequestInfo.do';
+//location.href='${pageContext.request.contextPath}/board/detailRequestInfo.do?'+testval;
+});    */
+ $('a').click(function(e) {
 
-	var form = $('<form></form>');
-	form.attr('charset', 'utf-8');
-	form.attr('method', 'post');
-	form.attr('action', action);
-	form.appendTo('body');
+		var req_idx = $(this).children('input').val();
 
-	var inputIdx = $('<input type="hidden" value="'+req_idx+'" name="req_idx">');
-	form.append(inputIdx);
-	form.submit();
-		});  
+		var action = '${pageContext.request.contextPath}/board/detailRequestInfo.do';
+
+		var form = $('<form></form>');
+		form.attr('charset', 'utf-8');
+		form.attr('method', 'post');
+		form.attr('action', action);
+		form.appendTo('body');
+
+		var inputIdx = $('<input type="hidden" value="'+req_idx+'" name="req_idx">');
+		form.append(inputIdx);
+		form.submit();
+			});   
 </script>
 <script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script>
 </body>

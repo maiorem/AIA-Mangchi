@@ -249,7 +249,7 @@ public class MessageDao {
 		List<Message> list=new ArrayList<Message>();
 
 		//받은 편지함에서 아이디 찾기 => writer의 아이디
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where mem.member_id like '%?%' order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where mem.member_id like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -296,7 +296,7 @@ public class MessageDao {
 
 		List<Message> list=new ArrayList<Message>();
 		//받은 편지함에서 제목 찾기 => writer의 아이디가 멤버 데이터와 일치해야함
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_title like '%?%' order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_title like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -343,7 +343,7 @@ public class MessageDao {
 
 		List<Message> list=new ArrayList<Message>();
 		//받은 편지함에서 내용 찾기 => writer의 아이디가 멤버 데이터와 일치해야함
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_text like '%?%' order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_text like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -390,7 +390,7 @@ public class MessageDao {
 
 		List<Message> list=new ArrayList<Message>();
 		//보낸 편지함에서 아이디 검색 => 받은 사람 아이디
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_receiver like '%?%' order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_receiver like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -437,7 +437,7 @@ public class MessageDao {
 
 		List<Message> list=new ArrayList<Message>();
 
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_title like '%?%' order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_title like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -484,7 +484,7 @@ public class MessageDao {
 
 		List<Message> list=new ArrayList<Message>();
 
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_text like '%?%' order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_text like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);

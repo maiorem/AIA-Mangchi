@@ -25,8 +25,11 @@ public class SearchNoteSelectServiceImpl implements Service {
 		MessageListView searchListView=null;
 		Connection conn=null;
 		int noteSort=Integer.parseInt(req.getParameter("noteSort"));
+		System.out.println("noteSort : "+noteSort);
 		int searchSort=Integer.parseInt(req.getParameter("searchSort"));
+		System.out.println("searchSort : "+searchSort);
 		String searchText=req.getParameter("noteSearch");
+		System.out.println("searchText : " +searchText);
 		
 		try {
 			conn=ConnectionProvider.getConnection();
@@ -45,32 +48,28 @@ public class SearchNoteSelectServiceImpl implements Service {
 				startrow=(currentPage-1)*MESSAGE_COUNT_PER_PAGE;
 				
 				if(noteSort==1) {
-					switch(searchSort) {
-					case 1:
+					if(searchSort==1) {
 						msgList=dao.searchReceiveNoteById(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
-						break;
-					case 2:
+	
+					} else if (searchSort==2) {
 						msgList=dao.searchReceiveNoteByTitle(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
-						break;
-					case 3:
+					} else if(searchSort==3) {
 						msgList=dao.searchReceiveNoteByText(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
-						break;
 					}
 					
 					
 				} else {
-					switch(searchSort) {
-					case 1:
+					if(searchSort==1) {
 						msgList=dao.searchSendNoteById(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
-						break;
-					case 2:
+					} else if(searchSort==2) {
 						msgList=dao.searchSendNoteByTitle(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
-						break;
-					case 3:
+					} else if(searchSort==3) {
 						msgList=dao.searchSendNoteByText(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
-						break;
+						
 					}
 				}
+				
+				System.out.println(msgList);
 
 			} else {
 				currentPage=0;

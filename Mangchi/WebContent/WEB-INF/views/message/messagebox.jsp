@@ -31,11 +31,10 @@ div.wrap {
 
 div.noteBox {
 	height: 650px;
-
 }
 
 div.onlybox {
-	height:600px;
+	height: 600px;
 	overflow: auto;
 }
 
@@ -73,8 +72,6 @@ table.box {
 			location.href = 'messageDelete.do?idx=' + idx;
 		}
 	}
-	
-
 
 	$(document).ready(function() {
 
@@ -89,32 +86,14 @@ table.box {
 			$('div.SendNoteArea').css('display', 'block');
 		});
 
-		var titleClick=function() {
-			if($('#checkmsg').val()==0) {
-				$('#checkmsg').text('읽지않음');
-				$('#checkmsg').addClass('check_not')
-			} else if($('#checkmsg').val()==1) {
-				$('#checkmsg').text("읽음");
-				$('#checkmsg').removeClass('check_not');
-				$('#checkmsg').addClass('check_ok');
-			}
+		if ($('.checkmsg').val()==0) {
+			$('.checkmsg').text('읽지않음');
+			$('.checkmsg').addClass('check_not')
+		} else if ($('.checkmsg').val()==1) {
+			$('.checkmsg').text("읽음");
+			$('.checkmsg').removeClass('check_not');
+			$('.checkmsg').addClass('check_ok');
 		}
-		
-		$('a.view').click(function() {
-			alert($(this).param());
-			
-			$.ajax({
-				url : 'readCheck.do',
-				data : {
-					idx : $(this).param()
-				},
-				success : function(data) {
-					if (data=='Y') {
-						titleClick();
-					}
-				}
-			});
-		});
 
 	});
 </script>
@@ -208,8 +187,9 @@ table.box {
 										<td><a class="view"
 											href='<c:url value="/message/noteview.do?idx=${SenderNotes.msg_idx}"/>'>${SenderNotes.msg_title}</a></td>
 										<td>${SenderNotes.msg_date}</td>
-										<td><span id="checkmsg">${SenderNotes.readcheck}</span></td>
-										<td><a href="javascript:messageListDel(${SenderNotes.msg_idx})">
+										<td><span class="checkmsg">${SenderNotes.readcheck}</span></td>
+										<td><a
+											href="javascript:messageListDel(${SenderNotes.msg_idx})">
 												<svg width="1em" height="1em" viewBox="0 0 16 16"
 													class="bi bi-trash" fill="currentColor"
 													xmlns="http://www.w3.org/2000/svg">
