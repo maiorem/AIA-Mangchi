@@ -38,11 +38,10 @@ button.sell{
 
  
 
-table {
+table.type09 {
     border-collapse: collapse;
     text-align: left;
     line-height: 1.5;
-    width: 100%; 
 
 }
 table.type09 thead th {
@@ -60,79 +59,13 @@ table.type09 tbody th {
     border-bottom: 1px solid #ccc;
     background: #f3f6f7;
 }
-
-+tr:nth-of-type(odd) { 
-  
-}
-th { 
- 
-  color: white; 
-  font-weight: bold; 
-}
-td, th { 
-  padding: 6px; 
- 
-  text-align: left; 
+table.type09 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
 }
 
-
-@media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	
-	tr { border: 1px solid #ccc; }
-	
-	td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-	}
-	
-	td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-	}
-	
-	td::before{
-	font-weight: bold;
-	color: #369;
-	}
-	
-	
-	td:nth-of-type(4){
-	
-	width: 80%;
-	}
-	
-	/*
-	Label the data
-	*/
-	td:nth-of-type(1):before { content: "게시글 제목"; }
-	td:nth-of-type(2):before { content: "닉네임"; }
-	td:nth-of-type(3):before { content: "평점"; }
-	td:nth-of-type(4):before { content: "내용"; }
-	td:nth-of-type(5):before { content: "날자"; }
-	
 
 
 </style>
@@ -181,9 +114,11 @@ only screen and (max-width: 760px),
 
 
 <tr>
-<th scope="cols">게시글 제목</th>
-<th scope="cols">닉네임</th>
-<th scope="cols">평점</th>
+<th scope="cols">리뷰idx</th>
+<th scope="cols">게시글번호</th>
+<th scope="cols">나</th>
+<th scope="cols">상대방</th>
+<th scope="cols">점수</th>
 <th scope="cols" style="width: 40%;">내용</th>
 <th scope="cols">리뷰쓴날자</th>
 </tr>
@@ -193,8 +128,10 @@ only screen and (max-width: 760px),
 <c:forEach items="${reviewList}" var="x">
 
 	<tr>
-		<td scope="row">${x.req_title}</td>
-		<td scope="row">${x.member_nick}</td>
+		<td scope="row">${x.review_idx}</td>
+		<td scope="row">${x.req_idx}</td>
+		<td scope="row">${x.review_receiver}</td>
+		<td scope="row">${x.review_writer}</td>
 		<td scope="row">${x.review_score}</td>
 		<td scope="row">${x.review_text}</td>
 		<td scope="row">${x.review_regdate}</td>
@@ -218,9 +155,11 @@ only screen and (max-width: 760px),
 <thead>
 
 <tr>
-<th scope="cols">게시글 제목</th>
-<th scope="cols">닉네임</th>
-<th scope="cols">평점</th>
+<th scope="cols">리뷰idx</th>
+<th scope="cols">게시글번호</th>
+<th scope="cols">상대방</th>
+<th scope="cols">나</th>
+<th scope="cols">점수</th>
 <th scope="cols" style="width: 40%;">내용</th>
 <th scope="cols">리뷰쓴날자</th>
 </tr>
@@ -230,12 +169,12 @@ only screen and (max-width: 760px),
 <c:forEach items="${writerList}" var="y">
 
 	<tr>
-	
-	<td  scope="row">${y.req_title}</td>
-		<td  scope="row">${y.member_nick}</td>
-		
+		<td  >${y.review_idx}</td>
+		<td  >${y.req_idx}</td>
+		<td  >${y.review_receiver}</td>
+		<td  scope="row">${y.review_writer}</td>
 		<td  scope="row">${y.review_score}</td>
-		<td  scope="row">${y.review_text}</td>
+		<td  scope="row" style="width: 40%;">${y.review_text}</td>
 		<td  scope="row">${y.review_regdate}</td>
 		
 		</tr>
@@ -247,7 +186,6 @@ only screen and (max-width: 760px),
 </table>
 </div>
 
-<div style="margin-bottom: 5%;"></div>
 
 
 

@@ -14,6 +14,7 @@ import board.model.RequestWriting;
 import jdbc.ConnectionProvider;
 import member.model.Member;
 import review.model.Review;
+import review.model.Reviewjoin;
 
 
 public class ReviewDao {
@@ -67,19 +68,19 @@ public class ReviewDao {
 	
 	
 	
-		public List<Review> getlist(Connection conn, int member_idx) throws SQLException {
+		public List<Reviewjoin> getlist(Connection conn, int member_idx) throws SQLException {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		List<Review> reviewList = new ArrayList<>();
+		List<Reviewjoin> reviewList = new ArrayList<>();
 		
 		
 		
 		try {
 			
 			
-			String sql = "select * from project.review_list where review_receiver=?";
+			String sql = "SELECT * FROM project.review_list inner join project.request_list on project.review_list.req_idx = project.request_list.req_idx inner join project.member on project.request_list.req_writer = project.member.member_idx where project.review_list.review_receiver=?";
 			
 			pstmt =conn.prepareStatement(sql);
 			//pstmt.setInt(1, member.getmember_idx());
@@ -90,8 +91,8 @@ public class ReviewDao {
 		
 			while(rs.next()) {
 				
-				reviewList.add(new Review(rs.getInt("review_idx"),rs.getInt("req_idx"),rs.getInt("review_receiver"),
-						rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getString("review_regdate")));
+				reviewList.add(new Reviewjoin(rs.getInt("review_idx"),rs.getInt("req_idx"),rs.getInt("review_receiver"),
+						rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getString("review_regdate"),rs.getString("req_title"),rs.getString("member_nick")));
 			}
 			
 			
@@ -109,19 +110,19 @@ public class ReviewDao {
 	
 	
 	
-		public List<Review> setlist(Connection conn, int a) throws SQLException {
+		public List<Reviewjoin> setlist(Connection conn, int a) throws SQLException {
 			
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			List<Review> reviewList = new ArrayList<>();
+			List<Reviewjoin> reviewList = new ArrayList<>();
 			
 			
 			
 			try {
 				
 				
-				String sql = "select * from project.review_list where review_writer=?";
+				String sql = "SELECT * FROM project.review_list inner join project.request_list on project.review_list.req_idx = project.request_list.req_idx inner join project.member on project.request_list.req_writer = project.member.member_idx where project.review_list.review_writer=?";
 				
 				pstmt =conn.prepareStatement(sql);
 				//pstmt.setInt(1, member.getmember_idx());
@@ -132,8 +133,8 @@ public class ReviewDao {
 			
 				while(rs.next()) {
 					
-					reviewList.add(new Review(rs.getInt("review_idx"),rs.getInt("req_idx"),rs.getInt("review_receiver"),
-							rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getString("review_regdate")));
+					reviewList.add(new Reviewjoin(rs.getInt("review_idx"),rs.getInt("req_idx"),rs.getInt("review_receiver"),
+							rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getString("review_regdate"),rs.getString("req_title"),rs.getString("member_nick")));
 				}
 				
 				
