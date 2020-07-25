@@ -74,6 +74,34 @@ public class MemberMessageDao {
 		return result;
 	}
 
+	public String selectIdByIdx(Connection conn, int idx) throws SQLException {
+		String id=null;
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			String sql="select member_id from project.member where member_idx=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);		
+					
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				id=rs.getString(1);
+			}
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+			
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		return id;
+	}
+
 
 	
 	

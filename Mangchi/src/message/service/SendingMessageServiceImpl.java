@@ -65,8 +65,7 @@ public class SendingMessageServiceImpl implements Service {
 						mmdao=MemberMessageDao.getInstance();
 
 						if(paramName.equals("reqListIdx")) {
-							String reqidx=paramValue;
-							reqlistIdx=Integer.parseInt(reqidx);
+							reqlistIdx=Integer.parseInt(paramValue);
 							
 						} else if(paramName.equals("sender")){
 							senderIdx=Integer.parseInt(paramValue);

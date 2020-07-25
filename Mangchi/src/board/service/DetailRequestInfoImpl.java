@@ -24,13 +24,20 @@ public class DetailRequestInfoImpl implements Service {
 		int loginIdx=loginMember.getIdx();
 		System.out.println(req.getParameter("req_idx"));
 		// int req_idx = Integer.parseInt(req.getParameter("req_idx"));
+
+		int req_idx = Integer.parseInt(req.getParameter("req_idx"));
 		
-		int req_idx=7;
+//		int req_idx=77; 
+
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao=BoardDao.getInstance();
 			rw= dao.getDetailRequestInfo(conn,req_idx);
-			list = dao.getRequestHelpers(conn,loginIdx,req_idx);
+			if(rw.getReq_writer()==loginIdx) {
+				list = dao.getRequestHelpers(conn,loginIdx,req_idx);				
+			}else {
+				list = dao.getRequestHelpers(conn,rw.getReq_writer(),req_idx);								
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
