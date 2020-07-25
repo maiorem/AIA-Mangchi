@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 import board.model.RequestWriting;
+import member.model.Member;
 
 public class BoardDao {
 	private BoardDao() {}
@@ -221,7 +223,7 @@ public class BoardDao {
 						rs.getString("member_nick"), 
 						rs.getString("req_title"),
 						rs.getInt("req_helper"),
-						rs.getInt("req_price"), 
+						rs.getInt("req_price"),
 						sdf.format(regdate),
 						rs.getString("req_term"),
 						rs.getString("req_loc"), 
@@ -242,6 +244,95 @@ public class BoardDao {
 		}
 		
 		return rw;
+	}
+	public List<Member> getRequestHelpers(Connection conn, int loginIdx, int req_idx) throws SQLException {
+		List<Member>list = new ArrayList<Member>();
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		
+		String sql ="SELECT * FROM project.message ms join project.member mb " + 
+					"where ms.msg_writer=mb.member_idx " + 
+					"	and req_idx=? " + 
+					"   and msg_writer != ? " + 
+					"group by msg_writer";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, req_idx);
+			pstmt.setInt(2, loginIdx);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Member member = new Member();
+				
+				member.setIdx(rs.getInt("member_idx"));
+				member.setNick(rs.getString("member_nick"));
+				
+				list.add(member);
+			}
+		} finally {
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+			if(rs!=null) {
+				rs.close();
+			}
+		}
+		return list;
+	}
+	public int chooseHelperStatus(Connection conn, int req_idx, int helper) throws SQLException {
+		
+		int num = 1;
+		PreparedStatement pstmt = null;
+		if(helper==-1) {
+			num=0;
+		}
+		String sql = "UPDATE `project`.`request_list` " + 
+					 "SET " + 
+					 "`req_helper` = ?, " + 
+					 "`req_status` = "+num+" " + 
+					 "WHERE `req_idx` = ?;";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if(helper==-1) {
+				pstmt.setNull(1, java.sql.Types.NULL);
+				pstmt.setInt(2, req_idx);
+			}else {
+				pstmt.setInt(1, helper);
+				pstmt.setInt(2, req_idx);				
+			}
+			pstmt.executeUpdate();
+			
+		} finally {
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		return num;
+	}
+	public int completeHelpStatus(Connection conn, int req_idx, int helper) throws SQLException {
+		int result =0;
+		int num=-1;
+		PreparedStatement pstmt=null;
+		String sql = "UPDATE `project`.`request_list` " + 
+				 	 "SET " + 
+				 	 "`req_helper` = ?, " + 
+				 	 "`req_status` = 2 " + 
+				 	 "WHERE `req_idx` = ?;";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, helper);;
+			pstmt.setInt(2, req_idx);
+			result=pstmt.executeUpdate();
+		} finally {
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		if(result ==1) {
+			num=2;
+		}
+		return num;
 	}
 	
 	

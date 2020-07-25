@@ -8,34 +8,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.dao.BoardDao;
-import board.model.RequestWriting;
 import jdbc.ConnectionProvider;
 import member.model.Member;
 import service.Service;
 
-public class DetailRequestInfoImpl implements Service {
+public class ChooseHelperServiceImpl implements Service {
 	BoardDao dao;
 	@Override
 	public String getViewPage(HttpServletRequest req, HttpServletResponse resp) {
-		Connection conn = null;
-		RequestWriting rw = null;
-		List<Member> list=null;
-		Member loginMember = (Member)req.getSession().getAttribute("loginInfo");
-		int loginIdx=loginMember.getIdx();
-		
 		int req_idx = Integer.parseInt(req.getParameter("req_idx"));
-		
-//		int req_idx=77; 
+		int helper = Integer.parseInt(req.getParameter("req_helper"));
+		int complete = Integer.parseInt(req.getParameter("complete"));
+		Connection conn = null;
+		int result =0;
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao=BoardDao.getInstance();
-			rw= dao.getDetailRequestInfo(conn,req_idx);
-			if(rw.getReq_writer()==loginIdx) {
-				list = dao.getRequestHelpers(conn,loginIdx,req_idx);				
-			}else {
-				list = dao.getRequestHelpers(conn,rw.getReq_writer(),req_idx);								
+			if(complete==0) {
+				result = dao.chooseHelperStatus(conn,req_idx,helper);				
+			}else{
+				result = dao.completeHelpStatus(conn,req_idx,helper);
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			if(conn!=null) {
@@ -46,11 +41,10 @@ public class DetailRequestInfoImpl implements Service {
 				}
 			}
 		}
-		if(rw!=null) {
-			req.setAttribute("choiceRequest", rw);
-			req.setAttribute("requestHelpers", list);
-		}
-		return "/WEB-INF/views/board/detailRequest.jsp";
+			
+		req.setAttribute("updateResult", result);
+//		req.setAttribute("requestHelpers", list);
+		return "/WEB-INF/views/board/updateStatusResult.jsp";
 	}
 
 }

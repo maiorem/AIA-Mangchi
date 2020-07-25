@@ -13,12 +13,15 @@
     <title>대여 내역</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
-
+	<link rel='stylesheet' href='<c:url value="/css/list.css"/>'>
     <!-- Bootstrap core CSS -->
 	<link rel='stylesheet' href='<c:url value="/assets/dist/css/bootstrap.css"/>'>
 	<link rel='stylesheet' href='<c:url value="/css/default.css"/>'> 
     <!-- Custom styles for this template -->
     <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
+    <link
+	href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap"
+	rel="stylesheet">
   </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -34,7 +37,7 @@
 		</div>
 		<h1>대여 내역</h1>
 		
-		<c:if test="${not empty rentalhistory}">
+<%-- 		<c:if test="${not empty listView.requestList}">
 
 		<table border=1>
 			<th>게시물 번호</th>
@@ -43,7 +46,7 @@
 			<th>등록 날짜</th>
 			<th>렌탈 기간</th>
 			<th>지역</th>
-			<c:forEach items="${rentalhistory}" var="rental">
+			<c:forEach items="${listView.requestList}" var="rental">
 				<tr>
 					<td>${rental.req_idx}</td>
 					<td>${rental.req_title}</td>
@@ -55,8 +58,42 @@
 			</c:forEach>
 
 		</table>
+	</c:if> --%>
+	<c:if test="${not empty listView.requestList}">
+			<c:forEach items="${listView.requestList}" var="request">
+				<article class="horizontal card">
+					<div class="card__content">
+						<div class="card__title">
+							<p id="p1">게시물 번호 : ${request.req_idx} 요청자 :
+								${request.member_nick} 게시물 제목 : ${request.req_title}</p>
+						</div>
+						<div class="card__date">${request.req_regdate}&middot;
+							<span class="card__time-to-read">${request.req_price}</span>
+						</div>
+						<div class="card__excerpt">
+							<p id="p2">게시물 대여 기간 : ${request.req_term} 게시물 지역 :
+								${request.req_loc}</p>
+						</div>
+						<div class="card__tags">
+
+							<a href="#" class="stretched-link"></a>
+						</div>
+					</div>
+				</article>
+				<br>
+			</c:forEach>
+		</c:if>
+	<c:if test="${listView.pageTotalCount > 0}">
+
+		<div class="paging">
+			<c:forEach begin="1" end="${listView.pageTotalCount}" var="num">
+				<a href="rnthistory.do?page=${num}"
+					${listView.currentPageNumber eq num? 'class="currentPage"':''}>[
+					${num} ]</a>
+			</c:forEach>
+		</div>
+
 	</c:if>
-		
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
