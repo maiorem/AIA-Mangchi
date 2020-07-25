@@ -28,14 +28,27 @@ div.wrap {
 	height: 500px;
 }
 
-div.noteBox {
-	height: 100px;
-	display:none;
+div.card {
+	border:1px solid #DDD;
+	width:500px;
+	height:500px;
 }
 
-
+div.textview {
+	border:1px solid #DDD;
+	width:400px;
+	height:400px;
+	overflow: auto;
+}
 
 </style>
+<script>
+function messageDel(idx) {
+	if(confirm('해당 메시지를 정말로 삭제하시겠습니까?\n삭제된 메시지는 복구할 수 없습니다.')) {
+		location.href='messageDelete.do?idx='+idx;
+	}
+}
+</script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -50,12 +63,18 @@ div.noteBox {
 		</div>
 		<hr>
 		<div class="card noteview">
-			게시판 번호 : ${viewNote.req_idx} <br> 보낸 사람 :
-			${viewNote.msg_writerId} 작성날짜 : ${viewNote.msg_date} <br> <strong>${viewNote.msg_title}</strong>
+			게시판 번호 : ${viewNote.req_idx} <br> 보낸 사람 : ${viewNote.msg_writerId} 작성날짜 : ${viewNote.msg_date}
 			<hr>
+			<strong>${viewNote.msg_title}</strong>
+			<hr>
+			<div class="textview">	
 			<p>${viewNote.msg_text}</p>
 			<img src='<c:url value="${viewNote.msg_img}"/>' style="width: 100px;">
-
+			</div>
+			<hr>
+			<form method="post">
+			<button><a href="repMessage.do?toPerson=${viewNote.msg_writerId }?req=${viewNote.req_idx}">답장하기</a></button> <button><a href="javascript:messageDel(${viewNote.msg_idx})">삭제하기</a></button>
+			</form>
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>

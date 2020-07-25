@@ -17,8 +17,8 @@ public class MessageViewServiceImpl implements Service {
 
 	@Override
 	public String getViewPage(HttpServletRequest req, HttpServletResponse resp) {
+
 		String note=req.getParameter("idx");
-		
 		int msgIdx=Integer.parseInt(note);
 		Connection conn=null;
 		Message msg=null;
