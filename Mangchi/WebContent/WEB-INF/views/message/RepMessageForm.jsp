@@ -49,11 +49,11 @@
 			<table>
 				<tr>
 					<td>보내는 사람</td>
-					<td><input type="email" name="senderId" id="noteId" value="${loginInfo.id}" readonly></td>
+					<td><input type="email" name="sender" id="sender" value="${loginInfo.id}" readonly></td>
 				</tr>
 				<tr>
 					<td>받는 사람</td>
-					<td><input type="email" name="receiverId" id="noteId" value="${toPerson}" readonly></td>
+					<td><input type="email" name="noteId" id="noteId" value="${toPerson}" readonly></td>
 				</tr>
 				<tr>
 					<td>제목</td>

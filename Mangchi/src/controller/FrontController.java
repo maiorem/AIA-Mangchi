@@ -3,7 +3,6 @@ package controller;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,9 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import service.NullServiceImpl;
 import service.Service;
+import service.ServiceAsync;
 
 public class FrontController extends HttpServlet{
 	
@@ -51,8 +50,11 @@ public class FrontController extends HttpServlet{
 		while(itr.hasNext()) {
 			String command=(String) itr.next(); 
 			String serviceClassName=prop.getProperty(command);
+			
 			try {
 				Class serviceClass=Class.forName(serviceClassName);
+				
+				
 				Service service=(Service) serviceClass.newInstance();
 				
 				commands.put(command, service);
@@ -93,6 +95,7 @@ public class FrontController extends HttpServlet{
 		
 
 		String page=service.getViewPage(req, resp);
+		
 
 		RequestDispatcher dispatcher=req.getRequestDispatcher(page);
 		dispatcher.forward(req, resp);
