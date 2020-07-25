@@ -49,7 +49,9 @@ div.textview {
 			location.href = 'messageDelete.do?idx=' + idx;
 		}
 	}
-	
+</script>
+<c:if test="${loginInfo.id != viewNote.msg_writerId }">
+<script>
 	$(document).ready(function(){
 		
 		$('body').hover(function(){
@@ -70,6 +72,7 @@ div.textview {
 	});
 	
 </script>
+</c:if>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
