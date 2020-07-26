@@ -19,14 +19,16 @@ public class WriteMessageFormServiceImpl implements Service {
 	@Override
 	public String getViewPage(HttpServletRequest req, HttpServletResponse resp) {
 		
-		int req_idx=Integer.parseInt("req_idx");
-		int reqWriterIdx=Integer.parseInt("uid");
+		int req_idx=Integer.parseInt(req.getParameter("req_idx"));
+		int reqWriterIdx=Integer.parseInt(req.getParameter("uid"));
 		String receiverId=null;
 		
 		Connection conn=null;
 		
 		try {
 			conn=ConnectionProvider.getConnection();
+			
+			dao=MemberMessageDao.getInstance();
 			receiverId=dao.selectIdByIdx(conn, reqWriterIdx);
 			
 			req.setAttribute("reqIdxForNote", req_idx);
