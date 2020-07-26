@@ -89,7 +89,8 @@
 				      					</div>
 			      					</div>
 			      				</div>
-								<div class="card-back">
+			      				</div> <!-- card-front -->
+								<div class="card-back" style="height: 600px;">
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Sign Up</h4>
@@ -126,8 +127,10 @@
 											<a href="#" class="btn mt-4 regSub">submit</a>
 				      					</div>
 			      					</div>
-			      				</div>
-			      			</div>
+			      				</div> <!--  card back -->
+			      			
+			      			</div> <!-- card-3d-wrapper -->
+			      			
 			      		</div>
 			      	</div>
 		      	</div>
