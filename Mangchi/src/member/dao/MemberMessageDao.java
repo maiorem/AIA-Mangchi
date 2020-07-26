@@ -17,7 +17,13 @@ public class MemberMessageDao {
 	public static MemberMessageDao getInstance() {
 		return dao;
 	}
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
+=======
+>>>>>>> KJJ
 	public boolean existId(Connection conn, String id) throws SQLException {
 		boolean result=false;
 		List<Member> list=new ArrayList<>();
@@ -33,13 +39,27 @@ public class MemberMessageDao {
 		
 		while(rs.next()) {
 			Member member=new Member(
+<<<<<<< HEAD
+					rs.getInt("idx"), 
+					rs.getString("id"), 
+					rs.getString("pw"), 
+					rs.getString("nick"),
+					rs.getDouble("score"),
+					rs.getDate("regDate"),
+					rs.getString("addr"),
+					rs.getString("photo")
+=======
+>>>>>>> master
 					rs.getInt("member_idx"), 
 					rs.getString("member_id"), 
 					rs.getString("member_pw"), 
 					rs.getString("member_nick"),
 					rs.getString("member_img"),
 					rs.getDate("member_regdate")
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
 					);
 			list.add(member);
 		}

@@ -51,7 +51,7 @@ div.textview {
 	}
 </script>
 <c:if test="${loginInfo.id != viewNote.msg_writerId }">
-<script>
+	<script>
 	$(document).ready(function(){
 		
 		$('body').hover(function(){
@@ -99,12 +99,15 @@ div.textview {
 			</div>
 			<hr>
 			<form method="post">
-				<button>
-					<a href="repMessage.do?idx=${viewNote.msg_idx}">답장하기</a>
-				</button>
-				<button>
-					<a href="javascript:messageDel(${viewNote.msg_idx})">삭제하기</a>
-				</button>
+				<c:if test="${loginInfo.id != viewNote.msg_writerId }">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="button">
+						<a href="javascript:messageDel(${viewNote.msg_idx})">삭제하기</a>
+					</button>
+
+					<button class="btn btn-outline-success my-2 my-sm-0" type="button">
+						<a href="repMessage.do?idx=${viewNote.msg_idx}">답장하기</a>
+					</button>
+				</c:if>
 			</form>
 		</div>
 	</div>
