@@ -70,7 +70,10 @@ span.star-prototype > * {
 						</div>
 						<p class="card-text mb-auto">This is a wider card with
 							supporting text below as a natural lead-in to additional content.</p>
-						<a href="#" class="stretched-link">프로필 수정하기</a>
+							<div class="row mb-2">
+								&nbsp;&nbsp;&nbsp;<a href="#">닉네임 수정&nbsp;&nbsp;&nbsp;</a><a href="#">비밀번호 수정&nbsp;&nbsp;&nbsp;</a><a href="#">회원 탈퇴</a>
+							</div>
+						
 					</div>
 					<div class="col-auto d-none d-lg-block"></div>
 				</div>
