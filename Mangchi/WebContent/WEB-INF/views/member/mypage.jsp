@@ -134,32 +134,40 @@ span.star-prototype > * {
 				<div
 					class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 					<div class="col p-4 d-flex flex-column position-static">
-						<strong class="d-inline-block mb-2 text-success">리뷰 내역</strong>
+						<strong class="d-inline-block mb-2 text-success">평점 현황</strong>
 
 						<div class="row mb-2">
 							<div class="col-lg-6">
-								<svg class="bd-placeholder-img rounded-circle" width="100"
-									height="100" xmlns="http://www.w3.org/2000/svg"
-									preserveAspectRatio="xMidYMid slice" focusable="false"
-									role="img" aria-label="Placeholder: 100x100">
-									<title>Placeholder</title><rect width="100%" height="100%"
-										fill="#777" />
-									<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-									<a href="${pageContext.request.contextPath}/reviews/reviewList.do">내가쓴 리뷰</a>
+								
+								<c:if test="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1))<3 }">
+						<img src="<%=request.getContextPath()%>/img/bad.png" width="130px;" height="130px;">
+							
+							<div style="display: inline; font-weight: bold; font-size:30px; margin-left: 30px;">나쁨</div>
+						<a href="${pageContext.request.contextPath}/reviews/reviewList.do">내가쓴 리뷰</a>
+						</c:if>
+								
+								
 							</div>
-							<div class="col-lg-6">
-							
-							<br>
-							
-						<div>
-						현재 나의 평점 :
-						<span class="star-prototype">
+						
+						<div style="font-weight: bold; font-size: 70px; display: inline;">
 						<c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>
-						</span>(<c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>)
+						
 						</div>
+						
+							
+						
+						
+						<!-- <span class="star-prototype"> -->
+						<%-- <c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/> --%>
+						<!-- </span> -->
+							
+						
+					
+						 <div class="col-lg-6">
 							
 							
-							</div>
+							
+							 </div> 
 						</div>
 						
 					

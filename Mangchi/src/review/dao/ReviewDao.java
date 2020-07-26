@@ -154,7 +154,7 @@ public class ReviewDao {
 		
 	
 	
-		public Member selecthlperMember(Connection conn, int id) throws SQLException {
+		public Member selecthlperMember(Connection conn, int a) throws SQLException {
 
 			Member member = null;
 
@@ -166,7 +166,7 @@ public class ReviewDao {
 				String sql = "select * from project.member where member_idx=?";
 
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, id);
+				pstmt.setInt(1, a);
 
 				rs = pstmt.executeQuery();
 
@@ -250,15 +250,9 @@ public class ReviewDao {
 				rs = pstmt.executeQuery();
 
 				while (rs.next()) {
-					rw = new RequestWriting(rs.getInt("req_idx"),rs.getInt("req_writer"), 
-							"", rs.getString("req_title"), 
-							rs.getInt("req_helper"), rs.getInt("req_price"),
-							rs.getString("req_regdate"), rs.getString("req_term"), 
-							rs.getString("req_loc"), rs.getString("req_text"),
-							rs.getDouble("req_latitude"), rs.getDouble("req_longitude"),
-							rs.getInt("req_readcnt"), rs.getInt("req_status"),
-							rs.getString("req_img"));
-				}
+					rw = new RequestWriting();
+					rw.setReq_title(rs.getString("req_title"));
+					}
 
 			} finally {
 				if (rs != null)
@@ -282,3 +276,4 @@ public class ReviewDao {
 	
 	
 	}
+
