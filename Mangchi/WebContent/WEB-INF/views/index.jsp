@@ -66,7 +66,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
       
-        <img src="<c:url value="/img/home1_1.png"/>">
+        <img src="<c:url value="/img/index/home.png"/>">
         <div class="container">
           <div class="carousel-caption text-left">
             <h1>당장 필요한 물건이 있는데 <br>사기엔 돈이 아깝다면?</h1>
@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img src="<c:url value="/img/home2_1.png"/>">
+        <img src="<c:url value="/img/index/wooden.png"/>">
         <div class="container">
           <div class="carousel-caption">
             <h1>집에서 놀고 있는 물건이 있는데 팔기엔 아쉽다면?</h1>
@@ -86,7 +86,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+       <img src="<c:url value="/img/index/home3.jpg"/>">
         <div class="container">
           <div class="carousel-caption text-right">
             <h1>우리 동네에 내가 당장 필요한 물건과<br>내 물건이 갑자기 필요해진 사람이 있다?</h1>
