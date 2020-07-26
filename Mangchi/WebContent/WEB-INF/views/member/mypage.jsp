@@ -61,15 +61,15 @@ span.star-prototype > * {
 				<div
 					class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 					<div class="col p-4 d-flex flex-column position-static">
-						<strong class="d-inline-block mb-2 text-primary">프로필</strong>
+						<strong style="color: #102770">프로필</strong>
 						<h3 class="mb-0">
 							${membernick} 
 						</h3>
 						<div class="mb-1 text-muted">
 							${memberaddr}
 						</div>
-						<p class="card-text mb-auto">This is a wider card with
-							supporting text below as a natural lead-in to additional content.</p>
+						<p class="card-text mb-auto">[${membernick}] 님 환영합니다 !!</p>
+						<br>
 							<div class="row mb-2">
 								&nbsp;&nbsp;&nbsp;<a href="modify.do?idx=2">닉네임 수정&nbsp;&nbsp;&nbsp;</a><a href="modify.do?idx=1">비밀번호 수정&nbsp;&nbsp;&nbsp;</a><a href="#">회원 탈퇴</a>
 							</div>
@@ -82,31 +82,19 @@ span.star-prototype > * {
 				<div
 					class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 					<div class="col p-4 d-flex flex-column position-static">
-						<strong class="d-inline-block mb-2 text-success">거래 내역</strong>
+						<strong style="color: #102770">거래 내역</strong>
 
 						<div class="row mb-2">
-							<div class="col-lg-6">
-								<svg class="bd-placeholder-img rounded-circle" width="100"
-									height="100" xmlns="http://www.w3.org/2000/svg"
-									preserveAspectRatio="xMidYMid slice" focusable="false"
-									role="img" aria-label="Placeholder: 100x100">
-									<title>Placeholder</title><rect width="100%" height="100%"
-										fill="#777" />
-									<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-									<a href="${pageContext.request.contextPath}/request/reqhistory.do">요청 내역</a>
+							<div style="width: 50%; text-align: center">
+							<a href="${pageContext.request.contextPath}/request/reqhistory.do"><img src="<c:url value="/img/logo2.png"/>" style="width: 150px; height: 100px;"></a>		
+									<p style="text-align: center">요청 내역</p>
 							</div>
-							<div class="col-lg-6">
-								<svg class="bd-placeholder-img rounded-circle" width="100"
-									height="100" xmlns="http://www.w3.org/2000/svg"
-									preserveAspectRatio="xMidYMid slice" focusable="false"
-									role="img" aria-label="Placeholder: 100x100">
-									<title>Placeholder</title><rect width="100%" height="100%"
-										fill="#777" />
-									<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-									<a href="${pageContext.request.contextPath}/request/rnthistory.do">대여 내역</a>
+							<div style="width: 50%; text-align: center">
+							<a href="${pageContext.request.contextPath}/request/reqhistory.do"><img src="<c:url value="/img/logo3.png"/>" style="width: 150px; height: 100px;" ></a>						
+									<p style="text-align: center">대여 내역</p>
 							</div>
 						</div>
-						<a href="#">Continue reading</a>
+						
 					</div>
 					<div class="col-auto d-none d-lg-block"></div>
 				</div>
@@ -117,7 +105,7 @@ span.star-prototype > * {
 				<div
 					class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 					<div class="col p-4 d-flex flex-column position-static">
-						<strong class="d-inline-block mb-2 text-primary">동네 설정</strong>
+						<strong style="color: #102770">동네 설정</strong>
 						<h3 class="mb-0">
 							<동네 설정>
 						</h3>
@@ -138,7 +126,7 @@ span.star-prototype > * {
 				<div
 					class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 					<div class="col p-4 d-flex flex-column position-static">
-						<strong class="d-inline-block mb-2 text-success">평점 현황</strong>
+						<strong style="color: #102770">평점 현황</strong>
 
 						<div class="row mb-2">
 							<div class="col-lg-6">
