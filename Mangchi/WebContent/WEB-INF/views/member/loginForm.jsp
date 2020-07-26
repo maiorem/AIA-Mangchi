@@ -21,9 +21,11 @@
     <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
     <link href='<c:url value="/css/RegForm.css"/>' rel="stylesheet">
     
-  
+
   </head>
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&autoLogAppEvents=1&version=v7.0&appId=289834475439470" nonce="TQFrHHrv"></script>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<div>
 
@@ -60,6 +62,11 @@
                             				<br>
                             				<!-- 카카오 로그인 api -->
                             				<a id="custom-login-btn" href="#"><img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222"/></a>
+                            				<!-- 페이스북 버튼 -->
+                            				<div class="form-group mt-2">
+                            					<div class="fb-login-button" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
 				      					</div>
 			      					</div>
 			      				</div>
@@ -113,6 +120,43 @@
  
 	</div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+
+<script>
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '289834475439470',
+    xfbml      : true,
+    version    : 'v7.0'
+  });
+  FB.AppEvents.logPageView();
+};
+
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "https://connect.facebook.net/en_US/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
+  
+  
+  //콜백
+  
+/* {
+    status: 'connected',
+    authResponse: {
+        accessToken: '...',
+        expiresIn:'...',
+        signedRequest:'...',
+        userID:'...'
+    }
+} */
+//페북 최신 상태를 얻어옴
+function checkLoginState() {
+	  FB.getLoginStatus(function(response) {
+	    statusChangeCallback(response);
+	  });
+</script>
 
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
