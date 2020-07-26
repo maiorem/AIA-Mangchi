@@ -67,7 +67,7 @@ public class SendingMessageServiceImpl implements Service {
 						if(paramName.equals("reqListIdx")) {
 							reqlistIdx=Integer.parseInt(paramValue);
 							
-						} else if(paramName.equals("idx")){
+						} else if(paramName.equals("senderIdx")){
 							senderIdx=Integer.parseInt(paramValue);
 							
 							
