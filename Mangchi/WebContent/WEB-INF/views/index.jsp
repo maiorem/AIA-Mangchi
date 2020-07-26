@@ -157,7 +157,7 @@
         <p class="lead">주요 포탈 API를 활용하여 클릭 한번에 회원가입부터 로그인까지 가능하도록 하였습니다.</p>
       </div>
       <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="<c:url value="/img/team/로그인화면.JPG"/>" style="width: 500px; height: 500px;" >
       </div>
     </div>
 
