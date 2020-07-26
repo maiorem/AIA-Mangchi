@@ -51,7 +51,9 @@ table.box {
 .check_not {
 	color: red;
 }
-
+div.paging {
+	text-align: center;
+}
 
 @media 
 only screen and (max-width: 760px),
