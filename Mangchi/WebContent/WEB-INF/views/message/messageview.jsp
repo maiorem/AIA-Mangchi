@@ -109,8 +109,15 @@ div.buttonArea {
 		<div class="card noteview">
 			<input type="hidden" id="viewIdx" value=${viewNote.msg_idx}>
 			<div class="noteheader">
-				게시판 번호 : ${viewNote.req_idx} <br> FROM :
-				${viewNote.msg_writerId} <br> DATE : ${viewNote.msg_date}
+				게시판 번호 : ${viewNote.req_idx} 
+				<br> 
+				<c:if test="${loginInfo.id != viewNote.msg_writerId }">
+				FROM :${viewNote.msg_writerId} 
+				</c:if>
+				<c:if test="${loginInfo.id == viewNote.msg_writerId }">
+				TO : ${viewNote.msg_receiver }
+				</c:if>
+				<br> DATE : ${viewNote.msg_date}
 			</div>
 			<hr>
 			<span class="noteTitle">${viewNote.msg_title}</span>
