@@ -44,11 +44,3 @@
     </div>
   </nav>
 </header>
-  <script>
-  function logoutWithKakao() {
-      Kakao.Auth.logout(function() {
-          alert('로그아웃되었습니다.');
-      });
-          sessionStorage.removeItem('loginInfo');
-  }
-</script>
