@@ -36,12 +36,13 @@ div.card {
 }
 
 div.noteheader {
-	margin-left:30px;
+	margin-left: 30px;
 	margin-top: 10px;
 }
 
 div.textview {
-	margin: 0 auto; width : 400px;
+	margin: 0 auto;
+	width: 400px;
 	height: 400px;
 	overflow: auto;
 	width: 400px;
@@ -51,10 +52,14 @@ span.noteTitle {
 	text-align: center;
 	font-weight: bold;
 }
+
 div.buttonArea {
 	margin: 10px auto;
 }
 
+@media only screen and (max-width: 760px) , ( min-device-width : 768px)
+	and (max-device-width: 1024px) {
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
@@ -67,6 +72,7 @@ div.buttonArea {
 </script>
 <c:if test="${loginInfo.id != viewNote.msg_writerId }">
 	<script>
+	
 	$(document).ready(function(){
 		
 		$('body').hover(function(){
@@ -103,8 +109,8 @@ div.buttonArea {
 		<div class="card noteview">
 			<input type="hidden" id="viewIdx" value=${viewNote.msg_idx}>
 			<div class="noteheader">
-			게시판 번호 : ${viewNote.req_idx} <br> FROM :
-			${viewNote.msg_writerId} <br> DATE : ${viewNote.msg_date}
+				게시판 번호 : ${viewNote.req_idx} <br> FROM :
+				${viewNote.msg_writerId} <br> DATE : ${viewNote.msg_date}
 			</div>
 			<hr>
 			<span class="noteTitle">${viewNote.msg_title}</span>
