@@ -172,7 +172,7 @@
         <p class="lead"> 당장 급한 물건이 있을 때 내 위치와 함께 필요한 물품을 게시하여 내 주위 사람들에게 도움을 청할 수 있습니다. </p>
       </div>
       <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="<c:url value="/img/team/내게시물1.JPG"/>" style="width: 500px; height: 500px;">
       </div>
     </div>
 
@@ -198,7 +198,7 @@
         <p class="lead">대여를 요청하는 게시물 중, 내가 가지고 있는 물건을 적당한 거리에 있는 사람이 필요로 한다면 글에서 바로 쪽지보내기를 클릭할 수 있습니다.</p>
       </div>
       <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="<c:url value="/img/team/쪽지1.JPG"/>" style="width: 500px; height: 500px;">
       </div>
     </div>
     
@@ -208,7 +208,7 @@
       <div class="col-md-7">
         <h3 class="featurette-heading"> 나에게 대여해 줄 상대 선택하기 </h3>
         <h5><span class="text-muted"> 딱 내가 찾던 물건이에요! << </span></h5>
-        <p class="lead">내 게시글을 통해 쪽지를 보낸 사람들 중에서 거래를 약속한 사람을 선택해 거래 이후 후기를 남길 수 있습니다.</p>
+        <p class="lead">내 게시글을 통해 쪽지를 보낸 사람들 중에서 거래를 약속한 사람을 선택합니다.</p>
       </div>
       <div class="col-md-5">
         <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
@@ -216,7 +216,19 @@
     </div>
 
     <hr class="featurette-divider">
+    
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h3 class="featurette-heading"> 대여기간이 끝나고 서로에 대한 후기 남기기 </h3>
+        <h5><span class="text-muted"> >> BOTH! << </span></h5>
+        <p class="lead"> 물건을 빌려준 사람도, 빌린 사람도 상대방에 대한 후기를 남기고 자신의 평점을 마이페이지에서 확인할 수 있습니다.</p>
+      </div>
+      <div class="col-md-5">
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="<c:url value="/img/team/마이페이지.JPG"/>" style="width: 500px; height: 500px;">
+      </div>
+    </div>
 
+    <hr class="featurette-divider">
     <!-- /END THE FEATURETTES -->
 
   </div><!-- /.container -->
