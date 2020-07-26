@@ -78,8 +78,40 @@ public class MemberDao {
 
 		return resultCnt;
 	}
+	
+	//member_id Check
+	
+	public int memberIdCheck(Connection conn, String id) throws SQLException {
 
-	// idCheck
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+
+		ResultSet rs = null;
+
+		try {
+
+			String sql = "SELECT count(*) FROM project.member WHERE member_id = ?";
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next())
+				resultCnt = rs.getInt(1);
+
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			if (rs != null)
+				rs.close();
+		}
+		return resultCnt;
+	}
+
+	// kakaoidCheck
 	public int idCheck(Connection conn, String id) throws SQLException {
 
 		int resultCnt = 0;
@@ -110,7 +142,7 @@ public class MemberDao {
 		return resultCnt;
 	}
 
-	// idCheck
+	// kakaoAddrCheck
 	public int addrCheck(Connection conn, String id) throws SQLException {
 
 		int resultCnt = 0;
