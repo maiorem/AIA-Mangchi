@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import board.dao.BoardDao;
 import board.model.RequestList;
 import board.model.RequestWriting;
+import board.model.RequestWriting2;
 import jdbc.ConnectionProvider;
 import member.model.Member;
 import service.Service;
@@ -35,7 +36,7 @@ public class MyRequestListServiceImpl implements Service {
 			conn = ConnectionProvider.getConnection();
 			dao = BoardDao.getInstance();
 			
-			List<RequestWriting> rqList=new ArrayList<RequestWriting>();
+			List<RequestWriting2> rqList=new ArrayList<RequestWriting2>();
 			
 			//가입한 전체 회원 수
 			int requestTotalCount = dao.selectTotalMyReqCnt(conn,member_idx);

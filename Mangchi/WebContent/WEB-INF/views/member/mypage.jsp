@@ -134,32 +134,48 @@ span.star-prototype > * {
 				<div
 					class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 					<div class="col p-4 d-flex flex-column position-static">
-						<strong class="d-inline-block mb-2 text-success">리뷰 내역</strong>
+						<strong class="d-inline-block mb-2 text-success">평점 현황</strong>
 
 						<div class="row mb-2">
 							<div class="col-lg-6">
-								<svg class="bd-placeholder-img rounded-circle" width="100"
-									height="100" xmlns="http://www.w3.org/2000/svg"
-									preserveAspectRatio="xMidYMid slice" focusable="false"
-									role="img" aria-label="Placeholder: 100x100">
-									<title>Placeholder</title><rect width="100%" height="100%"
-										fill="#777" />
-									<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-									<a href="${pageContext.request.contextPath}/reviews/reviewList.do">내가쓴 리뷰</a>
+								
+								<c:if test="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1))<=2.9 }">
+						<img src="<%=request.getContextPath()%>/img/bad.png" width="100px;" height="100px;">
+							<div style="display: inline; font-weight: bold; font-size:30px; margin-left: 30px; color: red;">나쁨</div>
+						</c:if>
+						
+						
+						
+						
+						
+						<c:if test="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1))>=3 }">
+						<img src="<%=request.getContextPath()%>/img/good.png" width="100px;" height="100px;">
+							<div style="display: inline; font-weight: bold; font-size:30px; margin-left: 30px; color: green;">좋음</div>
+						</c:if>
+								
+								
 							</div>
-							<div class="col-lg-6">
+						
+						
 							
-							<br>
+						
+						
+						<!-- <span class="star-prototype"> -->
+						<%-- <c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/> --%>
+						<!-- </span> -->
 							
-						<div>
-						현재 나의 평점 :
-						<span class="star-prototype">
+						
+					
+						 <div class="col-lg-6" style="text-align: center;">
+					
+							<p style="font-weight: bold; font-size: 50px; ">
 						<c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>
-						</span>(<c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>)
-						</div>
+						</p>
+						
+							<a  href="${pageContext.request.contextPath}/reviews/reviewList.do">내가쓴 리뷰</a>
 							
 							
-							</div>
+							 </div> 
 						</div>
 						
 					
@@ -167,6 +183,7 @@ span.star-prototype > * {
 					</div>
 				
 				</div>
+				
 			</div>
 			
 			

@@ -19,7 +19,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import jdbc.ConnectionProvider;
 import member.model.Member;
 import board.dao.BoardDao;
-import board.model.RequestWriting;
+import board.model.RequestWriting2;
 import service.Service;
 
 public class ReqWriteServiceImpl implements Service {
@@ -130,7 +130,7 @@ public class ReqWriteServiceImpl implements Service {
 				
 
 //				System.out.println("img : "+req_img);
-				RequestWriting rw = new RequestWriting();
+				RequestWriting2 rw = new RequestWriting2();
 				rw.setReq_writer(req_writer);
 				rw.setReq_title(req_title);
 				rw.setReq_price(req_price);

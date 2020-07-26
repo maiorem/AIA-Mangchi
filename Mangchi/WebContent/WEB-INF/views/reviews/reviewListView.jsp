@@ -71,9 +71,10 @@ th {
 }
 td, th { 
   padding: 6px; 
- 
+	
   text-align: left; 
 }
+
 
 
 @media 
@@ -100,6 +101,15 @@ only screen and (max-width: 760px),
 		border-bottom: 1px solid #eee; 
 		position: relative;
 		padding-left: 50%; 
+	
+		
+	}
+	
+	
+	td.row {
+	
+	margin-bottom: 20px;
+	
 	}
 	
 	td:before { 
@@ -193,7 +203,7 @@ only screen and (max-width: 760px),
 <c:forEach items="${reviewList}" var="x">
 
 	<tr>
-		<td scope="row">${x.req_title}</td>
+		<td  scope="row"">${x.req_title}</td>
 		<td scope="row">${x.member_nick}</td>
 		<td scope="row">${x.review_score}</td>
 		<td scope="row">${x.review_text}</td>

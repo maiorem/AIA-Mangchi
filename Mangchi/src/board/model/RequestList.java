@@ -4,7 +4,7 @@ import java.util.List;
 
 public class RequestList {
 	// 회원 리스트
-	private List<RequestWriting> rqList;
+	private List<RequestWriting2> rqList;
 	// 전체 게시물의 개수
 	private int requestTotalCount;
 	// 현재 페이지 번호
@@ -18,7 +18,7 @@ public class RequestList {
 
 	
 	public RequestList(
-				   List<RequestWriting> rqList, 
+				   List<RequestWriting2> rqList, 
 				   int requestTotalCount, 
 				   int currentPageNumber, 
 				   int requestCountPerPage, 
@@ -45,11 +45,11 @@ public class RequestList {
 	
 	
 	
-	public List<RequestWriting> getRqList() {
+	public List<RequestWriting2> getRqList() {
 		return rqList;
 	}
 
-	public void setRqList(List<RequestWriting> rqList) {
+	public void setRqList(List<RequestWriting2> rqList) {
 		this.rqList = rqList;
 	}
 

@@ -17,7 +17,6 @@ public class MemberMessageDao {
 	public static MemberMessageDao getInstance() {
 		return dao;
 	}
-
 	public boolean existId(Connection conn, String id) throws SQLException {
 		boolean result=false;
 		List<Member> list=new ArrayList<>();
@@ -39,7 +38,6 @@ public class MemberMessageDao {
 					rs.getString("member_nick"),
 					rs.getString("member_img"),
 					rs.getDate("member_regdate")
-
 					);
 			list.add(member);
 		}

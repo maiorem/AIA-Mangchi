@@ -20,18 +20,36 @@
     <!-- Custom styles for this template -->
     <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
   </head>
-<body>
+<body onload="javascript:window_onload()">
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	
+	<div style="margin-top: 50px;">
 	
-	DB등록완료
+	5초후 페이지 이동합니다
 	
 	
 	
 	</div>
+
+<div style="margin-bottom: 5%;"></div>
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')</script><script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script></body>
+
+<script>
+function window_onload(){
+
+    setTimeout('go_url()',5000)  // 5초후 go_url() 함수를 호출한다.
+
+ }
+
+ function go_url(){
+
+    location.href="<%=request.getContextPath()%>/request/rnthistory.do" 
+
+ }
+
+</script>
