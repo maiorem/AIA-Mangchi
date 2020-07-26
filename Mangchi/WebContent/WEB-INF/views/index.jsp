@@ -219,7 +219,7 @@
     
     <div class="row featurette">
       <div class="col-md-7 order-md-2">
-        <h3 class="featurette-heading"> 대여기간이 끝나고 서로에 대한 후기 남기기 </h3>
+        <h3 class="featurette-heading"> 대여기간이 끝나고 <br>서로에 대한 후기 남기기 </h3>
         <h5><span class="text-muted"> >> BOTH! << </span></h5>
         <p class="lead"> 물건을 빌려준 사람도, 빌린 사람도 상대방에 대한 후기를 남기고 자신의 평점을 마이페이지에서 확인할 수 있습니다.</p>
       </div>
