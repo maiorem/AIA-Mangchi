@@ -89,8 +89,7 @@ public class ReqWriteServiceImpl implements Service {
 						}else if (paramName.equals("req_price")) {
 							req_price = Integer.parseInt(paramVal);
 						}else if (paramName.equals("req_term")) {
-							String term_str = paramVal;
-							req_term = term_str.replace("T", " ");
+							req_term = paramVal;
 						}else if (paramName.equals("req_loc")) {
 							req_loc = paramVal;
 						}else if (paramName.equals("req_text")) {

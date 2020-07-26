@@ -14,6 +14,7 @@ public class RequestWriting2 {
 	private int req_price;
 	private String req_regdate;
 	private String req_term;
+	private String req_returnDate;
 	private String req_loc;
 	private String req_text;
 	private double req_latitude;
@@ -30,7 +31,8 @@ public class RequestWriting2 {
 						int req_helper, 
 						int req_price,
 						String req_regdate, 
-						String req_term, 
+						String req_term,
+						String req_returnDate,
 						String req_loc, 
 						String req_text, 
 						double req_latitude, 
@@ -45,6 +47,7 @@ public class RequestWriting2 {
 		this.req_price = req_price;
 		this.req_regdate = req_regdate;
 		this.req_term = req_term;
+		this.req_returnDate = req_returnDate;
 		this.req_loc = req_loc;
 		this.req_text = req_text;
 		this.req_latitude = req_latitude;
@@ -58,6 +61,14 @@ public class RequestWriting2 {
 
 	
 	
+	public String getReq_returnDate() {
+		return req_returnDate;
+	}
+
+	public void setReq_returnDate(String req_returnDate) {
+		this.req_returnDate = req_returnDate;
+	}
+
 	public String getHelper_nick() {
 		return helper_nick;
 	}
