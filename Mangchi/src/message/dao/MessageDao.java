@@ -240,6 +240,9 @@ public class MessageDao {
 		return resultCnt;
 	}
 
+	
+	
+	
 	public List<Message> searchReceiveNoteById(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
 			String searchText) throws SQLException {
 
