@@ -26,19 +26,29 @@
 <style>
 div.wrap {
 	margin: 100px;
-	height: 500px;
+	height: 700px;
 }
 
 div.noteBox {
-	height: 100px;
-	display:none;
+	height: 650px;
+}
+
+div.onlybox {
+	height: 600px;
+	overflow: auto;
+}
+
+div.SendNoteArea {
+	display: none;
+}
+
+div.paging {
+	text-align: center;
 }
 
 table.box {
-	
 	width: 800px;
 	color: #AAAAAA;
-
 }
 
 .check_ok {
@@ -48,165 +58,177 @@ table.box {
 .check_not {
 	color: red;
 }
-
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
-
 	function messageListDel(idx) {
-		
-	}
-
-	function messageDel(idx) {
-		if(confirm('해당 메시지를 정말로 삭제하시겠습니까?\n삭제된 메시지는 복구할 수 없습니다.')) {
-			location.href='messageDelete.do?idx='+idx;
+		if (confirm('아직 상대가 메시지를 읽지 않았습니다.\n발송을 취소하시겠습니까?')) {
+			location.href = 'messageDelete.do?idx=' + idx;
 		}
 	}
 
-	$(document).ready(function(){
+	function messageDel(idx) {
+		if (confirm('해당 메시지를 정말로 삭제하시겠습니까?\n삭제된 메시지는 복구할 수 없습니다.')) {
+			location.href = 'messageDelete.do?idx=' + idx;
+		}
+	}
+
+	$(document).ready(function() {
 		
-		$('#reBox').click(function(){
-			$('div.ReNoteArea').css('display', 'block');			
+		$('#reBox').click(function() {
+			$('div.ReNoteArea').css('display', 'block');
 			$('div.SendNoteArea').css('display', 'none');
 
 		});
-		
-		$('#seBox').click(function(){
+
+		$('#seBox').click(function() {
 			$('div.ReNoteArea').css('display', 'none');
 			$('div.SendNoteArea').css('display', 'block');
 		});
-		
-		$('a.view').click(function(){
-			
-			$.ajax({
-				url:'readCheck.do',
-				data: { idx : $(this).param() },
-				success: function(data){
-					if(data='Y') {
-						$('#checkmsg').text("읽음");
-						$('#checkmsg').addClass('check_ok');
-					} else {
-						$('#checkmsg').text("읽지않음");
-						$('#checkmsg').addClass('check_not');
-					}
-				}
-			});
-		});
-		
-		
-	});
 
+	});
 </script>
 </head>
 <body>
 	<c:if test="${loginInfo==null}">
-	<script>
-		alert('쪽지는 로그인을 해야 이용이 가능합니다.');
-		location.href='<c:url value="/member/loginForm.do"/>';
-	</script>
+		<script>
+			alert('쪽지는 로그인을 해야 이용이 가능합니다.');
+			location.href = '<c:url value="/member/loginForm.do"/>';
+		</script>
 	</c:if>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div class="wrap">
 
 		<div class="boxarea" id="noteBoxArea">
-			<button class="btn btn-outline-success my-2 my-sm-0" id="reBox" type="button">받은
-				쪽지함</button>
-			<button class="btn btn-outline-success my-2 my-sm-0" id="seBox" type="button">보낸
-				쪽지함</button>
+			<button class="btn btn-outline-success my-2 my-sm-0" id="reBox"
+				type="button">받은 쪽지함</button>
+			<button class="btn btn-outline-success my-2 my-sm-0" id="seBox"
+				type="button">보낸 쪽지함</button>
 
 		</div>
 		<hr>
 		<div class="contentsArea">
 			<div class="noteBox ReNoteArea">
-				<c:if test="${noteList.messageList != null}">
-					<table class="table table-hover">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">보낸이</th>
-							<th scope="col">제목</th>
-							<th scope="col">날짜</th>
-							<th scope="col">답장하기</th>
-							<th scope="col">삭제</th>
-						</tr>
-						<c:forEach items="${noteList.messageList}" var="notes">
-							<c:if test="${loginInfo.member_id eq notes.msg_receiver}">
-								<tr>
-									<th scope="row">-</th>
-									<td>${notes.msg_writerId}</td>
-									<td><a class="view" href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a>
-									</td>
-									<td>${notes.msg_date}</td>
-									<td><a href="repMessage.do?toPerson=${notes.msg_writerId}?req=${notes.req_idx}">답장</a></td>
-									<td><a href="javascript:messageDel(${notes.msg_idx})">
-									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+				<div class="onlybox">
+					<c:if test="${noteList.messageList != null}">
+						<table class="table table-hover">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">보낸이</th>
+								<th scope="col">제목</th>
+								<th scope="col">날짜</th>
+								<th scope="col">삭제</th>
+							</tr>
+							<c:forEach items="${noteList.messageList}" var="notes">
+								<c:if test="${loginInfo.id eq notes.msg_receiver}">
+									<tr>
+										<th scope="row">-</th>
+										<td>${notes.msg_writerId}</td>
+										<td><a class="view"
+											href='<c:url value="/message/noteview.do?idx=${notes.msg_idx}"/>'>${notes.msg_title}</a>
+										</td>
+										<td>${notes.msg_date}</td>
+										<td><a href="javascript:messageDel(${notes.msg_idx})">
+												<svg width="1em" height="1em" viewBox="0 0 16 16"
+													class="bi bi-trash" fill="currentColor"
+													xmlns="http://www.w3.org/2000/svg">
+  <path
+														d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+  <path fill-rule="evenodd"
+														d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
 </svg>
-									</a></td>
-								</tr>
-							</c:if>
-						</c:forEach>
-					</table>
-				</c:if>
+										</a></td>
+									</tr>
+								</c:if>
+							</c:forEach>
+						</table>
+					</c:if>
 
-				<c:if test="${noteList.messageList==null}">
+					<c:if test="${noteList.messageList==null}">
 
-					<h3>받은 쪽지가 존재하지 않습니다.</h3>
+						<h3>받은 쪽지가 존재하지 않습니다.</h3>
 
-				</c:if>
+					</c:if>
+				</div>
 				<div class="paging">
 					<c:forEach begin="1" end="${noteList.pageTotalCount}" var="num">
 						<a href="messageList.do?page=${num}"
 							${noteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
 					</c:forEach>
 				</div>
-
 			</div>
+
 			<div class="noteBox SendNoteArea">
-				<c:if test="${noteList.messageList != null}">
-					<table class="table table-hover">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">받는이</th>
-							<th scope="col">제목</th>
-							<th scope="col">날짜</th>
-							<th scope="col">읽음여부</th>
-							<th scope="col">삭제</th>
-						</tr>
-						<c:forEach items="${noteList.messageList}" var="notes">
-							<c:if test="${loginInfo.member_idx eq notes.msg_writer}">
-								<tr>
-									<th scope="row">-</th>
-									<td>${notes.msg_receiverId}</td>
-									<td><a class="view" href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a></td>
-									<td>${notes.msg_date}</td>
-									<td><span id="checkmsg">${notes.readcheck}</span></td>
-									<td><a href="javascript:messageListDel(${notes.msg_idx})">
-									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-</svg></a></td>
-								</tr>
-							</c:if>
-						</c:forEach>
-					</table>
-				</c:if>
+				<div class="onlybox">
+					<c:if test="${noteList.messageList != null}">
+						<table class="table table-hover">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">받는이</th>
+								<th scope="col">제목</th>
+								<th scope="col">날짜</th>
+								<th scope="col">읽음여부</th>
+								<th scope="col">삭제</th>
+							</tr>
+							<c:forEach items="${noteList.messageList}" var="SenderNotes">
+								<c:if test="${loginInfo.idx eq SenderNotes.msg_writer}">
+									<tr>
+										<th scope="row">-</th>
+										<td>${SenderNotes.msg_receiver}</td>
+										<td><a class="view"
+											href='<c:url value="/message/noteview.do?idx=${SenderNotes.msg_idx}"/>'>${SenderNotes.msg_title}</a></td>
+										<td>${SenderNotes.msg_date}</td>
+										<c:if test="${SenderNotes.readcheck==0}">
+										<td><span class="readCheck" style="color: red;">읽지 않음</span></td>
+																				<td><a
+											href="javascript:messageListDel(${SenderNotes.msg_idx})">
+										발송취소
+										</a></td>
+										</c:if>
+										<c:if test="${SenderNotes.readcheck==1}">
+										<td><span class="readCheck" style="color: green;">읽음</span></td>
+										<td style="color: gray;">발송취소불가</td>
+										</c:if>
+										
+									</tr>
+								</c:if>
+							</c:forEach>
+						</table>
+					</c:if>
 
-				<c:if test="${noteList.messageList==null}">
+					<c:if test="${noteList.messageList==null}">
 
-					<h3>보낸 쪽지가 존재하지 않습니다.</h3>
+						<h3>보낸 쪽지가 존재하지 않습니다.</h3>
 
-				</c:if>
+					</c:if>
+				</div>
 				<div class="paging">
 					<c:forEach begin="1" end="${noteList.pageTotalCount}" var="num">
 						<a href="messageList.do?page=${num}"
 							${noteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
 					</c:forEach>
 				</div>
-			
-			
-			
+
 			</div>
+
+
+
+		</div>
+		<div class="searchNote">
+			<form class="form-inline mt-2 mt-md-0"
+				action="<c:url value="/message/searchNote.do"/>" method="get">
+				<select class="form-control mr-sm-2" name="noteSort">
+					<option selected value="1">받은 쪽지함</option>
+					<option value="2">보낸 쪽지함</option>
+				</select> <select class="form-control mr-sm-2" name="searchSort">
+					<option selected value="1">아이디</option>
+					<option value="2">제목</option>
+					<option value="3">내용</option>
+				</select> <input class="form-control mr-sm-2" type="text" name="noteSearch"
+					placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">쪽지
+					검색</button>
+			</form>
 		</div>
 	</div>
 
@@ -214,9 +236,6 @@ table.box {
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
 <script>
 	window.jQuery
 			|| document

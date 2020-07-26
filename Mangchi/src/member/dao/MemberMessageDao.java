@@ -17,6 +17,10 @@ public class MemberMessageDao {
 	public static MemberMessageDao getInstance() {
 		return dao;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 	public boolean existId(Connection conn, String id) throws SQLException {
 		boolean result=false;
 		List<Member> list=new ArrayList<>();
@@ -32,6 +36,7 @@ public class MemberMessageDao {
 		
 		while(rs.next()) {
 			Member member=new Member(
+<<<<<<< HEAD
 					rs.getInt("idx"), 
 					rs.getString("id"), 
 					rs.getString("pw"), 
@@ -40,12 +45,18 @@ public class MemberMessageDao {
 					rs.getDate("regDate"),
 					rs.getString("addr"),
 					rs.getString("photo")
+=======
+>>>>>>> master
 					rs.getInt("member_idx"), 
 					rs.getString("member_id"), 
 					rs.getString("member_pw"), 
 					rs.getString("member_nick"),
 					rs.getString("member_img"),
 					rs.getDate("member_regdate")
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 					);
 			list.add(member);
 		}
@@ -65,6 +76,34 @@ public class MemberMessageDao {
 			
 		}
 		return result;
+	}
+
+	public String selectIdByIdx(Connection conn, int idx) throws SQLException {
+		String id=null;
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			String sql="select member_id from project.member where member_idx=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);		
+					
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				id=rs.getString(1);
+			}
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+			
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		return id;
 	}
 
 

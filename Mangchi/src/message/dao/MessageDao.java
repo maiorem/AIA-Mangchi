@@ -88,7 +88,7 @@ public class MessageDao {
 
 		List<Message> list=new ArrayList<Message>();
 
-		String sql="select msg.req_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -101,6 +101,7 @@ public class MessageDao {
 				Message msg=new Message(
 						rs.getInt("msg.msg_idx"),
 						rs.getInt("msg.req_idx"),
+						rs.getInt("mem.member_idx"),
 						rs.getString("mem.member_id"),
 						rs.getString("msg.msg_receiver"),
 						rs.getString("msg.msg_title"),
@@ -133,7 +134,7 @@ public class MessageDao {
 		ResultSet rs=null;
 
 		try {
-			String sql="select msg.msg_idx, msg.req_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_idx=?";
+			String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_idx=?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 
@@ -143,6 +144,7 @@ public class MessageDao {
 				msg=new Message(
 						rs.getInt("msg.msg_idx"),
 						rs.getInt("msg.req_idx"),
+						rs.getInt("mem.member_idx"),
 						rs.getString("mem.member_id"),
 						rs.getString("msg.msg_receiver"),
 						rs.getString("msg.msg_title"),
@@ -236,5 +238,353 @@ public class MessageDao {
 			
 		}
 		return resultCnt;
+	}
+
+	
+	
+	
+	public List<Message> searchReceiveNoteById(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+			String searchText) throws SQLException {
+
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+
+		List<Message> list=new ArrayList<Message>();
+
+		//받은 편지함에서 아이디 찾기 => writer의 아이디
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where mem.member_id like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, searchText);
+			pstmt.setInt(2, startrow);
+			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+
+			rs=pstmt.executeQuery();
+
+			while(rs.next()) {
+				Message msg=new Message(
+						rs.getInt("msg.msg_idx"),
+						rs.getInt("msg.req_idx"),
+						rs.getInt("mem.member_idx"),
+						rs.getString("mem.member_id"),
+						rs.getString("msg.msg_receiver"),
+						rs.getString("msg.msg_title"),
+						rs.getString("msg.msg_text"),
+						rs.getString("msg.msg_img"),
+						rs.getDate("msg.msg_date"),
+						rs.getInt("msg.msg_readcheck")
+						);
+
+				list.add(msg);
+			}
+
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+
+		return list;
+	}
+
+	public List<Message> searchReceiveNoteByTitle(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+			String searchText) throws SQLException {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+
+		List<Message> list=new ArrayList<Message>();
+		//받은 편지함에서 제목 찾기 => writer의 아이디가 멤버 데이터와 일치해야함
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_title like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, searchText);
+			pstmt.setInt(2, startrow);
+			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+
+			rs=pstmt.executeQuery();
+
+			while(rs.next()) {
+				Message msg=new Message(
+						rs.getInt("msg.msg_idx"),
+						rs.getInt("msg.req_idx"),
+						rs.getInt("mem.member_idx"),
+						rs.getString("mem.member_id"),
+						rs.getString("msg.msg_receiver"),
+						rs.getString("msg.msg_title"),
+						rs.getString("msg.msg_text"),
+						rs.getString("msg.msg_img"),
+						rs.getDate("msg.msg_date"),
+						rs.getInt("msg.msg_readcheck")
+						);
+
+				list.add(msg);
+			}
+
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+
+		return list;
+	}
+
+	public List<Message> searchReceiveNoteByText(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+			String searchText) throws SQLException {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+
+		List<Message> list=new ArrayList<Message>();
+		//받은 편지함에서 내용 찾기 => writer의 아이디가 멤버 데이터와 일치해야함
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_text like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, searchText);
+			pstmt.setInt(2, startrow);
+			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+
+			rs=pstmt.executeQuery();
+
+			while(rs.next()) {
+				Message msg=new Message(
+						rs.getInt("msg.msg_idx"),
+						rs.getInt("msg.req_idx"),
+						rs.getInt("mem.member_idx"),
+						rs.getString("mem.member_id"),
+						rs.getString("msg.msg_receiver"),
+						rs.getString("msg.msg_title"),
+						rs.getString("msg.msg_text"),
+						rs.getString("msg.msg_img"),
+						rs.getDate("msg.msg_date"),
+						rs.getInt("msg.msg_readcheck")
+						);
+
+				list.add(msg);
+			}
+
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+
+		return list;
+	}
+
+	public List<Message> searchSendNoteById(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+			String searchText) throws SQLException {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+
+		List<Message> list=new ArrayList<Message>();
+		//보낸 편지함에서 아이디 검색 => 받은 사람 아이디
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_receiver like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, searchText);
+			pstmt.setInt(2, startrow);
+			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+
+			rs=pstmt.executeQuery();
+
+			while(rs.next()) {
+				Message msg=new Message(
+						rs.getInt("msg.msg_idx"),
+						rs.getInt("msg.req_idx"),
+						rs.getInt("mem.member_idx"),
+						rs.getString("mem.member_id"),
+						rs.getString("msg.msg_receiver"),
+						rs.getString("msg.msg_title"),
+						rs.getString("msg.msg_text"),
+						rs.getString("msg.msg_img"),
+						rs.getDate("msg.msg_date"),
+						rs.getInt("msg.msg_readcheck")
+						);
+
+				list.add(msg);
+			}
+
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+
+		return list;
+	}
+
+	public List<Message> searchSendNoteByTitle(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+			String searchText) throws SQLException {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+
+		List<Message> list=new ArrayList<Message>();
+
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_title like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, searchText);
+			pstmt.setInt(2, startrow);
+			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+
+			rs=pstmt.executeQuery();
+
+			while(rs.next()) {
+				Message msg=new Message(
+						rs.getInt("msg.msg_idx"),
+						rs.getInt("msg.req_idx"),
+						rs.getInt("mem.member_idx"),
+						rs.getString("mem.member_id"),
+						rs.getString("msg.msg_receiver"),
+						rs.getString("msg.msg_title"),
+						rs.getString("msg.msg_text"),
+						rs.getString("msg.msg_img"),
+						rs.getDate("msg.msg_date"),
+						rs.getInt("msg.msg_readcheck")
+						);
+
+				list.add(msg);
+			}
+
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+
+		return list;
+	}
+
+	public List<Message> searchSendNoteByText(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+			String searchText) throws SQLException {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+
+		List<Message> list=new ArrayList<Message>();
+
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_text like '%"+"'?'"+"%' order by msg_date desc limit ?,?"; 
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, searchText);
+			pstmt.setInt(2, startrow);
+			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+
+			rs=pstmt.executeQuery();
+
+			while(rs.next()) {
+				Message msg=new Message(
+						rs.getInt("msg.msg_idx"),
+						rs.getInt("msg.req_idx"),
+						rs.getInt("mem.member_idx"),
+						rs.getString("mem.member_id"),
+						rs.getString("msg.msg_receiver"),
+						rs.getString("msg.msg_title"),
+						rs.getString("msg.msg_text"),
+						rs.getString("msg.msg_img"),
+						rs.getDate("msg.msg_date"),
+						rs.getInt("msg.msg_readcheck")
+						);
+
+				list.add(msg);
+			}
+
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+
+		return list;
+	}
+
+	public int selectReqIdxByMsgIdx(Connection conn, int idx) throws SQLException {
+		int reqIdx=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			String sql="select req_idx from project.message where msg_idx=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				reqIdx=rs.getInt(1);
+			}
+			
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+			
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		
+		
+		return reqIdx;
+	}
+
+	public String selectWriterIdByIdx(Connection conn, int idx) throws SQLException {
+		
+		String writerId=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			String sql="select mem.member_id from project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx where msg.msg_idx=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				writerId=rs.getString(1);
+			}
+			
+		}finally {
+			if(rs!=null) {
+				rs.close();
+			}
+			
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		
+		
+		return writerId;
 	}
 }

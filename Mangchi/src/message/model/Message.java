@@ -32,10 +32,11 @@ public class Message {
 		this.readcheck = readcheck;
 	}
 
-	public Message(int msg_idx, int req_idx, String msg_writerId, String msg_receiver, String msg_title,
+	public Message(int msg_idx, int req_idx, int msg_writer, String msg_writerId, String msg_receiver, String msg_title,
 			String msg_text, String msg_img, Date msg_date, int readcheck) {
 		this.msg_idx = msg_idx;
 		this.req_idx = req_idx;
+		this.msg_writer=msg_writer;
 		this.msg_writerId = msg_writerId;
 		this.msg_receiver = msg_receiver;
 		this.msg_title = msg_title;

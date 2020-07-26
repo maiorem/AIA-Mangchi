@@ -65,11 +65,11 @@ public class SendingMessageServiceImpl implements Service {
 						mmdao=MemberMessageDao.getInstance();
 
 						if(paramName.equals("reqListIdx")) {
-							String reqidx=paramValue;
-							reqlistIdx=Integer.parseInt(reqidx);
+							reqlistIdx=Integer.parseInt(paramValue);
 							
-						} else if(paramName.equals("sender")){
+						} else if(paramName.equals("idx")){
 							senderIdx=Integer.parseInt(paramValue);
+							
 							
 						} else if(paramName.equals("noteId")) {
 							if(mmdao.existId(conn, paramValue)) {
@@ -100,8 +100,10 @@ public class SendingMessageServiceImpl implements Service {
 					
 				}
 				Message msg=new Message();
+				msg.setReq_idx(reqlistIdx);
 				msg.setMsg_writer(senderIdx);
 				msg.setMsg_receiver(receiverId);
+				msg.setMsg_title(title);
 				msg.setMsg_text(text);
 				msg.setMsg_img(img);
 				

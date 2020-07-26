@@ -17,14 +17,14 @@ public class MessageViewServiceImpl implements Service {
 
 	@Override
 	public String getViewPage(HttpServletRequest req, HttpServletResponse resp) {
-		String note=req.getParameter("idx");
-		
-		int msgIdx=Integer.parseInt(note);
+
+		int msgIdx=Integer.parseInt(req.getParameter("idx"));
 		Connection conn=null;
 		Message msg=null;
 		
 		try {
 			conn=ConnectionProvider.getConnection();
+			dao=MessageDao.getInstance();
 			msg=dao.selectMessageFromIdx(conn, msgIdx);
 			
 			req.setAttribute("viewNote", msg);
