@@ -44,7 +44,7 @@ public class MyRequestListServiceImpl implements Service {
 			
 			if(requestTotalCount >0) {
 				startRaw = (pageNum -1) * MESSAGE_COUNT_PER_PAGE;
-				rqList = dao.selectMemberList(conn, startRaw, member_idx, MESSAGE_COUNT_PER_PAGE);
+//				rqList = dao.selectMemberList(conn, startRaw, member_idx, MESSAGE_COUNT_PER_PAGE);
 			}else {
 				pageNum = 0;
 				rqList = Collections.emptyList();
