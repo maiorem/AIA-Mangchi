@@ -47,9 +47,6 @@ div.onlybox {
 	overflow: auto;
 } */
 
-div.SendNoteArea {
-	display: none;
-}
 
 div.paging {
 	text-align: center;
@@ -112,11 +109,6 @@ table.box {
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
-	function messageListDel(idx) {
-		if (confirm('아직 상대가 메시지를 읽지 않았습니다.\n발송을 취소하시겠습니까?')) {
-			location.href = 'messageDelete.do?idx=' + idx;
-		}
-	}
 
 	function messageDel(idx) {
 		if (confirm('해당 메시지를 정말로 삭제하시겠습니까?\n삭제된 메시지는 복구할 수 없습니다.')) {
@@ -124,20 +116,7 @@ table.box {
 		}
 	}
 
-	$(document).ready(function() {
 
-		$('#reBox').click(function() {
-			$('div.ReNoteArea').css('display', 'block');
-			$('div.SendNoteArea').css('display', 'none');
-
-		});
-
-		$('#seBox').click(function() {
-			$('div.ReNoteArea').css('display', 'none');
-			$('div.SendNoteArea').css('display', 'block');
-		});
-
-	});
 </script>
 </head>
 <body>
@@ -152,9 +131,9 @@ table.box {
 
 		<div class="boxarea" id="noteBoxArea">
 			<button class="btn btn-outline-success my-2 my-sm-0" id="reBox"
-				type="button">받은 쪽지함</button>
+				type="button"><a href='<c:url value="/message/messageBox.do"/>'>받은 쪽지함</a></button>
 			<button class="btn btn-outline-success my-2 my-sm-0" id="seBox"
-				type="button">보낸 쪽지함</button>
+				type="button"><a href='<c:url value="/message/sendMessageBox.do"/>'>보낸 쪽지함</a></button>
 			<div class="searchNote">
 				<form class="form-inline mt-2 mt-md-0"
 					action="<c:url value="/message/searchNote.do"/>" method="get">
@@ -224,61 +203,6 @@ table.box {
 					</c:forEach>
 				</div>
 			</div>
-
-			<div class="noteBox SendNoteArea">
-				<div class="onlybox">
-					<c:if test="${noteList.messageList != null}">
-						<table class="table table-hover">
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">받는이</th>
-								<th scope="col">제목</th>
-								<th scope="col">날짜</th>
-								<th scope="col">읽음여부</th>
-								<th scope="col">삭제</th>
-							</tr>
-							<c:forEach items="${noteList.messageList}" var="SenderNotes">
-								<c:if test="${loginInfo.idx eq SenderNotes.msg_writer}">
-									<tr>
-										<th scope="row">-</th>
-										<td>${SenderNotes.msg_receiver}</td>
-										<td><a class="view"
-											href='<c:url value="/message/noteview.do?idx=${SenderNotes.msg_idx}"/>'>${SenderNotes.msg_title}</a></td>
-										<td>${SenderNotes.msg_date}</td>
-										<c:if test="${SenderNotes.readcheck==0}">
-											<td><span class="readCheck" style="color: red;">읽지
-													않음</span></td>
-											<td><a
-												href="javascript:messageListDel(${SenderNotes.msg_idx})">
-													발송취소 </a></td>
-										</c:if>
-										<c:if test="${SenderNotes.readcheck==1}">
-											<td><span class="readCheck" style="color: green;">읽음</span></td>
-											<td style="color: gray;">발송취소불가</td>
-										</c:if>
-
-									</tr>
-								</c:if>
-							</c:forEach>
-						</table>
-					</c:if>
-
-					<c:if test="${noteList.messageList==null}">
-
-						<h3>보낸 쪽지가 존재하지 않습니다.</h3>
-
-					</c:if>
-				</div>
-				<div class="paging">
-					<c:forEach begin="1" end="${noteList.pageTotalCount}" var="num">
-						<a href="messageBox.do?page=${num}"
-							${noteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
-					</c:forEach>
-				</div>
-
-			</div>
-
-
 
 		</div>
 
