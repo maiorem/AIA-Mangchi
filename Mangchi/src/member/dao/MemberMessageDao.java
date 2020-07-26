@@ -18,9 +18,12 @@ public class MemberMessageDao {
 		return dao;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> master
+=======
+>>>>>>> KJJ
 	public boolean existId(Connection conn, String id) throws SQLException {
 		boolean result=false;
 		List<Member> list=new ArrayList<>();
