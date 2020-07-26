@@ -139,20 +139,23 @@ span.star-prototype > * {
 						<div class="row mb-2">
 							<div class="col-lg-6">
 								
-								<c:if test="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1))<3 }">
-						<img src="<%=request.getContextPath()%>/img/bad.png" width="130px;" height="130px;">
-							
-							<div style="display: inline; font-weight: bold; font-size:30px; margin-left: 30px;">나쁨</div>
-						<a href="${pageContext.request.contextPath}/reviews/reviewList.do">내가쓴 리뷰</a>
+								<c:if test="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1))<=2.9 }">
+						<img src="<%=request.getContextPath()%>/img/bad.png" width="100px;" height="100px;">
+							<div style="display: inline; font-weight: bold; font-size:30px; margin-left: 30px; color: red;">나쁨</div>
+						</c:if>
+						
+						
+						
+						
+						
+						<c:if test="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1))>=3 }">
+						<img src="<%=request.getContextPath()%>/img/good.png" width="100px;" height="100px;">
+							<div style="display: inline; font-weight: bold; font-size:30px; margin-left: 30px; color: green;">좋음</div>
 						</c:if>
 								
 								
 							</div>
 						
-						<div style="font-weight: bold; font-size: 70px; display: inline;">
-						<c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>
-						
-						</div>
 						
 							
 						
@@ -163,8 +166,13 @@ span.star-prototype > * {
 							
 						
 					
-						 <div class="col-lg-6">
-							
+						 <div class="col-lg-6" style="text-align: center;">
+					
+							<p style="font-weight: bold; font-size: 50px; ">
+						<c:out value="${score+((score%1>0.5)?(1-(score%1))%1:-(score%1)) }"/>
+						</p>
+						
+							<a  href="${pageContext.request.contextPath}/reviews/reviewList.do">내가쓴 리뷰</a>
 							
 							
 							 </div> 
@@ -175,6 +183,7 @@ span.star-prototype > * {
 					</div>
 				
 				</div>
+				
 			</div>
 			
 			
