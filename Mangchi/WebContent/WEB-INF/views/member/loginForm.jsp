@@ -10,6 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
+    <meta name = "google-signin-client_id"content = "75140810207-a1qug6ggrqqageuv1q6gi8i0tkh5lpi6.apps.googleusercontent.com">
+    
     <title>로그인 / 회원가입</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
@@ -22,7 +24,16 @@
     <link href='<c:url value="/css/RegForm.css"/>' rel="stylesheet">
     
 
+ <script src="https://apis.google.com/js/platform.js" async defer></script>
   </head>
+  
+  <style>
+  
+  </style>
+  
+  
+  
+  
 <body>
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&autoLogAppEvents=1&version=v7.0&appId=289834475439470" nonce="TQFrHHrv"></script>
@@ -42,7 +53,7 @@
 			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
 			          	<label for="reg-log"></label>
 						<div class="card-3d-wrap mx-auto">
-							<div class="card-3d-wrapper">
+							<div class="card-3d-wrapper" style=" height: 530px;">
 								<div class="card-front">
 									<div class="center-wrap">
 										<div class="section text-center">
@@ -67,6 +78,14 @@
                             					<div class="fb-login-button" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
+											<div class="form-group mt-2">
+												<!-- <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div> -->
+												
+												<div style="margin-left: 75px;">
+												<div class="g-signin2" data-width="220" data-height="40">
+												<i class="input-icon uil uil-lock-alt" style="text-align:center; "></i>
+											</div></div>	
+
 				      					</div>
 			      					</div>
 			      				</div>
@@ -308,6 +327,7 @@ function checkLoginState() {
 	</script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a8a5ce6115cd1642bcb72f180541d7b&libraries=services"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
@@ -406,6 +426,33 @@ function checkLoginState() {
 		});
 	});
 </script>
+
+
+<script type="text/javascript"> // 구글 api 
+
+
+function onSuccess(googleUser) {
+    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+  }
+  function onFailure(error) {
+    console.log(error);
+  }
+  function renderButton() {
+    gapi.signin2.render('my-signin2', {
+      'scope': 'profile email',
+      'width': 240,
+      'height': 50,
+      'longtitle': true,
+      'theme': 'dark',
+      'onsuccess': onSuccess,
+      'onfailure': onFailure
+    });
+  }
+
+
+
+</script>
+
 </body>
 </html>
 
