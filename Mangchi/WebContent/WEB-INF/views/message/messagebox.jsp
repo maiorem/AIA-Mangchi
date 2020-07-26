@@ -62,7 +62,7 @@ table.box {
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
 	function messageListDel(idx) {
-		if (confirm('해당 메시지를 정말로 삭제하시겠습니까?')) {
+		if (confirm('아직 상대가 메시지를 읽지 않았습니다.\n발송을 취소하시겠습니까?')) {
 			location.href = 'messageDelete.do?idx=' + idx;
 		}
 	}
@@ -179,22 +179,17 @@ table.box {
 											href='<c:url value="/message/noteview.do?idx=${SenderNotes.msg_idx}"/>'>${SenderNotes.msg_title}</a></td>
 										<td>${SenderNotes.msg_date}</td>
 										<c:if test="${SenderNotes.readcheck==0}">
-										<td><span class="readCheck"><p style="color: red;">읽지 않음</p></span></td>
+										<td><span class="readCheck" style="color: red;">읽지 않음</span></td>
+																				<td><a
+											href="javascript:messageListDel(${SenderNotes.msg_idx})">
+										발송취소
+										</a></td>
 										</c:if>
 										<c:if test="${SenderNotes.readcheck==1}">
-										<td><span class="readCheck"><p style="color: green;">읽음</p></span></td>
+										<td><span class="readCheck" style="color: green;">읽음</span></td>
+										<td style="color: gray;">발송취소불가</td>
 										</c:if>
-										<td><a
-											href="javascript:messageListDel(${SenderNotes.msg_idx})">
-												<svg width="1em" height="1em" viewBox="0 0 16 16"
-													class="bi bi-trash" fill="currentColor"
-													xmlns="http://www.w3.org/2000/svg">
-  <path
-														d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-  <path fill-rule="evenodd"
-														d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-</svg>
-										</a></td>
+										
 									</tr>
 								</c:if>
 							</c:forEach>
