@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import board.dao.BoardDao;
 import board.model.RequestWriting;
+import board.model.RequestWriting2;
 import jdbc.ConnectionProvider;
 import member.model.Member;
 import service.Service;
@@ -18,7 +19,7 @@ public class WriteRequestResultServiceImpl implements Service {
 	@Override
 	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
 		Connection conn = null;
-		RequestWriting rw = null;
+		RequestWriting2 rw = null;
 		
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("loginInfo");
@@ -41,6 +42,7 @@ public class WriteRequestResultServiceImpl implements Service {
 		}
 		if(rw!=null) {
 			request.setAttribute("choiceRequest", rw);
+			request.setAttribute("currUserIdx", member_idx);
 		}
 		return "/WEB-INF/views/board/detailRequest.jsp";
 	}

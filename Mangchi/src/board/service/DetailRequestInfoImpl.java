@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.dao.BoardDao;
-import board.model.RequestWriting;
+import board.model.RequestWriting2;
 import jdbc.ConnectionProvider;
 import member.model.Member;
 import service.Service;
@@ -18,7 +18,7 @@ public class DetailRequestInfoImpl implements Service {
 	@Override
 	public String getViewPage(HttpServletRequest req, HttpServletResponse resp) {
 		Connection conn = null;
-		RequestWriting rw = null;
+		RequestWriting2 rw = null;
 		List<Member> list=null;
 		int loginIdx=-1;
 		if(req.getSession().getAttribute("loginInfo")!=null) {

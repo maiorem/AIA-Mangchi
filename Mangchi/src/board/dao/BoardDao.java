@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 import board.model.RequestWriting;
+import board.model.RequestWriting2;
 import member.model.Member;
 
 public class BoardDao {
@@ -48,7 +49,7 @@ public class BoardDao {
 		
 		return result;
 	}
-	public int insertRequest(Connection conn, RequestWriting rw) throws SQLException {
+	public int insertRequest(Connection conn, RequestWriting2 rw) throws SQLException {
 		int result=0;
 		PreparedStatement pstmt=null;
 		String sql="insert into project.request_list "
@@ -156,11 +157,11 @@ public class BoardDao {
 		return resultCnt;
 	}
 	
-	public List<RequestWriting> selectMemberList(Connection conn, int startRaw,int member_idx, int mESSAGE_COUNT_PER_PAGE) throws SQLException {
-		List<RequestWriting> list = new ArrayList<RequestWriting>();
+	public List<RequestWriting2> selectMemberList(Connection conn, int startRaw,int member_idx, int mESSAGE_COUNT_PER_PAGE) throws SQLException {
+		List<RequestWriting2> list = new ArrayList<RequestWriting2>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		RequestWriting rw=null;
+		RequestWriting2 rw=null;
 		String sql="select * from project.member m join project.request_list rl where m.member_idx=rl.req_writer and rl.req_writer=? limit ?,?";
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -172,7 +173,7 @@ public class BoardDao {
 			while(rs.next()) {
 				Timestamp regdate = rs.getTimestamp("req_regdate");
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				rw=new RequestWriting(
+				rw=new RequestWriting2(
 						rs.getInt("req_idx"), 
 						rs.getInt("req_writer"),
 						rs.getString("member_nick"), 
@@ -202,8 +203,8 @@ public class BoardDao {
 		};
 		return list;
 	}
-	public RequestWriting getDetailRequestInfo(Connection conn, int req_idx) throws SQLException {
-		RequestWriting rw=null;
+	public RequestWriting2 getDetailRequestInfo(Connection conn, int req_idx) throws SQLException {
+		RequestWriting2 rw=null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -217,7 +218,7 @@ public class BoardDao {
 			while(rs.next()) {
 				Timestamp regdate = rs.getTimestamp("req_regdate");
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				rw=new RequestWriting(
+				rw=new RequestWriting2(
 						rs.getInt("req_idx"), 
 						rs.getInt("req_writer"),
 						rs.getString("member_nick"), 
