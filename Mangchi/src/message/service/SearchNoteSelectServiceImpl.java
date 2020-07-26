@@ -94,6 +94,7 @@ public class SearchNoteSelectServiceImpl implements Service {
 			}
 		}
 		
+		req.setAttribute("noteSort", noteSort);
 		req.setAttribute("searchNoteList", searchListView);
 		
 		return "/WEB-INF/views/message/searchNoteResult.jsp";
