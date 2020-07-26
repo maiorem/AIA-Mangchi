@@ -23,7 +23,7 @@
 <body onload="javascript:window_onload()">
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	
-	<div style="margin-top: 50px;">
+	<!-- <div style="margin-top: 50px;">
 	
 	5초후 페이지 이동합니다
 	
@@ -31,7 +31,7 @@
 	
 	</div>
 
-<div style="margin-bottom: 5%;"></div>
+<div style="margin-bottom: 5%;"></div> -->
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
@@ -42,7 +42,7 @@
 <script>
 function window_onload(){
 
-    setTimeout('go_url()',5000)  // 5초후 go_url() 함수를 호출한다.
+    setTimeout('go_url()',500)  // 0.5초후 go_url() 함수를 호출한다.
 
  }
 
