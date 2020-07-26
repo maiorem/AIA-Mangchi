@@ -43,7 +43,7 @@
 
 	<div id="note">
 		<form action="<c:url value='/message/sendMessage.do'/>" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="idx" value="${loginInfo.idx}">
+			<input type="hidden" name="senderIdx" value="${loginInfo.idx}">
 			<input type="hidden" name="reqListIdx" value="${req_idx}">
 
 			<table>
