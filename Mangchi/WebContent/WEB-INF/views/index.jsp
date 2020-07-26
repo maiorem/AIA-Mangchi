@@ -38,8 +38,9 @@
     <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
    	<link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
     <style>
-    	h1, h3, h5 {
+    	h1, h3, h5, p {
     		font-family: 'Jua', sans-serif;
+    		color: black;
     	}
     	
     	.nanum .lead {
@@ -64,7 +65,8 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+      
+        <img src="<c:url value="/img/home1_1.png"/>">
         <div class="container">
           <div class="carousel-caption text-left">
             <h1>당장 필요한 물건이 있는데 <br>사기엔 돈이 아깝다면?</h1>
@@ -74,7 +76,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+        <img src="<c:url value="/img/home2_1.png"/>">
         <div class="container">
           <div class="carousel-caption">
             <h1>집에서 놀고 있는 물건이 있는데 팔기엔 아쉽다면?</h1>
