@@ -353,12 +353,14 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
-			// 검색 한 회원 전체 개수
 			if (rs.next()) {
 				requestTotalCount = rs.getInt(1);
 			}
 
 		} finally {
+			if (rs != null) {
+				rs.close();
+			}
 			if (pstmt != null) {
 				pstmt.close();
 			}
@@ -401,7 +403,6 @@ public class BoardDao {
 				rw.setReq_status(rs.getInt("req_status")); // 현재상태
 				rw.setReq_img(rs.getString("req_img")); // 사진
 				
-				// 리스트에 member 객체를 담음
 				requestList.add(rw);
 			}
 

@@ -178,46 +178,7 @@ public class RequestDao {
 			return resultCnt;
 		}
 	
-	// 모든 게시물
-	public List<Request> selectAllrequest(Connection conn, int startRow, int endRow) throws SQLException {
 
-		PreparedStatement pstmt = null;
-		ResultSet rs;
-		
-		List<Request> list = new ArrayList();
-
-
-		try {
-			String sql = "select * from project.request_list limit ?,?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				Request req = new Request();
-				req.setReq_idx(rs.getInt("req_idx"));
-				req.setMember_nick(rs.getString("member_nick"));
-				req.setReq_writer(rs.getInt("req_writer"));
-				req.setReq_title(rs.getString("req_title"));
-				req.setReq_loc(rs.getString("req_loc"));
-				req.setReq_price(rs.getInt("req_price"));
-				req.setReq_status(rs.getInt("req_status"));
-				req.setReq_regdate(rs.getDate("req_regdate"));
-				req.setReq_term(rs.getString("req_term"));
-				list.add(req);
-			}
-
-		} finally {
-			if (pstmt != null) {
-				pstmt.close();
-			}
-		}
-
-		return list;
-	}
-	
 	// 검색
 	public List<Request> searchRequest(Connection conn, String sch ,int startRow, int endRow ) throws SQLException {
 
