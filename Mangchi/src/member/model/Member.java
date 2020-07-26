@@ -12,6 +12,8 @@ public class Member {
 	private Date regDate;
 	private String addr;
 	private String photo;
+	private String latitude;
+	private String longitude;
 	
 	
 	public Member() {}
@@ -47,6 +49,23 @@ public class Member {
 		this.regDate = regDate;
 		this.addr = addr;
 		this.photo = photo;
+	}
+	
+	
+
+	public Member(int idx, String id, String kid, String pw, String nick, Double score, Date regDate, String addr,
+			String photo, String latitude, String longitude) {
+		this.idx = idx;
+		this.id = id;
+		this.kid = kid;
+		this.pw = pw;
+		this.nick = nick;
+		this.score = score;
+		this.regDate = regDate;
+		this.addr = addr;
+		this.photo = photo;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	public int getIdx() {
@@ -120,11 +139,31 @@ public class Member {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+	
+	
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
 
 	@Override
 	public String toString() {
 		return "Member [idx=" + idx + ", id=" + id + ", kid=" + kid + ", pw=" + pw + ", nick=" + nick + ", score="
-				+ score + ", regDate=" + regDate + ", addr=" + addr + ", photo=" + photo + "]";
+				+ score + ", regDate=" + regDate + ", addr=" + addr + ", photo=" + photo + ", latitude=" + latitude
+				+ ", longitude=" + longitude + "]";
 	}
+
 	
 }
