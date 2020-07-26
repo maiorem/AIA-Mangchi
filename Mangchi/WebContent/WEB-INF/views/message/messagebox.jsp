@@ -38,14 +38,14 @@ div.searchNote {
 	float: right;
 }
 
-div.noteBox {
+/* div.noteBox {
 	height: 650px;
 }
 
 div.onlybox {
 	height: 600px;
 	overflow: auto;
-}
+} */
 
 div.SendNoteArea {
 	display: none;
@@ -219,7 +219,7 @@ table.box {
 				</div>
 				<div class="paging">
 					<c:forEach begin="1" end="${noteList.pageTotalCount}" var="num">
-						<a href="messageList.do?page=${num}"
+						<a href="messageBox.do?page=${num}"
 							${noteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
 					</c:forEach>
 				</div>
@@ -271,7 +271,7 @@ table.box {
 				</div>
 				<div class="paging">
 					<c:forEach begin="1" end="${noteList.pageTotalCount}" var="num">
-						<a href="messageList.do?page=${num}"
+						<a href="messageBox.do?page=${num}"
 							${noteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
 					</c:forEach>
 				</div>

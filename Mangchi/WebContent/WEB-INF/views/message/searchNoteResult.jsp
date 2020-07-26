@@ -29,18 +29,15 @@ div.wrap {
 	height: 500px;
 }
 
-div.noteBox {
-	height: 450px;
-}
 
 div.SendNoteArea {
 	display: none;
 }
 
-div.contentsArea {
+/* div.contentsArea {
 	height: 450px;
 	overflow: auto;
-}
+} */
 
 table.box {
 	width: 800px;
@@ -54,7 +51,9 @@ table.box {
 .check_not {
 	color: red;
 }
-
+div.paging {
+	text-align: center;
+}
 
 @media 
 only screen and (max-width: 760px),
@@ -204,9 +203,9 @@ only screen and (max-width: 760px),
 
 				</c:if>
 				<div class="paging">
-					<c:forEach begin="1" end="${noteList.pageTotalCount}" var="num">
-						<a href="messageList.do?page=${num}"
-							${noteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
+					<c:forEach begin="1" end="${searchNoteList.pageTotalCount}" var="num">
+						<a href="searchNote.do?page=${num}"
+							${searchNoteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
 					</c:forEach>
 				</div>
 
