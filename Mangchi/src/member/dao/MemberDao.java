@@ -78,9 +78,9 @@ public class MemberDao {
 
 		return resultCnt;
 	}
-	
-	//member_id Check
-	
+
+	// member_id Check
+
 	public int memberIdCheck(Connection conn, String id) throws SQLException {
 
 		int resultCnt = 0;
@@ -108,6 +108,75 @@ public class MemberDao {
 			if (rs != null)
 				rs.close();
 		}
+		return resultCnt;
+	}
+
+	// Address Modify
+	public int memberAddrModify(Connection conn, String id, String addr) throws SQLException {
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE project.member SET member_addr = ? WHERE member_id = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, addr);
+			pstmt.setString(2, id);
+
+			resultCnt = pstmt.executeUpdate();
+		} finally {
+
+			if (pstmt != null)
+				pstmt.close();
+
+		}
+
+		return resultCnt;
+	}
+
+	// NickName Modify
+	public int memberNickModify(Connection conn, String id, String nick) throws SQLException {
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE project.member SET member_nick = ? WHERE member_id = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nick);
+			pstmt.setString(2, id);
+
+			resultCnt = pstmt.executeUpdate();
+		} finally {
+
+			if (pstmt != null)
+				pstmt.close();
+
+		}
+
+		return resultCnt;
+	}
+	
+	// Password Modify
+	public int memberPwModify(Connection conn, String id, String pw) throws SQLException {
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE project.member SET member_pw = ? WHERE member_id = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pw);
+			pstmt.setString(2, id);
+
+			resultCnt = pstmt.executeUpdate();
+		} finally {
+
+			if (pstmt != null)
+				pstmt.close();
+
+		}
+
 		return resultCnt;
 	}
 
@@ -220,7 +289,7 @@ public class MemberDao {
 
 		return resultCnt;
 	}
-	
+
 	// kakao 추가 회원가입
 	public int kakaoFinalRegMember(Connection conn, String id, String addr, String kid) throws SQLException {
 		int resultCnt = 0;
@@ -244,7 +313,7 @@ public class MemberDao {
 
 		return resultCnt;
 	}
-	
+
 	// kakao 로그인
 	public Member selectByKakaoMember(Connection conn, String id) throws SQLException {
 
@@ -263,9 +332,9 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				member = new Member(rs.getInt("member_idx"), rs.getString("kakao_id"),
-						rs.getString("member_nick"), rs.getDouble("member_score"), rs.getDate("member_regdate"),
-						rs.getString("member_addr"), rs.getString("member_img"));
+				member = new Member(rs.getInt("member_idx"), rs.getString("kakao_id"), rs.getString("member_nick"),
+						rs.getDouble("member_score"), rs.getDate("member_regdate"), rs.getString("member_addr"),
+						rs.getString("member_img"));
 			}
 
 		} finally {
