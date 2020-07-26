@@ -65,7 +65,6 @@ public class ReviewDao {
       return resultCnt;
    }
 
-<<<<<<< HEAD
    
    
    
@@ -156,98 +155,6 @@ public class ReviewDao {
    
    
       public Member selecthlperMember(Connection conn, int a) throws SQLException {
-=======
-	
-	
-	
-		public List<Reviewjoin> getlist(Connection conn, int member_idx) throws SQLException {
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		List<Reviewjoin> reviewList = new ArrayList<>();
-		
-		
-		
-		try {
-			
-			
-			String sql = "SELECT * FROM project.review_list inner join project.request_list on project.review_list.req_idx = project.request_list.req_idx inner join project.member on project.request_list.req_writer = project.member.member_idx where project.review_list.review_receiver=?";
-			
-			pstmt =conn.prepareStatement(sql);
-			//pstmt.setInt(1, member.getmember_idx());
-			pstmt.setInt(1, member_idx);
-			
-			rs=pstmt.executeQuery();
-			
-		
-			while(rs.next()) {
-				
-				reviewList.add(new Reviewjoin(rs.getInt("review_idx"),rs.getInt("req_idx"),rs.getInt("review_receiver"),
-						rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getString("review_regdate"),rs.getString("req_title"),rs.getString("member_nick")));
-			}
-			
-			
-		} finally {
-			if(rs != null) {
-				rs.close();
-			}
-			if(pstmt !=null) {
-				pstmt.close();
-			}
-		}
-		
-		return reviewList;
-	}
-	
-	
-	
-		public List<Reviewjoin> setlist(Connection conn, int a) throws SQLException {
-			
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			
-			List<Reviewjoin> reviewList = new ArrayList<>();
-			
-			
-			
-			try {
-				
-				
-				String sql = "SELECT * FROM project.review_list inner join project.request_list on project.review_list.req_idx = project.request_list.req_idx inner join project.member on project.request_list.req_writer = project.member.member_idx where project.review_list.review_writer=?";
-				
-				pstmt =conn.prepareStatement(sql);
-				//pstmt.setInt(1, member.getmember_idx());
-				pstmt.setInt(1, a);
-				
-				rs=pstmt.executeQuery();
-				
-			
-				while(rs.next()) {
-					
-					reviewList.add(new Reviewjoin(rs.getInt("review_idx"),rs.getInt("req_idx"),rs.getInt("review_receiver"),
-							rs.getInt("review_writer"),rs.getFloat("review_score"),rs.getString("review_text"),rs.getString("review_regdate"),rs.getString("req_title"),rs.getString("member_nick")));
-				}
-				
-				
-			} finally {
-				if(rs != null) {
-					rs.close();
-				}
-				if(pstmt !=null) {
-					pstmt.close();
-				}
-			}
-			
-			return reviewList;
-		}
-		
-		
-		
-	
-	
-		public Member selecthlperMember(Connection conn, int a) throws SQLException {
->>>>>>> Bogyeum
 
          Member member = null;
 
@@ -258,13 +165,8 @@ public class ReviewDao {
 
             String sql = "select * from project.member where member_idx=?";
 
-<<<<<<< HEAD
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, a);
-=======
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, a);
->>>>>>> Bogyeum
 
             rs = pstmt.executeQuery();
 
@@ -347,7 +249,6 @@ public class ReviewDao {
 
             rs = pstmt.executeQuery();
 
-<<<<<<< HEAD
             while (rs.next()) {
                rw = new RequestWriting();
                rw.setReq_title(rs.getString("req_title"));
@@ -375,33 +276,3 @@ public class ReviewDao {
    
    
    }
-=======
-				while (rs.next()) {
-					rw = new RequestWriting();
-					rw.setReq_title(rs.getString("req_title"));
-					}
-
-			} finally {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-			}
-			return rw;
-		}
-			
-			
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	}
-
->>>>>>> Bogyeum

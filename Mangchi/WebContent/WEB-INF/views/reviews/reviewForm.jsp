@@ -68,7 +68,7 @@
 				<div class="mb-3">
 
 					<label for="title" class="bold" style="color: gray;">거래한 상품</label><br>
-					<h4 style="margin-right: 20%;"> ${req.req_title } </h4> <c:out value="${nick.nick }"/>
+					<h4 style="margin-right: 20%;"> ${req.req_title } </h4> 상대방 닉네임 : <c:out value="${nick.nick }"/>
 					
 				
 
