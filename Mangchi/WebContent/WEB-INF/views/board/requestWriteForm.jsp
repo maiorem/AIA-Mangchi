@@ -90,7 +90,6 @@ form{
 							<option value="30">30분</option>
 							
 						</select>
-						<input type="button" id="btnbtn" onclick="btnbtnc()" value="test해보기"/>
 					</div>
 					<div class="write_reqinfo req_loc">
 						<label class="suround_only">받을주소</label>
@@ -112,10 +111,10 @@ form{
 					<label class="suround_only">상세 내용</label>
 					<textarea form="form_write" name="req_text" maxlength="2000" style="width: 100%; height: 300px;"
 						placeholder="상세 내용"></textarea>
-					<input type="button" id="button1" onclick="button1_click();" value="버튼1" />
 					<input type="submit" value="글쓰기 완료">
 				</div>
-				
+				<input type="hidden" name="req_latitude" id="req_latitude"/>
+				<input type="hidden" name="req_longitude" id="req_longitude"/>
 			</form>
 		</main>
 	</div>
@@ -179,9 +178,11 @@ form{
                     if (status === daum.maps.services.Status.OK) {
 
                         var result = results[0]; //첫번째 결과의 값을 활용
-
+						
                         // 해당 주소에 대한 좌표를 받아서
                         var coords = new daum.maps.LatLng(result.y, result.x);
+                        $('#req_latitude').attr('value',result.y);
+                        $('#req_longitude').attr('value',result.x);
                         // 지도를 보여준다.
                         mapContainer.style.display = "block";
                         map.relayout();

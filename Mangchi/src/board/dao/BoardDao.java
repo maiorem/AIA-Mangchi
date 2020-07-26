@@ -60,8 +60,10 @@ public class BoardDao {
 				 + "req_loc,"
 				 + "req_term,"
 				 + "req_text,"
-				 + "req_img) "
-				 + "values(?,?,?,?,?,?,?)";
+				 + "req_img,"
+				 + "req_latitude,"
+				 + "req_longitude) "
+				 + "values(?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -73,6 +75,8 @@ public class BoardDao {
 			pstmt.setString(5, rw.getReq_term());
 			pstmt.setString(6, rw.getReq_text());
 			pstmt.setString(7, rw.getReq_img());
+			pstmt.setDouble(8, rw.getReq_latitude());
+			pstmt.setDouble(9, rw.getReq_longitude());
 			
 			result = pstmt.executeUpdate();
 			
@@ -230,9 +234,9 @@ public class BoardDao {
 						rs.getString("req_returndate"),
 						rs.getString("req_loc"), 
 						rs.getString("req_text"),
+						rs.getDouble("req_latitude"),
+						rs.getDouble("req_longitude"),
 						rs.getInt("req_readcnt"),
-						0,
-						0,
 						rs.getInt("req_status"),
 						rs.getString("req_img"));
 			}

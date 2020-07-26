@@ -22,6 +22,7 @@ public class RequestWriting2 {
 	private int req_readcnt;
 	private int req_status;
 	private String req_img;
+	private double distance;
 	
 	public RequestWriting2(
 						int req_idx, 
@@ -61,6 +62,14 @@ public class RequestWriting2 {
 
 	
 	
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
 	public String getReq_returnDate() {
 		return req_returnDate;
 	}

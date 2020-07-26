@@ -54,8 +54,8 @@ public class ReqWriteServiceImpl implements Service {
 		String req_term=null; // 반납일시
 		String req_loc=null; // 주소
 		String req_text=null; // 상세내용
-		double req_latitude;// 위도
-		double req_longitude;// 경도
+		double req_latitude=0;// 위도
+		double req_longitude=0;// 경도
 		String req_img=null; // 참고이미지
 		Member mb=(Member)request.getSession().getAttribute("loginInfo");
 		String nick = mb.getNick();
@@ -98,6 +98,10 @@ public class ReqWriteServiceImpl implements Service {
 								req_text = "도와주세요";
 							}
 							
+						}else if (paramName.equals("req_latitude")) {
+							req_latitude=Double.parseDouble(paramVal);
+						}else if (paramName.equals("req_longitude")) {
+							req_longitude=Double.parseDouble(paramVal);
 						}
 						if (req_title.trim().length() == 0) {
 							req_title = "[" + nick + "의 요청] 도와주세요";
@@ -137,6 +141,8 @@ public class ReqWriteServiceImpl implements Service {
 				rw.setReq_term(req_term);
 				rw.setReq_text(req_text);
 				rw.setReq_img(req_img);
+				rw.setReq_latitude(req_latitude);
+				rw.setReq_longitude(req_longitude);
 				
 				conn = ConnectionProvider.getConnection();
 				dao = BoardDao.getInstance();
