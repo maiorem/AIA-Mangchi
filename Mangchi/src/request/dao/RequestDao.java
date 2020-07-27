@@ -12,6 +12,7 @@ import java.util.List;
 
 import member.model.Member;
 import request.model.Request;
+import request.model.Requesttime;
 
 public class RequestDao {
 	
@@ -30,7 +31,8 @@ public class RequestDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs;
 		List<Request> list = new ArrayList();
-
+		int time, day, hour, minute;
+		
 		try {
 			// String sql = "select * from project.request_list where req_writer=? limit ?,?";
 			
@@ -55,14 +57,18 @@ public class RequestDao {
 				req.setReq_status(rs.getInt("req_status"));
 				req.setReq_regdate(rs.getDate("req_regdate"));
 				req.setReq_term(rs.getString("req_term"));
+					
+				time = Integer.parseInt(req.getReq_term()); 
+				time = time/1000;
+				System.out.println(time);
 				
-				if(req.getReq_term()!=null && req.getReq_term().trim().length()>0) {
-					//날짜변환
-					long a =Long.parseLong(req.getReq_term());
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-					Date returnDate= new Date(a);
-					req.setReq_returnDate(sdf.format(returnDate));
-				}
+				day = time/(60*60*24);
+				hour = time%(60*60*24)/(60*60);
+				minute = time%(60*60*24)%(60*60)/60;
+							
+				req.setDay(day);
+				req.setHour(hour);
+				req.setMinute(minute);
 				
 				list.add(req);
 			}
@@ -114,7 +120,8 @@ public class RequestDao {
 
 			PreparedStatement pstmt = null;
 			ResultSet rs;
-			
+			int time, day, hour, minute;
+
 			List<Request> list = new ArrayList();
 
 
@@ -143,13 +150,19 @@ public class RequestDao {
 					req.setReq_regdate(rs.getDate("req_regdate"));
 					req.setReq_term(rs.getString("req_term"));
 					
-					if(req.getReq_term()!=null && req.getReq_term().trim().length()>0) {
-						//날짜변환
-						long a =Long.parseLong(req.getReq_term());
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-						Date returnDate= new Date(a);
-						req.setReq_returnDate(sdf.format(returnDate));
-					}
+					time = Integer.parseInt(req.getReq_term()); 
+					time = time/1000;
+					System.out.println(time);
+					
+					day = time/(60*60*24);
+					hour = time%(60*60*24)/(60*60);
+					minute = time%(60*60*24)%(60*60)/60;
+								
+					req.setDay(day);
+					req.setHour(hour);
+					req.setMinute(minute);
+					
+
 					
 					list.add(req);
 				}
@@ -202,7 +215,8 @@ public class RequestDao {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs;
-		
+		int time, day, hour, minute;
+
 		List<Request> list = new ArrayList();
 
 		try {
@@ -229,13 +243,19 @@ public class RequestDao {
 				req.setReq_regdate(rs.getDate("req_regdate"));
 				req.setReq_term(rs.getString("req_term"));
 				
-				if(req.getReq_term()!=null && req.getReq_term().trim().length()>0) {
-					//날짜변환
-					long a =Long.parseLong(req.getReq_term());
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-					Date returnDate= new Date(a);
-					req.setReq_returnDate(sdf.format(returnDate));
-				}
+				time = Integer.parseInt(req.getReq_term()); 
+				time = time/1000;
+				System.out.println(time);
+				
+				day = time/(60*60*24);
+				hour = time%(60*60*24)/(60*60);
+				minute = time%(60*60*24)%(60*60)/60;
+							
+				req.setDay(day);
+				req.setHour(hour);
+				req.setMinute(minute);
+				
+
 				
 				list.add(req);
 			}

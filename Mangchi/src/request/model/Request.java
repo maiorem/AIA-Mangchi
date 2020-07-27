@@ -9,7 +9,7 @@ public class Request {
 	private int req_helper;
 	private int req_price;
 	private Date req_regdate;
-	private String req_returnDate;
+	private int req_returnDate;
 	private String req_term;
 	private String req_loc;
 	private String req_text;
@@ -19,12 +19,16 @@ public class Request {
 	private int req_status;
 	private String req_img;
 	private String member_nick;
+	private int day;
+	private int hour;
+	private int minute;
 	
 	public Request() {}
 
 	public Request(int req_idx, int req_writer, String req_title, int req_helper, int req_price, Date req_regdate,
-			String req_returnDate, String req_term, String req_loc, String req_text, String member_latitude,
-			String member_longitude, int req_readcnt, int req_status, String req_img, String member_nick) {
+			int req_returnDate, String req_term, String req_loc, String req_text, String member_latitude,
+			String member_longitude, int req_readcnt, int req_status, String req_img, String member_nick, int day,
+			int hour, int minute) {
 		super();
 		this.req_idx = req_idx;
 		this.req_writer = req_writer;
@@ -42,6 +46,9 @@ public class Request {
 		this.req_status = req_status;
 		this.req_img = req_img;
 		this.member_nick = member_nick;
+		this.day = day;
+		this.hour = hour;
+		this.minute = minute;
 	}
 
 	public int getReq_idx() {
@@ -92,11 +99,11 @@ public class Request {
 		this.req_regdate = req_regdate;
 	}
 
-	public String getReq_returnDate() {
+	public int getReq_returnDate() {
 		return req_returnDate;
 	}
 
-	public void setReq_returnDate(String req_returnDate) {
+	public void setReq_returnDate(int req_returnDate) {
 		this.req_returnDate = req_returnDate;
 	}
 
@@ -172,6 +179,30 @@ public class Request {
 		this.member_nick = member_nick;
 	}
 
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
+	}
+
+	public int getHour() {
+		return hour;
+	}
+
+	public void setHour(int hour) {
+		this.hour = hour;
+	}
+
+	public int getMinute() {
+		return minute;
+	}
+
+	public void setMinute(int minute) {
+		this.minute = minute;
+	}
+
 	@Override
 	public String toString() {
 		return "Request [req_idx=" + req_idx + ", req_writer=" + req_writer + ", req_title=" + req_title
@@ -179,7 +210,10 @@ public class Request {
 				+ ", req_returnDate=" + req_returnDate + ", req_term=" + req_term + ", req_loc=" + req_loc
 				+ ", req_text=" + req_text + ", member_latitude=" + member_latitude + ", member_longitude="
 				+ member_longitude + ", req_readcnt=" + req_readcnt + ", req_status=" + req_status + ", req_img="
-				+ req_img + ", member_nick=" + member_nick + "]";
+				+ req_img + ", member_nick=" + member_nick + ", day=" + day + ", hour=" + hour + ", minute=" + minute
+				+ "]";
 	}
+
+	
 
 }
