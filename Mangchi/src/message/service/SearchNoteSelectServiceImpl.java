@@ -48,28 +48,36 @@ public class SearchNoteSelectServiceImpl implements Service {
 				startrow=(currentPage-1)*MESSAGE_COUNT_PER_PAGE;
 				
 				if(noteSort==1) {
+					
+					String receiver=req.getParameter("loginId");
+					
 					if(searchSort==1) {
-						msgList=dao.searchReceiveNoteById(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
+						msgList=dao.searchReceiveNoteById(conn, startrow, receiver, MESSAGE_COUNT_PER_PAGE, searchText);
 	
 					} else if (searchSort==2) {
-						msgList=dao.searchReceiveNoteByTitle(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
+						msgList=dao.searchReceiveNoteByTitle(conn, startrow, receiver, MESSAGE_COUNT_PER_PAGE, searchText);
 					} else if(searchSort==3) {
-						msgList=dao.searchReceiveNoteByText(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
+						msgList=dao.searchReceiveNoteByText(conn, startrow, receiver, MESSAGE_COUNT_PER_PAGE, searchText);
 					}
 					
-					
+					searchListView=new MessageListView(receiver, messageTotalCount, currentPage, msgList, MESSAGE_COUNT_PER_PAGE, startrow);
+
 				} else {
+					
+					int writer=Integer.parseInt(req.getParameter("loginIdx"));
+					
 					if(searchSort==1) {
-						msgList=dao.searchSendNoteById(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
+						msgList=dao.searchSendNoteById(conn, startrow, MESSAGE_COUNT_PER_PAGE, writer, searchText);
 					} else if(searchSort==2) {
-						msgList=dao.searchSendNoteByTitle(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
+						msgList=dao.searchSendNoteByTitle(conn, startrow, MESSAGE_COUNT_PER_PAGE, writer, searchText);
 					} else if(searchSort==3) {
-						msgList=dao.searchSendNoteByText(conn, startrow, MESSAGE_COUNT_PER_PAGE, searchText);
+						msgList=dao.searchSendNoteByText(conn, startrow, MESSAGE_COUNT_PER_PAGE, writer, searchText);
 						
 					}
+					searchListView=new MessageListView(writer, messageTotalCount, currentPage, msgList, MESSAGE_COUNT_PER_PAGE, startrow);
+
 				}
-				
-				System.out.println(msgList);
+
 
 			} else {
 				currentPage=0;
@@ -77,7 +85,6 @@ public class SearchNoteSelectServiceImpl implements Service {
 			}
 
 			
-			searchListView=new MessageListView(messageTotalCount, currentPage, msgList, MESSAGE_COUNT_PER_PAGE, startrow);
 
 			
 		} catch (SQLException e) {

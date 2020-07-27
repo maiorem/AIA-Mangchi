@@ -3,6 +3,11 @@ package message.model;
 import java.util.List;
 
 public class MessageListView {
+	
+	
+	//받는 사람 아이디
+	private String receiver;
+	private int writer;
 
 	//전체 게시물의 갯수
 	private int messageTotalCount;
@@ -18,7 +23,8 @@ public class MessageListView {
 	private int startRow;
 	
 	
-	public MessageListView(int messageTotalCount, int currentPageNumber, List<Message> messageList,	int messageCountPerpage, int startRow) {
+	public MessageListView(String receiver, int messageTotalCount, int currentPageNumber, List<Message> messageList,	int messageCountPerpage, int startRow) {
+		this.receiver=receiver;
 		this.messageTotalCount = messageTotalCount;
 		this.currentPageNumber = currentPageNumber;
 		this.messageList = messageList;
@@ -26,6 +32,19 @@ public class MessageListView {
 		this.startRow = startRow;
 		calTotalPageCount();
 	}
+	
+	
+	public MessageListView(int writer, int messageTotalCount, int currentPageNumber, List<Message> messageList,	int messageCountPerpage, int startRow) {
+		this.writer=writer;
+		this.messageTotalCount = messageTotalCount;
+		this.currentPageNumber = currentPageNumber;
+		this.messageList = messageList;
+		this.messageCountPerpage = messageCountPerpage;
+		this.startRow = startRow;
+		calTotalPageCount();
+	}
+	
+	
 	
 	private void calTotalPageCount() {
 		
@@ -39,6 +58,19 @@ public class MessageListView {
 			
 		}
 	}
+
+	
+	
+	
+	public String getReceiver() {
+		return receiver;
+	}
+	
+	
+	public int getWriter() {
+		return writer;
+	}
+
 
 	public int getMessageTotalCount() {
 		return messageTotalCount;
@@ -66,11 +98,13 @@ public class MessageListView {
 
 	@Override
 	public String toString() {
-		return "MessageListView [messageTotalCount=" + messageTotalCount + ", currentPageNumber=" + currentPageNumber
-				+ ", messageList=" + messageList + ", pageTotalCount=" + pageTotalCount + ", messageCountPerpage="
-				+ messageCountPerpage + ", startRow=" + startRow + "]";
+		return "MessageListView [receiver=" + receiver + ", messageTotalCount=" + messageTotalCount
+				+ ", currentPageNumber=" + currentPageNumber + ", messageList=" + messageList + ", pageTotalCount="
+				+ pageTotalCount + ", messageCountPerpage=" + messageCountPerpage + ", startRow=" + startRow + "]";
 	}
 
+
+	
 	
 	
 }
