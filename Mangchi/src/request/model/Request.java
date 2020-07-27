@@ -9,6 +9,7 @@ public class Request {
 	private int req_helper;
 	private int req_price;
 	private Date req_regdate;
+	private String req_returnDate;
 	private String req_term;
 	private String req_loc;
 	private String req_text;
@@ -22,8 +23,8 @@ public class Request {
 	public Request() {}
 
 	public Request(int req_idx, int req_writer, String req_title, int req_helper, int req_price, Date req_regdate,
-			String req_term, String req_loc, String req_text, String member_latitude, String member_longitude,
-			int req_readcnt, int req_status, String req_img, String member_nick) {
+			String req_returnDate, String req_term, String req_loc, String req_text, String member_latitude,
+			String member_longitude, int req_readcnt, int req_status, String req_img, String member_nick) {
 		super();
 		this.req_idx = req_idx;
 		this.req_writer = req_writer;
@@ -31,6 +32,7 @@ public class Request {
 		this.req_helper = req_helper;
 		this.req_price = req_price;
 		this.req_regdate = req_regdate;
+		this.req_returnDate = req_returnDate;
 		this.req_term = req_term;
 		this.req_loc = req_loc;
 		this.req_text = req_text;
@@ -88,6 +90,14 @@ public class Request {
 
 	public void setReq_regdate(Date req_regdate) {
 		this.req_regdate = req_regdate;
+	}
+
+	public String getReq_returnDate() {
+		return req_returnDate;
+	}
+
+	public void setReq_returnDate(String req_returnDate) {
+		this.req_returnDate = req_returnDate;
 	}
 
 	public String getReq_term() {
@@ -158,18 +168,18 @@ public class Request {
 		return member_nick;
 	}
 
-	public void setMember_nick(String req_nick) {
-		this.member_nick = req_nick;
+	public void setMember_nick(String member_nick) {
+		this.member_nick = member_nick;
 	}
 
 	@Override
 	public String toString() {
 		return "Request [req_idx=" + req_idx + ", req_writer=" + req_writer + ", req_title=" + req_title
 				+ ", req_helper=" + req_helper + ", req_price=" + req_price + ", req_regdate=" + req_regdate
-				+ ", req_term=" + req_term + ", req_loc=" + req_loc + ", req_text=" + req_text + ", member_latitude="
-				+ member_latitude + ", member_longitude=" + member_longitude + ", req_readcnt=" + req_readcnt
-				+ ", req_status=" + req_status + ", req_img=" + req_img + ", member_nick=" + member_nick + "]";
+				+ ", req_returnDate=" + req_returnDate + ", req_term=" + req_term + ", req_loc=" + req_loc
+				+ ", req_text=" + req_text + ", member_latitude=" + member_latitude + ", member_longitude="
+				+ member_longitude + ", req_readcnt=" + req_readcnt + ", req_status=" + req_status + ", req_img="
+				+ req_img + ", member_nick=" + member_nick + "]";
 	}
 
-	
 }
