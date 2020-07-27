@@ -81,7 +81,7 @@ form{
 						대여일입력<input type="number" name="term_day" value="0" id="term_day" size="10">일
 						대여 시간입력
 						<select name="term_hour" id="term_hour">
-						<c:forEach var="i" begin="0" end="12">
+						<c:forEach var="i" begin="0" end="23">
 							<option value="${i}">${i}시간</option>
 						</c:forEach>
 						</select>
