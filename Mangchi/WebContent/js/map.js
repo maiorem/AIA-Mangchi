@@ -17,7 +17,7 @@
 		
 		var userfunc = function(){
 
-		geocoder.addressSearch('서울특별시 종로구 종로 31',function(result, status) {
+		geocoder.addressSearch(userAddr,function(result, status) {
 				// 정상적으로 검색이 완료됐으면
 				if (status === kakao.maps.services.Status.OK) {
 
@@ -213,7 +213,6 @@
 		  
 		  	var link = document.location.href; 
 
-			console.log(link);
 				
 			var link = link.split('?');
 			
@@ -222,11 +221,7 @@
 				
 			  	var para = document.location.href.split("?"); 
 				var para = para[1].split("="); 
-			
-				console.log(para);
-				
 				currentPageNumber = para[1];
-				console.log(currentPageNumber);
 			}
 			
 			
@@ -247,8 +242,12 @@
 			  endRow = requestTotalCount;
 		  }
 		  
-		  
-		  
+		  function getContextPath(){
+			    var offset=location.href.indexOf(location.host)+location.host.length;
+			    var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
+			    return ctxPath;
+			}
+
 		  if(requestTotalCount > 0){
 			  
 			  
@@ -263,10 +262,21 @@
 				 
 				 tr.attr('id',''+pageList[k].req_idx+'');
 				 
+				 var contextPath = "${pageContext.contextPath}";
 				 
 				 var html = '';
 				 html +='<td>'+pageList[k].req_writer+'</td>';
-				 html +='<td>'+pageList[k].req_title+'</td>';
+				 html +='<td>';	
+				 
+				 
+				 html += '<a href=" ';
+				 html += getContextPath()+'/board/detailRequestInfo.do?req_idx='+pageList[k].req_idx+' " ';
+				 html += '>';
+				 
+				 html += pageList[k].req_title;
+				 html+= '</a>';
+				
+				 html +='</td>';
 				 html +='<td>'+pageList[k].req_price+'</td>';
 				 html +='<td>'+pageList[k].req_regdate+'</td>';
 				 html +='<td>'+pageList[k].req_term+'</td>';
