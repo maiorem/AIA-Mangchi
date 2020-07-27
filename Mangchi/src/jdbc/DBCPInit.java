@@ -43,19 +43,6 @@ public class DBCPInit extends HttpServlet {
 			String jdbcDriver = "jdbc:mysql://mangchi1.cynhwcnt3hk0.ap-northeast-2.rds.amazonaws.com:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
 
 			
-			//String jdbcDriver = "jdbc:mysql://localhost:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-
-//			String jdbcDriver = "jdbc:mysql://mangchi1.cynhwcnt3hk0.ap-northeast-2.rds.amazonaws.com:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-			
-			//String jdbcDriver = "jdbc:mysql://localhost:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-
-<<<<<<< HEAD
-			//String jdbcDriver = "jdbc:mysql://mangchi1.cynhwcnt3hk0.ap-northeast-2.rds.amazonaws.com:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-			//String jdbcDriver = "jdbc:mysql://127.0.0.1:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-=======
-			String jdbcDriver = "jdbc:mysql://mangchi1.cynhwcnt3hk0.ap-northeast-2.rds.amazonaws.com:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-//			String jdbcDriver = "jdbc:mysql://127.0.0.1:3306/project?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
->>>>>>> KJJ
 			String username = "bit";
 			String pw = "bit";
 			
