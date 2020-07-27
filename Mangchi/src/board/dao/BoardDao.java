@@ -348,7 +348,6 @@ public class BoardDao {
 
 	//=============================================================
 
-<<<<<<< HEAD
 	public List<RequestWriting> selectRequestList(Connection conn) throws SQLException {
 		  
 		  List<RequestWriting> requestList = new ArrayList<>();
@@ -399,11 +398,7 @@ public class BoardDao {
 		  
 		  
 		  return requestList;
-		  
-		  }
-=======
-		return requestTotalCount;
-		
+	  
 	}
 
 	public List<RequestWriting> selectMemberList(Connection conn, int startRow, int countPage) throws SQLException {
@@ -507,7 +502,6 @@ public class BoardDao {
 	}
 	
 	
->>>>>>> KJJ
 	
 	
 	
