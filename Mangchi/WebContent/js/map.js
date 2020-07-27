@@ -21,8 +21,7 @@
 				// 정상적으로 검색이 완료됐으면
 				if (status === kakao.maps.services.Status.OK) {
 
-					var coords = new kakao.maps.LatLng(result[0].y,
-							result[0].x);
+					var coords = new kakao.maps.LatLng(result[0].y,result[0].x);
 
 					var marker1 = new daum.maps.Marker({
 						map : map,
@@ -113,7 +112,7 @@
 			        return a[sortingField] - b[sortingField];
 			    });
 			    
-			    
+			    console.log(listt);
 			    var locPosition = new kakao.maps.LatLng(userlist[0], userlist[1]);
 			    map.setCenter(locPosition);
 			    
@@ -265,7 +264,7 @@
 				 var contextPath = "${pageContext.contextPath}";
 				 
 				 var html = '';
-				 html +='<td>'+pageList[k].req_writer+'</td>';
+				 html +='<td>'+pageList[k].writer_nick+'</td>';
 				 html +='<td>';	
 				 
 				 
@@ -279,7 +278,6 @@
 				 html +='</td>';
 				 html +='<td>'+pageList[k].req_price+'</td>';
 				 html +='<td>'+pageList[k].req_regdate+'</td>';
-				 html +='<td>'+pageList[k].req_term+'</td>';
 				 html +='<td>'+pageList[k].req_loc+'</td>';
 				 html +='<td>'+pageList[k].req_text+'</td>';
 				 html +='<td>'+pageList[k].req_readcnt+'</td>'; 

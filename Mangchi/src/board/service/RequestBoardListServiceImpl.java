@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.dao.BoardDao;
 import board.model.RequestWriting;
+import board.model.RequestWriting2;
 import jdbc.ConnectionProvider;
 import service.Service;
 
@@ -22,7 +23,7 @@ public class RequestBoardListServiceImpl implements Service {
 	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
 
 		Connection conn = null;
-		List<RequestWriting> requestWriting = null;
+		List<RequestWriting2> requestWriting = null;
 		
 		try {
 
