@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!doctype html>
 <html lang="ko">
@@ -54,6 +55,7 @@ form{
 	<div>
 
 		<main role="main" class="container">
+			<!-- <form action="test.do" method="post" id="form_write"> -->
 			<form action="insertpost.do" method="post" id="form_write" enctype="multipart/form-data">
 				<div class="write_form">
 					<div class="write_reqinfo req_title">
@@ -74,8 +76,20 @@ form{
 						<input type="text" name="req_price" id="req_priceid" placeholder="(금액)" required/>
 					</div>
 					<div class="write_reqinfo req_term">
-						<label for="req_termid" class="suround_only">반납날짜</label>
-						<input type="datetime-local" id="req_termid" value="xxx" min="yyy" max="zzz" name="req_term" required/>
+						<label for="req_termid" class="suround_only">대여기간</label>
+						<input type="hidden" id="req_termid" name="req_term"/>
+						대여일입력<input type="number" name="term_day" value="0" id="term_day" size="10">일
+						대여 시간입력
+						<select name="term_hour" id="term_hour">
+						<c:forEach var="i" begin="0" end="12">
+							<option value="${i}">${i}시간</option>
+						</c:forEach>
+						</select>
+						<select name="term_minute" id="term_minute">
+							<option value="0">00분</option>
+							<option value="30">30분</option>
+							
+						</select>
 					</div>
 					<div class="write_reqinfo req_loc">
 						<label class="suround_only">받을주소</label>
@@ -97,10 +111,10 @@ form{
 					<label class="suround_only">상세 내용</label>
 					<textarea form="form_write" name="req_text" maxlength="2000" style="width: 100%; height: 300px;"
 						placeholder="상세 내용"></textarea>
-					<input type="button" id="button1" onclick="button1_click();" value="버튼1" />
 					<input type="submit" value="글쓰기 완료">
 				</div>
-				
+				<input type="hidden" name="req_latitude" id="req_latitude"/>
+				<input type="hidden" name="req_longitude" id="req_longitude"/>
 			</form>
 		</main>
 	</div>
@@ -110,6 +124,30 @@ form{
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b991b264fa5727cb3e70e18b0cfb366&libraries=services"></script>
 <script>
+	var req_term;
+	$('#form_write').submit(function (){
+			//사용자가 설정한 렌트기간을 초단위로 변경
+			var term_day=parseInt($('#term_day').val())*60*60*24*1000;
+			var term_hour=parseInt($('#term_hour').val())*60*60*1000;
+			var term_minute=parseInt($('#term_minute').val())*60*1000;
+			var rentTerm=term_day+term_hour+term_minute;
+			
+			if(rentTerm==0){
+				alert('대여기간을 입력해주세요');
+				$('#term_day').focus();
+			}
+			
+			//현재 시간을 구하고 --> 초단위
+			var nowTime = new Date().getTime();
+			console.log(new Date());
+			
+			//현재시간에 렌트기간을 더하면 반납시간나옴-->초
+			req_term=nowTime+rentTerm;
+			var inputTerm = $('<input type="hidden" id="req_termid" name="req_term" value="'+rentTerm+'"/>');
+			$('#form_write').append(inputTerm);
+		}
+	);
+	
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
@@ -140,9 +178,11 @@ form{
                     if (status === daum.maps.services.Status.OK) {
 
                         var result = results[0]; //첫번째 결과의 값을 활용
-
+						
                         // 해당 주소에 대한 좌표를 받아서
                         var coords = new daum.maps.LatLng(result.y, result.x);
+                        $('#req_latitude').attr('value',result.y);
+                        $('#req_longitude').attr('value',result.x);
                         // 지도를 보여준다.
                         mapContainer.style.display = "block";
                         map.relayout();
@@ -155,6 +195,8 @@ form{
             }
         }).open();
     }
+    
+    
 </script>
 <script>
     

@@ -89,7 +89,8 @@
 				      					</div>
 			      					</div>
 			      				</div>
-								<div class="card-back">
+			      				</div> <!-- card-front -->
+								<div class="card-back" style="height: 600px;">
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Sign Up</h4>
@@ -126,8 +127,10 @@
 											<a href="#" class="btn mt-4 regSub">submit</a>
 				      					</div>
 			      					</div>
-			      				</div>
-			      			</div>
+			      				</div> <!--  card back -->
+			      			
+			      			</div> <!-- card-3d-wrapper -->
+			      			
 			      		</div>
 			      	</div>
 		      	</div>
@@ -175,6 +178,7 @@ function checkLoginState() {
 	  FB.getLoginStatus(function(response) {
 	    statusChangeCallback(response);
 	  });
+}
 </script>
 
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->

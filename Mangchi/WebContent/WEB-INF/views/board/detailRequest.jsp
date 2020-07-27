@@ -97,7 +97,7 @@
 	        	<div class="title">반납일시</div>
 	        </div>
 	        <div class="col-xs-8 col-lg-8">
-	        	<div class="contents">${choiceRequest.req_term}</div>
+	        	<div class="contents" id="return_date">${choiceRequest.req_returnDate}</div>
 	        </div>
 	        
 	        <div class="col-xs-3 col-lg-3">
@@ -159,7 +159,7 @@
 	$(document).ready(function(){
 		//현재 게시글을 통해 나에게 메세지 보낸 사람의 배열 
 		var arr = new Array();
-		
+		//1595768227494
 		//select 태그 동적생성
 		var selectTag=$('<select></select>');
 		selectTag.attr('name','helpers');
@@ -200,6 +200,7 @@
 		//status에 따라 렌탈완료버튼 보이기
 		if(helperStatus==0){
 			status_td.text('렌탈대기');
+			$('#return_date').text('(아직 렌탈 대기중입니다)');
 			$('#helpEnd').hide();
 		}else if(helperStatus==1){
 			status_td.css('font-weight','bold');
@@ -210,6 +211,7 @@
 			status_td.css('color','green');
 			status_td.css('font-weight','bold');
 			status_td.text('렌탈완료');
+		/* 	$('#return_date').text('${choiceRequest.req_returnDate}'); */
 			$('#helpEnd').hide();
 			$('#sendNote').hide();
 			//렌탈 완료이면 셀렉트 태그 없애고 닉네임 입력
@@ -279,22 +281,20 @@
 				data : {
 					req_idx: idx,
 					req_helper: $('#helpers').val(),
-					complete: 0
+					complete: 0,
+					req_term:'${choiceRequest.req_term}'
 					},
 				success : function(data){
 					if(data==1){
 						if(helperStatus==1&&changeHelper==1){
 							alert('헬퍼를 변경합니다');
-							status_td.text('렌탈중');
 							location.reload();
 						}else{
 							alert('렌탈을 시작합니다');
-							status_td.text('렌탈중');
 							location.reload();
 						}
 					}else if(data==0){
 						alert('대기중으로 전환합니다');
-						status_td.text('렌탈대기');
 						location.reload();
 					}
 				}
