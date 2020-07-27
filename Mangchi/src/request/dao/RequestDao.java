@@ -1,10 +1,12 @@
 package request.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +29,7 @@ public class RequestDao {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs;
-		
 		List<Request> list = new ArrayList();
-
 
 		try {
 			// String sql = "select * from project.request_list where req_writer=? limit ?,?";
@@ -55,6 +55,15 @@ public class RequestDao {
 				req.setReq_status(rs.getInt("req_status"));
 				req.setReq_regdate(rs.getDate("req_regdate"));
 				req.setReq_term(rs.getString("req_term"));
+				
+				if(req.getReq_term()!=null && req.getReq_term().trim().length()>0) {
+					//날짜변환
+					long a =Long.parseLong(req.getReq_term());
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					Date returnDate= new Date(a);
+					req.setReq_returnDate(sdf.format(returnDate));
+				}
+				
 				list.add(req);
 			}
 
@@ -133,6 +142,15 @@ public class RequestDao {
 					req.setReq_status(rs.getInt("req_status"));
 					req.setReq_regdate(rs.getDate("req_regdate"));
 					req.setReq_term(rs.getString("req_term"));
+					
+					if(req.getReq_term()!=null && req.getReq_term().trim().length()>0) {
+						//날짜변환
+						long a =Long.parseLong(req.getReq_term());
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+						Date returnDate= new Date(a);
+						req.setReq_returnDate(sdf.format(returnDate));
+					}
+					
 					list.add(req);
 				}
 
@@ -249,6 +267,15 @@ public class RequestDao {
 				req.setReq_status(rs.getInt("req_status"));
 				req.setReq_regdate(rs.getDate("req_regdate"));
 				req.setReq_term(rs.getString("req_term"));
+				
+				if(req.getReq_term()!=null && req.getReq_term().trim().length()>0) {
+					//날짜변환
+					long a =Long.parseLong(req.getReq_term());
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					Date returnDate= new Date(a);
+					req.setReq_returnDate(sdf.format(returnDate));
+				}
+				
 				list.add(req);
 			}
 
