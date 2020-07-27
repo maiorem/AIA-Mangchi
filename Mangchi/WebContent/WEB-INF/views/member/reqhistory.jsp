@@ -168,4 +168,4 @@
 					});
 </script>
 <script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script>
-</body>
+
