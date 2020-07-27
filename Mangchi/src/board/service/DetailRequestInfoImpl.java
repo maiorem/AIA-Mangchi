@@ -34,7 +34,7 @@ public class DetailRequestInfoImpl implements Service {
 			dao=BoardDao.getInstance();
 			rw= dao.getDetailRequestInfo(conn,req_idx);
 			
-			if(rw.getReq_returnDate()!=null) {
+			if(rw.getReq_returnDate()!=null && rw.getReq_returnDate().trim().length()>0) {
 				//날짜변환
 				long a =Long.parseLong(rw.getReq_returnDate());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
