@@ -425,6 +425,39 @@ public class BoardDao {
 		return requestList;
 		
 	}
+	public List<RequestWriting2> getHollys(Connection conn) throws SQLException {
+		List<RequestWriting2>list=new ArrayList<RequestWriting2>();
+		Statement stmt = null;
+		ResultSet rs = null;
+		RequestWriting2 rw = null;
+		try {
+			stmt = conn.createStatement();
+			String sql = "select * from project.request_list limit 0,7";
+			rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				rw = new RequestWriting2();
+				rw.setReq_idx(rs.getInt("req_idx"));
+				rw.setReq_title(rs.getString("req_title")); // 게시글 제목
+				rw.setReq_price(rs.getInt("req_price")); // 가격
+				rw.setReq_loc(rs.getString("req_loc")); // 지역
+				rw.setReq_text( rs.getString("req_text")); // 상세내용
+				rw.setReq_readcnt(rs.getInt("req_readcnt")); // 조회수
+				rw.setReq_status(rs.getInt("req_status")); // 현재상태
+				rw.setReq_img(rs.getString("req_img")); // 사진
+				rw.setReq_latitude(rs.getDouble("req_latitude"));
+				rw.setReq_longitude(rs.getDouble("req_longitude"));
+				list.add(rw);				
+			}
+		} finally {
+			if(stmt!=null) {
+				stmt.close();
+			}
+			if(rs!=null) {
+				rs.close();
+			}
+		}
+		return list;
+	}
 	
 	
 	
