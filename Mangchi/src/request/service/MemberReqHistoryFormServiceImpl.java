@@ -3,12 +3,15 @@ package request.service;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.dao.BoardDao;
+import board.model.RequestWriting2;
 import jdbc.ConnectionProvider;
 import member.model.Member;
 import request.dao.RequestDao;
@@ -20,7 +23,6 @@ public class MemberReqHistoryFormServiceImpl implements Service {
 
 	RequestDao dao;
 
-	
 	@Override
 	public String getViewPage(HttpServletRequest req, HttpServletResponse resp) {
 		
@@ -60,7 +62,6 @@ public class MemberReqHistoryFormServiceImpl implements Service {
 				// ���� ��, ������ ��
 				startRow = (pageNumber - 1) * COUNT_PER_PAGE ;
 				
-
 				requestList = dao.selectReqHistory(conn, idx, startRow, COUNT_PER_PAGE);
 				System.out.println("requestList: "+requestList);
 

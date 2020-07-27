@@ -18,7 +18,7 @@ public class SendMessageListServiceImpl implements Service {
 
 
 	MessageDao dao;
-	private final int MESSAGE_COUNT_PER_PAGE=10;
+	private final int MESSAGE_COUNT_PER_PAGE=50;
 
 
 	@Override

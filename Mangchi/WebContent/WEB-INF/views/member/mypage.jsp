@@ -90,7 +90,7 @@ span.star-prototype > * {
 									<p style="text-align: center">요청 내역</p>
 							</div>
 							<div style="width: 50%; text-align: center">
-							<a href="${pageContext.request.contextPath}/request/reqhistory.do"><img src="<c:url value="/img/logo3.png"/>" style="width: 150px; height: 100px;" ></a>						
+							<a href="${pageContext.request.contextPath}/request/rnthistory.do"><img src="<c:url value="/img/logo3.png"/>" style="width: 150px; height: 100px;" ></a>						
 									<p style="text-align: center">대여 내역</p>
 							</div>
 						</div>
