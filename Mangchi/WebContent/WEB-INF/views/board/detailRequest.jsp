@@ -80,7 +80,7 @@
 	        </div>
 	        
 	        <div class="col-xs-3 col-lg-3">
-	        	<div class="title">수행자</div>
+	        	<div class="title">헬퍼</div>
 	        </div>
 	        <div class="col-xs-8 col-lg-8">
 	        	<div class="contents" id="selectHelper"></div>
@@ -205,13 +205,14 @@
 		}else if(helperStatus==1){
 			status_td.css('font-weight','bold');
 			status_td.css('color','blue');
+			$('#return_date').text('${choiceRequest.req_returnDate}');
 			status_td.text('렌탈중');
 			$('#helpEnd').show();
 		}else if(helperStatus==2){
 			status_td.css('color','green');
 			status_td.css('font-weight','bold');
 			status_td.text('렌탈완료');
-		/* 	$('#return_date').text('${choiceRequest.req_returnDate}'); */
+			$('#return_date').text('${choiceRequest.req_returnDate}');
 			$('#helpEnd').hide();
 			$('#sendNote').hide();
 			//렌탈 완료이면 셀렉트 태그 없애고 닉네임 입력
@@ -239,9 +240,14 @@
 			}else{
 				console.log('다른');	
 				$('#helpEnd').hide();
-				for(var i=0;i<arr.length;i++){
-					if(helper==arr[i].idx){
-						$('#selectHelper').html(arr[i].nick);
+				if(helper==0){
+					$('#selectHelper').html('(아직 헬퍼가 없습니다)');
+				}else{
+					for(var i=0;i<arr.length;i++){
+						if(helper==arr[i].idx){
+							console.log(arr[i].nick);
+							$('#selectHelper').html(arr[i].nick);
+						}
 					}
 				}
 			}

@@ -95,7 +95,7 @@ form{
 						<label class="suround_only">받을주소</label>
 						<input type="text" id="sample5_address" name="req_loc" value="${loginInfo.addr}" readonly placeholder="(주소검색으로 입력)">
 						<input type="button" onclick="sample5_execDaumPostcode()" value="다른주소로 변경" ><br>
-						<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+						<div id="map" style="width:300px;height:300px;margin-top:10px;display:block"></div>
 					</div>
 					<div class="write_reqinfo req_img">
 						<label class="suround_only">참고 이미지</label>
@@ -113,8 +113,8 @@ form{
 						placeholder="상세 내용"></textarea>
 					<input type="submit" value="글쓰기 완료">
 				</div>
-				<input type="text" name="req_latitude" value="${loginInfo.latitude}" id="req_latitude"/>
-				<input type="text" name="req_longitude" value="${loginInfo.longitude}" id="req_longitude"/>
+				<input type="hidden" name="req_latitude" value="${loginInfo.latitude}" id="req_latitude"/>
+				<input type="hidden" name="req_longitude" value="${loginInfo.longitude}" id="req_longitude"/>
 			</form>
 		</main>
 	</div>
@@ -150,7 +150,7 @@ form{
 	
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            center: new daum.maps.LatLng(${loginInfo.latitude}, ${loginInfo.longitude}), // 지도의 중심좌표
             level: 5 // 지도의 확대 레벨
         };
 
@@ -160,7 +160,7 @@ form{
     var geocoder = new daum.maps.services.Geocoder();
     //마커를 미리 생성
     var marker = new daum.maps.Marker({
-        position: new daum.maps.LatLng(37.537187, 127.005476),
+        position: new daum.maps.LatLng(${loginInfo.latitude}, ${loginInfo.longitude}),
         map: map
     });
 
