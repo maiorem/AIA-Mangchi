@@ -29,18 +29,24 @@ div.wrap {
 	height: 700px;
 }
 
-div.noteBox {
+div.boxarea {
+	overflow: hidden;
+}
+
+div.searchNote {
+	width: 700px;
+	float: right;
+}
+
+/* div.noteBox {
 	height: 650px;
 }
 
 div.onlybox {
 	height: 600px;
 	overflow: auto;
-}
+} */
 
-div.SendNoteArea {
-	display: none;
-}
 
 div.paging {
 	text-align: center;
@@ -58,14 +64,53 @@ table.box {
 .check_not {
 	color: red;
 }
+a.currentPage{
+	font-weight: bold;
+}
+@media only screen and (max-width: 760px) , ( min-device-width : 768px)
+	and (max-device-width: 1024px) {
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr {
+		display: block;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	tr {
+		border: 1px solid #ccc;
+	}
+	td {
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+	}
+	td:before {
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
+	td::before {
+		font-weight: bold;
+		color: #369;
+	}
+	td:nth-of-type(4) {
+		width: 80%;
+	}
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
-	function messageListDel(idx) {
-		if (confirm('아직 상대가 메시지를 읽지 않았습니다.\n발송을 취소하시겠습니까?')) {
-			location.href = 'messageDelete.do?idx=' + idx;
-		}
-	}
 
 	function messageDel(idx) {
 		if (confirm('해당 메시지를 정말로 삭제하시겠습니까?\n삭제된 메시지는 복구할 수 없습니다.')) {
@@ -73,20 +118,7 @@ table.box {
 		}
 	}
 
-	$(document).ready(function() {
-		
-		$('#reBox').click(function() {
-			$('div.ReNoteArea').css('display', 'block');
-			$('div.SendNoteArea').css('display', 'none');
 
-		});
-
-		$('#seBox').click(function() {
-			$('div.ReNoteArea').css('display', 'none');
-			$('div.SendNoteArea').css('display', 'block');
-		});
-
-	});
 </script>
 </head>
 <body>
@@ -101,9 +133,25 @@ table.box {
 
 		<div class="boxarea" id="noteBoxArea">
 			<button class="btn btn-outline-success my-2 my-sm-0" id="reBox"
-				type="button">받은 쪽지함</button>
+				type="button"><a href='<c:url value="/message/messageBox.do"/>'>받은 쪽지함</a></button>
 			<button class="btn btn-outline-success my-2 my-sm-0" id="seBox"
-				type="button">보낸 쪽지함</button>
+				type="button"><a href='<c:url value="/message/sendMessageBox.do"/>'>보낸 쪽지함</a></button>
+			<div class="searchNote">
+				<form class="form-inline mt-2 mt-md-0"
+					action="<c:url value="/message/searchNote.do"/>" method="get">
+					<select class="form-control mr-sm-2" name="noteSort">
+						<option selected value="1">받은 쪽지함</option>
+						<option value="2">보낸 쪽지함</option>
+					</select> <select class="form-control mr-sm-2" name="searchSort">
+						<option selected value="1">아이디</option>
+						<option value="2">제목</option>
+						<option value="3">내용</option>
+					</select> <input class="form-control mr-sm-2" type="text" name="noteSearch"
+						placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">쪽지
+						검색</button>
+				</form>
+			</div>
 
 		</div>
 		<hr>
@@ -152,84 +200,14 @@ table.box {
 				</div>
 				<div class="paging">
 					<c:forEach begin="1" end="${noteList.pageTotalCount}" var="num">
-						<a href="messageList.do?page=${num}"
+						<a href="messageBox.do?page=${num}"
 							${noteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
 					</c:forEach>
 				</div>
 			</div>
 
-			<div class="noteBox SendNoteArea">
-				<div class="onlybox">
-					<c:if test="${noteList.messageList != null}">
-						<table class="table table-hover">
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">받는이</th>
-								<th scope="col">제목</th>
-								<th scope="col">날짜</th>
-								<th scope="col">읽음여부</th>
-								<th scope="col">삭제</th>
-							</tr>
-							<c:forEach items="${noteList.messageList}" var="SenderNotes">
-								<c:if test="${loginInfo.idx eq SenderNotes.msg_writer}">
-									<tr>
-										<th scope="row">-</th>
-										<td>${SenderNotes.msg_receiver}</td>
-										<td><a class="view"
-											href='<c:url value="/message/noteview.do?idx=${SenderNotes.msg_idx}"/>'>${SenderNotes.msg_title}</a></td>
-										<td>${SenderNotes.msg_date}</td>
-										<c:if test="${SenderNotes.readcheck==0}">
-										<td><span class="readCheck" style="color: red;">읽지 않음</span></td>
-																				<td><a
-											href="javascript:messageListDel(${SenderNotes.msg_idx})">
-										발송취소
-										</a></td>
-										</c:if>
-										<c:if test="${SenderNotes.readcheck==1}">
-										<td><span class="readCheck" style="color: green;">읽음</span></td>
-										<td style="color: gray;">발송취소불가</td>
-										</c:if>
-										
-									</tr>
-								</c:if>
-							</c:forEach>
-						</table>
-					</c:if>
-
-					<c:if test="${noteList.messageList==null}">
-
-						<h3>보낸 쪽지가 존재하지 않습니다.</h3>
-
-					</c:if>
-				</div>
-				<div class="paging">
-					<c:forEach begin="1" end="${noteList.pageTotalCount}" var="num">
-						<a href="messageList.do?page=${num}"
-							${noteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
-					</c:forEach>
-				</div>
-
-			</div>
-
-
-
 		</div>
-		<div class="searchNote">
-			<form class="form-inline mt-2 mt-md-0"
-				action="<c:url value="/message/searchNote.do"/>" method="get">
-				<select class="form-control mr-sm-2" name="noteSort">
-					<option selected value="1">받은 쪽지함</option>
-					<option value="2">보낸 쪽지함</option>
-				</select> <select class="form-control mr-sm-2" name="searchSort">
-					<option selected value="1">아이디</option>
-					<option value="2">제목</option>
-					<option value="3">내용</option>
-				</select> <input class="form-control mr-sm-2" type="text" name="noteSearch"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">쪽지
-					검색</button>
-			</form>
-		</div>
+
 	</div>
 
 

@@ -71,16 +71,38 @@
 				<article class="horizontal card" >
 					<div class="card__content">
 						<div class="card__title">
-							<p id="p1" >게시물 번호 : ${request.req_idx} 요청자 :
-								${request.member_nick} 게시물 제목 : ${request.req_title}</p>
-								
-						</div>
-						<div class="card__date">${request.req_regdate}&middot;
-							<span class="card__time-to-read">${request.req_price}</span>
+							<p id="p1">NO.${request.req_idx} >> ${request.req_title}</p>
 						</div>
 						<div class="card__excerpt">
-							<p id="p2">게시물 대여 기간 : ${request.req_term} 게시물 지역 :
-								${request.req_loc}</p>
+							<table>
+
+								<tr>
+									<td><p id="p2">작성자 | ${request.member_nick}</p></td>
+									<td></td>
+									<td><p id="p2">지역 | ${request.req_loc}</p></td>
+								</tr>
+								<tr>
+									<td><p id="p2">대여 기간 | ${request.req_term}</p></td>
+									<td></td>
+									<td><p id="p2">
+											대여 상태 |
+											<c:if test="${request.req_status eq 0}">
+								렌탈 상태: 대기중
+							</c:if>
+											<c:if test="${request.req_status eq 1}">
+								렌탈 상태: 렌탈 중
+							</c:if>
+											<c:if test="${request.req_status eq 2}">
+								렌탈 상태: 렌탈 완료
+							</c:if>
+										</p></td>
+								</tr>
+								<tr>
+									<td><p id="p2">가격 | ${request.req_price}</p></td>
+									<td></td>
+									<td><p id="p2">작성 날짜 | ${request.req_regdate}</p></td>
+								</tr>
+							</table>
 						</div>
 						<div class="card__tags">
 

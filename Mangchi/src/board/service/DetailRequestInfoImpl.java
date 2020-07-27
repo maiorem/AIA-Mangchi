@@ -2,6 +2,8 @@ package board.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,11 +28,19 @@ public class DetailRequestInfoImpl implements Service {
 			loginIdx=loginMember.getIdx();
 		}		
 		int req_idx = Integer.parseInt(req.getParameter("req_idx"));
-		
+		System.out.println("euna: "+req_idx);
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao=BoardDao.getInstance();
 			rw= dao.getDetailRequestInfo(conn,req_idx);
+			
+			if(rw.getReq_returnDate()!=null && rw.getReq_returnDate().trim().length()>0) {
+				//날짜변환
+				long a =Long.parseLong(rw.getReq_returnDate());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				Date returnDate= new Date(a);
+				rw.setReq_returnDate(sdf.format(returnDate));
+			}
 			//로그인한 사용자가 글쓴이 일 때
 			if(rw.getReq_writer()==loginIdx) {
 				list = dao.getRequestHelpers(conn,loginIdx,req_idx);

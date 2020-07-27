@@ -28,7 +28,8 @@ public class MemberMyPageFormServiceImpl implements Service {
 		HttpSession session=req.getSession();
 		Member rv = (Member)session.getAttribute("loginInfo");
 		int member_idx=rv.getIdx();
-		
+		String membernick=rv.getNick();
+		String memberaddr=rv.getAddr();
 		
 		try {
 			
@@ -51,8 +52,9 @@ public class MemberMyPageFormServiceImpl implements Service {
 			
 			
 			req.setAttribute("score", score);
-			
-			
+			req.setAttribute("membernick",membernick);
+			req.setAttribute("memberaddr",memberaddr);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -24,29 +24,46 @@
 <!-- Custom styles for this template -->
 <link href='<c:url value="/css/carousel.css"/>' rel="stylesheet">
 <style>
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
 #note {
 	border: 1, solid, black;
+	margin: 100px;
+	
+}
+
+table.noteForm{
+	margin: 0 auto;
 }
 
 #noteText {
 	width: 500px;
 	height: 500px;
 }
+
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+
+}
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>	
+	
 
 	<div id="note">
 		<form action="<c:url value='/message/sendMessage.do'/>" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="senderIdx" value="${loginInfo.idx}">
 			<input type="hidden" name="reqListIdx" value="${req_idx}">
 
-			<table>
+			<table class="noteForm">
 				<tr>
 					<td>보내는 사람</td>
 					<td><input type="email" name="sender" id="sender" value="${loginInfo.id}" readonly></td>
@@ -69,7 +86,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" value="보내기"></td>
+					<td style="text-align: center;"><input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="쪽지보내기"></td>
 				</tr>
 			</table>
 		</form>

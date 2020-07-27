@@ -49,6 +49,8 @@
 																<input type="email" name="logEmail" class="form-style"
 																	placeholder="Your Email" id="logemail"
 																	autocomplete="off" required>
+																<div id="idSuccess">사용 가능한 아이디입니다.</div>
+																<div id="idDanger">중복된 아이디입니다.</div>
 																<input type="hidden" id="kid" name="kid" value="">
 																	<i class="input-icon uil uil-at"></i>
 															</div>
@@ -59,7 +61,7 @@
 																<input type="button" class="btn mt-4" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 																<div id="map"></div>
 															</div>
-															<input type="submit" class="btn mt-4">
+															<input type="submit" class="btn mt-4 regSub">
 														</form>
 													</div>
 												</div>
@@ -137,6 +139,32 @@
             }
         }).open();
     }
+</script>
+<!-- 아이디 중복 체크 -->
+<script>
+	$(document).ready(function() {
+		$("#idSuccess").hide();
+		$("#idDanger").hide();
+		$('#logemail').focusout(function() {
+			$.ajax({
+				url : 'loginIdChk.do',
+				data : {
+					uid : $(this).val()
+				},
+				success : function(data) {
+					if (data == '0') {
+						$("#idSuccess").show();
+						$("#idDanger").hide();
+						$("#regSub").removeAttr("disabled");
+					} else {
+						$("#idSuccess").hide();
+						$("#idDanger").show();
+						$("#regSub").attr("disabled", "disabled");
+					}
+				}
+			});
+		});
+	});
 </script>
 </body>
 </html>

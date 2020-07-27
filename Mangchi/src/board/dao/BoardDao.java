@@ -60,8 +60,10 @@ public class BoardDao {
 				 + "req_loc,"
 				 + "req_term,"
 				 + "req_text,"
-				 + "req_img) "
-				 + "values(?,?,?,?,?,?,?)";
+				 + "req_img,"
+				 + "req_latitude,"
+				 + "req_longitude) "
+				 + "values(?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -73,6 +75,8 @@ public class BoardDao {
 			pstmt.setString(5, rw.getReq_term());
 			pstmt.setString(6, rw.getReq_text());
 			pstmt.setString(7, rw.getReq_img());
+			pstmt.setDouble(8, rw.getReq_latitude());
+			pstmt.setDouble(9, rw.getReq_longitude());
 			
 			result = pstmt.executeUpdate();
 			
@@ -156,53 +160,53 @@ public class BoardDao {
 		System.out.println("내가쓴 게시물 수 : "+resultCnt);
 		return resultCnt;
 	}
-	
-	public List<RequestWriting2> selectMemberList(Connection conn, int startRaw,int member_idx, int mESSAGE_COUNT_PER_PAGE) throws SQLException {
-		List<RequestWriting2> list = new ArrayList<RequestWriting2>();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		RequestWriting2 rw=null;
-		String sql="select * from project.member m join project.request_list rl where m.member_idx=rl.req_writer and rl.req_writer=? limit ?,?";
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, member_idx);
-			pstmt.setInt(2, startRaw);
-			pstmt.setInt(3, mESSAGE_COUNT_PER_PAGE);
-			
-			rs= pstmt.executeQuery();
-			while(rs.next()) {
-				Timestamp regdate = rs.getTimestamp("req_regdate");
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				rw=new RequestWriting2(
-						rs.getInt("req_idx"), 
-						rs.getInt("req_writer"),
-						rs.getString("member_nick"), 
-						rs.getString("req_title"),
-						rs.getInt("req_helper"),
-						rs.getInt("req_price"), 
-						sdf.format(regdate),
-						rs.getString("req_term"),
-						rs.getString("req_loc"), 
-						rs.getString("req_text"),
-						rs.getInt("req_readcnt"),
-						0,
-						0,
-						rs.getInt("req_status"),
-						rs.getString("req_img"));
-				list.add(rw);
-			}
-//			for(int i =0;i<list.size();i++) {
+//	
+//	public List<RequestWriting2> selectMemberList(Connection conn, int startRaw,int member_idx, int mESSAGE_COUNT_PER_PAGE) throws SQLException {
+//		List<RequestWriting2> list = new ArrayList<RequestWriting2>();
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		RequestWriting2 rw=null;
+//		String sql="select * from project.member m join project.request_list rl where m.member_idx=rl.req_writer and rl.req_writer=? limit ?,?";
+//		try {
+//			pstmt=conn.prepareStatement(sql);
+//			pstmt.setInt(1, member_idx);
+//			pstmt.setInt(2, startRaw);
+//			pstmt.setInt(3, mESSAGE_COUNT_PER_PAGE);
+//			
+//			rs= pstmt.executeQuery();
+//			while(rs.next()) {
+//				Timestamp regdate = rs.getTimestamp("req_regdate");
+//				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//				rw=new RequestWriting2(
+//						rs.getInt("req_idx"), 
+//						rs.getInt("req_writer"),
+//						rs.getString("member_nick"), 
+//						rs.getString("req_title"),
+//						rs.getInt("req_helper"),
+//						rs.getInt("req_price"), 
+//						sdf.format(regdate),
+//						rs.getString("req_term"),
+//						rs.getString("req_loc"), 
+//						rs.getString("req_text"),
+//						rs.getInt("req_readcnt"),
+//						0,
+//						0,
+//						rs.getInt("req_status"),
+//						rs.getString("req_img"));
+//				list.add(rw);
 //			}
-		} finally{
-			if(pstmt!=null) {
-				pstmt.close();
-			}
-			if(rs!=null) {
-				rs.close();
-			}
-		};
-		return list;
-	}
+////			for(int i =0;i<list.size();i++) {
+////			}
+//		} finally{
+//			if(pstmt!=null) {
+//				pstmt.close();
+//			}
+//			if(rs!=null) {
+//				rs.close();
+//			}
+//		};
+//		return list;
+//	}
 	public RequestWriting2 getDetailRequestInfo(Connection conn, int req_idx) throws SQLException {
 		RequestWriting2 rw=null;
 		PreparedStatement pstmt = null;
@@ -227,11 +231,12 @@ public class BoardDao {
 						rs.getInt("req_price"),
 						sdf.format(regdate),
 						rs.getString("req_term"),
+						rs.getString("req_returndate"),
 						rs.getString("req_loc"), 
 						rs.getString("req_text"),
+						rs.getDouble("req_latitude"),
+						rs.getDouble("req_longitude"),
 						rs.getInt("req_readcnt"),
-						0,
-						0,
 						rs.getInt("req_status"),
 						rs.getString("req_img"));
 			}
@@ -281,26 +286,30 @@ public class BoardDao {
 		}
 		return list;
 	}
-	public int chooseHelperStatus(Connection conn, int req_idx, int helper) throws SQLException {
+	public int chooseHelperStatus(Connection conn, int req_idx, int helper,String req_returnDate) throws SQLException {
 		
 		int num = 1;
 		PreparedStatement pstmt = null;
+		//대기중으로 바꿧을 때
 		if(helper==-1) {
 			num=0;
 		}
 		String sql = "UPDATE `project`.`request_list` " + 
 					 "SET " + 
 					 "`req_helper` = ?, " + 
-					 "`req_status` = "+num+" " + 
+					 "`req_status` = "+num+", " + 
+					 " req_returndate=? " +
 					 "WHERE `req_idx` = ?;";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			if(helper==-1) {
 				pstmt.setNull(1, java.sql.Types.NULL);
-				pstmt.setInt(2, req_idx);
+				pstmt.setNull(2, java.sql.Types.NULL);
+				pstmt.setInt(3, req_idx);
 			}else {
 				pstmt.setInt(1, helper);
-				pstmt.setInt(2, req_idx);				
+				pstmt.setString(2, req_returnDate);
+				pstmt.setInt(3, req_idx);
 			}
 			pstmt.executeUpdate();
 			

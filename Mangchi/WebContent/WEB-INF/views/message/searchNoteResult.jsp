@@ -29,18 +29,15 @@ div.wrap {
 	height: 500px;
 }
 
-div.noteBox {
-	height: 450px;
-}
 
 div.SendNoteArea {
 	display: none;
 }
 
-div.contentsArea {
+/* div.contentsArea {
 	height: 450px;
 	overflow: auto;
-}
+} */
 
 table.box {
 	width: 800px;
@@ -54,6 +51,59 @@ table.box {
 .check_not {
 	color: red;
 }
+div.paging {
+	text-align: center;
+}
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	td::before{
+	font-weight: bold;
+	color: #369;
+	}
+	
+	
+	td:nth-of-type(4){
+	
+	width: 80%;
+	}
+}	
+
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
@@ -69,48 +119,6 @@ table.box {
 		}
 	}
 
-	$(document).ready(function() {
-
-		$('#reBox').click(function() {
-			$('div.ReNoteArea').css('display', 'block');
-			$('div.SendNoteArea').css('display', 'none');
-
-		});
-
-		$('#seBox').click(function() {
-			$('div.ReNoteArea').css('display', 'none');
-			$('div.SendNoteArea').css('display', 'block');
-		});
-
-		$('.msgcheck').click(function() {
-			$('.onlycheck').attr('checked');
-
-		});
-
-		$('.sendmsgcheck').click(function() {
-			$('.sendonlycheck').attr('checked');
-		});
-
-		$('a.view').click(function() {
-
-			$.ajax({
-				url : 'readCheck.do',
-				data : {
-					idx : $(this).param()
-				},
-				success : function(data) {
-					if (data = 'Y') {
-						$('#checkmsg').text("읽음");
-						$('#checkmsg').addClass('check_ok');
-					} else {
-						$('#checkmsg').text("읽지않음");
-						$('#checkmsg').addClass('check_not');
-					}
-				}
-			});
-		});
-
-	});
 </script>
 </head>
 <body>
@@ -119,7 +127,9 @@ table.box {
 
 		<div class="boxarea" id="noteBoxArea">
 			<button class="btn btn-outline-success my-2 my-sm-0" id="reBox"
-				type="button"><a href="<c:url value="/message/messageBox.do"/>">쪽지함으로 돌아가기</a></button>
+				type="button">
+				<a href="<c:url value="/message/messageBox.do"/>">쪽지함으로 돌아가기</a>
+			</button>
 
 		</div>
 		<hr>
@@ -128,8 +138,7 @@ table.box {
 				<c:if test="${searchNoteList.messageList != null}">
 					<table class="table table-hover">
 						<tr>
-							<th scope="col"><input type="checkbox" name="msgCheck"
-								class="msgcheck allcheck" id="msgAllCheck"></th>
+							<th scope="col">#</th>
 							<th scope="col">받은이</th>
 							<th scope="col">보낸이</th>
 							<th scope="col">제목</th>
@@ -137,27 +146,52 @@ table.box {
 							<th scope="col">삭제</th>
 						</tr>
 						<c:forEach items="${searchNoteList.messageList}" var="notes">
-							<c:if test="${loginInfo.id eq notes.msg_receiver}">
-								<tr>
-									<th scope="row"><input type="checkbox" name="msgCheck"
-										class="msgcheck onlycheck" id="msg${notes.msg_idx}Check"></th>
-									<td>${notes.msg_receiver}</td>
-									<td>${notes.msg_writerId}</td>
-									<td><a class="view"
-										href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a>
-									</td>
-									<td>${notes.msg_date}</td>
-									<td><a href="javascript:messageDel(${notes.msg_idx})">
-											<svg width="1em" height="1em" viewBox="0 0 16 16"
-												class="bi bi-trash" fill="currentColor"
-												xmlns="http://www.w3.org/2000/svg">
+							<c:if test="${noteSort==1 }">
+								<c:if test="${loginInfo.id eq notes.msg_receiver}">
+									<tr>
+										<th scope="row">-</th>
+										<td>${notes.msg_receiver}</td>
+										<td>${notes.msg_writerId}</td>
+										<td><a class="view"
+											href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a>
+										</td>
+										<td>${notes.msg_date}</td>
+										<td><a href="javascript:messageDel(${notes.msg_idx})">
+												<svg width="1em" height="1em" viewBox="0 0 16 16"
+													class="bi bi-trash" fill="currentColor"
+													xmlns="http://www.w3.org/2000/svg">
   <path
-													d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+														d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
   <path fill-rule="evenodd"
-													d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+														d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
 </svg>
-									</a></td>
-								</tr>
+										</a></td>
+									</tr>
+								</c:if>
+							</c:if>
+							<c:if test="${noteSort==2 }">
+								<c:if test="${loginInfo.idx eq notes.msg_writer}">
+									<tr>
+										<th scope="row">-</th>
+										<td>${notes.msg_receiver}</td>
+										<td>${notes.msg_writerId}</td>
+										<td><a class="view"
+											href="/message/noteview.do?idx=${notes.msg_idx}">${notes.msg_title}</a>
+										</td>
+										<td>${notes.msg_date}</td>
+										<c:if test="${notes.readcheck==0}">
+											<td><span class="readCheck" style="color: red;">읽지
+													않음</span></td>
+											<td><a
+												href="javascript:messageListDel(${notes.msg_idx})">
+													발송취소 </a></td>
+										</c:if>
+										<c:if test="${notes.readcheck==1}">
+											<td><span class="readCheck" style="color: green;">읽음</span></td>
+											<td style="color: gray;">발송취소불가</td>
+										</c:if>
+									</tr>
+								</c:if>
 							</c:if>
 						</c:forEach>
 					</table>
@@ -169,9 +203,9 @@ table.box {
 
 				</c:if>
 				<div class="paging">
-					<c:forEach begin="1" end="${noteList.pageTotalCount}" var="num">
-						<a href="messageList.do?page=${num}"
-							${noteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
+					<c:forEach begin="1" end="${searchNoteList.pageTotalCount}" var="num">
+						<a href="searchNote.do?page=${num}"
+							${searchNoteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
 					</c:forEach>
 				</div>
 
