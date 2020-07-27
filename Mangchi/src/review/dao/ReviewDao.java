@@ -251,6 +251,7 @@ public class ReviewDao {
 
             while (rs.next()) {
                rw = new RequestWriting();
+               rw.setReq_idx(req_idx);
                rw.setReq_title(rs.getString("req_title"));
                }
 
