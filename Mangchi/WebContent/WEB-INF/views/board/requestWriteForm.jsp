@@ -113,8 +113,8 @@ form{
 						placeholder="상세 내용"></textarea>
 					<input type="submit" value="글쓰기 완료">
 				</div>
-				<input type="hidden" name="req_latitude" id="req_latitude"/>
-				<input type="hidden" name="req_longitude" id="req_longitude"/>
+				<input type="text" name="req_latitude" value="${loginInfo.latitude}" id="req_latitude"/>
+				<input type="text" name="req_longitude" value="${loginInfo.longitude}" id="req_longitude"/>
 			</form>
 		</main>
 	</div>
