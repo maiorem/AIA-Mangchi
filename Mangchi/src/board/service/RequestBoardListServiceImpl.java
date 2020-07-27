@@ -2,7 +2,6 @@ package board.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.dao.BoardDao;
 import board.model.RequestWriting;
-import board.model.RequestWritingList;
 import jdbc.ConnectionProvider;
 import service.Service;
 
