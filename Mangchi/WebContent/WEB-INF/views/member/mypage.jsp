@@ -71,7 +71,7 @@ span.star-prototype > * {
 						<p class="card-text mb-auto">[${membernick}] 님 환영합니다 !!</p>
 						<br>
 							<div class="row mb-2">
-								&nbsp;&nbsp;&nbsp;<a href="modify.do?idx=2">닉네임 수정&nbsp;&nbsp;&nbsp;</a><a href="modify.do?idx=1">비밀번호 수정&nbsp;&nbsp;&nbsp;</a><a href="#">회원 탈퇴</a>
+								&nbsp;&nbsp;&nbsp;<a href="modify.do?idx=2">닉네임 수정&nbsp;&nbsp;&nbsp;</a><a href="modify.do?idx=1">비밀번호 수정&nbsp;&nbsp;&nbsp;</a><a href="delete.do">회원 탈퇴</a>
 							</div>
 						
 					</div>

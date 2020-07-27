@@ -1,6 +1,9 @@
 package member.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import message.model.MessageListView;
 
 public class Member {
 	private int idx;
@@ -14,6 +17,9 @@ public class Member {
 	private String photo;
 	private double latitude;
 	private double longitude;
+	private List<MessageListView> recBox;
+	private List<MessageListView> sendBox;
+	
 	
 	
 	public Member() {}
@@ -67,6 +73,8 @@ public class Member {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
+	
+	
 
 	public int getIdx() {
 		return idx;
@@ -157,13 +165,32 @@ public class Member {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
+	
+	
+
+	public List<MessageListView> getRecBox() {
+		return recBox;
+	}
+
+	public void setRecBox(List<MessageListView> recBox) {
+		this.recBox = recBox;
+	}
+
+	public List<MessageListView> getSendBox() {
+		return sendBox;
+	}
+
+	public void setSendBox(List<MessageListView> sendBox) {
+		this.sendBox = sendBox;
+	}
 
 	@Override
 	public String toString() {
 		return "Member [idx=" + idx + ", id=" + id + ", kid=" + kid + ", pw=" + pw + ", nick=" + nick + ", score="
 				+ score + ", regDate=" + regDate + ", addr=" + addr + ", photo=" + photo + ", latitude=" + latitude
-				+ ", longitude=" + longitude + "]";
+				+ ", longitude=" + longitude + ", recBox=" + recBox + ", sendBox=" + sendBox + "]";
 	}
+
 
 	
 }

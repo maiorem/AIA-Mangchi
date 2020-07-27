@@ -53,7 +53,7 @@
 															<script>
 															setTimeout(function() {
 																location.replace("/Mangchi/index.html");
-																}, 10000);
+																}, 5000);
 															</script>
 														</c:if>
 														

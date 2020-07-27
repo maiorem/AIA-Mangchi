@@ -91,7 +91,7 @@
 			      				</div>
 			      				</div> <!-- card-front -->
 								<div class="card-back" style="height: 600px;">
-									<div class="center-wrap">
+									<div class="center-wrap"> 
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Sign Up</h4>
 											<div class="form-group">
@@ -124,7 +124,7 @@
 											<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 
 											
-											<a href="#" class="btn mt-4 regSub">submit</a>
+											<a href="regForm.do" class="btn mt-4 regSub">회원가입</a>
 				      					</div>
 			      					</div>
 			      				</div> <!--  card back -->
