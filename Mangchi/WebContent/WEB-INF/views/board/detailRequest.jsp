@@ -144,8 +144,11 @@
 		</div>
 	    <div class="row">
 	        <div class="col-sm-4 col-sm-offset-4 col-lg-4 col-lg-offset-4 buttons">
-		        <button type="button" id="sendNote" class="btn btn-success btn-lg">쪽지보내기</button>
+		        <button type="button" id="sendNote" class="btn btn-primary btn-lg">쪽지보내기</button>
 				<button type="button" id="helpEnd" class="btn btn-success btn-lg">렌탈완료</button>
+				<button type="button" id="delReq" class="btn btn-danger btn-lg">게시글삭제</button>
+				
+				
 	        </div>
 	    </div>
 	    
@@ -222,7 +225,7 @@
 				}
 			}
 		}
-				
+		
 		//select태그 선택시켜놓기
 		if(helperStatus!=0){
 			for(var i=0;i<arr.length;i++){
@@ -237,9 +240,11 @@
 			if(currUserIdx==writer){
 				console.log('같은');	
 				$('#sendNote').hide();
+				$('#delReq').show();
 			}else{
 				console.log('다른');	
 				$('#helpEnd').hide();
+				$('#delReq').hide();
 				if(helper==0){
 					$('#selectHelper').html('(아직 헬퍼가 없습니다)');
 				}else{
@@ -253,6 +258,7 @@
 			}
 		}else{
 			$('#helpEnd').hide();
+			$('#delReq').hide();
 			for(var i=0;i<arr.length;i++){
 				if(helper==arr[i].idx){
 					$('#selectHelper').html(arr[i].nick);
@@ -278,7 +284,22 @@
 				console.log('헬퍼'+changeHelper);
 			}
 		});
-		 
+		
+		//게시물삭제
+		$('#delReq').on('click',function(){
+			var action='<c:url value="/board/deleteRequest.do"/>';
+			
+			var form =$('<form></form>');
+			form.attr('charset','utf-8');
+			form.attr('method','post');
+			form.attr('action',action);
+			form.appendTo('body');
+			
+			var inputIdx =$('<input type="hidden" value="'+idx+'" name="req_idx">');
+			form.append(inputIdx);
+			form.submit();
+		});
+		
 		//헬퍼 선택버튼 클릭 이벤트
 		helperSelectBtn.on('click',function(){
 			$.ajax({

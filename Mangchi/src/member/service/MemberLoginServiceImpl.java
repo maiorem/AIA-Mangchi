@@ -39,7 +39,14 @@ public class MemberLoginServiceImpl implements Service {
 				System.out.println("맴버 객체 : " + loginInfo);
 				HttpSession session = req.getSession();
 				session.setAttribute("loginInfo", loginInfo);
+				req.setAttribute("resultCnt", resultCnt);
 				
+				return "/WEB-INF/views/member/loginChkChk.jsp";
+			} else if(resultCnt == 0) {
+				
+				req.setAttribute("resultCnt", resultCnt);
+				
+				return "/WEB-INF/views/member/loginChkChk.jsp";
 			}
 			
 			conn.commit();

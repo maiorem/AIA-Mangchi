@@ -67,7 +67,7 @@
 												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<input type="submit" class="btn mt-4">
+											<input type="submit" class="btn mt-4" value="로그인">
 											</form>
                             				<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
                             				<br>
@@ -94,8 +94,9 @@
 									<div class="center-wrap"> 
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Sign Up</h4>
+											<form action="regForm.do" method="post">
 											<div class="form-group">
-												<input type="text" name="nick" class="form-style" placeholder="Your NickName" id="nick" autocomplete="off" required>
+												<input type="text" name="unick" class="form-style" placeholder="Your NickName" id="nick" autocomplete="off" required>
 												<i class="input-icon uil uil-user"></i>
 											</div>	
 											<div class="form-group mt-2">
@@ -122,9 +123,10 @@
 												<input type="button" class="btn mt-4" onclick="sample5_execDaumPostcode()" value="주소 검색">
 											</div>
 											<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
-
-											
-											<a href="regForm.do" class="btn mt-4 regSub">회원가입</a>
+											<input type="hidden" name="lat" id="lat">
+											<input type="hidden" name="longi" id="longi">
+											<input type="submit" class="btn mt-4 regSub" value="회원가입">
+											</form>
 				      					</div>
 			      					</div>
 			      				</div> <!--  card back -->
@@ -235,9 +237,6 @@ function checkLoginState() {
 	            	   Kakao.API.request({
 	                       url: '/v2/user/me',
 	                       success: function(res) {
-	                           alert('로그인 되었습니다.');
-	                           //####
-	                           console.log(res);
 	                           
 	                           idCheck(res);
 	                              
@@ -344,10 +343,10 @@ function checkLoginState() {
     //주소-좌표 변환 객체를 생성
     var geocoder = new daum.maps.services.Geocoder();
     //마커를 미리 생성
-  /*   var marker = new daum.maps.Marker({
+     var marker = new daum.maps.Marker({
         position: new daum.maps.LatLng(37.537187, 127.005476),
         map: map
-    }); */
+    });
 
 
     function sample5_execDaumPostcode() {
@@ -358,7 +357,7 @@ function checkLoginState() {
                 // 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("uaddr").value = addr;
                 // 주소로 상세 정보를 검색
-            /*     geocoder.addressSearch(data.address, function(results, status) {
+                 geocoder.addressSearch(data.address, function(results, status) {
                     // 정상적으로 검색이 완료됐으면
                     if (status === daum.maps.services.Status.OK) {
 
@@ -366,15 +365,17 @@ function checkLoginState() {
 
                         // 해당 주소에 대한 좌표를 받아서
                         var coords = new daum.maps.LatLng(result.y, result.x);
+                        $('#lat').attr('value',result.y);
+                        $('#longi').attr('value',result.x);
                         // 지도를 보여준다.
-                        mapContainer.style.display = "block";
+                        mapContainer.style.display = "none";
                         map.relayout();
                         // 지도 중심을 변경한다.
                         map.setCenter(coords);
                         // 마커를 결과값으로 받은 위치로 옮긴다.
                         marker.setPosition(coords)
                     }
-                }); */
+                });
             }
         }).open();
     }

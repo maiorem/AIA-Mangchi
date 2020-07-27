@@ -46,10 +46,11 @@ public class ReviewServiceImpl implements Service {
 		//int review_receiver=3; // test용
 		
 		
-		
+		int review_score=0;
 				
-		
-		int review_score = Integer.parseInt(req.getParameter("review_score"));
+		if(req.getParameter("review_score")!=null) {
+			review_score = Integer.parseInt(req.getParameter("review_score"));
+		}
 		String review_text = req.getParameter("review_text");
 		
 		

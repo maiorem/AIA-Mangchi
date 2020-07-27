@@ -30,13 +30,11 @@
 <link href='<c:url value="/css/map.css"/>' rel="stylesheet">
 
 
-
 </head>
 
 
 <body>
 
-<!-- <div id="map" style="width: 100%; height: 350px; "></div> -->
 <div id="map" style="width: 100%; height: 350px; display: none;"></div>
 
 
@@ -45,10 +43,6 @@
 	
 	
 	
-	
-	<br>
-	<br>
-	<br>
 	<h1>게시판 들어갈 자리</h1>
 	
 
@@ -56,6 +50,7 @@
 		<h1>게시물 없음</h1>
 	</c:if>
 
+	<div class="container">
 	<table border="1" id="tab">
 	
 		 <tr>
@@ -73,21 +68,22 @@
 		</tr> 
 
 	</table>
-
+</div>
  
 	<div class="paging">
 		
 	</div>
 
 	
-	<!-- <p id="result" style="display: none;"></p> -->
 	<p id="result"></p>
+	
 	
 
 
 <script>
 	var locationList = new Array();
 	var allList = new Array();
+	var userAddr = '${loginInfo.addr}';
 	
 	<c:forEach var="requestList" items="${requestWritingList}">
 		locationList.push("${requestList.req_loc}");
