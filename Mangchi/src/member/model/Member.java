@@ -181,7 +181,15 @@ public class Member {
 	public String toString() {
 		return "Member [idx=" + idx + ", id=" + id + ", kid=" + kid + ", pw=" + pw + ", nick=" + nick + ", score="
 				+ score + ", regDate=" + regDate + ", addr=" + addr + ", photo=" + photo + ", latitude=" + latitude
+<<<<<<< HEAD
 				+ ", longitude=" + longitude + "]";
+=======
+<<<<<<< HEAD
+				+ ", longitude=" + longitude + ", recBox=" +  ", sendBox=" + "]";
+=======
+				+ ", longitude=" + longitude + "]";
+>>>>>>> KJJ
+>>>>>>> master
 	}
 
 
