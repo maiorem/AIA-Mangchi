@@ -53,8 +53,8 @@
 			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
 			          	<label for="reg-log"></label>
 						<div class="card-3d-wrap mx-auto">
-							<div class="card-3d-wrapper" style=" height: 530px;">
-								<div class="card-front">
+							<div class="card-3d-wrapper" >
+								<div class="card-front" style=" height: 600px;">
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Log In</h4>
