@@ -33,12 +33,12 @@ public class SendMessageListServiceImpl implements Service {
 			dao=MessageDao.getInstance();
 
 			List<Message> messageList=null;
+			int writerIdx=Integer.parseInt(req.getParameter("writer"));
 
-			int messageTotalCount=dao.selectTotalCount(conn);
+			int messageTotalCount=dao.selectTotalCount(conn, writerIdx);
 
 			int startrow=0;
 			int currentPage=1;
-			int writerIdx=Integer.parseInt(req.getParameter("writer"));
 			String page=req.getParameter("page");
 			
 
