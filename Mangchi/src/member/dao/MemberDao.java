@@ -38,8 +38,10 @@ public class MemberDao {
 				member = new Member(rs.getInt("member_idx"), rs.getString("member_id"), rs.getString("member_pw"),
 						rs.getString("member_nick"), rs.getDouble("member_score"), rs.getDate("member_regdate"),
 						rs.getString("member_addr"), rs.getString("member_img"));
+				member.setLatitude(rs.getDouble("member_latitude"));
+				member.setLongitude(rs.getDouble("member_longitude"));
 			}
-
+			
 		} finally {
 			if (rs != null)
 				rs.close();
