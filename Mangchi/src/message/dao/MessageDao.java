@@ -81,19 +81,20 @@ public class MessageDao {
 		return resultCnt;
 	}
 
-	public List<Message> selectMessageList(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE) throws SQLException {
+	public List<Message> selectMessageList(Connection conn, int startrow, String id, int MESSAGE_COUNT_PER_PAGE) throws SQLException {
 
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 
 		List<Message> list=new ArrayList<Message>();
 
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_receiver=? order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, startrow);
-			pstmt.setInt(2, MESSAGE_COUNT_PER_PAGE);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, startrow);
+			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
 
 			rs=pstmt.executeQuery();
 
@@ -243,7 +244,7 @@ public class MessageDao {
 	
 	
 	
-	public List<Message> searchReceiveNoteById(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchReceiveNoteById(Connection conn, int startrow, String id, int MESSAGE_COUNT_PER_PAGE,
 			String searchText) throws SQLException {
 
 		PreparedStatement pstmt=null;
@@ -252,13 +253,14 @@ public class MessageDao {
 		List<Message> list=new ArrayList<Message>();
 
 		//받은 편지함에서 아이디 찾기 => writer의 아이디
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where mem.member_id like ? order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_receiver=? and mem.member_id like ? order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+searchText+"%");
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+			pstmt.setString(1, id);
+			pstmt.setString(2, "%"+searchText+"%");
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, MESSAGE_COUNT_PER_PAGE);
 
 			rs=pstmt.executeQuery();
 
@@ -292,20 +294,21 @@ public class MessageDao {
 		return list;
 	}
 
-	public List<Message> searchReceiveNoteByTitle(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchReceiveNoteByTitle(Connection conn, int startrow, String id, int MESSAGE_COUNT_PER_PAGE,
 			String searchText) throws SQLException {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 
 		List<Message> list=new ArrayList<Message>();
 		//받은 편지함에서 제목 찾기 => writer의 아이디가 멤버 데이터와 일치해야함
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_title like ? order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_receiver=? and msg.msg_title like ? order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+searchText+"%");
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+			pstmt.setString(1, id);
+			pstmt.setString(2, "%"+searchText+"%");
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, MESSAGE_COUNT_PER_PAGE);
 
 			rs=pstmt.executeQuery();
 
@@ -339,20 +342,21 @@ public class MessageDao {
 		return list;
 	}
 
-	public List<Message> searchReceiveNoteByText(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchReceiveNoteByText(Connection conn, int startrow, String id, int MESSAGE_COUNT_PER_PAGE,
 			String searchText) throws SQLException {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 
 		List<Message> list=new ArrayList<Message>();
 		//받은 편지함에서 내용 찾기 => writer의 아이디가 멤버 데이터와 일치해야함
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_text like ? order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_receiver=? and msg.msg_text like ? order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+searchText+"%");
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+			pstmt.setString(1, id);
+			pstmt.setString(2, "%"+searchText+"%");
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, MESSAGE_COUNT_PER_PAGE);
 
 			rs=pstmt.executeQuery();
 
@@ -386,17 +390,18 @@ public class MessageDao {
 		return list;
 	}
 
-	public List<Message> searchSendNoteById(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchSendNoteById(Connection conn, int startrow, int idx, int MESSAGE_COUNT_PER_PAGE,
 			String searchText) throws SQLException {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 
 		List<Message> list=new ArrayList<Message>();
 		//보낸 편지함에서 아이디 검색 => 받은 사람 아이디
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_receiver like ? order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_writer=? and msg.msg_receiver like ? order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
 			pstmt.setString(1, "%"+searchText+"%");
 			pstmt.setInt(2, startrow);
 			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
@@ -433,17 +438,18 @@ public class MessageDao {
 		return list;
 	}
 
-	public List<Message> searchSendNoteByTitle(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchSendNoteByTitle(Connection conn, int startrow, int idx, int MESSAGE_COUNT_PER_PAGE,
 			String searchText) throws SQLException {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 
 		List<Message> list=new ArrayList<Message>();
 
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_title like ? order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_writer=? and msg.msg_title like ? order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
 			pstmt.setString(1, "%"+searchText+"%");
 			pstmt.setInt(2, startrow);
 			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
@@ -480,17 +486,18 @@ public class MessageDao {
 		return list;
 	}
 
-	public List<Message> searchSendNoteByText(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchSendNoteByText(Connection conn, int startrow, int idx, int MESSAGE_COUNT_PER_PAGE,
 			String searchText) throws SQLException {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 
 		List<Message> list=new ArrayList<Message>();
 
-		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_text like ? order by msg_date desc limit ?,?"; 
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_writer=? and msg.msg_text like ? order by msg_date desc limit ?,?"; 
 
 		try {
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
 			pstmt.setString(1, "%"+searchText+"%");
 			pstmt.setInt(2, startrow);
 			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
@@ -586,5 +593,52 @@ public class MessageDao {
 		
 		
 		return writerId;
+	}
+
+	public List<Message> selectMessageList(Connection conn, int startrow, int idx, int MESSAGE_COUNT_PER_PAGE) throws SQLException {
+
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+
+		List<Message> list=new ArrayList<Message>();
+
+		String sql="select msg.msg_idx, msg.req_idx, mem.member_idx, mem.member_id, msg.msg_receiver, msg.msg_title, msg.msg_text, msg.msg_img, msg.msg_date, msg.msg_readcheck from (project.message msg inner join project.member mem on msg.msg_writer=mem.member_idx) where msg.msg_writer=? order by msg_date desc limit ?,?"; 
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.setInt(2, startrow);
+			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+
+			rs=pstmt.executeQuery();
+
+			while(rs.next()) {
+				Message msg=new Message(
+						rs.getInt("msg.msg_idx"),
+						rs.getInt("msg.req_idx"),
+						rs.getInt("mem.member_idx"),
+						rs.getString("mem.member_id"),
+						rs.getString("msg.msg_receiver"),
+						rs.getString("msg.msg_title"),
+						rs.getString("msg.msg_text"),
+						rs.getString("msg.msg_img"),
+						rs.getDate("msg.msg_date"),
+						rs.getInt("msg.msg_readcheck")
+						);
+
+				list.add(msg);
+			}
+
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+
+		return list;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import jdbc.ConnectionProvider;
 import message.dao.MessageDao;
 import message.model.Message;
@@ -17,7 +18,7 @@ import service.Service;
 public class MessageListServiceImpl implements Service {
 
 	MessageDao dao;
-	private final int MESSAGE_COUNT_PER_PAGE=50;
+	private final int MESSAGE_COUNT_PER_PAGE=10;
 
 
 	@Override
@@ -37,6 +38,7 @@ public class MessageListServiceImpl implements Service {
 
 			int startrow=0;
 			int currentPage=1;
+			String receiver=req.getParameter("receiver");
 			String page=req.getParameter("page");
 
 			if(page!=null) {
@@ -46,14 +48,14 @@ public class MessageListServiceImpl implements Service {
 			if(messageTotalCount>0) {
 
 				startrow=(currentPage-1)*MESSAGE_COUNT_PER_PAGE;
-				messageList=dao.selectMessageList(conn, startrow, MESSAGE_COUNT_PER_PAGE);
+				messageList=dao.selectMessageList(conn, startrow, receiver, MESSAGE_COUNT_PER_PAGE);
 
 			} else {
 				currentPage=0;
 				messageList=Collections.emptyList();
 			}
 
-			messageListview=new MessageListView(messageTotalCount, currentPage, messageList, MESSAGE_COUNT_PER_PAGE, startrow);
+			messageListview=new MessageListView(receiver, messageTotalCount, currentPage, messageList, MESSAGE_COUNT_PER_PAGE, startrow);
 			req.setAttribute("noteList", messageListview);
 
 

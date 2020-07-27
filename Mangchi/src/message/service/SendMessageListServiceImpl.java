@@ -18,7 +18,7 @@ public class SendMessageListServiceImpl implements Service {
 
 
 	MessageDao dao;
-	private final int MESSAGE_COUNT_PER_PAGE=50;
+	private final int MESSAGE_COUNT_PER_PAGE=10;
 
 
 	@Override
@@ -38,6 +38,7 @@ public class SendMessageListServiceImpl implements Service {
 
 			int startrow=0;
 			int currentPage=1;
+			int writerIdx=Integer.parseInt(req.getParameter("writer"));
 			String page=req.getParameter("page");
 			
 
@@ -48,14 +49,14 @@ public class SendMessageListServiceImpl implements Service {
 			if(messageTotalCount>0) {
 
 				startrow=(currentPage-1)*MESSAGE_COUNT_PER_PAGE;
-				messageList=dao.selectMessageList(conn, startrow, MESSAGE_COUNT_PER_PAGE);
+				messageList=dao.selectMessageList(conn, startrow, writerIdx, MESSAGE_COUNT_PER_PAGE);
 
 			} else {
 				currentPage=0;
 				messageList=Collections.emptyList();
 			}
 
-			messageListview=new MessageListView(messageTotalCount, currentPage, messageList, MESSAGE_COUNT_PER_PAGE, startrow);
+			messageListview=new MessageListView(writerIdx, messageTotalCount, currentPage, messageList, MESSAGE_COUNT_PER_PAGE, startrow);
 			req.setAttribute("sendNoteList", messageListview);
 
 
