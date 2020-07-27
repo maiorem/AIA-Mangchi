@@ -17,7 +17,37 @@ public class MemberDao {
 	public static MemberDao getInstance() {
 		return member;
 	}
+	
+	
+	// 회원 정보 저장
+		public int insertMember(Connection conn, Member member) throws SQLException {
 
+			int resultCnt = 0;
+
+			PreparedStatement pstmt = null;
+			String sql = "INSERT INTO project.member (member_id,member_pw,member_nick,member_addr,member_latitude,member_longitude) VALUES (?,?,?,?,?,?)";
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, member.getId());
+				pstmt.setString(2, member.getPw());
+				pstmt.setString(3, member.getNick());
+				pstmt.setString(4, member.getAddr());
+				pstmt.setDouble(5, member.getLatitude());
+				pstmt.setDouble(6, member.getLongitude());
+
+				resultCnt = pstmt.executeUpdate();
+			} finally {
+
+				if (pstmt != null)
+					pstmt.close();
+
+			}
+			return resultCnt;
+
+		}
+	
+	//회원 객체 생성
 	public Member selectByMember(Connection conn, String id) throws SQLException {
 
 		Member member = null;

@@ -17,13 +17,24 @@ public class Member {
 	private String photo;
 	private double latitude;
 	private double longitude;
-	private List<MessageListView> recBox;
-	private List<MessageListView> sendBox;
-	
 	
 	
 	public Member() {}
 	
+	
+	
+	public Member(String id, String pw, String nick, String addr, double latitude, double longitude) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.nick = nick;
+		this.addr = addr;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+
+
 	public Member(int idx, String id, String pw, String nick, String photo, Date regDate) {
 		this.idx = idx;
 		this.id = id;
@@ -166,24 +177,6 @@ public class Member {
 		this.longitude = longitude;
 	}
 	
-	
-
-	public List<MessageListView> getRecBox() {
-		return recBox;
-	}
-
-	public void setRecBox(List<MessageListView> recBox) {
-		this.recBox = recBox;
-	}
-
-	public List<MessageListView> getSendBox() {
-		return sendBox;
-	}
-
-	public void setSendBox(List<MessageListView> sendBox) {
-		this.sendBox = sendBox;
-	}
-
 	@Override
 	public String toString() {
 		return "Member [idx=" + idx + ", id=" + id + ", kid=" + kid + ", pw=" + pw + ", nick=" + nick + ", score="
