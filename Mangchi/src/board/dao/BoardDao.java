@@ -458,6 +458,24 @@ public class BoardDao {
 		}
 		return list;
 	}
+	public int deleteRequestInfo(Connection conn, int req_idx) throws SQLException {
+		int result =0;
+		PreparedStatement pstmt = null;
+		
+		String sql = "DELETE FROM `project`.`request_list` " + 
+					 "WHERE req_idx=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, req_idx);
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+		return result;
+	}
 	
 	
 	
