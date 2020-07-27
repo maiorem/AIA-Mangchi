@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -127,12 +126,14 @@ a.currentPage{
 
 		<div class="boxarea" id="noteBoxArea">
 			<button class="btn btn-outline-success my-2 my-sm-0" id="reBox"
-				type="button"><a href='<c:url value="/message/messageBox.do"/>'>받은 쪽지함</a></button>
+				type="button"><a href='<c:url value="/message/messageBox.do?receiver=${loginInfo.id}"/>'>받은 쪽지함</a></button>
 			<button class="btn btn-outline-success my-2 my-sm-0" id="seBox"
-				type="button"><a href='<c:url value="/message/sendMessageBox.do"/>'>보낸 쪽지함</a></button>
+				type="button"><a href='<c:url value="/message/sendMessageBox.do?writer=${loginInfo.idx}"/>'>보낸 쪽지함</a></button>
 			<div class="searchNote">
 				<form class="form-inline mt-2 mt-md-0"
-					action="<c:url value="/message/searchNote.do"/>" method="get">
+					action="<c:url value="/message/searchNote.do"/>" method="post">
+					<input type="hidden" name="loginId" value="${loginInfo.id }">
+					<input type="hidden" name="loginIdx" value="${loginInfo.idx }">
 					<select class="form-control mr-sm-2" name="noteSort">
 						<option selected value="1">받은 쪽지함</option>
 						<option value="2">보낸 쪽지함</option>
@@ -197,7 +198,7 @@ a.currentPage{
 				</div>
 				<div class="paging">
 					<c:forEach begin="1" end="${sendNoteList.pageTotalCount}" var="num">
-						<a href="sendMessageBox.do?page=${num}"
+						<a href="sendMessageBox.do?page=${num}&writer=${loginInfo.idx}"
 							${sendNoteList.currentPageNumber eq num ? 'class="currentPage"' : '' }>[${num}]</a>
 					</c:forEach>
 				</div>

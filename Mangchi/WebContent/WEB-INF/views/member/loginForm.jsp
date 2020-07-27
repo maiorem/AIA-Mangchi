@@ -201,7 +201,7 @@ function checkLoginState() {
             var nick = res.properties.nickname;
             var photo = res.properties.profile_image;
             $.ajax({
-            	url:"/Mangchi/member/kakaoCheck.do",
+            	url:"<c:url value='/member/kakaoCheck.do'/>",
             	type:"post",
             	data:{id:id, nick:nick, photo:photo},
             	success:function(data){

@@ -163,7 +163,7 @@ public class RequestWriting2 {
 	}
 
 	public void setReq_text(String req_text) {
-		this.req_text = req_text;
+		this.req_text = req_text.replaceAll("\n", " ");
 	}
 
 	public double getReq_latitude() {

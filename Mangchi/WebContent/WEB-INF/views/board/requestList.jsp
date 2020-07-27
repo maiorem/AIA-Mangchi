@@ -58,7 +58,6 @@
 			<th>게시물 제목</th>
 			<th>가격</th>
 			<th>등록 날짜</th>
-			<th>렌탈 기간</th>
 			<th>지역</th>
 			<th>상세내용</th>
 			<th>조회수</th>
@@ -90,12 +89,11 @@
 		
 		requestAll = {
 				req_idx: '${requestList.req_idx}',
-				req_writer: '${requestList.req_writer}',
+				writer_nick: '${requestList.writer_nick}',
 				req_title:'${requestList.req_title}',
 				req_helper:'${requestList.req_helper}',
 				req_price:	'${requestList.req_price}',
 				req_regdate:'${requestList.req_regdate}',
-				req_term:'${requestList.req_term}',
 				req_loc:'${requestList.req_loc}',
 				req_text:'${requestList.req_text}',
 				req_readcnt:'${requestList.req_readcnt}',
@@ -117,9 +115,6 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69c40691beee2a7bf82c96e2f85f0da8"></script>
 	<script src="<c:url value="/js/map.js" />"></script>
-	
-</body>
-</html>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
@@ -129,4 +124,8 @@
 					.write('<script src="<c:url value='/assets/js/vendor/jquery.slim.min.js'/>"><\/script>')
 </script>
 <script src="<c:url value='/assets/dist/js/bootstrap.bundle.js'/>"></script>
+<script>
+
+</script>
 </body>
+</html>
