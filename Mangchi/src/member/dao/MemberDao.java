@@ -41,7 +41,7 @@ public class MemberDao {
 				member.setLatitude(rs.getDouble("member_latitude"));
 				member.setLongitude(rs.getDouble("member_longitude"));
 			}
-
+			
 		} finally {
 			if (rs != null)
 				rs.close();
