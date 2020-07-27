@@ -12,8 +12,8 @@ public class Member {
 	private Date regDate;
 	private String addr;
 	private String photo;
-	private String latitude;
-	private String longitude;
+	private double latitude;
+	private double longitude;
 	
 	
 	public Member() {}
@@ -54,7 +54,7 @@ public class Member {
 	
 
 	public Member(int idx, String id, String kid, String pw, String nick, Double score, Date regDate, String addr,
-			String photo, String latitude, String longitude) {
+			String photo, double latitude, double longitude) {
 		this.idx = idx;
 		this.id = id;
 		this.kid = kid;
@@ -142,19 +142,19 @@ public class Member {
 	
 	
 
-	public String getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
-	public String getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 

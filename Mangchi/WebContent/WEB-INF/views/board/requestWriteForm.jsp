@@ -81,7 +81,7 @@ form{
 						대여일입력<input type="number" name="term_day" value="0" id="term_day" size="10">일
 						대여 시간입력
 						<select name="term_hour" id="term_hour">
-						<c:forEach var="i" begin="0" end="12">
+						<c:forEach var="i" begin="0" end="23">
 							<option value="${i}">${i}시간</option>
 						</c:forEach>
 						</select>
@@ -113,8 +113,8 @@ form{
 						placeholder="상세 내용"></textarea>
 					<input type="submit" value="글쓰기 완료">
 				</div>
-				<input type="hidden" name="req_latitude" id="req_latitude"/>
-				<input type="hidden" name="req_longitude" id="req_longitude"/>
+				<input type="text" name="req_latitude" value="${loginInfo.latitude}" id="req_latitude"/>
+				<input type="text" name="req_longitude" value="${loginInfo.longitude}" id="req_longitude"/>
 			</form>
 		</main>
 	</div>
