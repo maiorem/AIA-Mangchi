@@ -211,6 +211,28 @@ public class MemberDao {
 
 		return resultCnt;
 	}
+	
+	// Password Modify
+	public int memberDelete(Connection conn, String id) throws SQLException {
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM project.member WHERE member_id = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+
+			resultCnt = pstmt.executeUpdate();
+		} finally {
+
+			if (pstmt != null)
+				pstmt.close();
+
+		}
+
+		return resultCnt;
+	}
 
 	// kakaoidCheck
 	public int idCheck(Connection conn, String id) throws SQLException {

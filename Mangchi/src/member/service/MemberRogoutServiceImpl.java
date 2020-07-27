@@ -12,7 +12,7 @@ public class MemberRogoutServiceImpl implements Service {
 		
 		req.getSession().invalidate();
 		
-		return "/WEB-INF/views/index.jsp";
+		return "/WEB-INF/views/member/logoutChk.jsp";
 	}
 	
 }
