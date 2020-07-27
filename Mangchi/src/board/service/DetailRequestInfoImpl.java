@@ -28,7 +28,7 @@ public class DetailRequestInfoImpl implements Service {
 			loginIdx=loginMember.getIdx();
 		}		
 		int req_idx = Integer.parseInt(req.getParameter("req_idx"));
-		
+		System.out.println("euna: "+req_idx);
 		try {
 			conn = ConnectionProvider.getConnection();
 			dao=BoardDao.getInstance();
