@@ -17,6 +17,7 @@ import member.model.Member;
 import request.dao.RequestDao;
 import request.model.Request;
 import request.model.RequestListView;
+import request.model.Requesttime;
 import service.Service;
 
 public class MemberReqHistoryFormServiceImpl implements Service {
@@ -29,6 +30,7 @@ public class MemberReqHistoryFormServiceImpl implements Service {
 		Connection conn = null;
 		RequestListView listview = null;
 		List<Request> requestList = null;
+		List<Requesttime> requestTime = null;
 		final int COUNT_PER_PAGE = 3;
 
 		try {
@@ -91,6 +93,7 @@ public class MemberReqHistoryFormServiceImpl implements Service {
 			}
 
 		}
+
 
 		req.setAttribute("listView", listview);
 		

@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -90,12 +90,14 @@
 
 								<tr>
 									<td><p id="p2">작성자 | ${request.member_nick}</p></td>
-									<td></td>
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									<td><p id="p2">지역 | ${request.req_loc}</p></td>
 								</tr>
 								<tr>
-									<td><p id="p2">대여 기간 | ${request.req_returnDate}</p></td>
-									<td></td>
+									<td><p id="p2">대여 기간 | 
+									${request.day}일  ${request.hour}시간 ${request.minute}분
+									</p></td>
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									<td><p id="p2">
 											대여 상태 |
 											<c:if test="${request.req_status eq 0}">
@@ -111,7 +113,7 @@
 								</tr>
 								<tr>
 									<td><p id="p2">가격 | ${request.req_price}</p></td>
-									<td></td>
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									<td><p id="p2">작성 날짜 | ${request.req_regdate}</p></td>
 								</tr>
 							</table>

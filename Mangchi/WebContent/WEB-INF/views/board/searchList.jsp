@@ -92,7 +92,8 @@
 									<td><p id="p2">지역 | ${request.req_loc}</p></td>
 								</tr>
 								<tr>
-									<td><p id="p2">대여 기간 | ${request.req_returnDate}</p></td>
+									<td><p id="p2">대여 기간 | 
+									${request.day}일  ${request.hour}시간 ${request.minute}분</p></td>
 									<td></td>
 									<td><p id="p2">
 											대여 상태 |
