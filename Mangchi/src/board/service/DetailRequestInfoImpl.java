@@ -41,6 +41,8 @@ public class DetailRequestInfoImpl implements Service {
 				Date returnDate= new Date(a);
 				rw.setReq_returnDate(sdf.format(returnDate));
 			}
+			long term = Long.parseLong(rw.getReq_term());
+
 			//로그인한 사용자가 글쓴이 일 때
 			if(rw.getReq_writer()==loginIdx) {
 				list = dao.getRequestHelpers(conn,loginIdx,req_idx);
