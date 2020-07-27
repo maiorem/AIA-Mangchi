@@ -33,12 +33,12 @@ public class MessageListServiceImpl implements Service {
 			dao=MessageDao.getInstance();
 
 			List<Message> messageList=null;
+			String receiver=req.getParameter("receiver");
 
-			int messageTotalCount=dao.selectTotalCount(conn);
+			int messageTotalCount=dao.selectTotalCount(conn, receiver);
 
 			int startrow=0;
 			int currentPage=1;
-			String receiver=req.getParameter("receiver");
 			String page=req.getParameter("page");
 
 			if(page!=null) {

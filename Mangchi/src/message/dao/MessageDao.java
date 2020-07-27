@@ -52,17 +52,18 @@ public class MessageDao {
 		return resultCnt;
 	}
 
-	public int selectTotalCount(Connection conn) throws SQLException {
+	public int selectTotalCount(Connection conn, String id) throws SQLException {
 		int resultCnt=0;
 
-		Statement stmt=null;
+		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 
 		try {
-			stmt=conn.createStatement();
-			String sql="select count(*) from project.message";
-
-			rs=stmt.executeQuery(sql);
+			
+			String sql="select count(*) from project.message where msg_receiver=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
 
 			if(rs.next()) {
 				resultCnt=rs.getInt(1);
@@ -73,8 +74,8 @@ public class MessageDao {
 				rs.close();
 			}
 
-			if(stmt!=null) {
-				stmt.close();
+			if(pstmt!=null) {
+				pstmt.close();
 			}
 
 		}
@@ -640,5 +641,34 @@ public class MessageDao {
 		}
 
 		return list;
+	}
+
+	public int selectTotalCount(Connection conn, int idx) throws SQLException {
+		int resultCnt=0;
+
+		Statement stmt=null;
+		ResultSet rs=null;
+
+		try {
+			stmt=conn.createStatement();
+			String sql="select count(*) from project.message where msg_writer="+idx;
+
+			rs=stmt.executeQuery(sql);
+
+			if(rs.next()) {
+				resultCnt=rs.getInt(1);
+			}
+
+		} finally {
+			if(rs!=null) {
+				rs.close();
+			}
+
+			if(stmt!=null) {
+				stmt.close();
+			}
+
+		}
+		return resultCnt;
 	}
 }
