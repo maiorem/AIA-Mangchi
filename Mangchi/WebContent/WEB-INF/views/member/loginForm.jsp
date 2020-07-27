@@ -67,7 +67,7 @@
 												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<input type="submit" class="btn mt-4">
+											<input type="submit" class="btn mt-4" value="로그인">
 											</form>
                             				<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
                             				<br>
@@ -237,9 +237,6 @@ function checkLoginState() {
 	            	   Kakao.API.request({
 	                       url: '/v2/user/me',
 	                       success: function(res) {
-	                           alert('로그인 되었습니다.');
-	                           //####
-	                           console.log(res);
 	                           
 	                           idCheck(res);
 	                              
