@@ -51,15 +51,14 @@
 	<br>
 	<h1>게시판 들어갈 자리</h1>
 	
-	
-	
 
 	<c:if test="${empty requestWritingList}">
 		<h1>게시물 없음</h1>
 	</c:if>
 
 	<table border="1" id="tab">
-		<tr>
+	
+		 <tr>
 			<th>작성자 이름</th>
 			<th>게시물 제목</th>
 			<th>가격</th>
@@ -71,55 +70,47 @@
 			<th>현재 상태</th>
 			<th>이미지?</th>
 			<th>나와 사용자 사이의 거리</th>
-		</tr>
-
-		<c:forEach var="requestList"
-			items="${requestWritingList.requestWriting}">
-			 <tbody id='tbd'>
-			
-			<tr >
-				<td>${requestList.req_writer}</td>
-				<td><a
-					href=" <c:url value="/board/detailrequestinfo.do?req_idx=${requestList.req_idx}"/>">${requestList.req_title}</a></td>
-				<td>${requestList.req_price}</td>
-				<td>${requestList.req_regdate}</td>
-				<td>${requestList.req_term}</td>
-				<td>${requestList.req_loc}</td>
-				<td>${requestList.req_text}</td>
-				<td>${requestList.req_readcnt}</td>
-				<td>${requestList.req_status}</td>
-				<td>${requestList.req_img}</td>
-			</tr>
-			
-			</tbody>
-		</c:forEach>
+		</tr> 
 
 	</table>
 
-	
+ 
 	<div class="paging">
-		<c:if test="${requestWritingList.pageTotalCount > 0}">
-			<c:forEach begin="1" end="${requestWritingList.pageTotalCount}"
-				var="num">
-				<a href=" <c:url value="/board/boarding.do?page=${num}" />"<%-- class="${requuestWrtingList.currentPageNumber eq num ? 'currentPage' : ''}" --%>
-					>[${num}]</a>
-			</c:forEach>
-		</c:if>
+		
 	</div>
-	
+
 	
 	<!-- <p id="result" style="display: none;"></p> -->
 	<p id="result"></p>
-	<script>
 	
-	var userAddr= '${loginInfo.addr}';
+
+
+<script>
 	var locationList = new Array();
-
-	<c:forEach var="requestList" items="${requestWritingList.requestWriting}">
-	locationList.push("${requestList.req_loc}");
-
+	var allList = new Array();
+	
+	<c:forEach var="requestList" items="${requestWritingList}">
+		locationList.push("${requestList.req_loc}");
+		
+		requestAll = {
+				req_idx: '${requestList.req_idx}',
+				req_writer: '${requestList.req_writer}',
+				req_title:'${requestList.req_title}',
+				req_helper:'${requestList.req_helper}',
+				req_price:	'${requestList.req_price}',
+				req_regdate:'${requestList.req_regdate}',
+				req_term:'${requestList.req_term}',
+				req_loc:'${requestList.req_loc}',
+				req_text:'${requestList.req_text}',
+				req_readcnt:'${requestList.req_readcnt}',
+				req_status:'${requestList.req_status}',
+				req_img:'${requestList.req_img}',
+			};
+		
+		allList.push(requestAll);
 	</c:forEach>
 </script>
+
 
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>

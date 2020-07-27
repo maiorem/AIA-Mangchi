@@ -15,11 +15,9 @@
 		var geocoder = new kakao.maps.services.Geocoder();
 		
 		
-		console.log(userAddr);
-		
 		var userfunc = function(){
-			
-		geocoder.addressSearch(userAddr,function(result, status) {
+
+		geocoder.addressSearch('서울특별시 종로구 종로 31',function(result, status) {
 				// 정상적으로 검색이 완료됐으면
 				if (status === kakao.maps.services.Status.OK) {
 
@@ -91,7 +89,7 @@
 							listt.push(boardLoc);
 							
 						   if (total === counter) { // 모든 비동기 콜백이 수행되었다면
-						        doSomething(); // 다음 로직으로 넘어갑니다.
+						        cal(); // 다음 로직으로 넘어갑니다.
 					        }
 								
 				});
@@ -103,9 +101,8 @@
 		
 		var distanceList = [];
 		
-		 function doSomething(index) {
+		 function cal() {
 			
-			 console.log(listt);
    
 				var linePath = [];
 				var calDistance= new Array();
@@ -137,7 +134,6 @@
 		    	
 		    	if(j%2 == 0){
 		    		
-		    		console.log(j);
 
 		    		calDistance.push(linePath[j]);
 		    		calDistance.push(linePath[j+1]);
@@ -157,34 +153,164 @@
 					var distance = polyline.getLength();
 					var distance = Math.round(distance);
 		
-					console.log('거리 계산 :' +distance);	
-		    		
-		    		
+					
 		    		calDistance.pop(linePath[j]);
 					calDistance.pop(linePath[j+1]);
 					
-					distanceList.push(distance);
-						
+					
+					if(distance <=  10000){
+						distanceList.push(distance);
+					}	
 		    	}
 		    	
 		    }// for문
 		  
-		  var tbd = $('#tbd');
-		    var tbd_tr = $('#tbd>tr');
-		    
-		    for (i=0; i<tbd_tr.length; i++) {
-		        td = document.createElement('td');
-		        td= tbd_tr[i].appendChild(td);
-		        
-		        var listdistance = 'listdistance'+i+'';
-		        
-		        td.setAttribute('class', listdistance);
-		        
-		        $('.listdistance'+[i]).text(distanceList[i]);
-		   }
 		  
-		    
+		  var pageList = [];
+
+		  
+		  for(var a=0;a<allList.length;a++){
+			 
+			  allList[a].distance=distanceList[a];
+		  }
+		  
+		  
+		  var sortingField = "distance";
+		  
+		  allList.sort(function(a, b) { // 오름차순
+			  return a[sortingField] - b[sortingField];
+		  });
+		  
+		  
+		  
+		  //사용자가 정한 거리 만큼 리스트 출력
+		  for(var a=0;a<allList.length;a++){
+			
+			  if(allList[a].distance != null){
+			  
+				  pageList.push(allList[a]);
+			  }
+			  
+		  }
+		  
+		  //전체 리스트 값  : pageList 
+		  //전체 리스트의 수 : pageList.length 
+		  //한 페이지 당 표현 할 리스트 수 : requestCountPage
+		  // 전체 페이지 수 : pageTotalCount
+		  // 시작 점 : startRow
+		  // 종료 : endRow
+		  
+		  
+		  const  requestCountPage = 4; //한 페이지 당 표현 할 리스트 수 
+		  var requestTotalCount = pageList.length; // 전체 리스트 개수 
+		  
+		  
+		  //파라미터 값으로 가져와야함 
+		  
+		  
 		 
+		  var currentPageNumber=1; //현재 페이지 
+		  
+		  	var link = document.location.href; 
+
+			console.log(link);
+				
+			var link = link.split('?');
+			
+			
+			if(link.length != 1){
+				
+			  	var para = document.location.href.split("?"); 
+				var para = para[1].split("="); 
+			
+				console.log(para);
+				
+				currentPageNumber = para[1];
+				console.log(currentPageNumber);
+			}
+			
+			
+		  
+		  //전체 페이지 수 구하기 (전체 리스트 개수 / 한페지 당 출력 할 값 )
+		  var pageTotalCount = requestTotalCount / requestCountPage;
+		  
+		  
+		  if (requestTotalCount % requestCountPage > 0) {
+			  pageTotalCount++;
+		  }
+		  
+		  var startRow = (currentPageNumber - 1) * requestCountPage;
+		  
+		  var endRow =  startRow + requestCountPage ;
+		  
+		  if(endRow > requestTotalCount){
+			  endRow = requestTotalCount;
+		  }
+		  
+		  
+		  
+		  if(requestTotalCount > 0){
+			  
+			  
+			  //한페이징 4개씩 출력하므로 4개 값이 출력된다 
+			 for(var k=startRow;k<endRow;k++){
+				 
+				 
+			  	var tr = $('<tr></tr>');
+				 
+				 $('#tab').append(tr);
+				 
+				 
+				 tr.attr('id',''+pageList[k].req_idx+'');
+				 
+				 
+				 var html = '';
+				 html +='<td>'+pageList[k].req_writer+'</td>';
+				 html +='<td>'+pageList[k].req_title+'</td>';
+				 html +='<td>'+pageList[k].req_price+'</td>';
+				 html +='<td>'+pageList[k].req_regdate+'</td>';
+				 html +='<td>'+pageList[k].req_term+'</td>';
+				 html +='<td>'+pageList[k].req_loc+'</td>';
+				 html +='<td>'+pageList[k].req_text+'</td>';
+				 html +='<td>'+pageList[k].req_readcnt+'</td>'; 
+				 html +='<td>'+pageList[k].req_status+'</td>';
+				 html +='<td>'+pageList[k].req_img+'</td>';
+				 html +='<td>'+pageList[k].distance+'</td>';
+			  
+				 tr.append(html);
+				 
+			 }
+			 
+			 history.replaceState({}, null, location.pathname);
+			 
+			 
+			 
+		  }
+		  else{
+			  alert('등록된 게시물이 없습니다.');
+		  }
+
+		  
+		  if(pageTotalCount > 0){
+			  
+				for(var m=1;m<=pageTotalCount;m++){		 
+		
+					var link = document.location.href; 
+					
+					var html = "";
+					html +="<a ";
+					html +='href="'+link+'?page='+m+'" ';
+					html +=">";
+					html +='['+m+']';
+					html +='</a>';
+					
+					$('.paging').append(html);
+					
+					
+				}	
+		  }
+		  
+
 		 }
 		 
 		
