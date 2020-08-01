@@ -391,7 +391,7 @@ public class MessageDao {
 		return list;
 	}
 
-	public List<Message> searchSendNoteById(Connection conn, int startrow, int idx, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchSendNoteById(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE, int idx, 
 			String searchText) throws SQLException {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -403,9 +403,9 @@ public class MessageDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
-			pstmt.setString(1, "%"+searchText+"%");
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+			pstmt.setString(2, "%"+searchText+"%");
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, MESSAGE_COUNT_PER_PAGE);
 
 			rs=pstmt.executeQuery();
 
@@ -439,7 +439,7 @@ public class MessageDao {
 		return list;
 	}
 
-	public List<Message> searchSendNoteByTitle(Connection conn, int startrow, int idx, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchSendNoteByTitle(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE, int idx,
 			String searchText) throws SQLException {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -451,9 +451,9 @@ public class MessageDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
-			pstmt.setString(1, "%"+searchText+"%");
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+			pstmt.setString(2, "%"+searchText+"%");
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, MESSAGE_COUNT_PER_PAGE);
 
 			rs=pstmt.executeQuery();
 
@@ -487,7 +487,7 @@ public class MessageDao {
 		return list;
 	}
 
-	public List<Message> searchSendNoteByText(Connection conn, int startrow, int idx, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchSendNoteByText(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE, int idx, 
 			String searchText) throws SQLException {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -499,9 +499,9 @@ public class MessageDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
-			pstmt.setString(1, "%"+searchText+"%");
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+			pstmt.setString(2, "%"+searchText+"%");
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, MESSAGE_COUNT_PER_PAGE);
 
 			rs=pstmt.executeQuery();
 
