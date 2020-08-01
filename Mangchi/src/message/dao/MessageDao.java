@@ -391,7 +391,7 @@ public class MessageDao {
 		return list;
 	}
 
-	public List<Message> searchSendNoteById(Connection conn, int startrow, int idx, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchSendNoteById(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE, int idx, 
 			String searchText) throws SQLException {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -439,7 +439,7 @@ public class MessageDao {
 		return list;
 	}
 
-	public List<Message> searchSendNoteByTitle(Connection conn, int startrow, int idx, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchSendNoteByTitle(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE, int idx,
 			String searchText) throws SQLException {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -487,7 +487,7 @@ public class MessageDao {
 		return list;
 	}
 
-	public List<Message> searchSendNoteByText(Connection conn, int startrow, int idx, int MESSAGE_COUNT_PER_PAGE,
+	public List<Message> searchSendNoteByText(Connection conn, int startrow, int MESSAGE_COUNT_PER_PAGE, int idx, 
 			String searchText) throws SQLException {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
