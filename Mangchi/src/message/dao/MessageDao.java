@@ -403,9 +403,9 @@ public class MessageDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
-			pstmt.setString(1, "%"+searchText+"%");
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+			pstmt.setString(2, "%"+searchText+"%");
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, MESSAGE_COUNT_PER_PAGE);
 
 			rs=pstmt.executeQuery();
 
@@ -451,9 +451,9 @@ public class MessageDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
-			pstmt.setString(1, "%"+searchText+"%");
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+			pstmt.setString(2, "%"+searchText+"%");
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, MESSAGE_COUNT_PER_PAGE);
 
 			rs=pstmt.executeQuery();
 
@@ -499,9 +499,9 @@ public class MessageDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
-			pstmt.setString(1, "%"+searchText+"%");
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, MESSAGE_COUNT_PER_PAGE);
+			pstmt.setString(2, "%"+searchText+"%");
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, MESSAGE_COUNT_PER_PAGE);
 
 			rs=pstmt.executeQuery();
 
