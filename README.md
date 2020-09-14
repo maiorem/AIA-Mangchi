@@ -46,7 +46,7 @@
 
 <hr />
 
-## 최종 PPT (2020.07.20)
+## 최종 PPT (2020.07.27)
 [LINK](https://docs.google.com/presentation/d/11V7nJ6M-K0urG5Cfvk8AAFKNN17PiiGp88Cc67sWM0w/edit#slide=id.p)
 
 
