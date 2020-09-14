@@ -24,23 +24,23 @@
 
 ![info](https://i.ibb.co/8dt8cjS/MANGCH.jpg)
 
-1. 기획 단계    
+2. 기획 단계    
 
-![info](https://ibb.co/Ld5v3Dh)
+![planning](https://i.ibb.co/WfZTfqs/MANGCH-5.jpg)
 
-2. 컨셉    
+3. 컨셉    
 
-![Concept](https://ibb.co/h9vV3zc)
+![Concept](https://i.ibb.co/VW99Lfs/MANGCH-6.jpg)
 
-3. 흐름도(Flow Chart)    
+4. 흐름도(Flow Chart)    
 
-![flow](https://ibb.co/Gfw90nP)    
+![flow](https://i.ibb.co/XbJPbQG/MANGCH-7.jpg)    
 
-4. 데이터베이스 ERD    
+5. 데이터베이스 ERD    
 
-![ERD](https://ibb.co/tHf0gxq)    
+![ERD](https://i.ibb.co/4MPb8vj/MANGCH-3.jpg)    
 
-5. 주요 기능    
+6. 주요 기능    
 
 ![Tech](https://ibb.co/VMyHLnF)  
 
