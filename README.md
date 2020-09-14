@@ -18,7 +18,12 @@
 
 <hr />
 
-### 목차    
+### 목차   
+
+1. 주제 선정
+
+![info](https://i.ibb.co/8dt8cjS/MANGCH.jpg)
+
 1. 기획 단계    
 
 ![info](https://ibb.co/Ld5v3Dh)
