@@ -9,17 +9,14 @@
 <hr />
 
 ## 사용 기술
-* JAVA8    
-* TOMCAT8    
-* MySql
-* BootStrap   
-* Javascript       
-* AWS
-
-
+* VIEW : JSP, JSTL     
+* SERVER : JAVA8    
+* DATABASE : MySQL
+* WAS : Tomcat8    
+* 배포 : AWS    
+* Framework : Bootstrap   
 
 <hr />
-
 
 ### 목차    
 1. 기획 단계    
